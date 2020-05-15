@@ -1,0 +1,868 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.Header {
+    margin: 25px auto;
+    text-align: center;
+    border: 1px solid #2c3e50;
+    border-top: 3px solid #2c3e50;
+    border-right: 2px solid #2c3e50;
+    border-left: 2px solid #2c3e50;
+    padding: 5px;
+    width: 150px;
+    background-color: #F2F2F2;
+    border-radius: 5px 5px;
+}
+
+    .Header P {
+        font-family: Arial;
+        font-size: 16px;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+.AddProductsTable, .GridsTable {
+    border-spacing: 0;
+    width: 790px;
+    direction: rtl;
+}
+
+.GridsTable {
+    width: 770px;
+    text-align: center;
+}
+
+.ValodationTD {
+    text-align: center;
+}
+
+.InfoTable {
+    border-spacing: 0;
+    width: 100%;
+    direction: rtl;
+}
+
+.RHSTD, .RHSTD2 {
+    text-align: right;
+    width: 80px;
+}
+
+.RHSTD2 {
+    width: 100px;
+}
+
+.RHSP {
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.RHSPModified {
+    font-size: 12px;
+}
+
+.txts, .txts2, .DateTxts, .DateTxts_MID, .txtsModified, .TxtMultiline, .Smalltxts, .MidTexts, .Smalltxts2 {
+    width: 700px;
+    padding: 5px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px 5px;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.txts2 {
+    width: 683px;
+}
+
+.EditTxt, .EditTxtName {
+    border-radius: 5px 5px;
+    border: 1px solid black;
+    font-size: 13px;
+    width: 70px;
+    text-align: center;
+    height: 15px;
+}
+
+.EditTxtName {
+    width: 125px;
+}
+
+.MidTexts {
+    font: 600 13px arial;
+    width: 310px;
+}
+
+.TxtMultiline {
+    min-height: 150px;
+    width: 683px;
+}
+
+.Smalltxts {
+    width: 160px;
+}
+
+.Smalltxts2 {
+    width: 390px;
+}
+
+.DateTxts, .DateTxts_MID {
+    width: 216px;
+}
+
+.txtsModified {
+    font-size: 12px;
+}
+
+.DateTxts_MID {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.WizaerdAddProducts {
+    direction: ltr;
+}
+
+.AddSupplierFooter {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.UpdateProductFooter {
+    margin-top: 20px;
+    text-align: right;
+    margin-bottom: 50px;
+}
+
+.BtnNext, .BtnExecute, .BtnaddInGrid {
+    border-style: none;
+    padding: 5px 10px;
+    font: 600 15px arial;
+    color: white;
+    background-color: #1abc9c;
+    border-radius: 3px 3px;
+    }
+
+.BtnExecute {
+    font: 600 14px arial;
+}
+
+.BtnNext:hover {
+    cursor: pointer;
+    background-color: #16a085;
+}
+
+.BtnExecute:hover {
+    cursor: pointer;
+    background-color: #16a085;
+}
+
+.BtnAdd {
+    border-style: none;
+    padding: 5px 10px;
+    font: 600 15px arial;
+    color: white;
+    border-radius: 3px 3px;
+    background-color: #34495e;
+    height: 28px;
+}
+
+    .BtnAdd:hover {
+        cursor: pointer;
+        background-color: #2c3e50;
+    }
+
+.ListHeader {
+    border-top: 2px solid #2c3e50;
+    border-bottom: 2px solid #2c3e50;
+    text-align: center;
+    padding-top: 10px;
+    vertical-align: central;
+    height: 25px;
+}
+
+    .ListHeader P {
+        font: 600 15px arial;
+    }
+
+.GridViewList, .GridViewBill, .GridReport, .GridViewReport {
+    direction: rtl;
+    width: 100%;
+    border: none;
+    border-color: white;
+    text-align: center;
+}
+
+.GridViewReport {
+    border-color: #2c3e50;
+    text-align: center;
+}
+
+.GridReport {
+    border-color: black;
+    font: bold 13px arial;
+}
+
+.HeaderStyleList {
+    font: 700 15px arial;
+    height: 25px;
+}
+
+.HeaderStyleBill, .FooterStyleBill {
+    font: 700 15px arial;
+    height: 25px;
+    border-bottom: 2px solid #2c3e50;
+    border-top: 2px solid #2c3e50;
+}
+
+.HeaderStylePhones {
+    font: 700 15px arial;
+    height: 25px;
+    background-color: #2c3e50;
+    color: white;
+}
+
+.RowStyleList, .RowStyleListHigher {
+    font: 500 14px arial;
+    color: #2c3e50;
+    padding: 5px 0 5px 0;
+}
+
+.RowStyleListHigher {
+    height: 25px;
+}
+
+.AlternateRowStyleList, .AlternateRowStyleListHigher {
+    font: 500 14px arial;
+    background-color: #F2F2F2;
+    color: #2c3e50;
+    padding: 5px 0 5px 0;
+}
+
+.AlternateRowStyleListHigher {
+    height: 25px;
+}
+
+.EmptyDataRowStyleList {
+    background-color: #fffbcc;
+    border: 1px solid red;
+    border-radius: 5px 5px;
+    font: 500 15px arial;
+    height: 40px;
+    color: red;
+}
+
+.SelectedRowStyle {
+    font: 600 13px arial;
+    color: white;
+    background-color: #808080;
+    height: 25px;
+}
+
+.NoDispaly {
+    display: none;
+}
+
+.MsgDiv {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.MessageLabel {
+    font: bold 14px arial;
+    color: red;
+}
+
+.PanelProductList, .PanelSuppliersList {
+    max-height: 600px;
+    overflow: auto;
+}
+
+.PanelSuppliersList {
+    clear: both;
+}
+
+.Search_Section {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.Search_table {
+    direction: rtl;
+    border-spacing: 0px;
+    width: auto;
+    height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #2c3e50;
+    margin: 0 auto;
+    border-radius: 5px 5px;
+}
+
+.Image_td {
+    vertical-align: middle;
+}
+
+.Search_Button {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 1px solid #2c3e50;
+}
+
+.Search_TextBox {
+    height: 24px;
+    width: 500px;
+    font: 600 14px arial;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-color: White;
+    border-style: None;
+    border-width: 0px;
+}
+
+.GridTxtDay, .GridTxtMonth, .GridTxtYear, .GridTxtAmount {
+    font: 500 13px arial;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 3px;
+    width: 30px;
+}
+
+.GridTxtYear {
+    width: 55px;
+}
+
+.GridTxtAmount {
+    width: 40px;
+}
+
+.alarm_Footer, .alarm_Header {
+    min-width: 98%;
+    margin: 2px auto;
+    border: 1px solid #fffbcc;
+    background-color: #FFFFCC;
+    direction: rtl;
+    text-align: right;
+    padding: 5px;
+    border-radius: 5px 5px;
+    float: right;
+    clear: both;
+    margin-bottom: 15px;
+    border-top: 2px solid #bdc3c7;
+}
+
+    .alarm_Footer P {
+        font: 600 12.5px arial;
+        margin: 0;
+        color: #ff6a00;
+    }
+
+.alarm_Header {
+    min-width: 80px;
+    text-align: center;
+    margin: 0px;
+}
+
+    .alarm_Header P {
+        font: bold 13px arial;
+        margin: 0;
+    }
+
+.Container {
+    border-bottom: 2px solid #2c3e50;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.GetDateStyle {
+    border: none;
+    border-radius: 5px;
+    background-color: #2c3e50;
+    padding: 8px 5px 8px 5px;
+    color: white;
+    font: bold 13px arial;
+}
+
+.ResultPanel {
+    width: 100%;
+    direction: rtl;
+}
+
+.Product_Search_Header {
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+.ProductInfo_Header_Table {
+    height: auto;
+    width: auto;
+    border-spacing: 0px;
+}
+
+.Links {
+    text-decoration: none;
+    font: bold 15px arial;
+    color: black;
+}
+
+    .Links:hover {
+        color: #808080;
+    }
+
+.InventoryGridHeader {
+    background-color: #2c3e50;
+    height: 25px;
+    color: white;
+    font: bold 12px tahoma;
+}
+
+.Row_Style {
+    background-color: white;
+    height: 25px;
+    font: 500 11px arial;
+}
+
+.AlternatRowStyle {
+    background-color: #bdc3c7;
+    height: 25px;
+    font: 500 11px arial;
+}
+
+.Footer_Row, .FooterIncomeReport {
+    height: 30px;
+    background-color: #2c3e50;
+    font: 500 12px tahoma;
+    color: white;
+}
+
+.FooterIncomeReport {
+    height: 20px;
+}
+
+.Prices_Offer_Div, .Prices_Offer_DivBill {
+    width: 100%;
+    min-height: 855px;
+    margin: 20px auto;
+    margin-bottom: 20px;
+    background-color: white;
+    border-top-left-radius: 8px 8px;
+    border-top-right-radius: 8px 8px;
+}
+
+    .Prices_Offer_DivBill P {
+        margin: 0;
+        padding: 0;
+    }
+
+.Prices_Offer_Footer, .Bill_header {
+    width: 100%;
+    height: 25px;
+    clear: both;
+    padding-top: 7px;
+    padding-bottom: 10px;
+    vertical-align: middle;
+    background-color: #7f8c8d;
+    border-bottom-right-radius: 8px 8px;
+    border-bottom-left-radius: 8px 8px;
+}
+
+.Bill_header {
+    height: 10px;
+    padding-top: 0;
+    border-top-right-radius: 8px 8px;
+    border-top-left-radius: 8px 8px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.Prices_Offer_SubHeader {
+    text-align: center;
+    margin-top: 10px;
+}
+
+    .Prices_Offer_SubHeader div {
+        width: 130px;
+        margin: 0 auto;
+        padding: 5px;
+        background-color: #BDC3C7;
+        border-top: 3px solid black;
+        border-right: 2px solid black;
+        border-left: 2px solid black;
+        border-bottom: 1px solid black;
+        border-radius: 5px 5px;
+    }
+
+.ReportDeclarationSection {
+    width: 100%;
+    direction: rtl;
+    min-height: 670px;
+    margin-top: 15px;
+}
+
+.ReportHeaderTable {
+    border-spacing: 0;
+}
+
+    .ReportHeaderTable td {
+        padding: 5px;
+        text-align: center;
+    }
+
+    .ReportHeaderTable P {
+        font: bold 13px arial;
+    }
+
+.PreSection {
+    float: right;
+    text-align: center;
+    margin-top: 25px;
+}
+
+    .PreSection div {
+        min-width: 150px;
+        margin: 0 auto;
+        padding: 5px;
+        background-color: #bdc3c7;
+        border-top-left-radius: 20px;
+    }
+
+    .PreSection P {
+        font: bold 14px arial;
+        color: black;
+        margin: 0px;
+        padding: 0px;
+    }
+
+.PreReport_Section {
+    clear: both;
+    direction: rtl;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    text-align: right;
+    padding-top: 10px;
+    border-top: 7px solid #bdc3c7;
+    border-top-left-radius: 7px;
+    min-height: 600px;
+}
+
+.Prices_Offer_SubHeader, .Prices_Offer_SubHeaderBill {
+    text-align: center;
+    margin-top: 5px;
+}
+
+    .Prices_Offer_SubHeader div {
+        width: 130px;
+        margin: 0 auto;
+        padding: 5px;
+        background-color: #BDC3C7;
+        border: 2px solid Black;
+        border-radius: 8px 8px;
+    }
+
+    .Prices_Offer_SubHeaderBill div {
+        width: 130px;
+        margin: 0 auto;
+        padding: 5px;
+        background-color: white;
+        border: 2px solid Black;
+        border-radius: 8px 8px;
+    }
+
+    .Prices_Offer_SubHeader P {
+        font: bold 13px arial;
+        color: black;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Prices_Offer_SubHeaderBill P {
+        font: bold 13px arial;
+        color: black;
+        margin: 0;
+        padding: 0;
+    }
+
+.Gridview_StyleReport {
+    text-align: center;
+    vertical-align: middle;
+    direction: rtl;
+    width: 100%;
+    font: bold 12px tahoma;
+}
+
+.Gridview_StylePriceslist {
+    text-align: center;
+    vertical-align: middle;
+    direction: rtl;
+    width: 100%;
+    font: 600 11px arial;
+}
+
+.FooterParagraphReportStyle {
+    font: bold 10px tahoma;
+    color: white;
+    margin: 0 auto;
+}
+
+.ChoiceRadioList {
+    font: bold 12px tahoma;
+    width: 89%;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.ChoicesSection {
+    width: 790px;
+    text-align: right;
+    direction: rtl;
+}
+
+.RBLCategories, .RBLCategories2 {
+    direction: rtl;
+    Width: 350px;
+    margin: 25px 0px 10px 315px;
+    font: 14px tahoma;
+}
+
+.RBLCategories2 {
+    width: 232px;
+    margin: 0 0px 10px 430px;
+}
+
+.Link {
+    color: blue;
+    text-decoration: underline;
+    font: bold 12px arial;
+}
+
+.UnStyled {
+    text-decoration: none;
+    color: black;
+    font: 500 12px arial;
+}
+
+.lblInfo {
+    font: bold 13px arial;
+}
+
+.lblInfo2 {
+    font: 600 13px arial;
+    color: #2c3e50;
+}
+
+.ErrorMessagePanal {
+    width: 90%;
+    margin: 0 auto;
+    padding: 15px 30px;
+}
+
+.Errorarticle {
+    background-color: #fffbcc;
+    border: 1px solid red;
+    padding: 10px;
+    direction: rtl;
+    text-align: center;
+    border-radius: 5px 5px;
+}
+
+.LblErrorMsg2 {
+    font: 500 12px arial;
+    color: red;
+}
+
+.ConatactsHeader, .HeaderIncomeReport {
+    color: white;
+    background-color: #2c3e50;
+    height: 35px;
+    font: 500 12px arial;
+    border-color: #808080;
+}
+
+.HeaderIncomeReport {
+    height: 25px;
+    font: 600 14px arial;
+}
+
+.Sec_table {
+    direction: rtl;
+    width: 100%;
+    border-spacing: 0px;
+    margin-top: 30px;
+}
+
+.td_lbls {
+    text-align: right;
+    padding-left: 3px;
+}
+
+.td_txts {
+    text-align: right;
+}
+
+.TxtMultiline {
+    min-height: 150px;
+}
+
+.PanelImages {
+    max-height: 670px;
+    overflow: auto;
+    width: 100%;
+}
+
+.EmptyDataRowStyle {
+    background-color: #fffbcc;
+    border: 1px solid red;
+    border-radius: 5px 5px;
+    font: 500 15px arial;
+    height: 40px;
+    color: red;
+    width: 100%;
+}
+
+.Offer_Header_table {
+    width: 100%;
+    border-spacing: 0px;
+    direction: rtl;
+}
+
+    .Offer_Header_table td {
+        text-align: center;
+    }
+
+    .Offer_Header_table P {
+        font: bold 13px tahoma;
+        color: white;
+    }
+
+.Prices_Offer_HeaderBill {
+    width: 100%;
+    border-top-right-radius: 8px 8px;
+    border-top-left-radius: 8px 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: white;
+    border-bottom: 3px solid Black;
+    margin-top: 5px;
+}
+
+.Logo_div, .Logo_divBill {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.LogoImage {
+    margin: 2px auto;
+    border-radius: 45px 45px;
+    width: 95px;
+    height: 95px;
+}
+
+.ContactsSection {
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    clear: both;
+    direction: rtl;
+}
+
+.BtnaddInGrid {
+    padding: 0, 5px, 0, 5px;
+    font: 600 12px arial;
+}
+
+    .BtnaddInGrid:hover {
+        cursor: pointer;
+        background-color: #16a085;
+    }
+
+.TabLnks {
+    font: 600 12px arial;
+    text-decoration: none;
+    color: black;
+}
+
+.Report_Footer, .PreReport_Section, .PreReport_SectionTab {
+    clear: both;
+    direction: rtl;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    text-align: right;
+    padding-top: 10px;
+    border-top: 7px solid #bdc3c7;
+    border-top-left-radius: 7px;
+    min-height: 75px;
+}
+
+.PreReport_SectionTab {
+    border-bottom: 7px solid #BDC3C7;
+    border-top: 7px solid #BDC3C7;
+}
+
+.Gridview_Style2 {
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    direction: rtl;
+    font: 13px arial;
+    border-width: 0px;
+    color: #2c3e50;
+    border-color: white;
+}
+
+.PagerStyle {
+    height: 30px;
+    color: black;
+    font: 15px bold arial;
+}
+
+.Empty_Style {
+    height: 40px;
+    color: green;
+    padding: 0 5px 0px 5px;
+    font: 500 12px arial;
+    border-radius: 5px 5px;
+    border: 1px solid #498835;
+    background-color: #B5D8AA;
+}
+
+.PreSectionTab {
+    float: right;
+    text-align: center;
+    margin-top: 25px;
+}
+
+    .PreSectionTab div {
+        min-width: 100px;
+        margin: 0 auto;
+        padding: 5px;
+        background-color: #BDC3C7;
+        border-top-left-radius: 20px;
+    }
+
+.DDLCategory2 {
+    width: 695px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px 5px;
+    font: bold 13px arial;
+    color: #2c3e50;
+}
+
+.NotesStyle {
+    font: 500 12px arial;
+}

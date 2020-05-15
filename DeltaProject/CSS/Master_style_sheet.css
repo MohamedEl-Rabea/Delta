@@ -1,0 +1,230 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    text-align: center;
+}
+
+.Big_Div {
+    margin: 0px auto;
+    min-height: 690px;
+    width: 1024px;
+}
+
+.Content_div {
+    width: 77.5%;
+    float: left;
+}
+
+.Side_Div {
+    float: right;
+    width: 20%;
+    margin-bottom: 15px;
+}
+
+.Main_header {
+    width: 100%;
+    padding: 30px 10px 30px 10px;
+    background-color: #2c3e50;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.StaticItemStyle {
+    min-width: 100px;
+    text-align: center;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    direction: rtl;
+    margin: 3px 3px 0px 3px;
+    background-color: #336e7b;
+    padding: 5px 3px 5px 3px;
+    border-radius: 10px 10px;
+}
+
+    .StaticItemStyle:hover {
+        background-color: #16A085;
+    }
+
+.DynamicItemStyle {
+    min-width: 100px;
+    background-color: #336e7b;
+    text-align: center;
+    font-family: Arial;
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+    margin: 2px 3px 3px 3px;
+    padding: 5px 3px 5px 3px;
+    border-radius: 10px 10px;
+}
+
+    .DynamicItemStyle:hover {
+        background-color: #16A085;
+    }
+
+.Menu {
+    margin: 0 auto;
+    direction: rtl;
+}
+
+.Content_Nav_Bar, .Side_Nav_Bar {
+    width: 100%;
+    min-height: 30px;
+    padding: 10px;
+    background-color: #F2F2F2;
+    border: 1px solid #F2F2F2;
+    border-radius: 10px;
+}
+
+.Side_Nav_Bar {
+    text-align: center;
+    padding-bottom: 0;
+    padding-top: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2c3e50;
+    border: 1px solid #2c3e50;
+}
+
+.Content_Section {
+    padding-right: 15px;
+    min-height: 600px;
+    text-align: right;
+    margin-bottom:20px;
+}
+
+.Side_Section {
+    width: 100%;
+    padding: 10px;
+    background-color: #F2F2F2;
+    text-align: center;
+    margin-top: 5px;
+    border-radius: 10px;
+    min-height: 250px;
+    direction: rtl;
+    border: 1px solid #F2F2F2;
+    border-bottom: 1px solid #2c3e50;
+}
+
+.LNKBTNMainDivisions {
+    font-family: Arial;
+    font-size: 19px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+    .LNKBTNMainDivisions:hover {
+        cursor:pointer;
+    }
+.Main_Footer {
+    width: 100%;
+    margin: 0px auto;
+    clear: both;
+    background-color: #2c3e50;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 20px;
+}
+
+.FooterParagraph {
+    font: bold 11px tahoma;
+    color: white;
+}
+
+.FooterParagraphReport {
+    font: bold 10px tahoma;
+    color: white;
+    margin: 0 auto;
+}
+
+.Links_Table {
+    padding-bottom: 5px;
+    padding-top: 15px;
+    float: right;
+    width: 100%;
+}
+
+.LinkBTN, .SubLinks {
+    text-decoration: none;
+    font: bold 14px tahoma;
+    color: #2c3e50;
+}
+
+.SubLinks {
+    color: #336e7b;
+    font: bold 12px tahoma;
+}
+
+.LinkBTN:hover {
+    color: #1abc9c;
+}
+
+.SubLinks:hover {
+    color: #1abc9c;
+}
+
+.lnk {
+    font: bold 11px tahoma;
+    color: navy;
+}
+
+    .lnk:hover {
+        color: #989B9E;
+    }
+
+.Para_Font {
+    font: bold 18px tahoma;
+    color: #BFBFBF;
+}
+
+.Extended_Table {
+    float: right;
+    width: 100%;
+}
+
+    .Extended_Table td {
+        padding-bottom: 5px;
+        padding-right: 5px;
+    }
+
+.Logo_Table {
+    border-spacing: 0px;
+    margin: 0 0 auto 0;
+}
+
+.TreeStyle {
+    direction: rtl;
+}
+
+.ParentNodeStyle {
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+    .ParentNodeStyle:hover {
+        cursor: default;
+    }
+
+.LeafNodeStyle {
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 600;
+    color: #808080;
+}
+
+    .LeafNodeStyle:hover {
+        cursor: pointer;
+        color: #2c3e50;
+    }
+.AlertImage {
+    margin-top:5px;
+}

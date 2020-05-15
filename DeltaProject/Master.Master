@@ -1,0 +1,144 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="DeltaProject.Master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ElRabea MIS</title>
+    <link href="Images/Logo.png" rel="icon" />
+    <link href="CSS/Master_style_sheet.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="Big_Div">
+                <header class="Main_header">
+                    <table class="Logo_Table" style="float: left">
+                        <tr>
+                            <td>
+                                <img width="44" height="44" src="Images/Logo.png" />
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="Logo_Table">
+                        <tr>
+                            <td style="text-align: left; padding-bottom: 5px;">
+                                <h3 style="color: white; letter-spacing: 2px; font: bold 20px verdana">ElRabea MIS</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5 style="letter-spacing: 2px; color: #808080">Trading - Maintenance - supplies - Imports . . . . . . . </h5>
+                            </td>
+                        </tr>
+                    </table>
+                </header>
+                <div class="Content_div">
+                    <nav class="Content_Nav_Bar">
+                        <table style="width: 200px; float: left">
+                            <tr>
+                                <td>
+                                    <asp:LinkButton ID="lnkAccountSettings" runat="server" CssClass="lnk" CausesValidation="false" OnClick="lnkAccountSettings_Click">اعدادات الحسابات</asp:LinkButton>
+                                    &nbsp;&nbsp;
+                                    <asp:LinkButton ID="lnkLogOut" runat="server" CssClass="lnk" CausesValidation="false" OnClick="lnkLogOut_Click">تسجيل خروج</asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="float: right; direction: rtl">
+                            <asp:Menu ID="BarMenu" runat="server" Orientation="Horizontal"
+                                StaticEnableDefaultPopOutImage="false"
+                                DynamicEnableDefaultPopOutImage="false"
+                                StaticMenuItemStyle-CssClass="StaticItemStyle"
+                                DynamicMenuItemStyle-CssClass="DynamicItemStyle">
+                                <Items>
+                                    <asp:MenuItem Text="الرئيسيــة" NavigateUrl="~/Default.aspx" ToolTip="الانتقال الى الصفحه الرئيسيه"></asp:MenuItem>
+                                    <asp:MenuItem Text="تقاريــــر">
+                                        <asp:MenuItem Text="تقارير تخزينيه">
+                                            <asp:MenuItem Text="احتياجـــــات" ToolTip="عرض احتياجات المخزن من منتجات" NavigateUrl="~/Needs_Report.aspx"></asp:MenuItem>
+                                        </asp:MenuItem>
+                                        <asp:MenuItem Text="تقارير مبيعات" ToolTip="عرض تقارير المبيعات والاحصائيات المتعلقه خلال فترة معينه" NavigateUrl="~/Sales_Report.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تقارير موردين" ToolTip="عرض تقرير عن كامل موردى الشركه وبياناتهم المتعلقه" NavigateUrl="~/Suppliers_report.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تقارير عملاء" ToolTip="عرض تقرير كامل عن العملاء المدانين للشركه">
+                                            <asp:MenuItem Text="عملاء الديون" ToolTip="عرض العملاء المتبقى بينهم وبين الشركه بواقى تعاملات ماديه" NavigateUrl="~/Clients_Report.aspx"></asp:MenuItem>
+                                            <asp:MenuItem Text="جميع العملاء" ToolTip="عرض العملاء المسجلين لدى النظام" NavigateUrl="~/All_Clients_Report.aspx"></asp:MenuItem>
+                                        </asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="الفواتيــــــر" Value="m2">
+                                        <asp:MenuItem Text="دفع فاتـــورة" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/Pay_Bill.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="استعـــــــلام" NavigateUrl="~/Search_For_Bills.aspx" ToolTip="الاستعلام عن فاتورة سام العميل او الشركه"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="عروض الاسعار">
+                                        <asp:MenuItem Text="عرض خاص" NavigateUrl="~/Special_Prices_List.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="عرض عام" NavigateUrl="~/Public_Prices_List.aspx"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="البيــــــــــــــع">
+                                        <asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="مرتجع / اضافه" ToolTip="تنفيذ عملية ارتجاع منتجات" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                </Items>
+                            </asp:Menu>
+                        </div>
+                        <asp:ImageButton ID="ImageAlert" runat="server" Visible="false"
+                            ImageUrl="~/Images/alert2.png" Width="24" Height="24" OnClick="ImageAlert_Click"
+                            CssClass="AlertImage" ToolTip="هناك عدد من الاحتياجات يجب عليك التحقق منها اضغط هنا او من خلال تقارير الاحتياجات" />
+                    </nav>
+                    <section class="Content_Section">
+                        <asp:ContentPlaceHolder ID="Content_Section" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </section>
+                </div>
+                <div class="Side_Div">
+                    <header class="Side_Nav_Bar">
+                        <asp:LinkButton runat="server" ID="MainDivisionsLNKBTN" OnClick="MainDivisionsLNKBTN_Click" CausesValidation="false" CssClass="LNKBTNMainDivisions">- : الاقســـام الرئيسيـــــــــه</asp:LinkButton>
+                    </header>
+                    <section class="Side_Section">
+                        <asp:TreeView ID="TreeViewMainDivisions" runat="server" CssClass="TreeStyle" NodeIndent="10">
+                            <LevelStyles>
+                                <asp:TreeNodeStyle CssClass="ParentNodeStyle" />
+                                <asp:TreeNodeStyle CssClass="LeafNodeStyle" />
+                            </LevelStyles>
+                            <Nodes>
+                                <asp:TreeNode Text="المخــــــــــــــــازن">
+                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تحديث كميـات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تعديل بيانـــات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مسح منتجــات" NavigateUrl="~/Delete_Products.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعـــــــــــلام" NavigateUrl="~/Search_For_Product.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="جرد البضائــع" NavigateUrl="~/Products_Inventory.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مرتجــــــــــــع" NavigateUrl="~/Supplier_Returned_Products.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تجميع منتـــج" NavigateUrl="~/Collect_Product.aspx"></asp:TreeNode>
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="المورديــــــــــــــن">
+                                    <asp:TreeNode Text="اضافة مورد" NavigateUrl="~/Add_Supplier.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Supplier_Info.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="سداد جديــــد" NavigateUrl="~/New_Supplier_Interaction.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Supplier.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Suppliers_Search.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعلام واردات" NavigateUrl="~/Supplier_Products.aspx"></asp:TreeNode>
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="العمــــــــــــــــــلاء">
+                                    <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Client_Info.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Client.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Search_For_Client.aspx"></asp:TreeNode>
+                                </asp:TreeNode>
+                                <asp:TreeNode Text="الماليـــــــــــــــــــه">
+                                    <asp:TreeNode Text="صـــــــــرف" NavigateUrl="~/Expenses.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="اضافة دخل" NavigateUrl="~/Add_Income.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تقرير الدخل" NavigateUrl="~/Income_Report.aspx"></asp:TreeNode>
+                                </asp:TreeNode>
+                            </Nodes>
+                        </asp:TreeView>
+                    </section>
+                </div>
+                <footer class="Main_Footer">
+                    <p class="FooterParagraph">Copyright&copy 2016 Delta MIS, All rights reserved</p>
+                    <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke; margin-bottom: 10px">By / mohammed rabea</p>
+                    <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke; margin-bottom: 10px">Contact / 01207758034</p>
+                </footer>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
