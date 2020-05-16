@@ -163,7 +163,7 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                double cost = Convert.ToInt32(e.Row.Cells[1].Text) * Convert.ToDouble(e.Row.Cells[2].Text);
+                double cost = Convert.ToDouble(e.Row.Cells[1].Text) * Convert.ToDouble(e.Row.Cells[2].Text);
                 ((Label)e.Row.FindControl("lblCost")).Text = cost.ToString();
                 TotalCost += cost;
             }

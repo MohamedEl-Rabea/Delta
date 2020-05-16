@@ -115,7 +115,7 @@ namespace DeltaProject
             p.Style = txtStyle.Text;
             p.Inch = Convert.ToDouble(txtInch.Text);
             p.Purchase_Price = Convert.ToDouble(txtboxPurchasePrice.Text);
-            p.Amount = Convert.ToInt32(txtboxAddedAmount.Text);
+            p.Amount = Convert.ToDecimal(txtboxAddedAmount.Text);
             string Notes;
             System.Text.StringBuilder ConcatenatedNotes = new System.Text.StringBuilder("ثمن شراء المنتجات التاليه : ");
 

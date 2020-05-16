@@ -22,7 +22,7 @@ namespace Business_Logic
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@S_Name", SqlDbType.NVarChar).Value = S_Name;
             cmd.Parameters.Add("@Date", SqlDbType.Date).Value = this.Pay_Date;
-            cmd.Parameters.Add("@Paid_Value", SqlDbType.SmallMoney).Value = this.Paid_amount;
+            cmd.Parameters.Add("@Paid_Value", SqlDbType.Money).Value = this.Paid_amount;
             con.Open();
             string Notes = Convert.ToString(cmd.ExecuteScalar());
             con.Close();
@@ -40,7 +40,7 @@ namespace Business_Logic
                 SqlCommand cmd = new SqlCommand("Add_Supplier_Payment", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@S_Name", SqlDbType.NVarChar).Value = S_name;
-                cmd.Parameters.Add("@Paid_amount", SqlDbType.SmallMoney).Value = this.Paid_amount;
+                cmd.Parameters.Add("@Paid_amount", SqlDbType.Money).Value = this.Paid_amount;
                 cmd.Parameters.Add("@Pay_Date", SqlDbType.SmallDateTime).Value = this.Pay_Date;
                 cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = this.Notes;
                 con.Open();

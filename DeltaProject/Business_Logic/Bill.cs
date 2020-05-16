@@ -29,10 +29,10 @@ namespace Business_Logic
             cmd.Parameters.Add("@Bill_Date", SqlDbType.SmallDateTime).Value = this.Bill_Date;
             cmd.Parameters.Add("@TotalCost", SqlDbType.Money).Value = TotalCost;
             cmd.Parameters.Add("@Paid_Value", SqlDbType.Money).Value = Paid_Value;
-            cmd.Parameters.Add("@Discount", SqlDbType.SmallMoney).Value = this.Discount;
+            cmd.Parameters.Add("@Discount", SqlDbType.Money).Value = this.Discount;
             cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = Notes;
             cmd.Parameters.Add("@Bill_ID", SqlDbType.BigInt);
-            cmd.Parameters.Add("@AdditionalCost", SqlDbType.SmallMoney).Value = this.AdditionalCost;
+            cmd.Parameters.Add("@AdditionalCost", SqlDbType.Money).Value = this.AdditionalCost;
             cmd.Parameters.Add("@AdditionalCostNotes", SqlDbType.NVarChar).Value = this.AdditionalCostNotes;
             cmd.Parameters["@Bill_ID"].Direction = ParameterDirection.Output;
             con.Open();

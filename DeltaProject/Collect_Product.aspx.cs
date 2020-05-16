@@ -36,7 +36,7 @@ namespace DeltaProject
                 Product product = new Product();
                 product.P_name = GridViewProducts.Rows[row_index].Cells[0].Text;
                 product.Purchase_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[1].Text);
-                product.Amount = Convert.ToInt32(amount);
+                product.Amount = Convert.ToDecimal(amount);
                 if (ViewState["Products_List"] == null)
                 {
                     List<Product> Products = new List<Product>();
@@ -104,7 +104,7 @@ namespace DeltaProject
                 Product product = new Product();
                 product.P_name = GridViewSelectedProducts.Rows[row_index].Cells[1].Text;
                 product.Purchase_Price = Convert.ToDouble(GridViewSelectedProducts.Rows[row_index].Cells[2].Text);
-                product.Amount = Convert.ToInt32(((TextBox)GridViewSelectedProducts.Rows[row_index].FindControl("txtAmount")).Text);
+                product.Amount = Convert.ToDecimal(((TextBox)GridViewSelectedProducts.Rows[row_index].FindControl("txtAmount")).Text);
                 list.Find(prod => prod.P_name == product.P_name && prod.Purchase_Price == product.Purchase_Price).Amount = product.Amount;
                 GridViewSelectedProducts.EditIndex = -1;
                 BindSelectedProducts();
@@ -147,7 +147,7 @@ namespace DeltaProject
                 Product product = new Product();
                 product.P_name = row.Cells[1].Text;
                 product.Purchase_Price = Convert.ToDouble(row.Cells[2].Text);
-                product.Amount = Convert.ToInt32(((Label)row.FindControl("lblAmount")).Text) * Convert.ToInt32(txtboxAmount.Text);
+                product.Amount = Convert.ToDecimal(((Label)row.FindControl("lblAmount")).Text) * Convert.ToInt32(txtboxAmount.Text);
                 if (!product.IsValidAmount())
                 {
                     lblDoneMsg.Text += "لا تتوفر كل الكميه المطلوبة من المنتج : " + product.P_name + "<br />";
@@ -174,7 +174,7 @@ namespace DeltaProject
                     product.Purchase_Price = Convert.ToDouble(txtboxPurchasePrice.Text);
                     product.Special_Price = Convert.ToDouble(txtboxSpecialSellPrice.Text);
                     product.Regulare_Price = Convert.ToDouble(txtboxRegularSellPrice.Text);
-                    product.Amount = Convert.ToInt32(txtboxAmount.Text);
+                    product.Amount = Convert.ToDecimal(txtboxAmount.Text);
                     product.Description = TxtDesc.Text;
                     if (!product.Add_Product(out m, "Unknown", new DateTime()))
                     {
@@ -187,7 +187,7 @@ namespace DeltaProject
                         {
                             product.P_name = row.Cells[1].Text;
                             product.Purchase_Price = Convert.ToDouble(row.Cells[2].Text);
-                            product.Amount = Convert.ToInt32(((Label)row.FindControl("lblAmount")).Text) * Convert.ToInt32(txtboxAmount.Text);
+                            product.Amount = Convert.ToDecimal(((Label)row.FindControl("lblAmount")).Text) * Convert.ToInt32(txtboxAmount.Text);
                             if (!product.AddContent(out m, txtboxP_name.Text, Convert.ToDouble(txtboxPurchasePrice.Text)))
                             {
                                 lblDoneMsg.Text += m + "هذا الخطأ عند المنتج : " + product.P_name + "<br />";

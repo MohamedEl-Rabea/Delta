@@ -28,7 +28,7 @@ namespace DeltaProject
             product.Purchase_Price = Convert.ToDouble(txtboxPurchasePrice.Text);
             product.Regulare_Price = Convert.ToDouble(txtboxRegularSellPrice.Text);
             product.Special_Price = Convert.ToDouble(txtboxSpecialSellPrice.Text);
-            product.Amount = Convert.ToInt32(txtboxAmount.Text);
+            product.Amount = Convert.ToDecimal(txtboxAmount.Text);
             product.Description = TxtDesc.Text;
             if (ProductType.SelectedValue == "Motors")
             {
@@ -159,7 +159,7 @@ namespace DeltaProject
                 p.Purchase_Price = Convert.ToDouble(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtPurchase_Price")).Text);
                 p.Regulare_Price = Convert.ToDouble(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtRegulare_Price")).Text);
                 p.Special_Price = Convert.ToDouble(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtSpecial_Price")).Text);
-                p.Amount = Convert.ToInt32(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtAmount")).Text);
+                p.Amount = Convert.ToDecimal(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtAmount")).Text);
                 ((List<Product>)ViewState["ProductsList"]).RemoveAll(product => (product.P_name == OldP_name) && (product.Purchase_Price == OldPurchase_Price
                     && product.Mark == OldMark && product.Style == OldStyle && product.Inch == OldInch));
                 if (!((List<Product>)ViewState["ProductsList"]).Contains(p))
@@ -293,7 +293,7 @@ namespace DeltaProject
                     product.Purchase_Price = Convert.ToDouble(((Label)row.FindControl("lblPurchase_Price")).Text);
                     product.Regulare_Price = Convert.ToDouble(((Label)row.FindControl("lblRegulare_Price")).Text);
                     product.Special_Price = Convert.ToDouble(((Label)row.FindControl("lblSpecial_Price")).Text);
-                    product.Amount = Convert.ToInt32(((Label)row.FindControl("lblAmount")).Text);
+                    product.Amount = Convert.ToDecimal(((Label)row.FindControl("lblAmount")).Text);
                     product.Description = ((Label)row.FindControl("lblDecription")).Text;
                     if (!product.Add_Product(out m, lblSupplier.Text, Convert.ToDateTime(lblPurchaseDate.Text)))
                     {

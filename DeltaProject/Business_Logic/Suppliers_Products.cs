@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using DeltaProject.Shared;
 
 namespace Business_Logic
 {
@@ -14,8 +15,19 @@ namespace Business_Logic
         public string Product_Name { get; set; }
         public DateTime Purchase_Date { get; set; }
         public double Price { get; set; }
-        public int Amount { get; set; }
-        public int Returned_Products { get; set; }
+
+        private decimal _amount;
+        public decimal Amount
+        {
+            get { return Helpers.GetFormatedDecimal(_amount); }
+            set { _amount = value; }
+        }
+        private decimal _returnedProducts;
+        public decimal Returned_Products
+        {
+            get { return Helpers.GetFormatedDecimal(_returnedProducts); }
+            set { _returnedProducts = value; }
+        }
         public DateTime Return_Date { get; set; }
 
         public static List<Suppliers_Products> GetProductsSuppliers(string P_name, string mark, string style, double inch)
@@ -37,7 +49,7 @@ namespace Business_Logic
                 supplier.Supplier_Name = rdr["Supplier_Name"].ToString();
                 supplier.Purchase_Date = Convert.ToDateTime(rdr["Purchase_Date"]);
                 supplier.Price = Convert.ToDouble(rdr["Price"]);
-                supplier.Amount = Convert.ToInt32(rdr["amount"]);
+                supplier.Amount = Convert.ToDecimal(rdr["amount"]);
                 Suppliers.Add(supplier);
             }
             rdr.Close();
@@ -62,7 +74,7 @@ namespace Business_Logic
                 cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = inch;
                 cmd.Parameters.Add("@Purchase_Date", SqlDbType.Date).Value = this.Purchase_Date;
                 cmd.Parameters.Add("@Return_Date", SqlDbType.SmallDateTime).Value = this.Return_Date;
-                cmd.Parameters.Add("@Purchase_Price", SqlDbType.SmallMoney).Value = this.Price;
+                cmd.Parameters.Add("@Purchase_Price", SqlDbType.Money).Value = this.Price;
                 cmd.Parameters.Add("@Returned_Amount", SqlDbType.Int).Value = this.Returned_Products;
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -88,7 +100,7 @@ namespace Business_Logic
             cmd.Parameters.Add("@Mark", SqlDbType.NVarChar).Value = Mark;
             cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = Inch;
             cmd.Parameters.Add("@Style", SqlDbType.NVarChar).Value = Style;
-            cmd.Parameters.Add("@Purchase_Price", SqlDbType.SmallMoney).Value = Purchase_Price;
+            cmd.Parameters.Add("@Purchase_Price", SqlDbType.Money).Value = Purchase_Price;
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -121,7 +133,7 @@ namespace Business_Logic
                 cmd.Parameters.Add("@Mark", SqlDbType.NVarChar).Value = Mark;
                 cmd.Parameters.Add("@Style", SqlDbType.NVarChar).Value = Style;
                 cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = Inch;
-                cmd.Parameters.Add("@Price", SqlDbType.SmallMoney).Value = Purchase_Price;
+                cmd.Parameters.Add("@Price", SqlDbType.Money).Value = Purchase_Price;
                 cmd.Parameters.Add("@S_Name", SqlDbType.NVarChar).Value = this.Supplier_Name;
                 cmd.Parameters.Add("@Purchase_Date", SqlDbType.Date).Value = this.Purchase_Date;
                 cmd.Parameters.Add("@NewS_Name", SqlDbType.NVarChar).Value = NewSupplier_Name;
@@ -156,7 +168,7 @@ namespace Business_Logic
                 cmd.Parameters.Add("@Mark", SqlDbType.NVarChar).Value = Mark;
                 cmd.Parameters.Add("@Style", SqlDbType.NVarChar).Value = Style;
                 cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = Inch;
-                cmd.Parameters.Add("@Price", SqlDbType.SmallMoney).Value = Purchase_Price;
+                cmd.Parameters.Add("@Price", SqlDbType.Money).Value = Purchase_Price;
                 cmd.Parameters.Add("@S_Name", SqlDbType.NVarChar).Value = this.Supplier_Name;
                 cmd.Parameters.Add("@Purchase_Date", SqlDbType.Date).Value = this.Purchase_Date;
                 con.Open();
@@ -180,7 +192,7 @@ namespace Business_Logic
             SqlCommand cmd = new SqlCommand("Get_Specific_Product_Suppliers", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@P_name", SqlDbType.NVarChar).Value = P_name;
-            cmd.Parameters.Add("@Purchase_Price", SqlDbType.SmallMoney).Value = Purchase_Price;
+            cmd.Parameters.Add("@Purchase_Price", SqlDbType.Money).Value = Purchase_Price;
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())

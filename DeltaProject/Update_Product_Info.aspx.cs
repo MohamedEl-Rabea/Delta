@@ -249,7 +249,7 @@ namespace DeltaProject
                 Suppliers_Products sp = new Suppliers_Products();
                 sp.Supplier_Name = ViewState["OldS_name"].ToString();
                 sp.Purchase_Date = Convert.ToDateTime(ViewState["OldPurchase_Date"]);
-                sp.Amount = Convert.ToInt32(((TextBox)GridViewProductSuppliers.Rows[row_index].FindControl("txtSupplierAmount")).Text);
+                sp.Amount = Convert.ToDecimal(((TextBox)GridViewProductSuppliers.Rows[row_index].FindControl("txtSupplierAmount")).Text);
                 sp.Returned_Products = Convert.ToInt32(((TextBox)GridViewProductSuppliers.Rows[row_index].FindControl("txtReturnedAmount")).Text);
 
                 int ReturnYear;

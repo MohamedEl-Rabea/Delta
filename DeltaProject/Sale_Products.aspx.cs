@@ -134,7 +134,7 @@ namespace DeltaProject
                         ((List<Product>)ViewState["ProductsList"]).Add(product);
                     }
                     product.Regulare_Price = Convert.ToDouble(price);
-                    product.Amount = Convert.ToInt32(amount);
+                    product.Amount = Convert.ToDecimal(amount);
                     PanelFinish.Visible = true;
                     lblFinishMsg.Text = "تم اضافة - " + product.P_name + " - الى القائمة";
                     lblFinishMsg.ForeColor = System.Drawing.Color.Green;
@@ -178,7 +178,7 @@ namespace DeltaProject
                                 " - " + e.Row.Cells[3].Text + " بوصه" : "";
                     e.Row.Cells[1].Text += e.Row.Cells[4].Text != "Not found" ? "- " + e.Row.Cells[2].Text +
                         " - " + e.Row.Cells[3].Text + " بوصه" + " طراز " + e.Row.Cells[4].Text : "";
-                    int amount = Convert.ToInt32(((Label)e.Row.FindControl("lblAmount")).Text);
+                    double amount = Convert.ToDouble(((Label)e.Row.FindControl("lblAmount")).Text);
                     double price = Convert.ToDouble(((Label)e.Row.FindControl("lblPrice")).Text);
                     cost += price * amount;
                     lblTotalCost.Text = cost.ToString();
@@ -222,7 +222,7 @@ namespace DeltaProject
                 string style = GridViewProductsList.Rows[row_index].Cells[4].Text;
                 double purchase_price = Convert.ToDouble(GridViewProductsList.Rows[row_index].Cells[5].Text);
                 int index = ((List<Product>)ViewState["ProductsList"]).FindIndex(product => product.P_name == P_name && product.Mark == mark && product.Style == style && product.Purchase_Price == purchase_price);
-                ((List<Product>)ViewState["ProductsList"])[index].Amount = Convert.ToInt32(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtAmount")).Text);
+                ((List<Product>)ViewState["ProductsList"])[index].Amount = Convert.ToDecimal(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtAmount")).Text);
                 ((List<Product>)ViewState["ProductsList"])[index].Regulare_Price = Convert.ToDouble(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtPrice")).Text);
                 GridViewProductsList.EditIndex = -1;
                 BindList();
@@ -321,7 +321,7 @@ namespace DeltaProject
                                     " - " + e.Row.Cells[2].Text + " بوصه" : "";
                 e.Row.Cells[0].Text += e.Row.Cells[3].Text != "Not found" ? "- " + e.Row.Cells[1].Text +
                     " - " + e.Row.Cells[2].Text + " بوصه" + " طراز " + e.Row.Cells[3].Text : "";
-                double cost = Convert.ToInt32(e.Row.Cells[4].Text) * Convert.ToDouble(e.Row.Cells[5].Text);
+                double cost = Convert.ToDouble(e.Row.Cells[4].Text) * Convert.ToDouble(e.Row.Cells[5].Text);
                 ((Label)e.Row.FindControl("lblCost")).Text = cost.ToString();
                 TotalCost += cost;
             }

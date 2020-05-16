@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using DeltaProject.Shared;
 
 namespace Business_Logic
 {
@@ -14,8 +15,12 @@ namespace Business_Logic
         public double Purchase_Price { get; set; }
         public double Specified_Price { get; set; }
         public double Sell_Price { get; set; }
-        public int amount { get; set; }
-
+        private decimal _amount;
+        public decimal amount
+        {
+            get { return Helpers.GetFormatedDecimal(_amount); }
+            set { _amount = value; }
+        }
         public bool Add_Bill_Contents(out string m, long Bill_ID, Product product)
         {
             bool b = true;
@@ -31,10 +36,10 @@ namespace Business_Logic
                 cmd.Parameters.Add("@Mark", SqlDbType.NVarChar).Value = product.Mark;
                 cmd.Parameters.Add("@Style", SqlDbType.NVarChar).Value = product.Style;
                 cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = product.Inch;
-                cmd.Parameters.Add("@Purchase_Price", SqlDbType.SmallMoney).Value = product.Purchase_Price;
-                cmd.Parameters.Add("@Specified_Price", SqlDbType.SmallMoney).Value = product.Specified_Price;
-                cmd.Parameters.Add("@Sell_Price", SqlDbType.SmallMoney).Value = product.Regulare_Price;
-                cmd.Parameters.Add("@Amount", SqlDbType.Int).Value = product.Amount;
+                cmd.Parameters.Add("@Purchase_Price", SqlDbType.Money).Value = product.Purchase_Price;
+                cmd.Parameters.Add("@Specified_Price", SqlDbType.Money).Value = product.Specified_Price;
+                cmd.Parameters.Add("@Sell_Price", SqlDbType.Money).Value = product.Regulare_Price;
+                cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = product.Amount;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -63,7 +68,7 @@ namespace Business_Logic
                 Bill_Content item = new Bill_Content();
                 item.P_name = rdr["P_Name"].ToString();
                 item.Sell_Price = Convert.ToDouble(rdr["Sell_Price"]);
-                item.amount = Convert.ToInt32(rdr["Amount"]);
+                item.amount = Convert.ToDecimal(rdr["Amount"]);
                 items.Add(item);
             }
             rdr.Close();
@@ -87,10 +92,10 @@ namespace Business_Logic
                 cmd.Parameters.Add("@Mark", SqlDbType.NVarChar).Value = Mark;
                 cmd.Parameters.Add("@Style", SqlDbType.NVarChar).Value = Style;
                 cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = Convert.ToDouble(Inch);
-                cmd.Parameters.Add("@Returned_amount", SqlDbType.Int).Value = this.amount;
+                cmd.Parameters.Add("@Returned_amount", SqlDbType.Decimal).Value = this.amount;
                 cmd.Parameters.Add("@Bill_ID", SqlDbType.BigInt).Value = Bill_ID;
                 cmd.Parameters.Add("@Return_Date", SqlDbType.SmallDateTime).Value = Return_Date;
-                cmd.Parameters.Add("@Rest_Of_Money", SqlDbType.SmallMoney);
+                cmd.Parameters.Add("@Rest_Of_Money", SqlDbType.Money);
                 cmd.Parameters["@Rest_Of_Money"].Direction = ParameterDirection.Output;
                 con.Open();
                 cmd.ExecuteNonQuery();

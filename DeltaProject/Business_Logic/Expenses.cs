@@ -27,7 +27,7 @@ namespace Business_Logic
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Pay_Date", SqlDbType.SmallDateTime).Value = this.Pay_Date;
                 cmd.Parameters.Add("@Category", SqlDbType.NVarChar).Value = this.Category;
-                cmd.Parameters.Add("@Paid_Value", SqlDbType.SmallMoney).Value = this.Paid_Value;
+                cmd.Parameters.Add("@Paid_Value", SqlDbType.Money).Value = this.Paid_Value;
                 cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = this.Notes;
                 cmd.Parameters.Add("@Bill_ID", SqlDbType.NVarChar).Value = Bill_Id;
                 con.Open();

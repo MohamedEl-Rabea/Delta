@@ -172,7 +172,7 @@ namespace DeltaProject
         {
             Bill_Content content = new Bill_Content();
             content.P_name = txtP_Name.Text;
-            content.amount = Convert.ToInt32(txtReturnedAmount.Text);
+            content.amount = Convert.ToDecimal(txtReturnedAmount.Text);
             string name, mark, inch, style, m;
             GetName(txtP_Name.Text, out name, out mark, out inch, out style);
             DateTime Return_Date = new DateTime(Convert.ToInt32(txtYear.Text), Convert.ToInt32(txtMonth.Text), Convert.ToInt32(txtDay.Text),
@@ -341,7 +341,7 @@ namespace DeltaProject
                         ((List<Product>)ViewState["ProductsList"]).Add(product);
                     }
                     product.Regulare_Price = Convert.ToDouble(price);
-                    product.Amount = Convert.ToInt32(amount);
+                    product.Amount = Convert.ToDecimal(amount);
                     PanelFinish.Visible = true;
                     lblAddedMsg.Text = "تم اضافة - " + product.P_name + " - الى القائمة";
                     lblAddedMsg.ForeColor = System.Drawing.Color.Green;
@@ -434,7 +434,7 @@ namespace DeltaProject
                 string style = GridViewProductsList.Rows[row_index].Cells[4].Text;
                 double purchase_price = Convert.ToDouble(GridViewProductsList.Rows[row_index].Cells[5].Text);
                 int index = ((List<Product>)ViewState["ProductsList"]).FindIndex(product => product.P_name == P_name && product.Mark == mark && product.Style == style && product.Purchase_Price == purchase_price);
-                ((List<Product>)ViewState["ProductsList"])[index].Amount = Convert.ToInt32(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtAmount")).Text);
+                ((List<Product>)ViewState["ProductsList"])[index].Amount = Convert.ToDecimal(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtAmount")).Text);
                 ((List<Product>)ViewState["ProductsList"])[index].Regulare_Price = Convert.ToDouble(((TextBox)GridViewProductsList.Rows[row_index].FindControl("txtPrice")).Text);
                 GridViewProductsList.EditIndex = -1;
                 BindList();

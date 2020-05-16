@@ -36,7 +36,7 @@ namespace Business_Logic
             SqlCommand cmd = new SqlCommand("Add_Bill_Payment_With_Discount", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@Bill_ID", SqlDbType.BigInt).Value = Bill_ID;
-            cmd.Parameters.Add("@NewDiscount", SqlDbType.SmallMoney).Value = Discount;
+            cmd.Parameters.Add("@NewDiscount", SqlDbType.Money).Value = Discount;
             cmd.Parameters.Add("@Pay_Date", SqlDbType.SmallDateTime).Value = this.Pay_Date;
             cmd.Parameters.Add("@Paid_Value", SqlDbType.Money).Value = this.Paid_amount;
             cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = this.Notes;

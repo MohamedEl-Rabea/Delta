@@ -52,7 +52,7 @@ namespace DeltaProject
             Product product = new Product();
             product.P_name = Products.Rows[row_index].Cells[0].Text;
             TextBox txtAmount = (TextBox)Products.Rows[row_index].FindControl("txtAmount");
-            product.Amount = txtAmount.Text != "" ? Convert.ToInt32(txtAmount.Text) : -1;
+            product.Amount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : -1;
             if (Products.ID == GridViewProducts.ID)
             {
                 product.Purchase_Price = Convert.ToDouble(Products.Rows[row_index].Cells[1].Text);

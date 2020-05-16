@@ -314,9 +314,9 @@
                     </asp:GridView>
                 </asp:Panel>
             </section>
-            <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">
-                <p class="FooterParagraphReportStyle">Copyright&copy 2016 Delta MIS, All rights reserved</p>
-                <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke;">By / mohammed rabea - Contact / 01207758034</p>
+            <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center;height:auto">                
+                <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke;">تم تطوير هذا النظام بواسطة م/ محمد ربيع</p>
+                <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke;">للاتصال / 01001143495</p>
             </footer>
         </div>
     </asp:Panel>
