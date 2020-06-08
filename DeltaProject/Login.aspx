@@ -27,7 +27,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <h3 style="color: black; letter-spacing: 2px; font: bold 22px verdana">Delta Management Information System</h3>
+                                            <h3 style="color: black; letter-spacing: 2px; font: bold 22px verdana">El-Rabea Management Information System</h3>
                                         </td>
                                     </tr>
                                     <tr>
@@ -44,7 +44,6 @@
                     <table class="Login_Table">
                         <tr>
                             <td colspan="2" style="text-align:center">
-                                <img src="Images/Up.png" width="300" height="70"/>
                             </td>
                         </tr>
                         <tr>
@@ -92,7 +91,6 @@
                                 </table>
                             </td>
                             <td>
-                                <img src="Images/Brand.png" width="300" height="200"/>
                             </td>
                         </tr>
                         <tr>
@@ -102,7 +100,6 @@
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align:center">
-                                <img src="Images/Down.png" width="300" height="70"/>
                             </td>
                         </tr>
                     </table>

@@ -366,7 +366,7 @@
                         <asp:CompareValidator ID="CompareValidator2" runat="server"
                             ControlToValidate="txtReturnedAmount" Display="Dynamic" SetFocusOnError="true"
                             ToolTip="يجب كتابة الكميه بشكل صحيح"
-                            Operator="DataTypeCheck" Type="Integer">
+                            Operator="DataTypeCheck" Type="Double">
                         <img src="Images/Error.png" width="24" height="24"/>
                         </asp:CompareValidator>
                     </td>
