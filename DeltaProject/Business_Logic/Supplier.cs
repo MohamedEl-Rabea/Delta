@@ -30,7 +30,7 @@ namespace Business_Logic
                 supplier.S_name = rdr["S_Name"].ToString();
                 supplier.Address = rdr["S_Address"].ToString();
                 supplier.Account_Number = Convert.ToString(rdr["Account_Number"]);
-                TotalDebts = Convert.ToDouble(rdr["debts"]);
+                TotalDebts = Convert.ToDouble(rdr["debts"] is DBNull ? "0" : rdr["debts"]);
             }
             rdr.Close();
             con.Close();
