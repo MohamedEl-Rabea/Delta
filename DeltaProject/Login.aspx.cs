@@ -62,6 +62,7 @@ namespace DeltaProject
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
             byte result = Convert.ToByte(cmd.ExecuteScalar());
+            Session["isAuthenticated"] = result == 1;
             return result == 1;
         }
     }

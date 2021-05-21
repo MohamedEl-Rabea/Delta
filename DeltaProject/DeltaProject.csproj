@@ -92,10 +92,10 @@
     <Content Include="Images\Extend.png" />
     <Content Include="Images\fax.png" />
     <Content Include="Images\Home_Page.jpg" />
+    <Content Include="Images\mamdouhlogo.jpg" />
     <Content Include="Images\Login_footer.png" />
     <Content Include="Images\Login_header.png" />
     <Content Include="Images\Logo.png" />
-    <Content Include="Images\LogoBill.png" />
     <Content Include="Images\Next.png" />
     <Content Include="Images\NextDisabled.png" />
     <Content Include="Images\ok.png" />
@@ -130,6 +130,7 @@
     <Content Include="Suppliers_Search.aspx" />
     <Content Include="Supplier_Products.aspx" />
     <Content Include="Supplier_Returned_Products.aspx" />
+    <Content Include="TrialExpired.aspx" />
     <Content Include="Update_Client_Info.aspx" />
     <Content Include="Update_Products_Amounts.aspx" />
     <Content Include="Update_Product_Info.aspx" />
@@ -392,6 +393,13 @@
     </Compile>
     <Compile Include="Supplier_Returned_Products.aspx.designer.cs">
       <DependentUpon>Supplier_Returned_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrialExpired.aspx.cs">
+      <DependentUpon>TrialExpired.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrialExpired.aspx.designer.cs">
+      <DependentUpon>TrialExpired.aspx</DependentUpon>
     </Compile>
     <Compile Include="Update_Client_Info.aspx.cs">
       <DependentUpon>Update_Client_Info.aspx</DependentUpon>

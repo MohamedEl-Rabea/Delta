@@ -29,21 +29,18 @@
             <table class="Offer_Header_table">
                 <tr>
                     <td style="vertical-align: top; width: 270px;">
-                        <p style="font: bold 28px Arial; color: black; margin: 0; padding: 0">شركة صحارى</p>
-                        <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">للتجارة و الصيانه</p>
-                        <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">خدمات الابار - انظمة الطاقه الشمسيه</p>
-                        <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">طريق مصر / اسيوط الغربى بحرى كمين بنى مزار 500متر</p>
-                        <p style="font: bold 28px Arial; color: black; line-height: 20px; margin: 0; padding: 0">ــــــــــــــــــــ</p>
+                        <p style="font: bold 25px Arial; color: black; margin: 0; padding: 0">اولاد صبرة لقطع غيار السيارات</p>
+                        <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">النقل التقيل - اكتروس - سيور - مسامير</p>
+                        <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">صندفا - امام مجلس قروى صندفا</p>
+                        <p style="font: bold 25px Arial; color: black; line-height: 20px; margin: 0; padding: 0">ــــــــــــــــــــ</p>
                     </td>
                     <td>
                         <div class="Logo_divBill">
-                            <img src="Images/LogoBill.png" width="90" height="90" class="LogoImage" />
+                            <img src="Images/mamdouhlogo.jpg" class="LogoImage" />
                         </div>
                     </td>
                     <td style="vertical-align: middle; width: 250px;">
-                        <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">ادارة م / ممدوح عبدالحميد</p>
-                        <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">&nbsp;&nbsp;&nbsp;م / محمد ممدوح</p>
-                        <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">&nbsp;&nbsp;م / على ممدوح</p>
+                        <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">ادارة / الحاج ممدوح صبره و اولاده</p>                   
                     </td>
                 </tr>
             </table>
@@ -51,7 +48,7 @@
         <%--Report PreSection--%>
         <header class="Prices_Offer_SubHeaderBill">
             <div>
-                <p>اسعار الدلتــــــــا</p>
+                <p>اسعار اولاد صبرة لقطع غيار السيارات</p>
             </div>
         </header>
         <section class="ReportDeclarationSection">
@@ -68,18 +65,12 @@
         </section>
         <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0; float: right">بيانات الاتصــــــــال</p>
         <section class="ContactsSection">
-            <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">
-                01002639370,
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01221118328,
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01207245550,
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01011315522,
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01282567534
-            </p>
+            <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">01099362177</p>
         </section>
         <br />
         <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">
             <p class="FooterParagraphReportStyle">Copyright&copy 2016 Delta MIS, All rights reserved</p>
-            <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke;margin-bottom:10px">By / mohammed rabea - Contact / 01207758034</p>
+            <p class="FooterParagraph" style="font-family: Arial; color: whitesmoke;margin-bottom:10px">By / mohammed rabea - Contact / 01001143495</p>
         </footer>
     </div>
 </asp:Content>

@@ -29,44 +29,6 @@
             });
         });
         $(function () {
-            $('#<%= TextBoxMotors.ClientID%>').autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "Services/GetProductsNames.asmx/Get_MotorsProducts_Names",
-                        data: "{ 'p_name': '" + request.term + "' }",
-                        type: "POST",
-                        dataType: "json",
-                        contentType: "application/json;charset=utf-8",
-                        success: function (result) {
-                            response(result.d);
-                        },
-                        error: function (result) {
-                            alert('Problem');
-                        }
-                    });
-                }
-            });
-        });
-        $(function () {
-            $('#<%= TextBoxTol.ClientID%>').autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "Services/GetProductsNames.asmx/Get_TolProducts_Names",
-                        data: "{ 'p_name': '" + request.term + "' }",
-                        type: "POST",
-                        dataType: "json",
-                        contentType: "application/json;charset=utf-8",
-                        success: function (result) {
-                            response(result.d);
-                        },
-                        error: function (result) {
-                            alert('Problem');
-                        }
-                    });
-                }
-            });
-        });
-        $(function () {
             $('#<%= txtClient_Name.ClientID%>').autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -121,11 +83,6 @@
         </asp:RadioButtonList>
     </asp:Panel>
     <asp:Panel runat="server" ID="PanelSearch" Visible="false">
-        <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories" OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
-            <asp:ListItem Value="Normal" Selected="True">منتجات عاديه</asp:ListItem>
-            <asp:ListItem Value="Tol">طلمبات</asp:ListItem>
-            <asp:ListItem Value="Motors">مواتير</asp:ListItem>
-        </asp:RadioButtonList>
         <section class="Search_Section">
             <table class="Search_table">
                 <tr>
@@ -136,10 +93,6 @@
                     <td class="Search_td">
                         <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
                             placeholder="اسم المنتج للبحث . . . . ."></asp:TextBox>
-                        <asp:TextBox ID="TextBoxTol" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
-                            placeholder="اسم المنتج للبحث . . . . ." Visible="false"></asp:TextBox>
-                        <asp:TextBox ID="TextBoxMotors" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
-                            placeholder="اسم المنتج للبحث . . . . ." Visible="false"></asp:TextBox>
                     </td>
                 </tr>
             </table>
@@ -516,29 +469,24 @@
                 <table class="Offer_Header_table">
                     <tr>
                         <td style="vertical-align: top; width: 270px;">
-                            <p style="font: bold 28px Arial; color: black; margin: 0; padding: 0">شركة صحارى</p>
-                            <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">للتجارة و الصيانه</p>
-                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">خدمات الابار - انظمة الطاقه الشمسيه</p>
-                            <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">طريق مصر / اسيوط الغربى بحرى كمين بنى مزار 500متر</p>
+                            <p style="font: bold 25px Arial; color: black; margin: 0; padding: 0">اولاد صبرة لقطع غيار السيارات</p>
+                            <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">النقل التقيل - اكتروس - سيور - مسامير</p>
+                            <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">صندفا - امام مجلس قروى صندفا</p>
                         </td>
                         <td>
                             <div class="Logo_divBill">
-                                <img src="Images/LogoBill.png" width="90" height="90" class="LogoImage" />
+                                <img src="Images/mamdouhlogo.jpg" width="90" height="90" class="LogoImage" />
                             </div>
                         </td>
                         <td style="vertical-align: middle; width: 250px;">
-                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">ادارة م / ممدوح عبدالحميد</p>
-                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">&nbsp;&nbsp;&nbsp;م / محمد ممدوح</p>
-                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">&nbsp;&nbsp;م / على ممدوح</p>
+                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">ادارة / الحاج ممدوح صبره و اولاده</p>
                         </td>
                     </tr>
                 </table>
                 <section class="ContactsSection">
                     <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">
                         للاتصــــــــــــال: 
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01221118328
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01207245550
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01282567534
+                        &nbsp;&nbsp;01099362177                       
                     </p>
                 </section>
             </header>

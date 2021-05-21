@@ -30,17 +30,6 @@ namespace DeltaProject
             product.Special_Price = Convert.ToDouble(txtboxSpecialSellPrice.Text);
             product.Amount = Convert.ToDecimal(txtboxAmount.Text);
             product.Description = TxtDesc.Text;
-            if (ProductType.SelectedValue == "Motors")
-            {
-                product.Mark = txtMark.Text;
-                product.Inch = Convert.ToDouble(txtInch.Text);
-            }
-            if (ProductType.SelectedValue == "Tol")
-            {
-                product.Mark = txtMark.Text;
-                product.Inch = Convert.ToDouble(txtInch.Text);
-                product.Style = txtStyle.Text;
-            }
             if (ViewState["ProductsList"] == null)
             {
                 List<Product> Products = new List<Product>();
@@ -193,25 +182,6 @@ namespace DeltaProject
         {
             PanelProductsList.Visible = false;
             PanelAddProducts.Visible = true;
-        }
-
-        protected void ProductType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ProductType.SelectedValue == "Motors")
-            {
-                PanelMotors.Visible = true;
-                PanelTol.Visible = false;
-            }
-            else if (ProductType.SelectedValue == "Tol")
-            {
-                PanelMotors.Visible = true;
-                PanelTol.Visible = true;
-            }
-            else
-            {
-                PanelMotors.Visible = false;
-                PanelTol.Visible = false;
-            }
         }
 
         protected void GridViewProductsList_RowDataBound(object sender, GridViewRowEventArgs e)

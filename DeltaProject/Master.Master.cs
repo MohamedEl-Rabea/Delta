@@ -15,10 +15,26 @@ namespace DeltaProject
             {
                 if (!IsPostBack)
                 {
-                    //if (IsExceeded())
-                    //    Response.Redirect("~/Login.aspx");
+                    if (Convert.ToBoolean(Session["isAuthenticated"]))
+                    {
+                        if (TrialExpired())
+                            Response.Redirect("~/TrialExpired.aspx");
+                    }
+                    else
+                        Response.Redirect("~/Login.aspx");
                 }
             }
+        }
+
+        private static bool TrialExpired()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("DateExpired", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            byte result = Convert.ToByte(cmd.ExecuteScalar());
+            return result == 1;
         }
 
         private bool IsExceeded()
@@ -29,7 +45,7 @@ namespace DeltaProject
             con.Open();
             int result = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
-            return result > 275;
+            return result > 200;
         }
 
         protected void MainDivisionsLNKBTN_Click(object sender, EventArgs e)

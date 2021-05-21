@@ -145,15 +145,7 @@
                     ToolTip="رجوع" OnClick="ImageButtonBackToAddSupplier_Click" CausesValidation="false" />
             </header>
             <br />
-            <section class="ChoicesSection">
-                <asp:RadioButtonList ID="ProductType" ClientIDMode="Static" runat="server" CssClass="ChoiceRadioList"
-                    OnSelectedIndexChanged="ProductType_SelectedIndexChanged" AutoPostBack="true" RepeatDirection="Horizontal">
-                    <asp:ListItem Text="منتجات عاديه" Value="Normal" Selected="True" />
-                    <asp:ListItem Text="طلمبات" Value="Tol" />
-                    <asp:ListItem Text="مواتير" Value="Motors" />
-                </asp:RadioButtonList>
-            </section>
-            <table class="AddProductsTable">
+        <table class="AddProductsTable">
                 <tr>
                     <td class="RHSTD2">
                         <p class="RHSP">اسم المنتـــــــــج :</p>

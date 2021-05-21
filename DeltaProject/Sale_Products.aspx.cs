@@ -14,69 +14,26 @@ namespace DeltaProject
         {
 
         }
-        protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RadioButtonListCategories.SelectedValue == "Normal")
-            {
-                TextBoxSearch.Visible = true;
-                TextBoxMotors.Visible = false;
-                TextBoxTol.Visible = false;
-            }
-            else if (RadioButtonListCategories.SelectedValue == "Tol")
-            {
-                TextBoxTol.Visible = true;
-                TextBoxSearch.Visible = false;
-                TextBoxMotors.Visible = false;
-            }
-            else
-            {
-                TextBoxMotors.Visible = true;
-                TextBoxSearch.Visible = false;
-                TextBoxTol.Visible = false;
-            }
-        }
+
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
             BindProductsGrid();
             PanelInitailResult.Visible = true;
         }
+
         private void BindProductsGrid()
         {
-            string P_name;
-            if (TextBoxSearch.Visible)
-            {
-                P_name = TextBoxSearch.Text;
-                GridViewProducts.Columns[1].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[1].HeaderStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[2].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[2].HeaderStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[3].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[3].HeaderStyle.CssClass = "NoDispaly";
-
-            }
-            else if (TextBoxTol.Visible)
-            {
-                P_name = TextBoxTol.Text;
-                GridViewProducts.Columns[1].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[1].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[2].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[2].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[3].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[3].HeaderStyle.CssClass = "";
-            }
-            else
-            {
-                P_name = TextBoxMotors.Text;
-                GridViewProducts.Columns[1].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[1].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[2].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[2].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[3].HeaderStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[3].ItemStyle.CssClass = "NoDispaly";
-            }
+            var P_name = TextBoxSearch.Text;
+            GridViewProducts.Columns[1].ItemStyle.CssClass = "NoDispaly";
+            GridViewProducts.Columns[1].HeaderStyle.CssClass = "NoDispaly";
+            GridViewProducts.Columns[2].ItemStyle.CssClass = "NoDispaly";
+            GridViewProducts.Columns[2].HeaderStyle.CssClass = "NoDispaly";
+            GridViewProducts.Columns[3].ItemStyle.CssClass = "NoDispaly";
+            GridViewProducts.Columns[3].HeaderStyle.CssClass = "NoDispaly";
             GridViewProducts.DataSource = Product.GetProducts(P_name);
             GridViewProducts.DataBind();
         }
+
         protected void Btnadd_Click(object sender, EventArgs e)
         {
             int row_index = ((GridViewRow)((Button)sender).NamingContainer).RowIndex;
@@ -91,23 +48,10 @@ namespace DeltaProject
             }
             else
             {
-
                 BtnFinish.Enabled = true;
                 Product product = new Product();
-
                 product.P_name = GridViewProducts.Rows[row_index].Cells[0].Text;
                 product.Purchase_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[6].Text);
-                if (RadioButtonListCategories.SelectedValue == "Motors")
-                {
-                    product.Mark = GridViewProducts.Rows[row_index].Cells[1].Text;
-                    product.Inch = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[2].Text);
-                }
-                else if (RadioButtonListCategories.SelectedValue == "Tol")
-                {
-                    product.Mark = GridViewProducts.Rows[row_index].Cells[1].Text;
-                    product.Inch = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[2].Text);
-                    product.Style = GridViewProducts.Rows[row_index].Cells[3].Text;
-                }
                 if (Custmer.SelectedIndex == 0) // special
                 {
                     product.Specified_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[4].Text);

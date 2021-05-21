@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>ElRabea MIS</title>
-    <link href="Images/Logo.png" rel="icon" />
     <link href="CSS/Master_style_sheet.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -18,7 +17,6 @@
                     <table class="Logo_Table" style="float: left">
                         <tr>
                             <td>
-                                <img width="44" height="44" src="Images/Logo.png" />
                             </td>
                         </tr>
                     </table>

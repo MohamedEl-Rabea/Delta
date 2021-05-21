@@ -21,7 +21,6 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="Images/LogoBill.png" width="80" height="80" style="border-radius:150px;"/>
                             </td>
                             <td style="vertical-align: central">
                                 <table>
@@ -44,6 +43,7 @@
                     <table class="Login_Table">
                         <tr>
                             <td colspan="2" style="text-align:center">
+
                             </td>
                         </tr>
                         <tr>
