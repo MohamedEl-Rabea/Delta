@@ -25,6 +25,7 @@ namespace DeltaProject
             string Notes = TxtNotes.Text;
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
+            con.Open();
             try
             {
                 SqlCommand cmd = new SqlCommand("Add_Income", con);

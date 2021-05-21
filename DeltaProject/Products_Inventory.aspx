@@ -169,7 +169,7 @@
             </asp:GridView>
         </section>
         <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">
-            <p class="FooterParagraphReportStyle">Copyright&copy 2015 EL-Safa MIS, All rights reserved</p>
+            
         </footer>
     </div>
 </asp:Content>
