@@ -32,7 +32,7 @@ namespace DeltaProject.Business_Logic
             cmd.ExecuteNonQuery();
             con.Close();
         }
-
+        //ToDO Somthing
         /*TODO: 1- Create complete UI for creating supplier cheque
           TODO: 2- Create method for getting upcoming payable cheques count
           TODO: 3- Implement UI for displaying notifications 
