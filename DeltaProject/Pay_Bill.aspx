@@ -2,13 +2,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
+    <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
     <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script type="text/javascript" src="Script/ServiseHandler.js"></script>
+    <script src="Script/jquery-1.10.2.js"></script>
+    <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#<%= TextBoxSearch.ClientID%>').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "Services/GetNamesService.asmx/Get_Clients_Names",
+                    data: "{ 'Client_Name': '" + request.term + "' }",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (result) {
+                        response(result.d);
+                    },
+                    error: function (result) {
+                        alert('Problem');
+                    }
+                });
+            }
+        });
+    });
+    </script>
     <style type="text/css">
         .auto-style1 {
             text-align: right;
             width: 99px;
         }
+
         .auto-style2 {
             text-align: right;
             width: 123px;
@@ -19,6 +44,11 @@
     <header class="Header">
         <p>دفع فواتير</p>
     </header>
+    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
+        OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
+        <asp:ListItem Value="Normal" Selected="True">اسم العميل</asp:ListItem>
+        <asp:ListItem Value="Motors">رقم الفاتورة</asp:ListItem>
+    </asp:RadioButtonList>
     <section class="Search_Section">
         <table class="Search_table">
             <tr>
@@ -27,7 +57,9 @@
                         Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_Click" />
                 </td>
                 <td class="Search_td">
-                    <asp:TextBox ID="txtBill_ID" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
+                    <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
+                        placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                    <asp:TextBox ID="txtBill_ID" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
                         placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
                 </td>
             </tr>
@@ -41,7 +73,7 @@
                         Type="Integer"
                         SetFocusOnError="true"
                         ToolTip="يجب كتابة رقم الفاتورة بشكل صحيح">
-                        <img src="Images/Error.png" width="24" height="24"/>
+                    <img src="Images/Error.png" width="24" height="24"/>
                     </asp:CompareValidator>
                 </td>
             </tr>
@@ -49,8 +81,45 @@
     </section>
     <asp:Panel ID="PanelErrorMessage" runat="server" CssClass="ErrorMessagePanal" Visible="false">
         <article class="Errorarticle">
-            <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="اما هناك خطأ فى الرقم او لو يدرج اى فاتورة بهذا الرقم"></asp:Label>
+            <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد فواتير مسجله لهذا العميل / الرقم"></asp:Label>
         </article>
+    </asp:Panel>
+    <asp:Panel runat="server" ID="PanelBills" Visible="false">
+        <header class="PreSectionTab">
+            <div>
+                <asp:LinkButton ID="lnkBtnUnpaidBills" runat="server" CssClass="TabLnks"
+                    ToolTip="عرض كافة الفواتير التى لم يتم دفعها الخاصه بهذا العميل">الفواتير الغير مدفوعه</asp:LinkButton>
+            </div>
+        </header>
+        <asp:Panel runat="server" ID="PanelUnPaidBills" CssClass="PreReport_SectionTab">
+            <asp:GridView ID="GridViewUnPaidBills" runat="server" AutoGenerateColumns="False" OnRowCommand="GridViewPaidBills_RowCommand"
+                CssClass="Gridview_Style2" EmptyDataText="لا توجد فواتير غير مدفوعه لهذا العميل"
+                DataSourceID="ObjectDataSourceUnPaidClientBills" AllowPaging="True">
+                <Columns>
+                    <asp:BoundField DataField="Bill_Date" HeaderText="تاريخ الفاتورة" SortExpression="Bill_Date" DataFormatString="{0:d}" />
+                    <asp:BoundField DataField="Client_Name" HeaderText="اسم العميل" SortExpression="Client_Name" />
+                    <asp:TemplateField HeaderText="رقم الفاتورة" SortExpression="Bill_ID">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButtonBill_ID" runat="server" Text='<%# Bind("Bill_ID") %>' ToolTip="الانتقال الى كامل بيانات الفاتورة" CommandName="Select_Bill"></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <RowStyle CssClass="Row_Style" />
+                <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
+                <EmptyDataRowStyle CssClass="EmptyDataRowStyle" />
+            </asp:GridView>
+            <asp:ObjectDataSource ID="ObjectDataSourceUnPaidClientBills" runat="server"
+                SelectMethod="Get_All_Client_Unpaid_Bills"
+                TypeName="Business_Logic.Bill"
+                StartRowIndexParameterName="Start_Index"
+                MaximumRowsParameterName="Max_Rows"
+                SelectCountMethod="Get_UnPaid_Count_By_C_Name"
+                EnablePaging="True">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TextBoxSearch" Name="Client_Name" PropertyName="Text" Type="String" />
+                </SelectParameters>
+            </asp:ObjectDataSource>
+        </asp:Panel>
     </asp:Panel>
     <asp:Panel runat="server" ID="PanelPayBill" Visible="false">
         <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">

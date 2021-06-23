@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Business_Logic;
 
 namespace DeltaProject
 {
@@ -16,7 +17,7 @@ namespace DeltaProject
 
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
-            GridViewSupplierProducts.DataSource = Business_Logic.Suppliers_Products.Get_Supplier_Products(TextBoxSearch.Text);
+            GridViewSupplierProducts.DataSource = Suppliers_Products.Get_Supplier_Products(TextBoxSearch.Text);
             GridViewSupplierProducts.DataBind();
 
             PanelSupplierProducts.Visible = true;

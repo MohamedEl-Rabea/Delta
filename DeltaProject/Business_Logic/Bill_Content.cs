@@ -12,6 +12,7 @@ namespace Business_Logic
     public class Bill_Content
     {
         public string P_name { get; set; }
+        public DateTime Item_Date { get; set; }
         public double Purchase_Price { get; set; }
         public double Specified_Price { get; set; }
         public double Sell_Price { get; set; }
@@ -33,6 +34,7 @@ namespace Business_Logic
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Bill_ID", SqlDbType.BigInt).Value = Bill_ID;
                 cmd.Parameters.Add("@P_Name", SqlDbType.NVarChar).Value = product.P_name;
+                cmd.Parameters.Add("@Item_Date", SqlDbType.DateTime).Value = DateTime.Now;
                 cmd.Parameters.Add("@Mark", SqlDbType.NVarChar).Value = product.Mark;
                 cmd.Parameters.Add("@Style", SqlDbType.NVarChar).Value = product.Style;
                 cmd.Parameters.Add("@Inch", SqlDbType.Decimal).Value = product.Inch;

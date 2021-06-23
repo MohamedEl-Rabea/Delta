@@ -178,10 +178,12 @@
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
     <Compile Include="Business_Logic\Client.cs" />
+    <Compile Include="Business_Logic\ClientCheque.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
     <Compile Include="Business_Logic\Product.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
+    <Compile Include="Business_Logic\SupplierCheque.cs" />
     <Compile Include="Business_Logic\Suppliers_Products.cs" />
     <Compile Include="Business_Logic\Supplier_Fax.cs" />
     <Compile Include="Business_Logic\Supplier_Payments_Documents.cs" />
