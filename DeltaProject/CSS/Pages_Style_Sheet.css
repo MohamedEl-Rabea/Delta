@@ -80,6 +80,11 @@
     width: 683px;
 }
 
+.txts3 {
+    width: 320px;
+    height: 35px;
+}
+
 .EditTxt, .EditTxtName {
     border-radius: 5px 5px;
     border: 1px solid black;
