@@ -82,7 +82,7 @@
                         <p class="RHSP">قيمة الشيك :</p>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtboxChequeValue" CssClass="txts3" PlaceHolder="سعر الشـــراء" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtboxChequeValue" CssClass="txts3" PlaceHolder="قيمة الشيك" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
 
                     <td class="RHSTD">
@@ -137,7 +137,7 @@
                 
                 <tr>
                     <td class="RHSTD2">
-                        <p class="RHSP">مدة اظهار الاشعار :</p>
+                        <p class="RHSP">تنبيه قبل :</p>
                     </td>
                     <td>
                         <asp:TextBox runat="server" ID="txtboxAlertBefore" CssClass="txts3" PlaceHolder="مدة اظهار الاشعار" AutoCompleteType="Disabled"></asp:TextBox>

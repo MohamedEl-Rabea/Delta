@@ -17,7 +17,7 @@ namespace Business_Logic
         public int AlertBefore { get; set; }
         public string Notes { get; set; }
 
-        public bool Create(SupplierCheque supplierCheque)
+        public bool Create()
         {
             bool isInserted = true;
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -26,12 +26,12 @@ namespace Business_Logic
             {
                 SqlCommand cmd = new SqlCommand("AddSupplierCheque", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@SupplierName", SqlDbType.NVarChar).Value = supplierCheque.SupplierName;
-                cmd.Parameters.Add("@ChequeValue", SqlDbType.Money).Value = supplierCheque.Value;
-                cmd.Parameters.Add("@DueDate", SqlDbType.SmallDateTime).Value = supplierCheque.DueDate;
-                cmd.Parameters.Add("@ChequeNumber", SqlDbType.NVarChar).Value = supplierCheque.ChequeNumber;
-                cmd.Parameters.Add("@AlertBefore", SqlDbType.Int).Value = supplierCheque.AlertBefore;
-                cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = supplierCheque.Notes;
+                cmd.Parameters.Add("@SupplierName", SqlDbType.NVarChar).Value = SupplierName;
+                cmd.Parameters.Add("@ChequeValue", SqlDbType.Money).Value = Value;
+                cmd.Parameters.Add("@DueDate", SqlDbType.SmallDateTime).Value = DueDate;
+                cmd.Parameters.Add("@ChequeNumber", SqlDbType.NVarChar).Value = ChequeNumber;
+                cmd.Parameters.Add("@AlertBefore", SqlDbType.Int).Value = AlertBefore;
+                cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = Notes;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -42,7 +42,6 @@ namespace Business_Logic
                 isInserted = false;
             }
             return isInserted;
-            
         }
 
         public bool IsExistsChequeNumber(string ChequeNumber)

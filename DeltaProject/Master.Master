@@ -70,7 +70,7 @@
                                         <asp:MenuItem Text="استعـــــــلام" NavigateUrl="~/Search_For_Bills.aspx" ToolTip="الاستعلام عن فاتورة سام العميل او الشركه"></asp:MenuItem>
                                     </asp:MenuItem>
 
-                                    <asp:MenuItem Text="استعلام شيكات">
+                                    <asp:MenuItem Text="شيكات">
                                         <asp:MenuItem Text="شيكات العملاء" ToolTip="بحث في شيكات العملاء" NavigateUrl="~/Search_For_ClientCheque.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="شيكات الموردين" ToolTip="بحث في شيكات الموردين" NavigateUrl="~/Search_For_SupplierCheque.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
@@ -119,7 +119,7 @@
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="المورديــــــــــــــن">
                                     <asp:TreeNode Text="اضافة مورد" NavigateUrl="~/Add_Supplier.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="اضافة شيك مورد" NavigateUrl="~/Add_SupplierCheque.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="اضافة شيكات" NavigateUrl="~/Add_SupplierCheque.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Supplier_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="سداد جديــــد" NavigateUrl="~/New_Supplier_Interaction.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Supplier.aspx"></asp:TreeNode>
@@ -127,7 +127,7 @@
                                     <asp:TreeNode Text="استعلام واردات" NavigateUrl="~/Supplier_Products.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="العمــــــــــــــــــلاء">
-                                    <asp:TreeNode Text="اضافة شيك عميل" NavigateUrl="~/Add_ClientCheque.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="اضافة شيكات" NavigateUrl="~/Add_ClientCheque.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Client_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Client.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Search_For_Client.aspx"></asp:TreeNode>

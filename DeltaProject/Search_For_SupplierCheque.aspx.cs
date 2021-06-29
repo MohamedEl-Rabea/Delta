@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Business_Logic;
-
-using System.Linq;
-using System.Web;
+﻿using Business_Logic;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,7 +9,7 @@ namespace DeltaProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lnkBtnUpcomingPayableSupplierCheques.ForeColor = System.Drawing.Color.White;
         }
 
         protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,10 +42,12 @@ namespace DeltaProject
                 {
                     PanelSupplierCheques.Visible = true;
                     PanelErrorMessage.Visible = false;
-                    PanelPaidSupplierCheques.Visible = true;
+                    PanelPaidSupplierCheques.Visible = false;
                     PanelUnPaidSupplierCheques.Visible = false;
-                    lnkBtnPaidSupplierCheques.ForeColor = System.Drawing.Color.White;
+                    PanelUpcomingPayableSupplierCheques.Visible = true;
+                    lnkBtnPaidSupplierCheques.ForeColor = System.Drawing.Color.Black;
                     lnkBtnUnpaidSupplierCheques.ForeColor = System.Drawing.Color.Black;
+                    lnkBtnUpcomingPayableSupplierCheques.ForeColor = System.Drawing.Color.White;
                     GridViewPaidSupplierCheques.PageIndex = 0;
                 }
             }

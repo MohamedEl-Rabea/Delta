@@ -47,6 +47,7 @@
 .RHSTD, .RHSTD2 {
     text-align: right;
     width: 80px;
+    padding-right: 5px;
 }
 
 .RHSTD2 {
@@ -64,7 +65,7 @@
     font-size: 12px;
 }
 
-.txts, .txts2, .DateTxts, .DateTxts_MID, .txtsModified, .TxtMultiline, .Smalltxts, .MidTexts, .Smalltxts2 {
+.txts, .txts2, .DateTxts, .DateTxts_MID, .txtsModified, .TxtMultiline, .Smalltxts, .MidTexts, .Smalltxts2, .txts3 {
     width: 700px;
     padding: 5px;
     height: 20px;
@@ -81,8 +82,7 @@
 }
 
 .txts3 {
-    width: 320px;
-    height: 35px;
+    width: 310px;
 }
 
 .EditTxt, .EditTxtName {
@@ -837,12 +837,11 @@
 
 .Empty_Style {
     height: 40px;
-    color: green;
     padding: 0 5px 0px 5px;
-    font: 500 12px arial;
-    border-radius: 5px 5px;
-    border: 1px solid #498835;
-    background-color: #B5D8AA;
+    font: 500 13px arial;
+    border-radius: 10px 10px;
+    border: 1px solid #ff6a00;
+    background-color: #fffbcc;
 }
 
 .PreSectionTab {

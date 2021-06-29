@@ -74,7 +74,7 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد شيكات مسجله لهذا المورد / الرقم"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelSupplierCheques" Visible="false">
+    <asp:Panel runat="server" ID="PanelSupplierCheques">
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnPaidSupplierCheques" runat="server" CssClass="TabLnks"
@@ -102,8 +102,6 @@
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
                     <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
-                    
-                   
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -154,7 +152,7 @@
                 </SelectParameters>
             </asp:ObjectDataSource>
         </asp:Panel>
-        <asp:Panel runat="server" ID="PanelUpcomingPayableSupplierCheques" CssClass="PreReport_SectionTab" Visible="false">
+        <asp:Panel runat="server" ID="PanelUpcomingPayableSupplierCheques" CssClass="PreReport_SectionTab">
             <asp:GridView ID="GridViewUpcomingPayableSupplierCheques" runat="server" AutoGenerateColumns="False" 
                 CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات مستحقة الدفع لهذا المورد"
                 DataSourceID="ObjectDataSourceUpcomingPayableSupplierCheques" AllowPaging="True">
@@ -163,8 +161,6 @@
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
                     <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
-                    
-                    
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -186,6 +182,5 @@
                 <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
         </div>
     </asp:Panel>
-    
 </asp:Content>
 

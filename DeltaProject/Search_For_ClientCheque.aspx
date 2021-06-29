@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Search_For_ClientCheque.aspx.cs" Inherits="DeltaProject.Search_For_ClientCheque" %>
- 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
@@ -25,7 +25,7 @@
                 }
             });
         });
-        
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
@@ -72,7 +72,7 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد شيكات مسجله لهذا العميل / الرقم"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelCientCheques" Visible="false">
+    <asp:Panel runat="server" ID="PanelCientCheques">
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnPaidCientCheques" runat="server" CssClass="TabLnks"
@@ -99,13 +99,7 @@
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
-                    
-                    <%--<asp:TemplateField HeaderText="القيمة" SortExpression="Value">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="LinkButtonBill_ID" runat="server" Text='<%# Bind("Bill_ID") %>' ToolTip="الانتقال الى كامل بيانات الفاتورة" CommandName="Select_Bill"></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:d}" SortExpression="DueDate" />
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -124,15 +118,15 @@
             </asp:ObjectDataSource>
         </asp:Panel>
         <asp:Panel runat="server" ID="PanelUnPaidCientCheques" CssClass="PreReport_SectionTab" Visible="false">
-            <asp:GridView ID="GridViewUnPaidCientCheques" runat="server" AutoGenerateColumns="False" 
+            <asp:GridView ID="GridViewUnPaidCientCheques" runat="server" AutoGenerateColumns="False"
                 CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات غير مدفوعه لهذا العميل"
                 DataSourceID="ObjectDataSourceUnPaidClientCientCheques" AllowPaging="True" DataKeyNames="Id">
                 <Columns>
-                    <asp:BoundField DataField="Id" visible="false" SortExpression="Id" />
+                    <asp:BoundField DataField="Id" Visible="false" SortExpression="Id" />
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:d}" SortExpression="DueDate" />
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:ImageButton ID="ImageButtonConfirmEdit" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
@@ -156,21 +150,15 @@
                 </SelectParameters>
             </asp:ObjectDataSource>
         </asp:Panel>
-        <asp:Panel runat="server" ID="PanelUpcomingPayableClientCheques" CssClass="PreReport_SectionTab" Visible="false">
-            <asp:GridView ID="GridViewUpcomingPayableClientCheques" runat="server" AutoGenerateColumns="False" 
-                CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات مستحقة الدفع لهذا العميل"
+        <asp:Panel runat="server" ID="PanelUpcomingPayableClientCheques" CssClass="PreReport_SectionTab">
+            <asp:GridView ID="GridViewUpcomingPayableClientCheques" runat="server" AutoGenerateColumns="False"
+                CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات مستحقة التحصيل على هذا العميل"
                 DataSourceID="ObjectDataSourceUpcomingPayableCientCheques" AllowPaging="True">
                 <Columns>
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
-                    
-                    <%--<asp:TemplateField HeaderText="القيمة" SortExpression="Value">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="LinkButtonBill_ID" runat="server" Text='<%# Bind("Bill_ID") %>' ToolTip="الانتقال الى كامل بيانات الفاتورة" CommandName="Select_Bill"></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:d}" SortExpression="DueDate" />
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -188,11 +176,9 @@
                 </SelectParameters>
             </asp:ObjectDataSource>
         </asp:Panel>
-
         <div class="MsgDiv">
-                <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
+            <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
         </div>
     </asp:Panel>
-    
 </asp:Content>
 

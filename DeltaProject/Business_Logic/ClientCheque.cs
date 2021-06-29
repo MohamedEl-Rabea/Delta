@@ -18,7 +18,7 @@ namespace Business_Logic
         public int AlertBefore { get; set; }
         public string Notes { get; set; }
 
-        public bool Create(ClientCheque clientCheque)
+        public bool Save()
         {
             bool isInserted = true;
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -27,12 +27,12 @@ namespace Business_Logic
             {
                 SqlCommand cmd = new SqlCommand("AddClientCheque", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@ClientName", SqlDbType.NVarChar).Value = clientCheque.ClientName;
-                cmd.Parameters.Add("@ChequeValue", SqlDbType.Money).Value = clientCheque.Value;
-                cmd.Parameters.Add("@DueDate", SqlDbType.SmallDateTime).Value = clientCheque.DueDate;
-                cmd.Parameters.Add("@ChequeNumber", SqlDbType.NVarChar).Value = clientCheque.ChequeNumber;
-                cmd.Parameters.Add("@AlertBefore", SqlDbType.Int).Value = clientCheque.AlertBefore;
-                cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = clientCheque.Notes;
+                cmd.Parameters.Add("@ClientName", SqlDbType.NVarChar).Value = ClientName;
+                cmd.Parameters.Add("@ChequeValue", SqlDbType.Money).Value = Value;
+                cmd.Parameters.Add("@DueDate", SqlDbType.SmallDateTime).Value = DueDate;
+                cmd.Parameters.Add("@ChequeNumber", SqlDbType.NVarChar).Value = ChequeNumber;
+                cmd.Parameters.Add("@AlertBefore", SqlDbType.Int).Value = AlertBefore;
+                cmd.Parameters.Add("@Notes", SqlDbType.NVarChar).Value = Notes;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -43,7 +43,6 @@ namespace Business_Logic
                 isInserted = false;
             }
             return isInserted;
-
         }
 
         public static List<ClientCheque> GetPaidClientCheques()

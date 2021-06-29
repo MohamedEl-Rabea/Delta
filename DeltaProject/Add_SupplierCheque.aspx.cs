@@ -1,10 +1,5 @@
 ﻿using Business_Logic;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
@@ -21,14 +16,14 @@ namespace DeltaProject
             SupplierCheque supplierCheque = new SupplierCheque();
             supplierCheque.SupplierName = txtSupplier_Name.Text;
             supplierCheque.Notes = txtNotes.Text;
-            DateTime dueDate = Convert.ToDateTime(DueDate.Text);
-            dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-            supplierCheque.DueDate = dueDate;
+            //DateTime dueDate = Convert.ToDateTime(DueDate.Text);
+            //dueDate = new DateTime(dueDate.Year, dueDate.Month, dueDate.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            supplierCheque.DueDate = Convert.ToDateTime(DueDate.Text);
             supplierCheque.Value = Convert.ToDecimal(txtboxChequeValue.Text);
             supplierCheque.PaidOff = false;
             supplierCheque.ChequeNumber = txtChequeNumber.Text;
             supplierCheque.AlertBefore =Convert.ToInt32(txtboxAlertBefore.Text);
-            if (!supplierCheque.Create(supplierCheque))
+            if (!supplierCheque.Create())
             {
                 lblFinishMsg.Text = "هناك مشكلة في الحفظ برجاء اعادة المحاولة";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Red;
@@ -37,6 +32,11 @@ namespace DeltaProject
             {
                 lblFinishMsg.Text = "تم بنجاح";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                txtSupplier_Name.Text = string.Empty;
+                txtNotes.Text = string.Empty;
+                txtboxChequeValue.Text = string.Empty;
+                txtChequeNumber.Text = string.Empty;
+                DueDate.Text = string.Empty;
             }
         }
     }

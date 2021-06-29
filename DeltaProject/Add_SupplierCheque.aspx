@@ -39,7 +39,7 @@
             <table class="AddProductsTable">
                 <tr>
                     <td class="RHSTD">
-                        <p class="RHSP">اسم المـــورد :</p>
+                        <p class="RHSP">اسم المورد :</p>
                     </td>
                     <td style="text-align: right">
                         <asp:TextBox runat="server" ID="txtSupplier_Name" CssClass="txts3" PlaceHolder="اسم المورد" AutoCompleteType="Disabled"></asp:TextBox>
@@ -48,7 +48,7 @@
                     <td class="RHSTD">
                         <p class="RHSP">تاريخ الاستحقاق :</p>
                     </td>
-                    <td style="text-align: right">
+                    <td style="text-align: right"> 
                         <asp:TextBox runat="server" ID="DueDate" CssClass="txts3" PlaceHolder="تاريخ الاستحقاق" TextMode="Date"></asp:TextBox>
                     </td>
                 </tr>
@@ -83,7 +83,7 @@
                         <p class="RHSP">قيمة الشيك :</p>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtboxChequeValue" CssClass="txts3" PlaceHolder="سعر الشـــراء" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtboxChequeValue" CssClass="txts3" PlaceHolder="قيمة الشيك" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
 
                     <td class="RHSTD">
@@ -135,13 +135,13 @@
                     </td>
                 </tr>
                 
-                
+      
                 <tr>
                     <td class="RHSTD2">
-                        <p class="RHSP">مدة اظهار الاشعار :</p>
+                        <p class="RHSP">تبيه قبل :</p>
                     </td>
                     <td>
-                        <asp:TextBox runat="server" ID="txtboxAlertBefore" CssClass="txts3" PlaceHolder="مدة اظهار الاشعار" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtboxAlertBefore" CssClass="txts3" PlaceHolder="مدة اظهار الاشعار" Text="1" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
 
                     <td class="RHSTD">
