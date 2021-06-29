@@ -49,7 +49,7 @@ namespace Business_Logic
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("IsExistsChequeNumber", con);
+            SqlCommand cmd = new SqlCommand("IsExistsSupplierChequeNumber", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@ChequeNumber", SqlDbType.NVarChar).Value = ChequeNumber;
             con.Open();
