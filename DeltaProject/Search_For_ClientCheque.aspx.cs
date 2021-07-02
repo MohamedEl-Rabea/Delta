@@ -7,31 +7,19 @@ namespace DeltaProject
 {
     public partial class Search_For_ClientCheque : System.Web.UI.Page
     {
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.White;
+            Session["ClientChequesCount"] = 0;
         }
 
-        protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RadioButtonListCategories.SelectedIndex == 0)
-            {
-                TextBoxSearch.Visible = true;
-                txtClientCheques_ID.Visible = false;
-            }
-            else
-            {
-                TextBoxSearch.Visible = false;
-                txtClientCheques_ID.Visible = true;
-            }
-        }
-
+        
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
             if (TextBoxSearch.Visible)
             {
                 ClientCheque clientCheque = new ClientCheque();
-                clientCheque.ChequeNumber = txtClientCheques_ID.Text != "" ? txtClientCheques_ID.Text : "";
                 clientCheque.ClientName = TextBoxSearch.Text;
                 if (string.IsNullOrEmpty(TextBoxSearch.Text))
                 {
@@ -51,21 +39,7 @@ namespace DeltaProject
                     GridViewPaidCientCheques.PageIndex = 0;
                 }
             }
-            else // search by ChequeNumber
-            {
-                ClientCheque clientCheque = new ClientCheque();
-                clientCheque.ChequeNumber = txtClientCheques_ID.Text != "" ? txtClientCheques_ID.Text : "";
-                if (clientCheque.ChequeNumber == "" || !clientCheque.IsExistsChequeNumber(clientCheque.ChequeNumber))
-                {
-                    PanelCientCheques.Visible = false;
-                    PanelErrorMessage.Visible = true;
-                }
-                else
-                {
-                    PanelErrorMessage.Visible = false;
-                    PanelCientCheques.Visible = true;
-                }
-            }
+            
         }
 
         protected void lnkBtnPaidCientCheques_Click(object sender, EventArgs e)

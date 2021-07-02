@@ -10,28 +10,16 @@ namespace DeltaProject
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkBtnUpcomingPayableSupplierCheques.ForeColor = System.Drawing.Color.White;
+            Session["SupplierChequesCount"] = 0;
+
         }
 
-        protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RadioButtonListCategories.SelectedIndex == 0)
-            {
-                TextBoxSearch.Visible = true;
-                txtSupplierCheques_ID.Visible = false;
-            }
-            else
-            {
-                TextBoxSearch.Visible = false;
-                txtSupplierCheques_ID.Visible = true;
-            }
-        }
-
+        
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
             if (TextBoxSearch.Visible)
             {
                 SupplierCheque SupplierCheque = new SupplierCheque();
-                SupplierCheque.ChequeNumber = txtSupplierCheques_ID.Text != "" ? txtSupplierCheques_ID.Text : "";
                 SupplierCheque.SupplierName = TextBoxSearch.Text;
                 if (string.IsNullOrEmpty(TextBoxSearch.Text))
                 {
@@ -51,21 +39,7 @@ namespace DeltaProject
                     GridViewPaidSupplierCheques.PageIndex = 0;
                 }
             }
-            else // search by ChequeNumber
-            {
-                SupplierCheque SupplierCheque = new SupplierCheque();
-                SupplierCheque.ChequeNumber = txtSupplierCheques_ID.Text != "" ? txtSupplierCheques_ID.Text : "";
-                if (SupplierCheque.ChequeNumber == "" || !SupplierCheque.IsExistsChequeNumber(SupplierCheque.ChequeNumber))
-                {
-                    PanelSupplierCheques.Visible = false;
-                    PanelErrorMessage.Visible = true;
-                }
-                else
-                {
-                    PanelErrorMessage.Visible = false;
-                    PanelSupplierCheques.Visible = true;
-                }
-            }
+            
         }
 
         protected void lnkBtnPaidSupplierCheques_Click(object sender, EventArgs e)

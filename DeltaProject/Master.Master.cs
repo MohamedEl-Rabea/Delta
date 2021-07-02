@@ -5,11 +5,16 @@ using System.Web.Security;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using Business_Logic;
 
 namespace DeltaProject
 {
     public partial class Master : System.Web.UI.MasterPage
     {
+        public int ClientChequesCount = ClientCheque.GetUpcomingPayableClientChequesCount();
+        public int SupplierChequesCount = SupplierCheque.GetUpcomingPayableSupplierChequesCount();
+        public int Total;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             {
@@ -17,6 +22,35 @@ namespace DeltaProject
                 {
                     if (Convert.ToBoolean(Session["isAuthenticated"]))
                     {
+                        if ( Session["SupplierChequesCount"] != null)
+                            SupplierChequesCount = Convert.ToInt32(Session["SupplierChequesCount"]);
+                        else if (Session["ClientChequesCount"] != null)
+                            ClientChequesCount = Convert.ToInt32(Session["ClientChequesCount"]);
+
+                        Total = SupplierChequesCount + ClientChequesCount;
+                        foreach (MenuItem menuitem in BarMenu.Items)
+                        {
+
+                            if (menuitem.Value == "Cheques")
+                            {
+                                menuitem.Text = menuitem.Text + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + "<div class='dot'>" + (Total != 0 ? Total : 0) + "</div>";
+                            }
+
+                            foreach (MenuItem submenuitem in menuitem.ChildItems)
+                            {
+                                if (submenuitem.Value == "ClientCheques")
+                                {
+                                    submenuitem.Text = submenuitem.Text + "&nbsp; &nbsp; " + "<div class='dot'>" + (ClientChequesCount != 0 ? ClientChequesCount : 0) + "</div>";
+                                }
+
+                                if (submenuitem.Value == "SupplierCheques")
+                                {
+                                    submenuitem.Text = submenuitem.Text + "&nbsp; " + "<div class='dot'>" + (SupplierChequesCount != 0 ? SupplierChequesCount : 0) + "</div>";
+                                }
+                            }
+
+                        }
+
                         if (TrialExpired())
                             Response.Redirect("~/TrialExpired.aspx");
                     }
@@ -24,6 +58,10 @@ namespace DeltaProject
                         Response.Redirect("~/Login.aspx");
                 }
             }
+        }
+        protected void __doPostBack(object sender, EventArgs e)
+        {
+
         }
 
         private static bool TrialExpired()

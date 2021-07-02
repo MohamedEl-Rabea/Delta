@@ -228,3 +228,11 @@ body {
 .AlertImage {
     margin-top:5px;
 }
+
+.dot {
+    height: 17px;
+    width: 17px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}

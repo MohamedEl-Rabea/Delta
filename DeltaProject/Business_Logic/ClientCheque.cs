@@ -248,5 +248,17 @@ namespace Business_Logic
             return ClientCheques;
         }
 
+        public static int GetUpcomingPayableClientChequesCount()
+        {
+            int Count;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("GetUpcomingPayableClientChequesCount", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
+        }
     }
 }

@@ -29,6 +29,17 @@
             });
         });
     </script>
+
+    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link  rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
+        <script src=" https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" >
+            $(function dtTimePicker() {
+                $('#<%= DueDate.ClientID%>').datepicker({
+                    dateFormat: 'dd/mm/yy',
+                });
+            });
+        </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
@@ -49,7 +60,7 @@
                         <p class="RHSP">تاريخ الاستحقاق :</p>
                     </td>
                     <td style="text-align: right"> 
-                        <asp:TextBox runat="server" ID="DueDate" CssClass="txts3" PlaceHolder="تاريخ الاستحقاق" TextMode="Date"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="DueDate" CssClass="txts3" PlaceHolder="تاريخ الاستحقاق" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -138,7 +149,7 @@
       
                 <tr>
                     <td class="RHSTD2">
-                        <p class="RHSP">تبيه قبل :</p>
+                        <p class="RHSP">تنبيه قبل :</p>
                     </td>
                     <td>
                         <asp:TextBox runat="server" ID="txtboxAlertBefore" CssClass="txts3" PlaceHolder="مدة اظهار الاشعار" Text="1" AutoCompleteType="Disabled"></asp:TextBox>
@@ -185,5 +196,4 @@
             </div>
         </footer>
     </asp:Panel>
-    
 </asp:Content>

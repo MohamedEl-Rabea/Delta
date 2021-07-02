@@ -34,11 +34,7 @@
     <header class="Header">
         <p>استعلام عن شيكات الموردين</p>
     </header>
-    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
-        OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
-        <asp:ListItem Value="Normal" Selected="True">اسم المورد</asp:ListItem>
-        <asp:ListItem Value="Motors">رقم الشيك</asp:ListItem>
-    </asp:RadioButtonList>
+    
     <section class="Search_Section">
         <table class="Search_table">
             <tr>
@@ -49,24 +45,9 @@
                 <td class="Search_td">
                     <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
                         placeholder="اسم المورد للبحث . . . . ."></asp:TextBox>
-                    <asp:TextBox ID="txtSupplierCheques_ID" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
-                        placeholder="رقم الشيك للبحث . . . . ."></asp:TextBox>
                 </td>
             </tr>
-            <tr>
-                <td></td>
-                <td style="text-align: center">
-                    <asp:CompareValidator ID="CompareValidator1" runat="server"
-                        ControlToValidate="txtSupplierCheques_ID"
-                        Display="Dynamic"
-                        Operator="DataTypeCheck"
-                        Type="Integer"
-                        SetFocusOnError="true"
-                        ToolTip="يجب كتابة رقم الشيك بشكل صحيح">
-                        <img src="Images/Error.png" width="24" height="24"/>
-                    </asp:CompareValidator>
-                </td>
-            </tr>
+            
         </table>
     </section>
     <asp:Panel ID="PanelErrorMessage" runat="server" CssClass="ErrorMessagePanal" Visible="false">
@@ -101,7 +82,7 @@
                     <asp:BoundField DataField="SupplierName" HeaderText="اسم المورد" SortExpression="SupplierName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:dd/MM/yyyy}" SortExpression="DueDate" />
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -128,7 +109,7 @@
                     <asp:BoundField DataField="SupplierName" HeaderText="اسم المورد" SortExpression="SupplierName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:dd/MM/yyyy}" SortExpression="DueDate" />
                     <asp:TemplateField >
                         <ItemTemplate>
                             <asp:ImageButton ID="ImageButtonConfirmEdit" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
@@ -160,7 +141,7 @@
                     <asp:BoundField DataField="SupplierName" HeaderText="اسم المورد" SortExpression="SupplierName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
                     <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:d}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:dd/MM/yyyy}" SortExpression="DueDate" />
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />

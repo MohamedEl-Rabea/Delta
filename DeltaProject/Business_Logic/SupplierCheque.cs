@@ -201,7 +201,18 @@ namespace Business_Logic
             return SupplierCheques;
         }
 
-
+        public static int GetUpcomingPayableSupplierChequesCount()
+        {
+            int Count;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("GetUpcomingPayableSupplierChequesCount", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
+        }
         //ToDO Somthing
         /*TODO: 1- Create complete UI for creating supplier cheque
           TODO: 2- Create method for getting upcoming payable cheques count

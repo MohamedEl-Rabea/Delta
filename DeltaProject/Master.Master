@@ -37,10 +37,10 @@
                 </header>
                 <div class="Content_div">
                     <nav class="Content_Nav_Bar">
-                        <table style="width: 200px; float: left">
+                        <table style="width: 130px; float: left">
                             <tr>
                                 <td>
-                                    <asp:LinkButton ID="lnkAccountSettings" runat="server" CssClass="lnk" CausesValidation="false" OnClick="lnkAccountSettings_Click">اعدادات الحسابات</asp:LinkButton>
+                                    <asp:LinkButton ID="lnkAccountSettings" runat="server" CssClass="lnk" CausesValidation="false" OnClick="lnkAccountSettings_Click">اعدادات</asp:LinkButton>
                                     &nbsp;&nbsp;
                                     <asp:LinkButton ID="lnkLogOut" runat="server" CssClass="lnk" CausesValidation="false" OnClick="lnkLogOut_Click">تسجيل خروج</asp:LinkButton>
                                 </td>
@@ -70,9 +70,9 @@
                                         <asp:MenuItem Text="استعـــــــلام" NavigateUrl="~/Search_For_Bills.aspx" ToolTip="الاستعلام عن فاتورة سام العميل او الشركه"></asp:MenuItem>
                                     </asp:MenuItem>
 
-                                    <asp:MenuItem Text="شيكات">
-                                        <asp:MenuItem Text="شيكات العملاء" ToolTip="بحث في شيكات العملاء" NavigateUrl="~/Search_For_ClientCheque.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="شيكات الموردين" ToolTip="بحث في شيكات الموردين" NavigateUrl="~/Search_For_SupplierCheque.aspx"></asp:MenuItem>
+                                    <asp:MenuItem Text="شيكات" Value="Cheques">
+                                        <asp:MenuItem Text="شيكات العملاء" Value="ClientCheques" ToolTip="بحث في شيكات العملاء" NavigateUrl="~/Search_For_ClientCheque.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="شيكات الموردين" Value="SupplierCheques" ToolTip="بحث في شيكات الموردين" NavigateUrl="~/Search_For_SupplierCheque.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
 
                                     
