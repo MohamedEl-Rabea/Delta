@@ -11,79 +11,61 @@ namespace DeltaProject
 {
 
 
-    public partial class Master
+    public partial class Unpaid_ClientCheque
     {
 
         /// <summary>
-        /// head control.
+        /// RadioButtonListCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonListCategories;
 
         /// <summary>
-        /// form1 control.
+        /// ImageButtonSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonSearch;
 
         /// <summary>
-        /// lnkAccountSettings control.
+        /// TextBoxSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAccountSettings;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSearch;
 
         /// <summary>
-        /// lnkLogOut control.
+        /// txtClientCheques_ID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLogOut;
+        protected global::System.Web.UI.WebControls.TextBox txtClientCheques_ID;
 
         /// <summary>
-        /// BarMenu control.
+        /// CompareValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu BarMenu;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
 
         /// <summary>
-        /// Content_Section control.
+        /// GridViewUnPaidClientCheque control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Content_Section;
-
-        /// <summary>
-        /// MainDivisionsLNKBTN control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton MainDivisionsLNKBTN;
-
-        /// <summary>
-        /// TreeViewMainDivisions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView TreeViewMainDivisions;
+        protected global::System.Web.UI.WebControls.GridView GridViewUnPaidClientCheque;
     }
 }

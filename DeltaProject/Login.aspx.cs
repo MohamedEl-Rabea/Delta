@@ -63,6 +63,8 @@ namespace DeltaProject
             con.Open();
             byte result = Convert.ToByte(cmd.ExecuteScalar());
             Session["isAuthenticated"] = result == 1;
+            Session["ClientChequesCount"] = null;
+            Session["SupplierChequesCount"] = null;
             return result == 1;
         }
     }

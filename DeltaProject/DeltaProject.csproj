@@ -61,12 +61,16 @@
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
     <Content Include="AddProducts.aspx" />
+    <Content Include="Add_ClientCheque.aspx" />
     <Content Include="Add_Income.aspx" />
     <Content Include="Add_Supplier.aspx" />
+    <Content Include="Add_SupplierCheque.aspx" />
     <Content Include="All_Clients_Report.aspx" />
     <Content Include="Clients_Report.aspx" />
     <Content Include="Collect_Product.aspx" />
     <Content Include="CSS\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="CSS\jquery-ui-smoothness.css" />
+    <Content Include="CSS\jquery-ui.min.css" />
     <Content Include="CSS\LoginStyleSheet.css" />
     <Content Include="CSS\Master_style_sheet.css" />
     <Content Include="CSS\Pages_Style_Sheet.css" />
@@ -118,11 +122,15 @@
     <Content Include="Script\jquery-1.10.2.js" />
     <Content Include="Script\jquery-2.1.4.js" />
     <Content Include="Script\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Script\jquery-ui-i18n.min.js" />
+    <Content Include="Script\jquery-ui.min.js" />
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
     <Content Include="Search_For_Bills.aspx" />
     <Content Include="Search_For_Client.aspx" />
+    <Content Include="Search_For_ClientCheque.aspx" />
     <Content Include="Search_For_Product.aspx" />
+    <Content Include="Search_For_SupplierCheque.aspx" />
     <Content Include="Services\GetProductsNames.asmx" />
     <Content Include="Services\GetNamesService.asmx" />
     <Content Include="Special_Prices_List.aspx" />
@@ -130,6 +138,7 @@
     <Content Include="Suppliers_Search.aspx" />
     <Content Include="Supplier_Products.aspx" />
     <Content Include="Supplier_Returned_Products.aspx" />
+    <Content Include="Unpaid_ClientCheque.aspx" />
     <Content Include="Update_Client_Info.aspx" />
     <Content Include="Update_Products_Amounts.aspx" />
     <Content Include="Update_Product_Info.aspx" />
@@ -153,6 +162,13 @@
     <Compile Include="AddProducts.aspx.designer.cs">
       <DependentUpon>AddProducts.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Add_ClientCheque.aspx.cs">
+      <DependentUpon>Add_ClientCheque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_ClientCheque.aspx.designer.cs">
+      <DependentUpon>Add_ClientCheque.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Add_Income.aspx.cs">
       <DependentUpon>Add_Income.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -166,6 +182,13 @@
     </Compile>
     <Compile Include="Add_Supplier.aspx.designer.cs">
       <DependentUpon>Add_Supplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Add_SupplierCheque.aspx.cs">
+      <DependentUpon>Add_SupplierCheque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_SupplierCheque.aspx.designer.cs">
+      <DependentUpon>Add_SupplierCheque.aspx</DependentUpon>
     </Compile>
     <Compile Include="All_Clients_Report.aspx.cs">
       <DependentUpon>All_Clients_Report.aspx</DependentUpon>
@@ -344,12 +367,26 @@
     <Compile Include="Search_For_Client.aspx.designer.cs">
       <DependentUpon>Search_For_Client.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Search_For_ClientCheque.aspx.cs">
+      <DependentUpon>Search_For_ClientCheque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search_For_ClientCheque.aspx.designer.cs">
+      <DependentUpon>Search_For_ClientCheque.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Search_For_Product.aspx.cs">
       <DependentUpon>Search_For_Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Search_For_Product.aspx.designer.cs">
       <DependentUpon>Search_For_Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search_For_SupplierCheque.aspx.cs">
+      <DependentUpon>Search_For_SupplierCheque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search_For_SupplierCheque.aspx.designer.cs">
+      <DependentUpon>Search_For_SupplierCheque.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services\GetProductsNames.asmx.cs">
       <DependentUpon>GetProductsNames.asmx</DependentUpon>
@@ -394,6 +431,13 @@
     </Compile>
     <Compile Include="Supplier_Returned_Products.aspx.designer.cs">
       <DependentUpon>Supplier_Returned_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Unpaid_ClientCheque.aspx.cs">
+      <DependentUpon>Unpaid_ClientCheque.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Unpaid_ClientCheque.aspx.designer.cs">
+      <DependentUpon>Unpaid_ClientCheque.aspx</DependentUpon>
     </Compile>
     <Compile Include="Update_Client_Info.aspx.cs">
       <DependentUpon>Update_Client_Info.aspx</DependentUpon>

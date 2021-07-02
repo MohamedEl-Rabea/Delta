@@ -12,16 +12,6 @@ namespace DeltaProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (!Product.AmountEnough())
-                {
-                    // or you can make use of MasterType directive in the content page "Default.aspx" to retrieve strongly typed refernece rather suing typecasting
-                    //<<%@ MasterType VirtualPath="~/Master.Master" %> in the .aspx page
-                    (((Master)Master).AlertImage).Visible = true;
-                }
-
-            }
         }
     }
 }
