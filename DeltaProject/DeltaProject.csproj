@@ -69,6 +69,8 @@
     <Content Include="Clients_Report.aspx" />
     <Content Include="Collect_Product.aspx" />
     <Content Include="CSS\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="CSS\jquery-ui-smoothness.css" />
+    <Content Include="CSS\jquery-ui.min.css" />
     <Content Include="CSS\LoginStyleSheet.css" />
     <Content Include="CSS\Master_style_sheet.css" />
     <Content Include="CSS\Pages_Style_Sheet.css" />
@@ -120,6 +122,8 @@
     <Content Include="Script\jquery-1.10.2.js" />
     <Content Include="Script\jquery-2.1.4.js" />
     <Content Include="Script\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Script\jquery-ui-i18n.min.js" />
+    <Content Include="Script\jquery-ui.min.js" />
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
     <Content Include="Search_For_Bills.aspx" />

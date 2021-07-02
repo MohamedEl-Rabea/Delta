@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeltaProject {
-    
-    
-    public partial class Master {
-        
+namespace DeltaProject
+{
+
+
+    public partial class Master
+    {
+
         /// <summary>
         /// head control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// lnkAccountSettings control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkAccountSettings;
-        
+
         /// <summary>
         /// lnkLogOut control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkLogOut;
-        
+
         /// <summary>
         /// BarMenu control.
         /// </summary>
@@ -56,16 +58,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Menu BarMenu;
-        
-        /// <summary>
-        /// ImageAlert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageAlert;
-        
+
         /// <summary>
         /// Content_Section control.
         /// </summary>
@@ -74,7 +67,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Content_Section;
-        
+
         /// <summary>
         /// MainDivisionsLNKBTN control.
         /// </summary>
@@ -83,7 +76,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton MainDivisionsLNKBTN;
-        
+
         /// <summary>
         /// TreeViewMainDivisions control.
         /// </summary>

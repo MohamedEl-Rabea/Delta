@@ -56,19 +56,19 @@
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnPaidCientCheques" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كافة الشيكات التى تم دفعها الخاصه بهذا العميل" OnClick="lnkBtnPaidCientCheques_Click">الشيكات المدفوعه</asp:LinkButton>
+                    ToolTip="عرض كافة الشيكات التى تم تحصيلها الخاصه بهذا العميل" OnClick="lnkBtnPaidCientCheques_Click">الشيكات المحصلة</asp:LinkButton>
             </div>
         </header>
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnUnpaidCientCheques" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كافة الشيكات التى لم يتم دفعها الخاصه بهذا العميل" OnClick="lnkBtnUnpaidCientCheques_Click">الشيكات الغير مدفوعه</asp:LinkButton>
+                    ToolTip="عرض كافة الشيكات التى لم يتم تحصيلها الخاصه بهذا العميل" OnClick="lnkBtnUnpaidCientCheques_Click">الشيكات الغير محصلة</asp:LinkButton>
             </div>
         </header>
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnUpcomingPayableCientCheques" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كافة الشيكات المستحقة الدفع الخاصه بهذا العميل" OnClick="lnkBtnUpcomingPayableCientCheques_Click">الشيكات المستحقة الدفع</asp:LinkButton>
+                    ToolTip="عرض كافة الشيكات المستحقة التحصيل الخاصه بهذا العميل" OnClick="lnkBtnUpcomingPayableCientCheques_Click">شيكات مستحقة التحصيل</asp:LinkButton>
             </div>
         </header>
         <asp:Panel runat="server" ID="PanelPaidCientCheques" CssClass="PreReport_SectionTab" Visible="false">

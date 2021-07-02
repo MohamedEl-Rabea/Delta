@@ -21,7 +21,7 @@ namespace DeltaProject
             {
                 SupplierCheque SupplierCheque = new SupplierCheque();
                 SupplierCheque.SupplierName = TextBoxSearch.Text;
-                if (string.IsNullOrEmpty(TextBoxSearch.Text))
+                if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
                 {
                     PanelSupplierCheques.Visible = false;
                     PanelErrorMessage.Visible = true;
@@ -50,6 +50,7 @@ namespace DeltaProject
             lnkBtnUpcomingPayableSupplierCheques.ForeColor = System.Drawing.Color.Black;
             lnkBtnPaidSupplierCheques.ForeColor = System.Drawing.Color.White;
             lnkBtnUnpaidSupplierCheques.ForeColor = System.Drawing.Color.Black;
+            GridViewPaidSupplierCheques.DataBind();
             GridViewPaidSupplierCheques.PageIndex = 0;
 
         }

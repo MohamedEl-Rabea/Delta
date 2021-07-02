@@ -230,9 +230,10 @@ body {
 }
 
 .dot {
-    height: 17px;
-    width: 17px;
     background-color: red;
     border-radius: 50%;
-    display: inline-block;
+    padding: 2px 5px 2px 5px;
+    margin-left: 5px;
+    float: left;
+    font: bold 11px tahoma;
 }

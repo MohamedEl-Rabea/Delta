@@ -4,10 +4,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
-    <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <script src="Script/jquery-1.10.2.js"></script>
-    <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
-    <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#<%= txtSupplier_Name.ClientID%>').autocomplete({
@@ -29,17 +25,21 @@
             });
         });
     </script>
-
-    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link  rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
-        <script src=" https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script type="text/javascript" >
-            $(function dtTimePicker() {
-                $('#<%= DueDate.ClientID%>').datepicker({
-                    dateFormat: 'dd/mm/yy',
-                });
-            });
-        </script>
+    <script type="text/javascript">
+        $(function dtTimePicker() {
+            var options = $.extend(
+                {},
+                $.datepicker.regional["ar"],
+                {
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'dd/mm/yy'
+                }
+            );
+            $('#<%= DueDate.ClientID%>').datepicker(options);
+            $('#<%= DueDate.ClientID%>').datepicker("setDate", new Date());
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
@@ -57,10 +57,10 @@
                     </td>
 
                     <td class="RHSTD">
-                        <p class="RHSP">تاريخ الاستحقاق :</p>
+                        <p class="RHSP">رقم الشيك :</p>
                     </td>
-                    <td style="text-align: right"> 
-                        <asp:TextBox runat="server" ID="DueDate" CssClass="txts3" PlaceHolder="تاريخ الاستحقاق" ></asp:TextBox>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtChequeNumber" CssClass="txts3" PlaceHolder="رقم الشيك" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -80,15 +80,22 @@
                         <br />
                         <br />
                     </td>
-                    <td class="ValodationTD">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
-                            ControlToValidate="DueDate" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="تاريخ الاستحقاق متطلب اساسى">
+                    <td style="text-align: center">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                            ControlToValidate="txtChequeNumber" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="رقم الشيك متطلب اساسى">
                         <img src="Images/Error.png" width="24" height="24"/>
                         </asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="CustomValidator4" runat="server"
+                            ToolTip="يجب كتابة رقم الشيك بشكل صحيح"
+                            ControlToValidate="txtChequeNumber"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ClientValidationFunction="IsValidNumber">
+                    <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CustomValidator>
                     </td>
                 </tr>
-
                 <tr>
                     <td class="RHSTD2">
                         <p class="RHSP">قيمة الشيك :</p>
@@ -98,10 +105,10 @@
                     </td>
 
                     <td class="RHSTD">
-                        <p class="RHSP">رقم الشيك :</p>
+                        <p class="RHSPSmall">ت. الاستحقاق :</p>
                     </td>
                     <td style="text-align: right">
-                        <asp:TextBox runat="server" ID="txtChequeNumber" CssClass="txts3" PlaceHolder="رقم الشيك" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="DueDate" CssClass="txts3" PlaceHolder="تاريخ الاستحقاق" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -129,24 +136,14 @@
                         <br />
                         <br />
                     </td>
-                    <td style="text-align: center">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                            ControlToValidate="txtChequeNumber" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="رقم الشيك متطلب اساسى">
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+                            ControlToValidate="DueDate" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="تاريخ الاستحقاق متطلب اساسى">
                         <img src="Images/Error.png" width="24" height="24"/>
                         </asp:RequiredFieldValidator>
-                        <asp:CustomValidator ID="CustomValidator4" runat="server"
-                            ToolTip="يجب كتابة رقم الشيك بشكل صحيح"
-                            ControlToValidate="txtChequeNumber"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ClientValidationFunction="IsValidNumber">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CustomValidator>
                     </td>
                 </tr>
-                
-      
                 <tr>
                     <td class="RHSTD2">
                         <p class="RHSP">تنبيه قبل :</p>
@@ -184,12 +181,12 @@
                         </asp:CustomValidator>
                     </td>
                 </tr>
-                
+
             </table>
         </section>
         <footer class="AddSupplierChequeFooter">
             <div class="MsgDiv" style="text-align: center">
-               <asp:Button ID="BtnFinish" runat="server" Text="انهاء" CssClass="BtnNext" OnClick="BtnFinish_Click" />
+                <asp:Button ID="BtnFinish" runat="server" Text="انهاء" CssClass="BtnNext" OnClick="BtnFinish_Click" />
             </div>
             <div class="MsgDiv">
                 <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>

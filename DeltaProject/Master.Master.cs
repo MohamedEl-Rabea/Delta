@@ -11,54 +11,59 @@ namespace DeltaProject
 {
     public partial class Master : System.Web.UI.MasterPage
     {
-        public int ClientChequesCount = ClientCheque.GetUpcomingPayableClientChequesCount();
-        public int SupplierChequesCount = SupplierCheque.GetUpcomingPayableSupplierChequesCount();
-        public int Total;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             {
                 if (!IsPostBack)
                 {
-                    if (Convert.ToBoolean(Session["isAuthenticated"]))
-                    {
-                        if ( Session["SupplierChequesCount"] != null)
-                            SupplierChequesCount = Convert.ToInt32(Session["SupplierChequesCount"]);
-                        else if (Session["ClientChequesCount"] != null)
-                            ClientChequesCount = Convert.ToInt32(Session["ClientChequesCount"]);
+                    if (TrialExpired())
+                        Response.Redirect("~/TrialExpired.aspx");
 
-                        Total = SupplierChequesCount + ClientChequesCount;
-                        foreach (MenuItem menuitem in BarMenu.Items)
-                        {
-
-                            if (menuitem.Value == "Cheques")
-                            {
-                                menuitem.Text = menuitem.Text + "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + "<div class='dot'>" + (Total != 0 ? Total : 0) + "</div>";
-                            }
-
-                            foreach (MenuItem submenuitem in menuitem.ChildItems)
-                            {
-                                if (submenuitem.Value == "ClientCheques")
-                                {
-                                    submenuitem.Text = submenuitem.Text + "&nbsp; &nbsp; " + "<div class='dot'>" + (ClientChequesCount != 0 ? ClientChequesCount : 0) + "</div>";
-                                }
-
-                                if (submenuitem.Value == "SupplierCheques")
-                                {
-                                    submenuitem.Text = submenuitem.Text + "&nbsp; " + "<div class='dot'>" + (SupplierChequesCount != 0 ? SupplierChequesCount : 0) + "</div>";
-                                }
-                            }
-
-                        }
-
-                        if (TrialExpired())
-                            Response.Redirect("~/TrialExpired.aspx");
-                    }
-                    else
+                    if (!Convert.ToBoolean(Session["isAuthenticated"]))
                         Response.Redirect("~/Login.aspx");
+
+                    UpdateChequeMenuItemsNotifications();
                 }
             }
         }
+
+        public void UpdateChequeMenuItemsNotifications()
+        {
+            var supplierChequesCount = Session["SupplierChequesCount"] != null
+                                        ? Convert.ToInt32(Session["SupplierChequesCount"])
+                                        : SupplierCheque.GetUpcomingPayableSupplierChequesCount();
+
+            var clientChequesCount = Session["ClientChequesCount"] != null
+            ? Convert.ToInt32(Session["ClientChequesCount"])
+            : ClientCheque.GetUpcomingPayableClientChequesCount();
+
+            var total = supplierChequesCount + clientChequesCount;
+
+            if (total > 0)
+            {
+                var chequesMenuItem = BarMenu.FindItem("Cheques");
+                chequesMenuItem.Text = chequesMenuItem.Text.Substring(0, chequesMenuItem.Text.IndexOf("<span") > 0
+                    ? chequesMenuItem.Text.IndexOf("<span")
+                    : chequesMenuItem.Text.Length) + "<span class='dot'>" + total + "</span>";
+            }
+
+            if (clientChequesCount > 0)
+            {
+                var clientChequesMenuItem = BarMenu.FindItem("Cheques/ClientCheques");
+                clientChequesMenuItem.Text = clientChequesMenuItem.Text.Substring(0, clientChequesMenuItem.Text.IndexOf("<span") > 0
+                ? clientChequesMenuItem.Text.IndexOf("<span")
+                : clientChequesMenuItem.Text.Length) + "<span class='dot'>" + clientChequesCount + "</span>";
+            }
+
+            if (supplierChequesCount > 0)
+            {
+                var supplierChequesMenuItem = BarMenu.FindItem("Cheques/SupplierCheques");
+                supplierChequesMenuItem.Text = supplierChequesMenuItem.Text.Substring(0, supplierChequesMenuItem.Text.IndexOf("<span") > 0
+                    ? supplierChequesMenuItem.Text.IndexOf("<span")
+                    : supplierChequesMenuItem.Text.Length) + "<span class='dot'>" + supplierChequesCount + "</span>";
+            }
+        }
+
         protected void __doPostBack(object sender, EventArgs e)
         {
 
@@ -97,14 +102,6 @@ namespace DeltaProject
             {
                 TreeViewMainDivisions.ExpandAll();
                 ViewState["IsExpanded"] = null;
-            }
-        }
-
-        public ImageButton AlertImage
-        {
-            get
-            {
-                return this.ImageAlert;
             }
         }
 

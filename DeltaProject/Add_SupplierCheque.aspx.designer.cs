@@ -33,13 +33,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.TextBox txtSupplier_Name;
 
         /// <summary>
-        /// DueDate control.
+        /// txtChequeNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DueDate;
+        protected global::System.Web.UI.WebControls.TextBox txtChequeNumber;
 
         /// <summary>
         /// RequiredFieldValidator1 control.
@@ -51,13 +51,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// RequiredFieldValidator5 control.
+        /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+
+        /// <summary>
+        /// CustomValidator4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator4;
 
         /// <summary>
         /// txtboxChequeValue control.
@@ -69,13 +78,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.TextBox txtboxChequeValue;
 
         /// <summary>
-        /// txtChequeNumber control.
+        /// DueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChequeNumber;
+        protected global::System.Web.UI.WebControls.TextBox DueDate;
 
         /// <summary>
         /// RequiredFieldValidator2 control.
@@ -96,22 +105,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator3;
 
         /// <summary>
-        /// RequiredFieldValidator3 control.
+        /// RequiredFieldValidator5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
-
-        /// <summary>
-        /// CustomValidator4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator4;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 
         /// <summary>
         /// txtboxAlertBefore control.

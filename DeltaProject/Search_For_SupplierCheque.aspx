@@ -71,7 +71,7 @@
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnUpcomingPayableSupplierCheques" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كافة الشيكات المستحقة الدفع الخاصه بهذا المورد" OnClick="lnkBtnUpcomingPayableSupplierCheques_Click">الشيكات المستحقة الدفع</asp:LinkButton>
+                    ToolTip="عرض كافة الشيكات المستحقة الدفع الخاصه بهذا المورد" OnClick="lnkBtnUpcomingPayableSupplierCheques_Click">شيكات مستحقة الدفع</asp:LinkButton>
             </div>
         </header>
         <asp:Panel runat="server" ID="PanelPaidSupplierCheques" CssClass="PreReport_SectionTab" Visible="false">
