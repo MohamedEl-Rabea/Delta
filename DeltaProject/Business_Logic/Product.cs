@@ -27,6 +27,8 @@ namespace Business_Logic
         public string Style { get; set; }
         public double Inch { get; set; }
         public double Specified_Price { get; set; }
+        public bool IsFreeItem { get; set; }
+
         public List<Suppliers_Products> Suppliers
         {
             get
@@ -45,8 +47,7 @@ namespace Business_Logic
 
         public bool Equals(Product product)
         {
-            return (this.P_name == product.P_name && this.Mark == product.Mark && this.Inch == product.Inch
-                                                        && this.Style == product.Style && this.Purchase_Price == product.Purchase_Price);
+            return this.P_name == product.P_name && this.Mark == product.Mark && this.Inch == product.Inch && this.Style == product.Style;
         }
 
         public bool Add_Product(out string m, string Supplier_name, DateTime Purchase_Date)
@@ -498,7 +499,7 @@ namespace Business_Logic
             if (rdr.Read())
             {
                 signal = Convert.ToByte(rdr["Signal"]);
-                Current_amount = Convert.ToInt32(rdr["amount"]);
+                Current_amount = rdr["amount"] is DBNull ? 0 : Convert.ToInt32(rdr["amount"]);
             }
             rdr.Close();
             con.Close();

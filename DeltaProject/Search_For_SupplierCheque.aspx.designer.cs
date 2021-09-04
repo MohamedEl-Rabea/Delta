@@ -60,6 +60,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Panel PanelSupplierCheques;
 
         /// <summary>
+        /// lnkBtnAllSupplierCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkBtnAllSupplierCheques;
+
+        /// <summary>
         /// lnkBtnPaidSupplierCheques control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,33 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkBtnUpcomingPayableSupplierCheques;
+
+        /// <summary>
+        /// PanelAllSupplierCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelAllSupplierCheques;
+
+        /// <summary>
+        /// GridViewAllSupplierCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAllSupplierCheques;
+
+        /// <summary>
+        /// ObjectDataSourceAllSupplierCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceAllSupplierCheques;
 
         /// <summary>
         /// PanelPaidSupplierCheques control.

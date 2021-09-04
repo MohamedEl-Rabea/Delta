@@ -269,7 +269,7 @@ namespace DeltaProject
             bool AllDone = true;
             foreach (Product p in (List<Product>)ViewState["ProductsList"])
             {
-                if (!content.Add_Bill_Contents(out m, Bill_ID, p))
+                if (!content.Add_Bill_Contents(out m, Bill_ID, false, p))
                 {
                     Response.Write("<script>alert('" + m + "')</script>");
                     AllDone = false;

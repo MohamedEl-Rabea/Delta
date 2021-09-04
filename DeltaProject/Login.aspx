@@ -21,7 +21,7 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="Images/LogoBill.png" width="80" height="80" style="border-radius:150px;"/>
+                                <img src="Images/Logo.jpg" width="80" height="80" style="border-radius:150px;"/>
                             </td>
                             <td style="vertical-align: central">
                                 <table>

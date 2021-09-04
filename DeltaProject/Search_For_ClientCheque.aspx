@@ -10,7 +10,7 @@
             $('#<%= TextBoxSearch.ClientID%>').autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: "Services/GetNamesService.asmx/Get_Clients_Names",
+                        url: "Services/GetNamesService.asmx/Get_Cheques_Clients_Names",
                         data: "{ 'Client_Name': '" + request.term + "' }",
                         type: "POST",
                         dataType: "json",
@@ -44,7 +44,7 @@
                         placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                 </td>
             </tr>
-            
+
         </table>
     </section>
     <asp:Panel ID="PanelErrorMessage" runat="server" CssClass="ErrorMessagePanal" Visible="false">
@@ -52,7 +52,13 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد شيكات مسجله لهذا العميل / الرقم"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelCientCheques">
+    <asp:Panel runat="server" ID="PanelClientCheques">
+        <header class="PreSectionTab">
+            <div>
+                <asp:LinkButton ID="lnkBtnAllClientsCheceques" runat="server" CssClass="TabLnks"
+                    ToolTip="عرض كل الشيكات الخاصه بهذا العميل" OnClick="lnkBtnAllClientsCheceques_Click">الكـــــل</asp:LinkButton>
+            </div>
+        </header>
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnPaidCientCheques" runat="server" CssClass="TabLnks"
@@ -71,15 +77,49 @@
                     ToolTip="عرض كافة الشيكات المستحقة التحصيل الخاصه بهذا العميل" OnClick="lnkBtnUpcomingPayableCientCheques_Click">شيكات مستحقة التحصيل</asp:LinkButton>
             </div>
         </header>
+        <asp:Panel runat="server" ID="PanelAllClientsCheques" CssClass="PreReport_SectionTab" Visible="false">
+            <asp:GridView ID="GridViewAllClientsCheques" runat="server" AutoGenerateColumns="False"
+                CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات لهذا العميل" DataKeyNames="Id"
+                DataSourceID="ObjectDataSourceAllClientCheques" AllowPaging="True" OnRowCommand="GridViewAllClientsCheques_RowCommand">
+                <Columns>
+                    <asp:BoundField DataField="Id" Visible="false" SortExpression="Id" />
+                    <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
+                    <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
+                    <asp:BoundField DataField="Value" HeaderText="القيمة" DataFormatString="{0:#.##}" SortExpression="Value" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:dd/MM/yyyy}" SortExpression="DueDate" />
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:ImageButton ID="ImageButtonDelete" runat="server" ImageUrl="~/Images/Delete.png" Width="16" Height="16"
+                                CausesValidation="false" CommandName="Delete_Row"
+                                OnClientClick="return confirm('سيتم مسح هذا الشيك نهائيا. . . هل تريد المتابعه ؟');" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <RowStyle CssClass="Row_Style" />
+                <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
+                <EmptyDataRowStyle CssClass="Empty_Style" />
+            </asp:GridView>
+            <asp:ObjectDataSource ID="ObjectDataSourceAllClientCheques" runat="server"
+                SelectMethod="Get_All_ClientCheques"
+                TypeName="Business_Logic.ClientCheque"
+                StartRowIndexParameterName="Start_Index"
+                MaximumRowsParameterName="Max_Rows"
+                SelectCountMethod="Get_ClientCheques_Count_By_C_Name"
+                EnablePaging="True">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TextBoxSearch" Name="Client_Name" PropertyName="Text" Type="String" />
+                </SelectParameters>
+            </asp:ObjectDataSource>
+        </asp:Panel>
         <asp:Panel runat="server" ID="PanelPaidCientCheques" CssClass="PreReport_SectionTab" Visible="false">
             <asp:GridView ID="GridViewPaidCientCheques" runat="server" AutoGenerateColumns="False"
-                CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات مدفوعه لهذا العميل"
+                CssClass="Gridview_Style2" EmptyDataText="لا توجد شيكات مدفوعه لهذا العميل" DataKeyNames="Id"
                 DataSourceID="ObjectDataSourcePaidClientCientCheques" AllowPaging="True">
                 <Columns>
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
-                    <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:dd/MM/yyyy}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="Value" HeaderText="القيمة" DataFormatString="{0:#.##}" SortExpression="Value" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:dd/MM/yyyy}" SortExpression="DueDate" />
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -105,8 +145,8 @@
                     <asp:BoundField DataField="Id" Visible="false" SortExpression="Id" />
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
-                    <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:dd/MM/yyyy}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="Value" HeaderText="القيمة" DataFormatString="{0:#.##}" SortExpression="Value" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:dd/MM/yyyy}" SortExpression="DueDate" />
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:ImageButton ID="ImageButtonConfirmEdit" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
@@ -137,8 +177,8 @@
                 <Columns>
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" DataFormatString="{0:d}" />
                     <asp:BoundField DataField="ChequeNumber" HeaderText="رقم الشيك" SortExpression="ChequeNumber" />
-                    <asp:BoundField DataField="Value" HeaderText="القيمة" SortExpression="Value" />
-                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString = "{0:dd/MM/yyyy}" SortExpression="DueDate" />
+                    <asp:BoundField DataField="Value" HeaderText="القيمة" DataFormatString="{0:#.##}" SortExpression="Value" />
+                    <asp:BoundField DataField="DueDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:dd/MM/yyyy}" SortExpression="DueDate" />
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />

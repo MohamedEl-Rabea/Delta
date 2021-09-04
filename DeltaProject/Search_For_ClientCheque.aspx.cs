@@ -23,13 +23,14 @@ namespace DeltaProject
                 clientCheque.ClientName = TextBoxSearch.Text;
                 if (string.IsNullOrEmpty(TextBoxSearch.Text))
                 {
-                    PanelCientCheques.Visible = false;
+                    PanelClientCheques.Visible = false;
                     PanelErrorMessage.Visible = true;
                 }
                 else
                 {
-                    PanelCientCheques.Visible = true;
+                    PanelClientCheques.Visible = true;
                     PanelErrorMessage.Visible = false;
+                    PanelAllClientsCheques.Visible = false;
                     PanelPaidCientCheques.Visible = false;
                     PanelUnPaidCientCheques.Visible = false;
                     PanelUpcomingPayableClientCheques.Visible = true;
@@ -42,14 +43,30 @@ namespace DeltaProject
             
         }
 
+        protected void lnkBtnAllClientsCheceques_Click(object sender, EventArgs e)
+        {
+            PanelAllClientsCheques.Visible = true;
+            PanelUnPaidCientCheques.Visible = false;
+            PanelPaidCientCheques.Visible = false;
+            PanelUpcomingPayableClientCheques.Visible = false;
+            lnkBtnAllClientsCheceques.ForeColor = System.Drawing.Color.White;
+            lnkBtnUnpaidCientCheques.ForeColor = System.Drawing.Color.Black;
+            lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.Black;
+            lnkBtnPaidCientCheques.ForeColor = System.Drawing.Color.Black;
+            GridViewAllClientsCheques.DataBind();
+            GridViewAllClientsCheques.PageIndex = 0;
+        }
+
         protected void lnkBtnPaidCientCheques_Click(object sender, EventArgs e)
         {
             PanelPaidCientCheques.Visible = true;
             PanelUnPaidCientCheques.Visible = false;
             PanelUpcomingPayableClientCheques.Visible = false;
-            lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.Black;
+            PanelAllClientsCheques.Visible = false;
             lnkBtnPaidCientCheques.ForeColor = System.Drawing.Color.White;
+            lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.Black;
             lnkBtnUnpaidCientCheques.ForeColor = System.Drawing.Color.Black;
+            lnkBtnAllClientsCheceques.ForeColor = System.Drawing.Color.Black;
             GridViewPaidCientCheques.PageIndex = 0;
 
         }
@@ -59,46 +76,90 @@ namespace DeltaProject
             PanelUnPaidCientCheques.Visible = true;
             PanelPaidCientCheques.Visible = false;
             PanelUpcomingPayableClientCheques.Visible = false;
+            PanelAllClientsCheques.Visible = false;
+            lnkBtnUnpaidCientCheques.ForeColor = System.Drawing.Color.White;
             lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.Black;
             lnkBtnPaidCientCheques.ForeColor = System.Drawing.Color.Black;
-            lnkBtnUnpaidCientCheques.ForeColor = System.Drawing.Color.White;
+            lnkBtnAllClientsCheceques.ForeColor = System.Drawing.Color.Black;
             GridViewUnPaidCientCheques.DataBind();
             GridViewUnPaidCientCheques.PageIndex = 0;
         }
 
         protected void lnkBtnUpcomingPayableCientCheques_Click(object sender, EventArgs e)
         {
+            PanelUpcomingPayableClientCheques.Visible = true;
             PanelPaidCientCheques.Visible = false;
             PanelUnPaidCientCheques.Visible = false;
-            PanelUpcomingPayableClientCheques.Visible = true;
+            PanelAllClientsCheques.Visible = false;
+            lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.White;
             lnkBtnPaidCientCheques.ForeColor = System.Drawing.Color.Black;
             lnkBtnUnpaidCientCheques.ForeColor = System.Drawing.Color.Black;
-            lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.White;
+            lnkBtnAllClientsCheceques.ForeColor = System.Drawing.Color.Black;
             GridViewUpcomingPayableClientCheques.DataBind();
             GridViewUpcomingPayableClientCheques.PageIndex = 0;
         }
 
         protected void ImageButtonConfirmEdit_Click(object sender, ImageClickEventArgs e)
         {
-            int row_index = ((GridViewRow)((ImageButton)sender).NamingContainer).RowIndex;
-            GridView ClientCheques = (GridView)((GridViewRow)((ImageButton)sender).NamingContainer).NamingContainer;
-            ClientCheque clientCheque = new ClientCheque();
-            int Id = (int)GridViewUnPaidCientCheques.DataKeys[row_index].Value;
-            if (!clientCheque.Update_UnPaidClientCheques_By_Id(Id))
+            var gridRow = ((GridViewRow)((ImageButton)sender).NamingContainer);
+            int row_index = gridRow.RowIndex;
+            var clientName = gridRow.Cells[1].Text;
+            var chequeNumber = gridRow.Cells[2].Text;
+            int chequeId = (int)GridViewUnPaidCientCheques.DataKeys[row_index].Value;
+            ClientCheque clientCheque = new ClientCheque { Id = chequeId };
+            string msg = string.Empty;
+            if (!clientCheque.Update_UnPaidClientCheques_By_Id(out msg))
             {
-                lblFinishMsg.Text = "هناك مشكلة في التحديث برجاء اعادة المحاولة";
+                lblFinishMsg.Text = msg;
                 lblFinishMsg.ForeColor = System.Drawing.Color.Red;
             }
             else
             {
-                lblFinishMsg.Text = "تم بنجاح";
+                lblFinishMsg.Text = $"تم تحصيل شيك رقم {chequeNumber} للعميل {clientName}";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
-                GridViewPaidCientCheques.DataBind();
-                GridViewUnPaidCientCheques.DataBind();
-                GridViewUpcomingPayableClientCheques.DataBind();
-
+                ReBoundGrids();
             }
         }
 
+        protected void GridViewAllClientsCheques_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete_Row")
+            {
+                var gridRow = (GridViewRow)((ImageButton)e.CommandSource).NamingContainer;
+                int row_index = gridRow.RowIndex;
+                int chequeId = (int)GridViewAllClientsCheques.DataKeys[row_index].Value;
+                var clientName = gridRow.Cells[1].Text;
+                var chequeNumber = gridRow.Cells[2].Text;
+                ClientCheque clientCheque = new ClientCheque { Id = chequeId };
+                string msg = string.Empty;
+                if (!clientCheque.Delete(out msg))
+                {
+                    lblFinishMsg.Text = msg;
+                    lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    lblFinishMsg.Text = $"تم مسح شيك رقم {chequeNumber} للعميل {clientName} بنجاح";
+                    lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                    ReBoundGrids();
+                    RefreshChequeNotifications();
+                }
+            }
+        }
+
+        private void ReBoundGrids()
+        {
+            GridViewPaidCientCheques.DataBind();
+            GridViewUnPaidCientCheques.DataBind();
+            GridViewUpcomingPayableClientCheques.DataBind();
+            GridViewAllClientsCheques.DataBind();
+            lnkBtnUpcomingPayableCientCheques.ForeColor = System.Drawing.Color.Black;
+        }
+
+        private void RefreshChequeNotifications()
+        {
+            Session["ClientChequesCount"] = ClientCheque.GetUpcomingPayableClientChequesCount();
+            ((Master)Master).UpdateChequeMenuItemsNotifications();
+        }
     }
 }

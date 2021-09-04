@@ -58,5 +58,45 @@ namespace DeltaProject.Services
             }
             return Clients_Names;
         }
+
+        [WebMethod]
+        public List<string> Get_Cheques_Clients_Names(string Client_Name)
+        {
+            List<string> Clients_Names = new List<string>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("Get_Cheques_Clients_Names", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@C_Name", SqlDbType.NVarChar).Value = Client_Name;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Clients_Names.Add(rdr["ClientName"].ToString());
+                }
+            }
+            return Clients_Names;
+        }
+
+        [WebMethod]
+        public List<string> Get_Cheques_Suppliers_Names(string supplier_name)
+        {
+            List<string> Clients_Names = new List<string>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("Get_Cheques_Suppliers_Names", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@S_Name", SqlDbType.NVarChar).Value = supplier_name;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Clients_Names.Add(rdr["SupplierName"].ToString());
+                }
+            }
+            return Clients_Names;
+        }
     }
 }
