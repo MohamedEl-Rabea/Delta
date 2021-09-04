@@ -44,6 +44,30 @@ namespace Business_Logic
             return isInserted;
         }
 
+        public bool Delete(out string msg)
+        {
+            msg = "";
+            bool isUpdated = true;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("Delete_SupplierCheque_By_Id", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                isUpdated = false;
+                msg = ex.Message;
+            }
+            return isUpdated;
+        }
+
         public bool IsExistsChequeNumber(string ChequeNumber)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -55,6 +79,20 @@ namespace Business_Logic
             int result = Convert.ToInt32(cmd.ExecuteScalar());
             con.Close();
             return result >= 1;
+        }
+
+        public static int Get_AllSupplierCheques_Count_By_C_Name(string Supplier_Name)
+        {
+            int Count;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_AllSupplierCheques_Count_By_C_Name", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Supplier_Name", SqlDbType.NVarChar).Value = Supplier_Name;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
         }
 
         public static int Get_PaidSupplierCheques_Count_By_C_Name(string Supplier_Name)
@@ -99,8 +137,9 @@ namespace Business_Logic
             return Count;
         }
 
-        public bool Update_UnPaidSupplierCheques_By_Id(int Id)
+        public bool Update_UnPaidSupplierCheques_By_Id(out string msg)
         {
+            msg = string.Empty;
             bool isUpdated = true;
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
@@ -117,8 +156,36 @@ namespace Business_Logic
             {
                 con.Close();
                 isUpdated = false;
+                msg = ex.Message;
             }
             return isUpdated;
+        }
+
+        public static List<SupplierCheque> Get_All_SupplierCheques(int Start_Index, int Max_Rows, string Supplier_Name)
+        {
+            List<SupplierCheque> SupplierCheques = new List<SupplierCheque>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_SupplierCheques", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Supplier_Name", SqlDbType.NVarChar).Value = Supplier_Name;
+            cmd.Parameters.Add("@StartIndex", SqlDbType.Int).Value = Start_Index;
+            cmd.Parameters.Add("@MaxRows", SqlDbType.Int).Value = Max_Rows;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                SupplierCheque SupplierCheque = new SupplierCheque();
+                SupplierCheque.Id = Convert.ToInt32(rdr["Id"]);
+                SupplierCheque.SupplierName = rdr["SupplierName"].ToString();
+                SupplierCheque.Value = Convert.ToDecimal(rdr["ChequeValue"]);
+                SupplierCheque.ChequeNumber = Convert.ToString(rdr["ChequeNumber"]);
+                SupplierCheque.DueDate = Convert.ToDateTime(rdr["DueDate"]);
+                SupplierCheques.Add(SupplierCheque);
+            }
+            rdr.Close();
+            con.Close();
+            return SupplierCheques;
         }
 
         public static List<SupplierCheque> Get_All_SupplierCheques_Paid(int Start_Index, int Max_Rows, string Supplier_Name)

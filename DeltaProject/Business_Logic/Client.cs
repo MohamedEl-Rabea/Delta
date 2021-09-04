@@ -8,6 +8,7 @@ using System.Configuration;
 
 namespace Business_Logic
 {
+
     public class Client
     {
         public string C_name { get; set; }
@@ -33,6 +34,34 @@ namespace Business_Logic
             rdr.Close();
             con.Close();
             return supplier;
+        }
+
+        public IEnumerable<ClientStatement> GetClientStatement(DateTime? startDate)
+        {
+            var clientStatementList = new List<ClientStatement>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_Client_Statement", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = C_name;
+            if(startDate.HasValue)
+                cmd.Parameters.AddWithValue("@Start_Date", startDate);
+            
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                var clientStatement = new ClientStatement();
+                clientStatement.TransactionDate = rdr["TransactionDate"] is DBNull ? (DateTime?)null : Convert.ToDateTime(rdr["TransactionDate"]);
+                clientStatement.Debit = Convert.ToDouble(rdr["Debit"]);
+                clientStatement.Credit = Convert.ToDouble(rdr["Credit"]);
+                clientStatement.Balance = Convert.ToDouble(rdr["Balance"]);
+                clientStatement.Statement = rdr["Statement"].ToString();
+                clientStatementList.Add(clientStatement);
+            }
+            rdr.Close();
+            con.Close();
+            return clientStatementList;
         }
 
         public bool Update_Client_Info(out string m, string Old_name)

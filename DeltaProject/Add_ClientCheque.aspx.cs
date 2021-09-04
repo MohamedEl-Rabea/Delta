@@ -1,5 +1,6 @@
 ﻿using Business_Logic;
 using System;
+using System.Globalization;
 
 namespace DeltaProject
 {
@@ -15,7 +16,7 @@ namespace DeltaProject
             ClientCheque clientCheque = new ClientCheque();
             clientCheque.ClientName = txtClient_Name.Text;
             clientCheque.Notes = txtNotes.Text;
-            clientCheque.DueDate = Convert.ToDateTime(DueDate.Text);
+            clientCheque.DueDate = DateTime.ParseExact(DueDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             clientCheque.Value = Convert.ToDecimal(txtboxChequeValue.Text);
             clientCheque.ChequeNumber = txtChequeNumber.Text;
             clientCheque.AlertBefore = Convert.ToInt32(txtboxAlertBefore.Text);

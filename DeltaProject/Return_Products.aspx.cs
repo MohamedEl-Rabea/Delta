@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Business_Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business_Logic;
 
 namespace DeltaProject
 {
@@ -495,7 +494,7 @@ namespace DeltaProject
                 System.Text.StringBuilder ConcatenatedNotes = new System.Text.StringBuilder("قام العميل باضافة منتجات جديدة للفاتورة : ");
                 foreach (Product p in (List<Product>)ViewState["ProductsList"])
                 {
-                    if (!content.Add_Bill_Contents(out m, Convert.ToInt64(lblBill_ID.Text), p))
+                    if (!content.Add_Bill_Contents(out m, Convert.ToInt64(lblBill_ID.Text), true, p))
                     {
                         Response.Write("<script>alert('" + m + "')</script>");
                         AllDone = false;

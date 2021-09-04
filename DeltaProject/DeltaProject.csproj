@@ -63,10 +63,12 @@
     <Content Include="AddProducts.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
     <Content Include="Add_Income.aspx" />
+    <Content Include="Add_Items_To_Invoice.aspx" />
     <Content Include="Add_Supplier.aspx" />
     <Content Include="Add_SupplierCheque.aspx" />
     <Content Include="All_Clients_Report.aspx" />
     <Content Include="Clients_Report.aspx" />
+    <Content Include="Client_Statement.aspx" />
     <Content Include="Collect_Product.aspx" />
     <Content Include="CSS\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="CSS\jquery-ui-smoothness.css" />
@@ -98,8 +100,7 @@
     <Content Include="Images\Home_Page.jpg" />
     <Content Include="Images\Login_footer.png" />
     <Content Include="Images\Login_header.png" />
-    <Content Include="Images\Logo.png" />
-    <Content Include="Images\LogoBill.png" />
+    <Content Include="Images\Logo.jpg" />
     <Content Include="Images\Next.png" />
     <Content Include="Images\NextDisabled.png" />
     <Content Include="Images\ok.png" />
@@ -176,6 +177,13 @@
     <Compile Include="Add_Income.aspx.designer.cs">
       <DependentUpon>Add_Income.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Add_Items_To_Invoice.aspx.cs">
+      <DependentUpon>Add_Items_To_Invoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_Items_To_Invoice.aspx.designer.cs">
+      <DependentUpon>Add_Items_To_Invoice.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Add_Supplier.aspx.cs">
       <DependentUpon>Add_Supplier.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -202,6 +210,7 @@
     <Compile Include="Business_Logic\Bill_Payments.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
+    <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
     <Compile Include="Business_Logic\Product.cs" />
@@ -218,6 +227,13 @@
     </Compile>
     <Compile Include="Clients_Report.aspx.designer.cs">
       <DependentUpon>Clients_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Statement.aspx.cs">
+      <DependentUpon>Client_Statement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client_Statement.aspx.designer.cs">
+      <DependentUpon>Client_Statement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Collect_Product.aspx.cs">
       <DependentUpon>Collect_Product.aspx</DependentUpon>

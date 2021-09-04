@@ -22,7 +22,7 @@ namespace Business_Logic
             get { return Helpers.GetFormatedDecimal(_amount); }
             set { _amount = value; }
         }
-        public bool Add_Bill_Contents(out string m, long Bill_ID, Product product)
+        public bool Add_Bill_Contents(out string m, long Bill_ID, bool isAddedItem, Product product)
         {
             bool b = true;
             m = "";
@@ -42,6 +42,7 @@ namespace Business_Logic
                 cmd.Parameters.Add("@Specified_Price", SqlDbType.Money).Value = product.Specified_Price;
                 cmd.Parameters.Add("@Sell_Price", SqlDbType.Money).Value = product.Regulare_Price;
                 cmd.Parameters.Add("@Amount", SqlDbType.Decimal).Value = product.Amount;
+                cmd.Parameters.Add("@IsAddedItem", SqlDbType.Bit).Value = isAddedItem;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -75,6 +76,13 @@ namespace Business_Logic
             }
             rdr.Close();
             con.Close();
+            items = items.GroupBy(item => new { item.P_name, item.Sell_Price })
+                .Select(groupedItem => new Bill_Content
+                {
+                    P_name = groupedItem.Key.P_name,
+                    Sell_Price = groupedItem.Key.Sell_Price,
+                    amount = groupedItem.Sum(i => i.amount)
+                }).Where(item => item.amount > 0).ToList();
             return items;
         }
 

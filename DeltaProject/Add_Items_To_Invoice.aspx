@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Return_Products.aspx.cs" Inherits="DeltaProject.Return_Products" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Add_Items_To_Invoice.aspx.cs" Inherits="DeltaProject.Add_Items_To_Invoice" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="Script/ValidationScript.js"></script>
@@ -9,25 +9,6 @@
     <script src="Script/jquery-1.10.2.js"></script>
     <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $('#<%= txtP_Name.ClientID%>').autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "Services/GetProductsNames.asmx/Get_Products_Names_Form_Bills",
-                        data: "{ 'p_name': '" + request.term + "' }",
-                        type: "POST",
-                        dataType: "json",
-                        contentType: "application/json;charset=utf-8",
-                        success: function (result) {
-                            response(result.d);
-                        },
-                        error: function (result) {
-                            alert('Problem');
-                        }
-                    });
-                }
-            });
-        });
         $(function () {
             $('#<%= txtClient.ClientID%>').autocomplete({
                 source: function (request, response) {
@@ -109,7 +90,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <asp:Panel runat="server" ID="PanelSearchClient">
         <header class="Header">
-            <p>مرتجع فواتير</p>
+            <p>عملية اضافه لفاتورة</p>
         </header>
         <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
             OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
@@ -224,277 +205,17 @@
             </asp:ObjectDataSource>
         </asp:Panel>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelBill" Visible="false">
-        <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
-            <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 10px;">
-                <div style="border: 1px solid black">
-                    <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات الفاتورة</p>
-                </div>
-            </header>
-            <table class="AddProductsTable">
-                <tr>
-                    <td>
-                        <asp:Label ID="Label1" runat="server" Text="تاريخ الفاتورة : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 125px">
-                        <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label2" runat="server" Text="رقم الفاتورة : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblBill_ID" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label3" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label4" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="تكلفة الفاتورة : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="lblDiscount" runat="server" CssClass="lblInfo" Text="الخصم : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblDiscountValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label6" runat="server" CssClass="lblInfo" Text="المدفوع : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblPaid_Value" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label7" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblRest" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblAddtionalCost" runat="server" CssClass="lblInfo" Text="تكلفة اضافيه : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblAdditionalCostValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td colspan="6">
-                        <asp:Label ID="lblAdditionalcostNotes" runat="server" CssClass="lblInfo2" Text=" ملاحظات التكلفه الاضافيه"></asp:Label>
-                    </td>
-                </tr>
-            </table>
-        </section>
-        <br />
-        <br />
-        <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
-            <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 10px;">
-                <div style="border: 1px solid black">
-                    <p style="font: bold 13px arial; margin: 0; padding: 0">محتويات الفاتورة</p>
-                </div>
-            </header>
-            <asp:GridView runat="server" ID="GridViewBillList" CssClass="GridViewBill" AutoGenerateColumns="False" EmptyDataText="لا توجد منتجات">
-                <Columns>
-                    <asp:BoundField DataField="P_Name" HeaderText="اسم المنتـــــــــــج" />
-                    <asp:BoundField DataField="amount" HeaderText="الكميه" />
-                    <asp:BoundField DataField="Sell_Price" HeaderText="سعر الوحده" />
-                </Columns>
-                <HeaderStyle CssClass="HeaderStyleBill" />
-                <RowStyle CssClass="RowStyleList" />
-                <AlternatingRowStyle CssClass="AlternateRowStyleList" />
-                <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
-            </asp:GridView>
-        </section>
-        <br />
-        <br />
-        <section>
-            <table class="AddProductsTable">
-                <tr>
-                    <td>
-                        <p class="RHSP">اسم المنتــــج : </p>
-                    </td>
-                    <td>&nbsp;&nbsp;<asp:TextBox runat="server" ID="txtP_Name" CssClass="MidTexts" PlaceHolder="اسم المنتج للمرتجع" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                    <td>
-                        <p class="RHSP">الكميه :</p>
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtReturnedAmount" CssClass="MidTexts" PlaceHolder="الكميه المعاده" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                        <br />
-                    </td>
-                    <td style="text-align: center">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                            ControlToValidate="txtP_Name" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="اسم المنتج مطلوب">
-                        <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                    </td>
-                    <td></td>
-                    <td style="text-align: center">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
-                            ControlToValidate="txtReturnedAmount" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="الكميه متطلب اساسى">
-                        <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                        <asp:CompareValidator ID="CompareValidator2" runat="server"
-                            ControlToValidate="txtReturnedAmount" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="يجب كتابة الكميه بشكل صحيح"
-                            Operator="DataTypeCheck" Type="Double">
-                        <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CompareValidator>
-                    </td>
-                </tr>
-            </table>
-            <table class="AddProductsTable">
-                <tr>
-                    <td class="RHSTD">
-                        <p class="RHSP">تاريخ المرتجع :</p>
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtDay" ClientIDMode="Static" CssClass="DateTxts" PlaceHolder="يوم" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtMonth" ClientIDMode="Static" CssClass="DateTxts_MID" PlaceHolder="شهر" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox runat="server" ID="txtYear" ClientIDMode="Static" CssClass="DateTxts" PlaceHolder="سنه" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:Button ID="BtnGetDate" runat="server" Text=":" CausesValidation="false" CssClass="GetDateStyle"
-                            OnClientClick="return GetDate()" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="RHSTD">
-                        <br />
-                        <br />
-                    </td>
-                    <td style="text-align: center">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorDay" runat="server" ControlToValidate="txtDay" Display="Dynamic" SetFocusOnError="true"
-                            ErrorMessage="يجب اضافة يوم المرتجع" ToolTip="يجب اضافة يوم المرتجع" ValidationGroup="AddProducts">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidatorDay" runat="server" ErrorMessage="RangeValidator" Display="Dynamic"
-                            ControlToValidate="txtDay" Type="Integer" MinimumValue="1" MaximumValue="31" ToolTip="يجب اضافة اليوم بشكل صحيح مابين 1-31" ValidationGroup="AddProducts">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RangeValidator>
-                    </td>
-                    <td style="text-align: center">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorMonth" runat="server" ControlToValidate="txtMonth" Display="Dynamic" SetFocusOnError="true"
-                            ErrorMessage="يجب اضافة شهر المرتجع" ToolTip="يجب اضافة شهر المرتجع" ValidationGroup="AddProducts">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="RangeValidatorMonth" runat="server" ErrorMessage="RangeValidator" Display="Dynamic"
-                            ControlToValidate="txtMonth" Type="Integer" MinimumValue="1" MaximumValue="12" ToolTip="يجب اضافة اليوم بشكل صحيح مابين 1-12" ValidationGroup="AddProducts">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RangeValidator>
-                    </td>
-                    <td style="text-align: center">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorYear" runat="server" ControlToValidate="txtYear" Display="Dynamic" SetFocusOnError="true"
-                            ErrorMessage="يجب اضافة سنة المرتجع" ToolTip="يجب اضافة سنة المرتجع" ValidationGroup="AddProducts">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                        <asp:CustomValidator ID="CustomValidator1" runat="server"
-                            ToolTip="يجب اضافة سنة المرتجع بشكل صحيح"
-                            ControlToValidate="txtYear"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ClientValidationFunction="IsValidYear" ValidationGroup="AddProducts">
-                    <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CustomValidator>
-                    </td>
-
-                </tr>
-            </table>
-            <footer class="AddSupplierFooter">
-                <asp:Button ID="BtnFinish" runat="server" Text="انهاء" CssClass="BtnNext"
-                    UseSubmitBehavior="false"
-                    OnClientClick="this.disabled='true';this.value='Please wait....';" OnClick="BtnFinish_Click" />
-                <div class="MsgDiv">
-                    <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
-                </div>
-            </footer>
-            <asp:Panel runat="server" ID="PanelRest" Visible="false">
-                <footer class="AddSupplierFooter">
-                    <div style="direction: rtl">
-                        <table class="AddProductsTable" style="text-align: right">
-                            <tr>
-                                <td>
-                                    <b>المتبقى من قيمة المدفوع لفاتورة = </b>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblRestOfMoney" runat="server"></asp:Label>
-                                </td>
-                                <td>
-                                    <b>هل تم دفعها للعميل</b>
-                                </td>
-                                <td>
-                                    <asp:RadioButtonList ID="RBLYesOrNo" RepeatDirection="Horizontal" runat="server">
-                                        <asp:ListItem>نعم</asp:ListItem>
-                                        <asp:ListItem>لا</asp:ListItem>
-                                    </asp:RadioButtonList>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <asp:Button ID="BtnConfirm" runat="server" Text="تأكيد" CssClass="BtnNext"
-                        UseSubmitBehavior="false"
-                        OnClientClick="this.disabled='true';this.value='Please wait....';" OnClick="BtnConfirm_Click" />
-                    <div class="MsgDiv">
-                        <asp:Label ID="lblConfirm" runat="server" CssClass="MessageLabel"></asp:Label>
-                    </div>
-                </footer>
-            </asp:Panel>
-           <%-- <div class="MsgDiv" style="text-align: right">
-                <asp:LinkButton ID="lnkBtnAddProducts" runat="server" ValidationGroup="AddProducts" CssClass="UnStyled" OnClick="lnkBtnAddProducts_Click">
-                    اذا كنت تريد اضافة منتجات جديده للفاتورة اضغط <span class="Link">هنا</span></asp:LinkButton>
-            </div>--%>
-        </section>
-    </asp:Panel>
     <asp:Panel runat="server" ID="PanelSale" Visible="false">
         <header class="Header">
             <p>عملية اضافه لفاتورة</p>
         </header>
-        <asp:Panel runat="server" ID="PanelCustomerType">
-            <asp:RadioButtonList ID="Custmer" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories"
-                OnSelectedIndexChanged="Custmer_SelectedIndexChanged" AutoPostBack="true">
-                <asp:ListItem Value="Special">بيع جمله</asp:ListItem>
-                <asp:ListItem Value="Regular">بيع قطاعى</asp:ListItem>
-            </asp:RadioButtonList>
-        </asp:Panel>
-        <asp:Panel runat="server" ID="PanelSearch" Visible="false">
+        <asp:Panel runat="server" ID="PanelSearch">
             <asp:RadioButtonList ID="RBLProductType" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories"
                 OnSelectedIndexChanged="RBLProductType_SelectedIndexChanged" AutoPostBack="true">
                 <asp:ListItem Value="Normal" Selected="True">منتجات عاديه</asp:ListItem>
                 <asp:ListItem Value="Tol">طلمبات</asp:ListItem>
                 <asp:ListItem Value="Motors">مواتير</asp:ListItem>
+                <asp:ListItem Value="Services">خدمات</asp:ListItem>
             </asp:RadioButtonList>
             <section class="Search_Section">
                 <table class="Search_table">
@@ -567,6 +288,33 @@
                     <SelectedRowStyle CssClass="SelectedRowStyle" />
                 </asp:GridView>
                 <br />
+                <asp:Panel runat="server" ID="PanelAddFreeItem" CssClass="PanelProductList" Visible="false">
+                    <table class="AddFreeItemTable">
+                        <tr>
+                            <td class="RHSTD">
+                                <p class="RHSP">اسم الخدمه :</p>
+                            </td>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtFreeItemName" CssClass="EditTxtFreeItemName" PlaceHolder="اسم الخدمه" AutoCompleteType="Disabled"></asp:TextBox>
+                            </td>
+                            <td class="RHSTD">
+                                <p class="RHSP">الكميه :</p>
+                            </td>
+                            <td style="text-align: right">
+                                <asp:TextBox runat="server" ID="txtFreeItemAmount" CssClass="EditTxtFreeItemPrice" PlaceHolder="الكميه" AutoCompleteType="Disabled"></asp:TextBox>
+                            </td>
+                            <td class="RHSTD">
+                                <p class="RHSP">السعر :</p>
+                            </td>
+                            <td style="text-align: right">
+                                <asp:TextBox runat="server" ID="txtFreeItemPrice" CssClass="EditTxtFreeItemPrice" PlaceHolder="السعر" AutoCompleteType="Disabled"></asp:TextBox>
+                            </td>
+                            <td class="RHSTD">
+                                <asp:Button ID="BtnaddFreeItem" runat="server" Text="اضافه" CssClass="BtnaddInGrid" OnClick="BtnaddFreeItem_Click" />
+                            </td>
+                        </tr>
+                    </table>
+                </asp:Panel>
                 <asp:Panel runat="server" ID="PanelFinish" Visible="false">
                     <footer class="AddSupplierFooter" style="text-align: center">
                         <asp:Button ID="BtnDoneAdding" runat="server" Text="تم" CssClass="BtnNext" OnClick="BtnDoneAdding_Click" />

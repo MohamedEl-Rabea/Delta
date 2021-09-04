@@ -51,13 +51,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label LabelErrMsg;
 
         /// <summary>
-        /// PanelCientCheques control.
+        /// PanelClientCheques control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCientCheques;
+        protected global::System.Web.UI.WebControls.Panel PanelClientCheques;
+
+        /// <summary>
+        /// lnkBtnAllClientsCheceques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkBtnAllClientsCheceques;
 
         /// <summary>
         /// lnkBtnPaidCientCheques control.
@@ -85,6 +94,33 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkBtnUpcomingPayableCientCheques;
+
+        /// <summary>
+        /// PanelAllClientsCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelAllClientsCheques;
+
+        /// <summary>
+        /// GridViewAllClientsCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewAllClientsCheques;
+
+        /// <summary>
+        /// ObjectDataSourceAllClientCheques control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceAllClientCheques;
 
         /// <summary>
         /// PanelPaidCientCheques control.

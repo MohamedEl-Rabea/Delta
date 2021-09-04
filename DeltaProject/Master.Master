@@ -25,7 +25,7 @@
                     <table class="Logo_Table" style="float: left">
                         <tr>
                             <td>
-                                <img width="44" height="44" src="Images/Logo.png" />
+<%--                                <img width="44" height="44" src="Images/Logo.jpg" />--%>
                             </td>
                         </tr>
                     </table>
@@ -70,6 +70,7 @@
                                         <asp:MenuItem Text="تقارير عملاء" ToolTip="عرض تقرير كامل عن العملاء المدانين للشركه">
                                             <asp:MenuItem Text="عملاء الديون" ToolTip="عرض العملاء المتبقى بينهم وبين الشركه بواقى تعاملات ماديه" NavigateUrl="~/Clients_Report.aspx"></asp:MenuItem>
                                             <asp:MenuItem Text="جميع العملاء" ToolTip="عرض العملاء المسجلين لدى النظام" NavigateUrl="~/All_Clients_Report.aspx"></asp:MenuItem>
+                                            <asp:MenuItem Text="كشف حساب" ToolTip="كشف حساب لكل التعاملات المادية للعميل" NavigateUrl="~/Client_Statement.aspx"></asp:MenuItem>
                                         </asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="الفواتيــــــر" Value="m2">
@@ -89,7 +90,8 @@
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="البيــــــــــــــع">
                                         <asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="مرتجع / اضافه" ToolTip="تنفيذ عملية ارتجاع منتجات" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية ارتجاع منتجات من فاتورة موجوده" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/Add_Items_To_Invoice.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                 </Items>
                             </asp:Menu>

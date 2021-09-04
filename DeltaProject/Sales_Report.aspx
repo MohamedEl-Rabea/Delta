@@ -159,15 +159,15 @@
                 <table class="Offer_Header_table">
                     <tr>
                         <td style="vertical-align: top; width: 270px;">
-                            <p style="font: bold 28px Arial; color: black; margin: 0; padding: 0">شركة صحارى</p>
-                            <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">للتجارة و الصيانه</p>
-                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">خدمات الابار - انظمة الطاقه الشمسيه</p>
-                            <p style="font: bold 12px Arial; color: black; line-height: 25px; margin: 0; padding: 0">طريق مصر / اسيوط الغربى بحرى كمين بنى مزار 500متر</p>
+                            <p style="font: bold 28px Arial; color: black; margin: 0; padding: 0">مؤسسة صحارى</p>
+                            <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">للتوريد و التركيب</p>
+                            <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">جميع مهامات الجهد المنخفض والمتوسط - مستلزمات الآبار - أنظمة الطاقه الشمسية</p>
+
                             <p style="font: bold 28px Arial; color: black; line-height: 20px; margin: 0; padding: 0">ــــــــــــــــــــ</p>
                         </td>
-                        <td style="text-align:center">
+                        <td style="text-align: center">
                             <div class="Logo_divBill">
-                                <img src="Images/LogoBill.png" width="90" height="90" class="LogoImage" />
+                                <img src="Images/Logo.jpg" width="90" height="90" class="LogoImage" />
                             </div>
                         </td>
                         <td style="vertical-align: middle; width: 250px;">
@@ -242,7 +242,25 @@
                 <br />
             </section>
             <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">
-                <p class="FooterParagraphReportStyle">Copyright&copy 2016 EL-Delta MIS, All rights reserved</p>
+                <table class="Offer_Header_table">
+                    <tr>
+                        <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">المقر الرئيسى</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: المنيا - بنى مزار - طريق القاهرة اسيوط الغربى بحرى كمين بنى مزار 500م</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">للاتصال: 01000901815 - 01206778015</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px; margin-right: 25px;"></p>
+                        </td>
+                        <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">مقر ملوى</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: ملوى - بنى مزار - طريق القاهرة اسيوط الغربى بحرى كمين ملوى 500م</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">للاتصال: 01027793162 - 01110211419</p>
+                        </td>
+                        <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">مقر الواحات</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: غرب غرب المنيا - طريق الواحات</p>
+                        </td>
+                    </tr>
+                </table>
             </footer>
         </div>
     </asp:Panel>
