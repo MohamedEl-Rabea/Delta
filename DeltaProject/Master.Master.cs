@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using Business_Logic;
+using System.Linq;
 
 namespace DeltaProject
 {
@@ -22,9 +23,27 @@ namespace DeltaProject
                     if (!Convert.ToBoolean(Session["isAuthenticated"]))
                         Response.Redirect("~/Login.aspx");
 
+                    if (!IsAuthorized())
+                        Response.Redirect("~/NotAuthorized.aspx");
+
                     UpdateChequeMenuItemsNotifications();
                 }
             }
+        }
+
+        private bool IsAuthorized()
+        {
+            var currentPage = Request.Url.AbsolutePath.Remove(0, 1).Split('.').First().ToLower();
+            return HasPermission(currentPage);
+        }
+
+        private bool HasPermission(string page)
+        {
+            var loggedInUserPermissions = Convert.ToString(Session["UserPermissions"]).ToLower().Split(',').ToList();
+            var isAuthorized = (loggedInUserPermissions.Count == 1 && loggedInUserPermissions.First() == "all")
+                || page == "default" || page == "notauthorized"
+                || loggedInUserPermissions.Contains(page);
+            return isAuthorized;
         }
 
         public void UpdateChequeMenuItemsNotifications()

@@ -11,7 +11,7 @@ namespace DeltaProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private static string CheckMac()
@@ -61,11 +61,18 @@ namespace DeltaProject
             cmd.Parameters.Add("@Password", SqlDbType.NVarChar).Value = password;
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
-            byte result = Convert.ToByte(cmd.ExecuteScalar());
-            Session["isAuthenticated"] = result == 1;
+            var rdr = cmd.ExecuteReader();
+
+            if (rdr.Read())
+            {
+                Session["isAuthenticated"] = !string.IsNullOrEmpty(Convert.ToString(rdr["ID"]));
+                Session["UserPermissions"] = Convert.ToString(rdr["UserPermissions"]);
+            }
+            rdr.Close();
+            con.Close();
             Session["ClientChequesCount"] = null;
             Session["SupplierChequesCount"] = null;
-            return result == 1;
+            return Convert.ToBoolean(Session["isAuthenticated"]);
         }
     }
 }

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
+using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
@@ -60,12 +56,11 @@ namespace DeltaProject
                 e.Row.Cells[1].Text = "ديون  الشركة : " + totalCompanyDebts.ToString() + " جنيها " +  " - ديون العملاء : " + totalClientsDebts  + " جنيها";
             }
         }
-
         private double Get_Detbs(string client_name)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("Get_Client_plan", con);
+            SqlCommand cmd = new SqlCommand("Get_Client_Debt", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@C_Name", SqlDbType.NVarChar).Value = client_name;
             con.Open();

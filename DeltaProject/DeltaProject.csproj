@@ -110,9 +110,11 @@
     <Content Include="Images\Up.png" />
     <Content Include="Income_Report.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Manage_Permissions.aspx" />
     <Content Include="Needs_Report.aspx" />
     <Content Include="New_Client_Interaction.aspx" />
     <Content Include="New_Supplier_Interaction.aspx" />
+    <Content Include="NotAuthorized.aspx" />
     <Content Include="Pay_Bill.aspx" />
     <Content Include="Public\Permission_Page.aspx" />
     <Content Include="Products_Inventory.aspx" />
@@ -210,6 +212,7 @@
     <Compile Include="Business_Logic\Bill_Payments.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
+    <Compile Include="Business_Logic\ClientDebtsSchedule.cs" />
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
@@ -221,6 +224,7 @@
     <Compile Include="Business_Logic\Supplier_Payments_Documents.cs" />
     <Compile Include="Business_Logic\Supplier_Payment_Record.cs" />
     <Compile Include="Business_Logic\Supplier_Phone.cs" />
+    <Compile Include="Business_Logic\User.cs" />
     <Compile Include="Clients_Report.aspx.cs">
       <DependentUpon>Clients_Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -291,6 +295,13 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manage_Permissions.aspx.cs">
+      <DependentUpon>Manage_Permissions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage_Permissions.aspx.designer.cs">
+      <DependentUpon>Manage_Permissions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,6 +329,13 @@
     </Compile>
     <Compile Include="New_Supplier_Interaction.aspx.designer.cs">
       <DependentUpon>New_Supplier_Interaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotAuthorized.aspx.cs">
+      <DependentUpon>NotAuthorized.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotAuthorized.aspx.designer.cs">
+      <DependentUpon>NotAuthorized.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pay_Bill.aspx.cs">
       <DependentUpon>Pay_Bill.aspx</DependentUpon>
