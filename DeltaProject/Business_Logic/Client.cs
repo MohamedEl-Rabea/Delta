@@ -14,7 +14,8 @@ namespace Business_Logic
         public string C_name { get; set; }
         public string Address { get; set; }
         public string Account_Number { get; set; }
-
+        public double DebtValue { get; set; }
+        public bool ShouldSchedule { get; set; }
         public Client Get_Client_info()
         {
             Client supplier = new Client();
@@ -113,6 +114,46 @@ namespace Business_Logic
                 b = false;
             }
             return b;
+        }
+
+        public static int Get_All_Indebted_Clients_Count(string Client_Name)
+        {
+            int Count;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Indebted_Clients_Count_By_C_Name", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
+        }
+
+        public static List<Client> Get_All_Indebted_Clients(int Start_Index, int Max_Rows, string Client_Name)
+        {
+            List<Client> clientList = new List<Client>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Indebted_Clients", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            cmd.Parameters.Add("@StartIndex", SqlDbType.Int).Value = Start_Index;
+            cmd.Parameters.Add("@MaxRows", SqlDbType.Int).Value = Max_Rows;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                Client client = new Client();
+                client.C_name = Convert.ToString(rdr["Client_Name"]);
+                client.Address = rdr["Client_Name"].ToString();
+                client.DebtValue = Convert.ToDouble(rdr["DebtValue"]);
+                client.ShouldSchedule = Convert.ToBoolean(rdr["ShouldSchedule"]);
+                clientList.Add(client);
+            }
+            rdr.Close();
+            con.Close();
+            return clientList;
         }
 
     }

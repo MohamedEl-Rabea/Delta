@@ -10,19 +10,6 @@ namespace DeltaProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-                SqlConnection con = new SqlConnection(CS);
-                SqlCommand cmd = new SqlCommand("Get_Clients_Report", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-                GridViewClients.DataSource = rdr;
-                GridViewClients.DataBind();
-                rdr.Close();
-                con.Close();
-            }
         }
 
         double totalClientsDebts, totalCompanyDebts = 0;
@@ -30,7 +17,7 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                double debts = Get_Detbs(e.Row.Cells[0].Text);
+                double debts = Convert.ToDouble(e.Row.Cells[2].Text);
                 Label lblDebts = ((Label)e.Row.FindControl("lblTotalDebts"));
                 lblDebts.Text = debts.ToString();
                 if (debts < 0)
@@ -55,18 +42,6 @@ namespace DeltaProject
                 e.Row.Cells.RemoveAt(1);
                 e.Row.Cells[1].Text = "ديون  الشركة : " + totalCompanyDebts.ToString() + " جنيها " +  " - ديون العملاء : " + totalClientsDebts  + " جنيها";
             }
-        }
-        private double Get_Detbs(string client_name)
-        {
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("Get_Client_Debt", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@C_Name", SqlDbType.NVarChar).Value = client_name;
-            con.Open();
-            double result = Convert.ToDouble(cmd.ExecuteScalar());
-            con.Close();
-            return result;
         }
     }
 }
