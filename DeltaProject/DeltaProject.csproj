@@ -68,6 +68,7 @@
     <Content Include="Add_SupplierCheque.aspx" />
     <Content Include="All_Clients_Report.aspx" />
     <Content Include="Clients_Report.aspx" />
+    <Content Include="Client_Debts_Schedule.aspx" />
     <Content Include="Client_Statement.aspx" />
     <Content Include="Collect_Product.aspx" />
     <Content Include="CSS\jquery-ui-1.10.4.custom.min.css" />
@@ -81,6 +82,7 @@
     <Content Include="Delete_Products.aspx" />
     <Content Include="Delete_Supplier.aspx" />
     <Content Include="Expenses.aspx" />
+    <Content Include="Images\AddNew.png" />
     <Content Include="Images\alert.png" />
     <Content Include="Images\alert2.png" />
     <Content Include="Images\back.png" />
@@ -231,6 +233,13 @@
     </Compile>
     <Compile Include="Clients_Report.aspx.designer.cs">
       <DependentUpon>Clients_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Debts_Schedule.aspx.cs">
+      <DependentUpon>Client_Debts_Schedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client_Debts_Schedule.aspx.designer.cs">
+      <DependentUpon>Client_Debts_Schedule.aspx</DependentUpon>
     </Compile>
     <Compile Include="Client_Statement.aspx.cs">
       <DependentUpon>Client_Statement.aspx</DependentUpon>

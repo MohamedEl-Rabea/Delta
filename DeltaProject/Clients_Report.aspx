@@ -115,6 +115,11 @@
                     <asp:BoundField DataField="C_name" HeaderText="العميل" FooterText="اجمـــــــالى" />
                     <asp:BoundField DataField="Address" HeaderText="العنوان" />
                     <asp:BoundField DataField="DebtValue" HeaderText="العنوان" />
+                    <asp:TemplateField HeaderText="رقم الفاتورة" SortExpression="Bill_ID">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lnkBtnSchedule" runat="server" Text='جدوله' ToolTip="جدولة الدين الى دفعات" PostBackUrl='<%# "Client_Debts_Schedule.aspx?ClientName=" + Eval("C_name")%>'></asp:LinkButton>
+                    </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
                 <HeaderStyle CssClass="HeaderIncomeReport" />
