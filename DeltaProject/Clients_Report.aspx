@@ -87,58 +87,62 @@
             </footer>
         </div>
         <section class="ReportDeclarationSection">
-           
+
             <section class="Search_Section">
                 <table class="Search_table">
                     <tr>
                         <td class="Image_td">
                             <asp:ImageButton ID="ImageButtonSearch" runat="server" ImageUrl="~/Images/common_search_lookup.png"
-                                             Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_OnClick" />
+                                Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_OnClick" />
                         </td>
                         <td class="Search_td">
                             <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
-                                         placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                                placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                         </td>
                     </tr>
                 </table>
             </section>
-             <header class="PreSectionTab">
+            <header class="PreSectionTab">
                 <div>
                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="TabLnks" Enabled="false">العملاء</asp:LinkButton>
                 </div>
             </header>
             <section class="PreReport_SectionTab">
-            <asp:GridView ID="GridViewAllClients" runat="server" AutoGenerateColumns="False"
-                          EmptyDataText="لا يوجد عملاء" CssClass="GridReport" ShowFooter="True" OnRowDataBound="GridViewClients_RowDataBound"
-                          DataSourceID="ObjectDataSourceClients" AllowPaging="True" PageSize="20">
-                <Columns>
-                    <asp:BoundField DataField="C_name" HeaderText="العميل" FooterText="اجمـــــــالى" />
-                    <asp:BoundField DataField="Address" HeaderText="العنوان" />
-                    <asp:BoundField DataField="DebtValue" HeaderText="العنوان" />
-                    <asp:TemplateField HeaderText="رقم الفاتورة" SortExpression="Bill_ID">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="lnkBtnSchedule" runat="server" Text='جدوله' ToolTip="جدولة الدين الى دفعات" PostBackUrl='<%# "Client_Debts_Schedule.aspx?ClientName=" + Eval("C_name")%>'></asp:LinkButton>
-                    </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-                <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
-                <HeaderStyle CssClass="HeaderIncomeReport" />
-                <RowStyle CssClass="Row_Style" />
-                <AlternatingRowStyle CssClass="AlternatRowStyle" />
-                <FooterStyle CssClass="FooterIncomeReport" />
-                <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
-            </asp:GridView>
-            <asp:ObjectDataSource ID="ObjectDataSourceClients" runat="server"
-                SelectMethod="Get_All_Indebted_Clients"
-                TypeName="Business_Logic.Client"
-                StartRowIndexParameterName="Start_Index"
-                MaximumRowsParameterName="Max_Rows"
-                SelectCountMethod="Get_All_Indebted_Clients_Count"
-                EnablePaging="True">
-                <SelectParameters>
-                    <asp:ControlParameter ControlID="TextBoxSearch" Name="Client_Name" PropertyName="Text" Type="String" />
-                </SelectParameters>
-            </asp:ObjectDataSource>
+                <asp:GridView ID="GridViewAllClients" runat="server" AutoGenerateColumns="False"
+                    EmptyDataText="لا يوجد عملاء" CssClass="GridReport" ShowFooter="True" OnRowDataBound="GridViewClients_RowDataBound"
+                    DataSourceID="ObjectDataSourceClients" AllowPaging="True" PageSize="20">
+                    <Columns>
+                        <asp:BoundField DataField="C_name" HeaderText="العميل" FooterText="اجمـــــــالى" />
+                        <asp:BoundField DataField="Address" HeaderText="العنوان" />
+                        <asp:BoundField DataField="DebtValue" HeaderText="العنوان" />
+                        <asp:TemplateField SortExpression="Bill_ID">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkBtnSchedule" runat="server" Text='جدوله'
+                                    ToolTip="جدولة الدين الى دفعات"
+                                    CssClass="gridActionlnkBtn"
+                                    PostBackUrl='<%# "Client_Debts_Schedule.aspx?ClientName=" + Eval("C_name")%>'>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                    <HeaderStyle CssClass="HeaderIncomeReport" />
+                    <RowStyle CssClass="Row_Style" />
+                    <AlternatingRowStyle CssClass="AlternatRowStyle" />
+                    <FooterStyle CssClass="FooterIncomeReport" />
+                    <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
+                </asp:GridView>
+                <asp:ObjectDataSource ID="ObjectDataSourceClients" runat="server"
+                    SelectMethod="Get_All_Indebted_Clients"
+                    TypeName="Business_Logic.Client"
+                    StartRowIndexParameterName="Start_Index"
+                    MaximumRowsParameterName="Max_Rows"
+                    SelectCountMethod="Get_All_Indebted_Clients_Count"
+                    EnablePaging="True">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="TextBoxSearch" Name="Client_Name" PropertyName="Text" Type="String" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
             </section>
         </section>
         <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">

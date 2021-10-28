@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace DeltaProject.Business_Logic
 {
+    [Serializable]
     public class ClientDebtsSchedule
     {
         public int Id { get; set; }
@@ -15,7 +17,7 @@ namespace DeltaProject.Business_Logic
         public string Description { get; set; }
         public bool Paid { get; set; }
 
-        public bool AddClientSchedule(IEnumerable<ClientDebtsSchedule> debtsSchedules, out string msg)
+        public static bool AddClientSchedule(IEnumerable<ClientDebtsSchedule> debtsSchedules, out string msg)
         {
             msg = string.Empty;
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -47,6 +49,57 @@ namespace DeltaProject.Business_Logic
             SqlCommand cmd = new SqlCommand("PayClientDebt", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+            con.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return string.IsNullOrEmpty(msg);
+        }
+
+        public bool Delete(out string msg)
+        {
+            msg = string.Empty;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Delete_Client_Debts_Schedule", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+            con.Open();
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return string.IsNullOrEmpty(msg);
+        }
+
+        public bool Update(out string msg)
+        {
+            msg = string.Empty;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Update_Client_Debts_Schedule", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+            cmd.Parameters.Add("@DebtValue", SqlDbType.Money).Value = DebtValue;
+            cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Description;
+            cmd.Parameters.Add("@ScheduledDate", SqlDbType.Date).Value = ScheduledDate;
             con.Open();
             try
             {
