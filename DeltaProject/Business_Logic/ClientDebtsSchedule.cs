@@ -142,28 +142,127 @@ namespace DeltaProject.Business_Logic
             return result;
         }
 
-        public static IEnumerable<ClientDebtsSchedule> GetAllOverdueDebts()
+        public static int Get_All_Debts_Schedule_Count(string Client_Name)
         {
-            var result = new List<ClientDebtsSchedule>();
+            int Count;
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("GetAllOverdueDebts", con);
+            SqlCommand cmd = new SqlCommand("Get_All_Debts_Schedule_Count", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
+        }
+
+        public static List<ClientDebtsSchedule> Get_All_Debts_Schedule(int Start_Index, int Max_Rows, string Client_Name)
+        {
+            List<ClientDebtsSchedule> scheduleList = new List<ClientDebtsSchedule>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Debts_Schedule", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            cmd.Parameters.Add("@StartIndex", SqlDbType.Int).Value = Start_Index;
+            cmd.Parameters.Add("@MaxRows", SqlDbType.Int).Value = Max_Rows;
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                var clientSchedule = new ClientDebtsSchedule();
-                clientSchedule.Id = Convert.ToInt32(rdr["Id"]);
-                clientSchedule.ClientName = Convert.ToString(rdr["ClientName"]);
-                clientSchedule.DebtValue = Convert.ToDouble(rdr["DebtValue"]);
-                clientSchedule.ScheduledDate = Convert.ToDateTime(rdr["ScheduledDate"]);
-                clientSchedule.Description = Convert.ToString(rdr["Description"]);
-                result.Add(clientSchedule);
+                ClientDebtsSchedule schedule = new ClientDebtsSchedule();
+                schedule.Id = Convert.ToInt32(rdr["Id"]);
+                schedule.DebtValue = Convert.ToDouble(rdr["DebtValue"]);
+                schedule.ScheduledDate = Convert.ToDateTime(rdr["ScheduledDate"]);
+                schedule.Description = Convert.ToString(rdr["Description"]);
+                schedule.Paid = Convert.ToBoolean(rdr["Paid"]);
+                scheduleList.Add(schedule);
             }
             rdr.Close();
             con.Close();
-            return result;
+            return scheduleList;
+        }
+
+        public static int Get_All_Not_Paid_Debts_Schedule_Count(string Client_Name)
+        {
+            int Count;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Not_Paid_Debts_Schedule_Count", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
+        }
+
+        public static List<ClientDebtsSchedule> Get_All_Not_Paid_Debts_Schedule(int Start_Index, int Max_Rows, string Client_Name)
+        {
+            List<ClientDebtsSchedule> scheduleList = new List<ClientDebtsSchedule>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Not_Paid_Debts_Schedule_Count", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            cmd.Parameters.Add("@StartIndex", SqlDbType.Int).Value = Start_Index;
+            cmd.Parameters.Add("@MaxRows", SqlDbType.Int).Value = Max_Rows;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ClientDebtsSchedule schedule = new ClientDebtsSchedule();
+                schedule.Id = Convert.ToInt32(rdr["Id"]);
+                schedule.DebtValue = Convert.ToDouble(rdr["DebtValue"]);
+                schedule.ScheduledDate = Convert.ToDateTime(rdr["ScheduledDate"]);
+                schedule.Description = Convert.ToString(rdr["Description"]);
+                schedule.Paid = Convert.ToBoolean(rdr["Paid"]);
+                scheduleList.Add(schedule);
+            }
+            rdr.Close();
+            con.Close();
+            return scheduleList;
+        }
+
+        public static int Get_All_Have_To_Pay_Debts_Schedule_Count(string Client_Name)
+        {
+            int Count;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Have_To_Pay_Debts_Schedule_Count", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            con.Open();
+            Count = (int)cmd.ExecuteScalar();
+            con.Close();
+            return Count;
+        }
+
+        public static List<ClientDebtsSchedule> Get_All_Have_To_Pay_Debts_Schedule(int Start_Index, int Max_Rows, string Client_Name)
+        {
+            List<ClientDebtsSchedule> scheduleList = new List<ClientDebtsSchedule>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_All_Have_To_Pay_Debts_Schedule", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = Client_Name;
+            cmd.Parameters.Add("@StartIndex", SqlDbType.Int).Value = Start_Index;
+            cmd.Parameters.Add("@MaxRows", SqlDbType.Int).Value = Max_Rows;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                ClientDebtsSchedule schedule = new ClientDebtsSchedule();
+                schedule.Id = Convert.ToInt32(rdr["Id"]);
+                schedule.DebtValue = Convert.ToDouble(rdr["DebtValue"]);
+                schedule.ScheduledDate = Convert.ToDateTime(rdr["ScheduledDate"]);
+                schedule.Description = Convert.ToString(rdr["Description"]);
+                schedule.Paid = Convert.ToBoolean(rdr["Paid"]);
+                scheduleList.Add(schedule);
+            }
+            rdr.Close();
+            con.Close();
+            return scheduleList;
         }
 
         private static DataTable ToDataTable(IEnumerable<ClientDebtsSchedule> debtsSchedules)

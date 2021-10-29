@@ -155,6 +155,7 @@ namespace Business_Logic
             con.Close();
             return clientList;
         }
+        
         public void Get_Client_Debts_Info()
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
