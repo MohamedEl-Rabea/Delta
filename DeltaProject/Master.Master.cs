@@ -91,18 +91,27 @@ namespace DeltaProject
                 ? Convert.ToInt32(Session["ClientDebtsCount"])
                 : ClientDebtsSchedule.Get_All_Have_To_Pay_Debts_Schedule_Count(null);
 
+            MenuItem clientsMenuItemWithoutSpan, debtsMenuItemWithoutSpan;
+            RemoveClientDebtsNotificationSpans(out clientsMenuItemWithoutSpan, out debtsMenuItemWithoutSpan);
+
             if (debtsCount > 0)
             {
-                var clientsMenuItem = BarMenu.FindItem("Clients");
-                clientsMenuItem.Text = clientsMenuItem.Text.Substring(0, clientsMenuItem.Text.IndexOf("<span") > 0
-                    ? clientsMenuItem.Text.IndexOf("<span")
-                    : clientsMenuItem.Text.Length) + "<span class='dot'>" + debtsCount + "</span>";
-
-                var debtsMenuItem = BarMenu.FindItem("Clients/Debts");
-                debtsMenuItem.Text = debtsMenuItem.Text.Substring(0, debtsMenuItem.Text.IndexOf("<span") > 0
-                    ? debtsMenuItem.Text.IndexOf("<span")
-                    : debtsMenuItem.Text.Length) + "<span class='dot'>" + debtsCount + "</span>";
+                clientsMenuItemWithoutSpan.Text += "<span class='dot'>" + debtsCount + "</span>";
+                debtsMenuItemWithoutSpan.Text += "<span class='dot'>" + debtsCount + "</span>";
             }
+        }
+
+        private void RemoveClientDebtsNotificationSpans(out MenuItem clientsMenuItemWithoutSpan, out MenuItem debtsMenuItemWithoutSpan)
+        {
+            clientsMenuItemWithoutSpan = BarMenu.FindItem("Clients");
+            clientsMenuItemWithoutSpan.Text = clientsMenuItemWithoutSpan.Text.Substring(0, clientsMenuItemWithoutSpan.Text.IndexOf("<span") > 0
+                ? clientsMenuItemWithoutSpan.Text.IndexOf("<span")
+                : clientsMenuItemWithoutSpan.Text.Length);
+
+            debtsMenuItemWithoutSpan = BarMenu.FindItem("Clients/Debts");
+            debtsMenuItemWithoutSpan.Text = debtsMenuItemWithoutSpan.Text.Substring(0, debtsMenuItemWithoutSpan.Text.IndexOf("<span") > 0
+                ? debtsMenuItemWithoutSpan.Text.IndexOf("<span")
+                : debtsMenuItemWithoutSpan.Text.Length);
         }
 
         protected void __doPostBack(object sender, EventArgs e)

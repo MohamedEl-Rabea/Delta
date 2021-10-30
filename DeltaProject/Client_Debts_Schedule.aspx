@@ -126,6 +126,11 @@
                             <asp:TextBox ID="txtNewDescription" CssClass="EditTxt-x-lg" placeholder="الوصف" AutoCompleteType="Disabled" runat="server"></asp:TextBox>
                         </FooterTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="مسدده">
+                        <ItemTemplate>
+                            <asp:CheckBox ID="chkPaid" runat="server" Checked='<%# Convert.ToBoolean(Eval("Paid") is DBNull ? 0 : Eval("Paid")) %>' Enabled="false" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:ImageButton ID="ImageButtonEdit" runat="server" ImageUrl="~/Images/Edit.png" Width="16" Height="16"

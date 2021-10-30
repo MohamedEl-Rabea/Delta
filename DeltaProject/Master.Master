@@ -65,11 +65,13 @@
                                         </asp:MenuItem>
                                         <asp:MenuItem Text="تقارير مبيعات" ToolTip="عرض تقارير المبيعات والاحصائيات المتعلقه خلال فترة معينه" NavigateUrl="~/Sales_Report.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="تقارير موردين" ToolTip="عرض تقرير عن كامل موردى الشركه وبياناتهم المتعلقه" NavigateUrl="~/Suppliers_report.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="عرض سعر خاص" NavigateUrl="~/Special_Prices_List.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="عرض سعر عام" NavigateUrl="~/Public_Prices_List.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="العملاء" ToolTip="عرض تقرير كامل عن العملاء المدانين للشركه" Value="Clients">
                                         <asp:MenuItem Text="عملاء الديون" ToolTip="عرض العملاء المتبقى بينهم وبين الشركه بواقى تعاملات ماديه" NavigateUrl="~/Clients_Report.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="جميع العملاء" ToolTip="عرض العملاء المسجلين لدى النظام" NavigateUrl="~/All_Clients_Report.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="سداد ديون"  Value="Debts" ToolTip="سداد ديون العملاء المسجلين لدى النظام" NavigateUrl="~/Pay_Client_Debts.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="سداد ديون" Value="Debts" ToolTip="سداد ديون العملاء المسجلين لدى النظام" NavigateUrl="~/Pay_Client_Debts.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="كشف حساب" ToolTip="كشف حساب لكل التعاملات المادية للعميل" NavigateUrl="~/Client_Statement.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="الفواتيــــــر" Value="m2">
@@ -79,10 +81,6 @@
                                     <asp:MenuItem Text="شيكات" Value="Cheques">
                                         <asp:MenuItem Text="العملاء" Value="ClientCheques" ToolTip="بحث في شيكات العملاء" NavigateUrl="~/Search_For_ClientCheque.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="الموردين" Value="SupplierCheques" ToolTip="بحث في شيكات الموردين" NavigateUrl="~/Search_For_SupplierCheque.aspx"></asp:MenuItem>
-                                    </asp:MenuItem>
-                                    <asp:MenuItem Text="عروض الاسعار">
-                                        <asp:MenuItem Text="عرض خاص" NavigateUrl="~/Special_Prices_List.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="عرض عام" NavigateUrl="~/Public_Prices_List.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="البيــــــــــــــع">
                                         <asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>

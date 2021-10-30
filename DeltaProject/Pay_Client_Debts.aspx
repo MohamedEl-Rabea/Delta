@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Pay_Client_Debts.aspx.cs" Inherits="DeltaProject.Pay_Customer_Debt" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
@@ -27,7 +28,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
-     <header class="Header">
+    <header class="Header">
         <p>ديون العميل</p>
     </header>
     <section class="Search_Section">
@@ -50,37 +51,51 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد ديون مسجله لهذا العميل"></asp:Label>
         </article>
     </asp:Panel>
-    
+
     <asp:Panel runat="server" ID="PanelClientCheques">
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnAllClientsDebts" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كل الديون الخاصه بهذا العميل" OnClick="lnkBtnAllClientsDebts_Click">الكـــــل</asp:LinkButton>
+                    ToolTip="عرض كل الديون الخاصه بهذا العميل"
+                    OnClick="lnkBtnAllClientsDebts_Click">الكـــــل</asp:LinkButton>
             </div>
         </header>
-       <header class="PreSectionTab">
+        <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnUnpaidCientDebts" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كافة الديون التى لم يتم تحصيلها الخاصه بهذا العميل" OnClick="lnkBtnUnpaidCientDebts_Click">الغير محصلة</asp:LinkButton>
+                    ToolTip="عرض كافة الديون التى لم يتم تحصيلها الخاصه بهذا العميل"
+                    OnClick="lnkBtnUnpaidCientDebts_Click">
+                    الغير محصلة
+                </asp:LinkButton>
             </div>
         </header>
         <header class="PreSectionTab">
             <div>
                 <asp:LinkButton ID="lnkBtnTodayCientDebts" runat="server" CssClass="TabLnks"
-                                ToolTip="عرض كافة الديون المطلوب تحصيلها اليوم الخاصه بهذا العميل" OnClick="lnkBtnTodayCientDebts_Click">واجبة التحصيل</asp:LinkButton>
+                    ToolTip="عرض كافة الديون المطلوب تحصيلها اليوم الخاصه بهذا العميل"
+                    OnClick="lnkBtnTodayCientDebts_Click">
+                    واجبة التحصيل
+                </asp:LinkButton>
             </div>
         </header>
-
         <asp:Panel runat="server" ID="PanelAllClientsDebts" CssClass="PreReport_SectionTab" Visible="false">
             <asp:GridView ID="GridViewAllClientsDebts" runat="server" AutoGenerateColumns="False"
-                CssClass="Gridview_Style2" EmptyDataText="لا توجد ديون" DataKeyNames="Id"
-                DataSourceID="ObjectDataSourceAllClientDebts" AllowPaging="True">
+                CssClass="Gridview_Style2"
+                EmptyDataText="لا توجد ديون"
+                DataKeyNames="Id"
+                DataSourceID="ObjectDataSourceAllClientDebts"
+                AllowPaging="True">
                 <Columns>
                     <asp:BoundField DataField="Id" Visible="false" SortExpression="Id" />
                     <asp:BoundField DataField="ClientName" HeaderText="إسم العميل" SortExpression="ClientName" />
                     <asp:BoundField DataField="DebtValue" HeaderText="القيمة" DataFormatString="{0:#.##}" SortExpression="DebtValue" />
                     <asp:BoundField DataField="ScheduledDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:dd/MM/yyyy}" SortExpression="ScheduledDate" />
                     <asp:BoundField DataField="Description" HeaderText="الوصف" SortExpression="Description" />
+                    <asp:TemplateField HeaderText="مسدده">
+                        <ItemTemplate>
+                            <asp:CheckBox ID="chkPaid" runat="server" Checked='<%# ((bool)Eval("Paid")) %>' Enabled="false" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
                 <RowStyle CssClass="Row_Style" />
                 <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
@@ -110,10 +125,10 @@
                     <asp:BoundField DataField="Description" HeaderText="الوصف" SortExpression="Description" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:ImageButton ID="ImageButtonPay" runat="server" ImageUrl="~/Images/ok.png" Width="16" Height="16"
-                                             CausesValidation="false" CommandName="Pay_Debt"/>
+                            <asp:ImageButton ID="ImageButtonPay" runat="server" ImageUrl="~/Images/ok.png" Width="20" Height="20"
+                                CausesValidation="false" CommandName="Pay_Debt" ToolTip="سداد" />
                             <asp:ImageButton ID="ImageButtonDelete" runat="server" ImageUrl="~/Images/Delete.png" Width="16" Height="16"
-                                             CausesValidation="false" CommandName="Delete_Debt"/>
+                                CausesValidation="false" CommandName="Delete_Debt" ToolTip="مسح" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -142,11 +157,11 @@
                     <asp:BoundField DataField="ClientName" HeaderText="إسم العميل" SortExpression="ClientName" />
                     <asp:BoundField DataField="DebtValue" HeaderText="القيمة" DataFormatString="{0:#.##}" SortExpression="DebtValue" />
                     <asp:BoundField DataField="ScheduledDate" HeaderText="تاريخ الاستحقاق" DataFormatString="{0:dd/MM/yyyy}" SortExpression="ScheduledDate" />
-                    <asp:BoundField DataField="Description" HeaderText="الوصف" SortExpression="Description"/>
+                    <asp:BoundField DataField="Description" HeaderText="الوصف" SortExpression="Description" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:ImageButton ID="ImageButtonPay" runat="server" ImageUrl="~/Images/ok.png" Width="16" Height="16"
-                                             CausesValidation="false" CommandName="Pay_Debt"/>
+                            <asp:ImageButton ID="ImageButtonPay" runat="server" ImageUrl="~/Images/ok.png" Width="20" Height="20"
+                                CausesValidation="false" CommandName="Pay_Debt" ToolTip="سداد" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

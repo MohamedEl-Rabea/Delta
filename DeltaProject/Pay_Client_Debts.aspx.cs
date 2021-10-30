@@ -46,9 +46,9 @@ namespace DeltaProject
             PanelAllClientsDebts.Visible = false;
             PanelUnpaidCientDebts.Visible = false;
             PanelTodayCientDebts.Visible = true;
-            lnkBtnAllClientsDebts.ForeColor = System.Drawing.Color.Black;
-            lnkBtnUnpaidCientDebts.ForeColor = System.Drawing.Color.Black;
-            lnkBtnTodayCientDebts.ForeColor = System.Drawing.Color.White;
+            lnkBtnAllClientsDebts.ForeColor = Color.Black;
+            lnkBtnUnpaidCientDebts.ForeColor = Color.Black;
+            lnkBtnTodayCientDebts.ForeColor = Color.White;
             lblFinishMsg.Text = "";
             GridViewTodayCientDebts.DataBind();
             GridViewTodayCientDebts.PageIndex = 0;
@@ -57,11 +57,8 @@ namespace DeltaProject
         protected void GridViewUnpaidCientDebts_OnRowCommand(object sender, GridViewCommandEventArgs e)
         {
             var selectedRow = ((GridViewRow)((ImageButton)e.CommandSource).NamingContainer);
-            var id = selectedRow.RowType == DataControlRowType.DataRow
-                ? Convert.ToInt32(GridViewUnpaidCientDebts.DataKeys[selectedRow.RowIndex]?.Value)
-                : 0;
-            var clientDebtSchedule = new ClientDebtsSchedule { Id = id };
-
+            var scheduleId = Convert.ToInt32(GridViewUnpaidCientDebts.DataKeys[selectedRow.RowIndex].Value);
+            var clientDebtSchedule = new ClientDebtsSchedule { Id = scheduleId };
             if (e.CommandName == "Pay_Debt")
             {
                 if (clientDebtSchedule.PayDebt(out var msg))
@@ -87,10 +84,8 @@ namespace DeltaProject
         protected void GridViewTodayCientDebts_OnRowCommand(object sender, GridViewCommandEventArgs e)
         {
             var selectedRow = ((GridViewRow)((ImageButton)e.CommandSource).NamingContainer);
-            var id = selectedRow.RowType == DataControlRowType.DataRow
-                ? Convert.ToInt32(GridViewUnpaidCientDebts.DataKeys[selectedRow.RowIndex]?.Value)
-                : 0;
-            var clientDebtSchedule = new ClientDebtsSchedule { Id = id };
+            var scheduleId = Convert.ToInt32(GridViewTodayCientDebts.DataKeys[selectedRow.RowIndex].Value);
+            var clientDebtSchedule = new ClientDebtsSchedule { Id = scheduleId };
 
             if (e.CommandName == "Pay_Debt")
             {

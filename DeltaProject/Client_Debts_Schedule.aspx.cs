@@ -39,7 +39,7 @@ namespace DeltaProject
                 : ClientDebtsScheduleList;
 
             var gridDataSource = ClientDebtsScheduleList.Union(NewClientDebtsSchedule);
-            lblUnScheduled.Text = (Convert.ToDouble(lblTotalDebts.Text) - gridDataSource.Where(d => !d.Paid).Sum(d => d.DebtValue)).ToString();
+            lblUnScheduled.Text = (Convert.ToDouble(lblTotalDebts.Text) - gridDataSource.Sum(d => d.DebtValue)).ToString();
             gridViewDebts.DataSource = ToDataTable(gridDataSource);
             gridViewDebts.DataBind();
         }
@@ -168,8 +168,8 @@ namespace DeltaProject
         protected void gridViewDebts_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             var isDataRow = e.Row.RowType == DataControlRowType.DataRow;
-
-            var hideAllActions = isDataRow && gridViewDebts.DataKeys[e.Row.RowIndex].Value is DBNull;
+            var hideAllActions = isDataRow && (gridViewDebts.DataKeys[e.Row.RowIndex].Value is DBNull
+                || ((CheckBox)e.Row.FindControl("chkPaid")).Checked);
             if (hideAllActions)
             {
                 ((ImageButton)e.Row.FindControl("ImageButtonEdit")).Visible = false;
@@ -215,9 +215,10 @@ namespace DeltaProject
             table.Columns.Add("DebtValue", typeof(double));
             table.Columns.Add("ScheduledDate", typeof(DateTime));
             table.Columns.Add("Description", typeof(string));
+            table.Columns.Add("Paid", typeof(bool));
 
             foreach (var item in debtsSchedules)
-                table.Rows.Add(item.Id, item.DebtValue, item.ScheduledDate, item.Description);
+                table.Rows.Add(item.Id, item.DebtValue, item.ScheduledDate, item.Description, item.Paid);
 
             if (table.Rows.Count == 0)
             {
