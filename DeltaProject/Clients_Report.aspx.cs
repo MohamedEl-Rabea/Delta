@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
@@ -18,12 +16,9 @@ namespace DeltaProject
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 double debts = Convert.ToDouble(e.Row.Cells[2].Text);
-                Label lblDebts = ((Label)e.Row.FindControl("lblTotalDebts"));
-                lblDebts.Text = debts.ToString();
                 if (debts < 0)
                 {
                     e.Row.BackColor = System.Drawing.Color.LightGray;
-                    lblDebts.Text = (-Convert.ToDouble(lblDebts.Text)).ToString();
                     totalCompanyDebts += -debts;
                 }
                 else if (debts > 0)
@@ -40,8 +35,14 @@ namespace DeltaProject
             {
                 e.Row.Cells[0].ColumnSpan = 2;
                 e.Row.Cells.RemoveAt(1);
-                e.Row.Cells[1].Text = "ديون  الشركة : " + totalCompanyDebts.ToString() + " جنيها " +  " - ديون العملاء : " + totalClientsDebts  + " جنيها";
+                e.Row.Cells[1].Text = "ديون  الشركة : " + totalCompanyDebts + " جنيها " + " - ديون العملاء : " + totalClientsDebts + " جنيها";
             }
+        }
+
+        protected void ImageButtonSearch_OnClick(object sender, ImageClickEventArgs e)
+        {
+            GridViewAllClients.PageIndex = 0;
+
         }
     }
 }

@@ -2,7 +2,30 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
-    <script>
+    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
+    <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <script src="Script/jquery-1.10.2.js"></script>
+    <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#<%= TextBoxSearch.ClientID%>').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "Services/GetNamesService.asmx/Get_Clients_Names",
+                        data: "{ 'Client_Name': '" + request.term + "' }",
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "application/json;charset=utf-8",
+                        success: function (result) {
+                            response(result.d);
+                        },
+                        error: function (result) {
+                            alert('Problem');
+                        }
+                    });
+                }
+            });
+        });
         function PrintDivContent(divId) {
             var printContent = document.getElementById(divId);
             var WinPrint = window.open('', '', 'height=auto,width=auto,resizable=1,scrollbars=1,toolbar=1,sta­tus=0');
@@ -64,20 +87,41 @@
             </footer>
         </div>
         <section class="ReportDeclarationSection">
+
+            <section class="Search_Section">
+                <table class="Search_table">
+                    <tr>
+                        <td class="Image_td">
+                            <asp:ImageButton ID="ImageButtonSearch" runat="server" ImageUrl="~/Images/common_search_lookup.png"
+                                Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_OnClick" />
+                        </td>
+                        <td class="Search_td">
+                            <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
+                                placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                        </td>
+                    </tr>
+                </table>
+            </section>
             <header class="PreSectionTab">
                 <div>
                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="TabLnks" Enabled="false">العملاء</asp:LinkButton>
                 </div>
             </header>
             <section class="PreReport_SectionTab">
-                <asp:GridView ID="GridViewClients" runat="server" AutoGenerateColumns="False"
-                    EmptyDataText="لا يوجد عملاء" CssClass="GridReport" ShowFooter="True" OnRowDataBound="GridViewClients_RowDataBound">
+                <asp:GridView ID="GridViewAllClients" runat="server" AutoGenerateColumns="False"
+                    EmptyDataText="لا يوجد عملاء" CssClass="GridReport" ShowFooter="True" OnRowDataBound="GridViewClients_RowDataBound"
+                    DataSourceID="ObjectDataSourceClients" AllowPaging="True" PageSize="20">
                     <Columns>
-                        <asp:BoundField DataField="Client_Name" HeaderText="العميل" FooterText="اجمـــــــالى" />
-                        <asp:BoundField DataField="C_Address" HeaderText="العنوان" />
-                        <asp:TemplateField HeaderText="قيمة الحساب">
+                        <asp:BoundField DataField="C_name" HeaderText="العميل" FooterText="اجمـــــــالى" />
+                        <asp:BoundField DataField="Address" HeaderText="العنوان" />
+                        <asp:BoundField DataField="DebtValue" HeaderText="العنوان" />
+                        <asp:TemplateField SortExpression="Bill_ID">
                             <ItemTemplate>
-                                <asp:Label ID="lblTotalDebts" runat="server" CssClass="lblInfo"></asp:Label>
+                                <asp:LinkButton ID="lnkBtnSchedule" runat="server" Text='جدوله'
+                                    ToolTip="جدولة الدين الى دفعات"
+                                    CssClass="gridActionlnkBtn"
+                                    PostBackUrl='<%# "Client_Debts_Schedule.aspx?ClientName=" + Eval("C_name")%>'>
+                                </asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -86,7 +130,19 @@
                     <RowStyle CssClass="Row_Style" />
                     <AlternatingRowStyle CssClass="AlternatRowStyle" />
                     <FooterStyle CssClass="FooterIncomeReport" />
+                    <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
                 </asp:GridView>
+                <asp:ObjectDataSource ID="ObjectDataSourceClients" runat="server"
+                    SelectMethod="Get_All_Indebted_Clients"
+                    TypeName="Business_Logic.Client"
+                    StartRowIndexParameterName="Start_Index"
+                    MaximumRowsParameterName="Max_Rows"
+                    SelectCountMethod="Get_All_Indebted_Clients_Count"
+                    EnablePaging="True">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="TextBoxSearch" Name="Client_Name" PropertyName="Text" Type="String" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
             </section>
         </section>
         <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">

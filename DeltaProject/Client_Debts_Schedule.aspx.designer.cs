@@ -11,61 +11,88 @@ namespace DeltaProject
 {
 
 
-    public partial class Clients_Report
+    public partial class Client_Debts_Schedule
     {
 
         /// <summary>
-        /// ImageButton1 control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// ImageButtonSearch control.
+        /// lblClientName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButtonSearch;
+        protected global::System.Web.UI.WebControls.Label lblClientName;
 
         /// <summary>
-        /// TextBoxSearch control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSearch;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// lblTotalDebts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.Label lblTotalDebts;
 
         /// <summary>
-        /// GridViewAllClients control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewAllClients;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// ObjectDataSourceClients control.
+        /// lblUnScheduled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceClients;
+        protected global::System.Web.UI.WebControls.Label lblUnScheduled;
+
+        /// <summary>
+        /// gridViewDebts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridViewDebts;
+
+        /// <summary>
+        /// BtnFinish control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnFinish;
+
+        /// <summary>
+        /// lblFinishMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFinishMsg;
     }
 }

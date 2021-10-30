@@ -121,10 +121,14 @@
         </asp:RadioButtonList>
     </asp:Panel>
     <asp:Panel runat="server" ID="PanelSearch" Visible="false">
-        <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories" OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
+        <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal"
+            CssClass="RBLCategories"
+            OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged"
+            AutoPostBack="true">
             <asp:ListItem Value="Normal" Selected="True">منتجات عاديه</asp:ListItem>
             <asp:ListItem Value="Tol">طلمبات</asp:ListItem>
             <asp:ListItem Value="Motors">مواتير</asp:ListItem>
+            <asp:ListItem Value="Services">خدمات</asp:ListItem>
         </asp:RadioButtonList>
         <section class="Search_Section">
             <table class="Search_table">
@@ -197,6 +201,33 @@
                 <SelectedRowStyle CssClass="SelectedRowStyle" />
             </asp:GridView>
             <br />
+            <asp:Panel runat="server" ID="PanelAddFreeItem" CssClass="PanelProductList" Visible="false">
+                <table class="AddFreeItemTable">
+                    <tr>
+                        <td class="RHSTD">
+                            <p class="RHSP">اسم الخدمه :</p>
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" ID="txtFreeItemName" CssClass="EditTxtFreeItemName" PlaceHolder="اسم الخدمه" AutoCompleteType="Disabled"></asp:TextBox>
+                        </td>
+                        <td class="RHSTD">
+                            <p class="RHSP">الكميه :</p>
+                        </td>
+                        <td style="text-align: right">
+                            <asp:TextBox runat="server" ID="txtFreeItemAmount" CssClass="EditTxtFreeItemPrice" PlaceHolder="الكميه" AutoCompleteType="Disabled"></asp:TextBox>
+                        </td>
+                        <td class="RHSTD">
+                            <p class="RHSP">السعر :</p>
+                        </td>
+                        <td style="text-align: right">
+                            <asp:TextBox runat="server" ID="txtFreeItemPrice" CssClass="EditTxtFreeItemPrice" PlaceHolder="السعر" AutoCompleteType="Disabled"></asp:TextBox>
+                        </td>
+                        <td class="RHSTD">
+                            <asp:Button ID="BtnaddFreeItem" runat="server" Text="اضافه" CssClass="BtnaddInGrid" OnClick="BtnaddFreeItem_Click" />
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
             <asp:Panel runat="server" ID="PanelFinish" Visible="false">
                 <footer class="AddSupplierFooter" style="text-align: center">
                     <asp:Button ID="BtnFinish" runat="server" Text="تم" CssClass="BtnNext" OnClick="BtnFinish_Click" />

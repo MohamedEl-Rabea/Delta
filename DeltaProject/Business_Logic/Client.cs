@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Business_Logic
 {
@@ -16,6 +14,8 @@ namespace Business_Logic
         public string Account_Number { get; set; }
         public double DebtValue { get; set; }
         public bool ShouldSchedule { get; set; }
+        public double ScheduledDebtValue { get; set; }
+
         public Client Get_Client_info()
         {
             Client supplier = new Client();
@@ -45,9 +45,9 @@ namespace Business_Logic
             SqlCommand cmd = new SqlCommand("Get_Client_Statement", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = C_name;
-            if(startDate.HasValue)
+            if (startDate.HasValue)
                 cmd.Parameters.AddWithValue("@Start_Date", startDate);
-            
+
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -146,7 +146,7 @@ namespace Business_Logic
             {
                 Client client = new Client();
                 client.C_name = Convert.ToString(rdr["Client_Name"]);
-                client.Address = rdr["Client_Name"].ToString();
+                client.Address = rdr["C_Address"].ToString();
                 client.DebtValue = Convert.ToDouble(rdr["DebtValue"]);
                 client.ShouldSchedule = Convert.ToBoolean(rdr["ShouldSchedule"]);
                 clientList.Add(client);
@@ -155,6 +155,24 @@ namespace Business_Logic
             con.Close();
             return clientList;
         }
+        
+        public void Get_Client_Debts_Info()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("Get_Client_Debts_Info", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@Client_Name", SqlDbType.NVarChar).Value = C_name;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
 
+            if (rdr.Read())
+            {
+                DebtValue = Convert.ToDouble(rdr["TotalDebtValue"]);
+                ScheduledDebtValue = Convert.ToDouble(rdr["ScheduledDebtValue"]);
+            }
+
+            con.Close();
+        }
     }
 }
