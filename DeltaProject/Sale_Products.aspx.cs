@@ -16,8 +16,12 @@ namespace DeltaProject
         }
         protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PanelInitailResult.Visible = false;
+            GridViewProducts.Visible = true;
+            PanelAddFreeItem.Visible = false;
             if (RadioButtonListCategories.SelectedValue == "Normal")
             {
+                TextBoxSearch.Enabled = true;
                 TextBoxSearch.Visible = true;
                 TextBoxMotors.Visible = false;
                 TextBoxTol.Visible = false;
@@ -28,11 +32,21 @@ namespace DeltaProject
                 TextBoxSearch.Visible = false;
                 TextBoxMotors.Visible = false;
             }
-            else
+            else if (RadioButtonListCategories.SelectedValue == "Motors")
             {
                 TextBoxMotors.Visible = true;
                 TextBoxSearch.Visible = false;
                 TextBoxTol.Visible = false;
+            }
+            else
+            {
+                TextBoxSearch.Visible = true;
+                TextBoxSearch.Enabled = false;
+                TextBoxMotors.Visible = false;
+                TextBoxTol.Visible = false;
+                PanelInitailResult.Visible = true;
+                GridViewProducts.Visible = false;
+                PanelAddFreeItem.Visible = true;
             }
         }
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
@@ -348,5 +362,43 @@ namespace DeltaProject
                 GridViewBillList.DataBind();
             }
         }
+
+        protected void BtnaddFreeItem_Click(object sender, EventArgs e)
+        {
+            AddFreeItemToList();
+        }
+
+        private void AddFreeItemToList()
+        {
+            BtnFinish.Enabled = true;
+            Product product = new Product();
+            product.IsFreeItem = true;
+            product.P_name = txtFreeItemName.Text;
+            if (ViewState["ProductsList"] != null && ((List<Product>)ViewState["ProductsList"]).Contains(product))
+            {
+                PanelFinish.Visible = true;
+                lblFinishMsg.Text = "! هذا المنتج مسجل فى القائمة";
+                lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                if (ViewState["ProductsList"] == null)
+                {
+                    List<Product> Products = new List<Product>();
+                    Products.Add(product);
+                    ViewState["ProductsList"] = Products;
+                }
+                else
+                {
+                    ((List<Product>)ViewState["ProductsList"]).Add(product);
+                }
+                product.Amount = Convert.ToDecimal(txtFreeItemAmount.Text);
+                product.Regulare_Price = Convert.ToDouble(txtFreeItemPrice.Text);
+                PanelFinish.Visible = true;
+                lblFinishMsg.Text = "تم اضافة - " + product.P_name + " - الى القائمة";
+                lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+            }
+        }
+
     }
 }

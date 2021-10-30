@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeltaProject {
-    
-    
-    public partial class Sale_Products {
-        
+namespace DeltaProject
+{
+
+
+    public partial class Sale_Products
+    {
+
         /// <summary>
         /// PanelCustomerType control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelCustomerType;
-        
+
         /// <summary>
         /// Custmer control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList Custmer;
-        
+
         /// <summary>
         /// PanelSearch control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelSearch;
-        
+
         /// <summary>
         /// RadioButtonListCategories control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonListCategories;
-        
+
         /// <summary>
         /// ImageButtonSearch control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonSearch;
-        
+
         /// <summary>
         /// TextBoxSearch control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxSearch;
-        
+
         /// <summary>
         /// TextBoxTol control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxTol;
-        
+
         /// <summary>
         /// TextBoxMotors control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxMotors;
-        
+
         /// <summary>
         /// PanelInitailResult control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelInitailResult;
-        
+
         /// <summary>
         /// GridViewProducts control.
         /// </summary>
@@ -101,7 +103,52 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewProducts;
-        
+
+        /// <summary>
+        /// PanelAddFreeItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelAddFreeItem;
+
+        /// <summary>
+        /// txtFreeItemName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFreeItemName;
+
+        /// <summary>
+        /// txtFreeItemAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFreeItemAmount;
+
+        /// <summary>
+        /// txtFreeItemPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFreeItemPrice;
+
+        /// <summary>
+        /// BtnaddFreeItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnaddFreeItem;
+
         /// <summary>
         /// PanelFinish control.
         /// </summary>
@@ -110,7 +157,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelFinish;
-        
+
         /// <summary>
         /// BtnFinish control.
         /// </summary>
@@ -119,7 +166,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnFinish;
-        
+
         /// <summary>
         /// lblFinishMsg control.
         /// </summary>
@@ -128,7 +175,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFinishMsg;
-        
+
         /// <summary>
         /// PanelProductList control.
         /// </summary>
@@ -137,7 +184,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelProductList;
-        
+
         /// <summary>
         /// PanelList control.
         /// </summary>
@@ -146,7 +193,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelList;
-        
+
         /// <summary>
         /// GridViewProductsList control.
         /// </summary>
@@ -155,7 +202,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewProductsList;
-        
+
         /// <summary>
         /// lblTotalCost control.
         /// </summary>
@@ -164,7 +211,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalCost;
-        
+
         /// <summary>
         /// txtDiscount control.
         /// </summary>
@@ -173,7 +220,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDiscount;
-        
+
         /// <summary>
         /// txtPaid_Amount control.
         /// </summary>
@@ -182,7 +229,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPaid_Amount;
-        
+
         /// <summary>
         /// CustomValidator1 control.
         /// </summary>
@@ -191,7 +238,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
-        
+
         /// <summary>
         /// CustomValidatorPaidAmount control.
         /// </summary>
@@ -200,7 +247,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorPaidAmount;
-        
+
         /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
@@ -209,7 +256,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
+
         /// <summary>
         /// txtAdditionalCost control.
         /// </summary>
@@ -218,7 +265,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAdditionalCost;
-        
+
         /// <summary>
         /// txtAdditionalcostNotes control.
         /// </summary>
@@ -227,7 +274,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAdditionalcostNotes;
-        
+
         /// <summary>
         /// CustomValidator3 control.
         /// </summary>
@@ -236,7 +283,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator3;
-        
+
         /// <summary>
         /// BtnConfirm control.
         /// </summary>
@@ -245,7 +292,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnConfirm;
-        
+
         /// <summary>
         /// lblConfirmMsg control.
         /// </summary>
@@ -254,7 +301,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblConfirmMsg;
-        
+
         /// <summary>
         /// PanelClientInfo control.
         /// </summary>
@@ -263,7 +310,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelClientInfo;
-        
+
         /// <summary>
         /// txtDay control.
         /// </summary>
@@ -272,7 +319,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDay;
-        
+
         /// <summary>
         /// txtMonth control.
         /// </summary>
@@ -281,7 +328,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMonth;
-        
+
         /// <summary>
         /// txtYear control.
         /// </summary>
@@ -290,7 +337,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtYear;
-        
+
         /// <summary>
         /// BtnGetDate control.
         /// </summary>
@@ -299,7 +346,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnGetDate;
-        
+
         /// <summary>
         /// RequiredFieldValidatorDay control.
         /// </summary>
@@ -308,7 +355,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorDay;
-        
+
         /// <summary>
         /// RangeValidatorDay control.
         /// </summary>
@@ -317,7 +364,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorDay;
-        
+
         /// <summary>
         /// RequiredFieldValidatorMonth control.
         /// </summary>
@@ -326,7 +373,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorMonth;
-        
+
         /// <summary>
         /// RangeValidatorMonth control.
         /// </summary>
@@ -335,7 +382,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidatorMonth;
-        
+
         /// <summary>
         /// RequiredFieldValidatorYear control.
         /// </summary>
@@ -344,7 +391,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorYear;
-        
+
         /// <summary>
         /// CustomValidator2 control.
         /// </summary>
@@ -353,7 +400,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator2;
-        
+
         /// <summary>
         /// txtClient_Name control.
         /// </summary>
@@ -362,7 +409,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtClient_Name;
-        
+
         /// <summary>
         /// RequiredFieldValidator2 control.
         /// </summary>
@@ -371,7 +418,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
+
         /// <summary>
         /// txtAddress control.
         /// </summary>
@@ -380,7 +427,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAddress;
-        
+
         /// <summary>
         /// TxtDesc control.
         /// </summary>
@@ -389,7 +436,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtDesc;
-        
+
         /// <summary>
         /// BtnBill control.
         /// </summary>
@@ -398,7 +445,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnBill;
-        
+
         /// <summary>
         /// PanelBill control.
         /// </summary>
@@ -407,7 +454,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelBill;
-        
+
         /// <summary>
         /// ImageButton1 control.
         /// </summary>
@@ -416,7 +463,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
-        
+
         /// <summary>
         /// lblBillDate control.
         /// </summary>
@@ -425,7 +472,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBillDate;
-        
+
         /// <summary>
         /// lblBill_ID control.
         /// </summary>
@@ -434,7 +481,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBill_ID;
-        
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -443,7 +490,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// lblClientName control.
         /// </summary>
@@ -452,7 +499,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblClientName;
-        
+
         /// <summary>
         /// Label2 control.
         /// </summary>
@@ -461,7 +508,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
+
         /// <summary>
         /// lblAddress control.
         /// </summary>
@@ -470,7 +517,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAddress;
-        
+
         /// <summary>
         /// Label3 control.
         /// </summary>
@@ -479,7 +526,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-        
+
         /// <summary>
         /// lblBillCost control.
         /// </summary>
@@ -488,7 +535,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBillCost;
-        
+
         /// <summary>
         /// lblDiscount control.
         /// </summary>
@@ -497,7 +544,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDiscount;
-        
+
         /// <summary>
         /// lblDiscountValue control.
         /// </summary>
@@ -506,7 +553,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDiscountValue;
-        
+
         /// <summary>
         /// Label4 control.
         /// </summary>
@@ -515,7 +562,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
-        
+
         /// <summary>
         /// lblPaid_Value control.
         /// </summary>
@@ -524,7 +571,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPaid_Value;
-        
+
         /// <summary>
         /// Label7 control.
         /// </summary>
@@ -533,7 +580,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
-        
+
         /// <summary>
         /// lblRest control.
         /// </summary>
@@ -542,7 +589,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRest;
-        
+
         /// <summary>
         /// lblAddtionalCost control.
         /// </summary>
@@ -551,7 +598,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAddtionalCost;
-        
+
         /// <summary>
         /// lblAdditionalCostValue control.
         /// </summary>
@@ -560,7 +607,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAdditionalCostValue;
-        
+
         /// <summary>
         /// lblAdditionalcostNotes control.
         /// </summary>
@@ -569,7 +616,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAdditionalcostNotes;
-        
+
         /// <summary>
         /// GridViewBillList control.
         /// </summary>

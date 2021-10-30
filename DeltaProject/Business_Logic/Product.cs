@@ -1,11 +1,9 @@
-﻿using System;
+﻿using DeltaProject.Shared;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using DeltaProject.Shared;
 
 namespace Business_Logic
 {
@@ -47,7 +45,7 @@ namespace Business_Logic
 
         public bool Equals(Product product)
         {
-            return this.P_name == product.P_name && this.Mark == product.Mark && this.Inch == product.Inch && this.Style == product.Style;
+            return P_name == product.P_name && Mark == product.Mark && Inch == product.Inch && Style == product.Style;
         }
 
         public bool Add_Product(out string m, string Supplier_name, DateTime Purchase_Date)
