@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Business_Logic;
+using DeltaProject.Business_Logic;
+using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Security;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Data;
-using Business_Logic;
-using System.Linq;
 
 namespace DeltaProject
 {
@@ -27,6 +28,7 @@ namespace DeltaProject
                         Response.Redirect("~/NotAuthorized.aspx");
 
                     UpdateChequeMenuItemsNotifications();
+                    UpdateDebtsMenuItemsNotifications();
                 }
             }
         }
@@ -80,6 +82,26 @@ namespace DeltaProject
                 supplierChequesMenuItem.Text = supplierChequesMenuItem.Text.Substring(0, supplierChequesMenuItem.Text.IndexOf("<span") > 0
                     ? supplierChequesMenuItem.Text.IndexOf("<span")
                     : supplierChequesMenuItem.Text.Length) + "<span class='dot'>" + supplierChequesCount + "</span>";
+            }
+        }
+
+        public void UpdateDebtsMenuItemsNotifications()
+        {
+            var debtsCount = Session["ClientDebtsCount"] != null
+                ? Convert.ToInt32(Session["ClientDebtsCount"])
+                : ClientDebtsSchedule.Get_All_Have_To_Pay_Debts_Schedule_Count(null);
+
+            if (debtsCount > 0)
+            {
+                var clientsMenuItem = BarMenu.FindItem("Clients");
+                clientsMenuItem.Text = clientsMenuItem.Text.Substring(0, clientsMenuItem.Text.IndexOf("<span") > 0
+                    ? clientsMenuItem.Text.IndexOf("<span")
+                    : clientsMenuItem.Text.Length) + "<span class='dot'>" + debtsCount + "</span>";
+
+                var debtsMenuItem = BarMenu.FindItem("Clients/Debts");
+                debtsMenuItem.Text = debtsMenuItem.Text.Substring(0, debtsMenuItem.Text.IndexOf("<span") > 0
+                    ? debtsMenuItem.Text.IndexOf("<span")
+                    : debtsMenuItem.Text.Length) + "<span class='dot'>" + debtsCount + "</span>";
             }
         }
 

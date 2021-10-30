@@ -54,6 +54,7 @@ namespace DeltaProject
                 NewClientDebtsSchedule = new List<ClientDebtsSchedule>();
                 BindDebtsScheduleGridView(refresh: true);
                 Succcess("تم الاضافه بنجاح");
+                RefreshDebtsNotifications();
             }
             else
                 Error(msg);
@@ -98,6 +99,7 @@ namespace DeltaProject
                 {
                     Succcess("تم المسح بنجاح");
                     BindDebtsScheduleGridView(refresh: true);
+                    RefreshDebtsNotifications();
                 }
                 else
                     Error(msg);
@@ -116,6 +118,7 @@ namespace DeltaProject
                     Succcess("تم التعديل بنجاح");
                     gridViewDebts.EditIndex = -1;
                     BindDebtsScheduleGridView(refresh: true);
+                    RefreshDebtsNotifications();
                 }
                 else
                 {
@@ -222,6 +225,12 @@ namespace DeltaProject
                 table.Rows.Add(dr);
             }
             return table;
+        }
+
+        private void RefreshDebtsNotifications()
+        {
+            Session["ClientDebtsCount"] = ClientDebtsSchedule.Get_All_Have_To_Pay_Debts_Schedule_Count(null);
+            ((Master)Master).UpdateDebtsMenuItemsNotifications();
         }
     }
 }

@@ -118,6 +118,7 @@
     <Content Include="New_Supplier_Interaction.aspx" />
     <Content Include="NotAuthorized.aspx" />
     <Content Include="Pay_Bill.aspx" />
+    <Content Include="Pay_Client_Debts.aspx" />
     <Content Include="Public\Permission_Page.aspx" />
     <Content Include="Products_Inventory.aspx" />
     <Content Include="Public_Prices_List.aspx" />
@@ -352,6 +353,13 @@
     </Compile>
     <Compile Include="Pay_Bill.aspx.designer.cs">
       <DependentUpon>Pay_Bill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pay_Client_Debts.aspx.cs">
+      <DependentUpon>Pay_Client_Debts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pay_Client_Debts.aspx.designer.cs">
+      <DependentUpon>Pay_Client_Debts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Public\Permission_Page.aspx.cs">
       <DependentUpon>Permission_Page.aspx</DependentUpon>

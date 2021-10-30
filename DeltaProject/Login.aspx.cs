@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Web.Security;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Net.NetworkInformation;
+using System.Web.Security;
 
 namespace DeltaProject
 {
@@ -71,6 +71,7 @@ namespace DeltaProject
             rdr.Close();
             con.Close();
             Session["ClientChequesCount"] = null;
+            Session["ClientDebtsCount"] = null;
             Session["SupplierChequesCount"] = null;
             return Convert.ToBoolean(Session["isAuthenticated"]);
         }
