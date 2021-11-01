@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI.WebControls;
 
@@ -74,7 +75,7 @@ namespace DeltaProject
                 {
                     ClientName = lblClientName.Text,
                     DebtValue = Convert.ToDouble(((TextBox)gridViewDebts.FooterRow.FindControl("txtNewDebtValue")).Text),
-                    ScheduledDate = Convert.ToDateTime(((TextBox)gridViewDebts.FooterRow.FindControl("txtNewDebtDate")).Text),
+                    ScheduledDate = DateTime.ParseExact(((TextBox)gridViewDebts.FooterRow.FindControl("txtNewDebtDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Description = ((TextBox)gridViewDebts.FooterRow.FindControl("txtNewDescription")).Text
                 };
                 AddNewDebtSchedule(clientDebtsSchedule);
@@ -111,7 +112,7 @@ namespace DeltaProject
                     Id = scheduleId,
                     DebtValue = Convert.ToDouble(((TextBox)selectedRow.FindControl("txtDebtValue")).Text),
                     Description = ((TextBox)selectedRow.FindControl("txtDescription")).Text,
-                    ScheduledDate = Convert.ToDateTime(((TextBox)selectedRow.FindControl("txtDebtDate")).Text),
+                    ScheduledDate = DateTime.ParseExact(((TextBox)selectedRow.FindControl("txtDebtDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture)
                 };
                 if (clientDebtsSchedule.Update(out var msg))
                 {

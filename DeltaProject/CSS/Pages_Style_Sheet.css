@@ -843,7 +843,7 @@
     color: black;
 }
 
-.Report_Footer, .PreReport_Section, .PreReport_SectionTab {
+.Report_Footer, .PreReport_Section, .PreReport_SectionTab, .PreReport_SectionTab_No_Border {
     clear: both;
     direction: rtl;
     margin-bottom: 25px;
@@ -857,6 +857,10 @@
 
 .PreReport_SectionTab {
     border-bottom: 7px solid #BDC3C7;
+    border-top: 7px solid #BDC3C7;
+}
+
+.PreReport_SectionTab_No_Border {
     border-top: 7px solid #BDC3C7;
 }
 
@@ -876,6 +880,23 @@
     color: black;
     font: 15px bold arial;
 }
+
+    .PagerStyle a, .PagerStyle span {
+        color: black;
+        background-color: #f2f2f2;
+        float: left;
+        padding: 8px 13px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ddd;
+        margin: 4px;
+        border-radius: 50%;
+    }
+
+    .PagerStyle span {
+        color: white;
+        background-color: #2d3e50;
+    }
 
 .Empty_Style {
     height: 40px;
