@@ -319,7 +319,7 @@
                         </td>
                         <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
                             <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">مقر ملوى</p>
-                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: ملوى - بنى مزار - طريق القاهرة اسيوط الغربى بحرى كمين ملوى 500م</p>
+                            <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: المنيا - ملوى - طريق القاهرة اسيوط الغربى بحرى كمين ملوى 500م</p>
                             <p style="font: bold 14px Arial; color: white; line-height: 25px;">للاتصال: 01027793162 - 01110211419</p>
                         </td>
                         <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
