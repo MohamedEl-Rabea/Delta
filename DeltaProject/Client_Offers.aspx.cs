@@ -47,7 +47,7 @@ namespace DeltaProject
                 {
                     if (File.Exists(filePath))
                         File.Delete(filePath);
-                    lblFinishMsg.Text = $"تم مسح عرض رقم {id} للعميل {clientName} بنجاح";
+                    lblFinishMsg.Text = $"تم مسح عرض : '{selectedRow.Cells[1].Text}' للعميل {clientName} بنجاح";
                     lblFinishMsg.ForeColor = System.Drawing.Color.Green;
                     ReboundGridView();
                 }
