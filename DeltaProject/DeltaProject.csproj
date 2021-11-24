@@ -62,11 +62,13 @@
     <Content Include="Accounts_Settings.aspx" />
     <Content Include="AddProducts.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
+    <Content Include="Add_Client_Offer.aspx" />
     <Content Include="Add_Income.aspx" />
     <Content Include="Add_Items_To_Invoice.aspx" />
     <Content Include="Add_Supplier.aspx" />
     <Content Include="Add_SupplierCheque.aspx" />
     <Content Include="All_Clients_Report.aspx" />
+    <Content Include="Client_Offers.aspx" />
     <Content Include="Clients_Report.aspx" />
     <Content Include="Client_Debts_Schedule.aspx" />
     <Content Include="Client_Statement.aspx" />
@@ -95,6 +97,7 @@
     <Content Include="Images\common_search_lookup.png" />
     <Content Include="Images\Delete.png" />
     <Content Include="Images\Down.png" />
+    <Content Include="Images\Download.png" />
     <Content Include="Images\Edit.png" />
     <Content Include="Images\Error.png" />
     <Content Include="Images\Extend.png" />
@@ -175,6 +178,13 @@
     <Compile Include="Add_ClientCheque.aspx.designer.cs">
       <DependentUpon>Add_ClientCheque.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Add_Client_Offer.aspx.cs">
+      <DependentUpon>Add_Client_Offer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_Client_Offer.aspx.designer.cs">
+      <DependentUpon>Add_Client_Offer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Add_Income.aspx.cs">
       <DependentUpon>Add_Income.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +226,7 @@
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
     <Compile Include="Business_Logic\ClientDebtsSchedule.cs" />
+    <Compile Include="Business_Logic\ClientOffer.cs" />
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
@@ -228,6 +239,13 @@
     <Compile Include="Business_Logic\Supplier_Payment_Record.cs" />
     <Compile Include="Business_Logic\Supplier_Phone.cs" />
     <Compile Include="Business_Logic\User.cs" />
+    <Compile Include="Client_Offers.aspx.cs">
+      <DependentUpon>Client_Offers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client_Offers.aspx.designer.cs">
+      <DependentUpon>Client_Offers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clients_Report.aspx.cs">
       <DependentUpon>Clients_Report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -530,7 +548,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

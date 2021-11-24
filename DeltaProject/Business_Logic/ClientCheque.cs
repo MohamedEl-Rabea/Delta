@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+
 //DeltaProject.
 
 namespace Business_Logic
@@ -277,7 +278,7 @@ namespace Business_Logic
             while (rdr.Read())
             {
                 ClientCheque clientCheque = new ClientCheque();
-                clientCheque.Id =Convert.ToInt32(rdr["Id"]);
+                clientCheque.Id = Convert.ToInt32(rdr["Id"]);
                 clientCheque.ClientName = rdr["ClientName"].ToString();
                 clientCheque.Value = Convert.ToDecimal(rdr["ChequeValue"]);
                 clientCheque.ChequeNumber = Convert.ToString(rdr["ChequeNumber"]);
