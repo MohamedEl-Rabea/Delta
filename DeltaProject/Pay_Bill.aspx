@@ -60,7 +60,7 @@
                     <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
                         placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                     <asp:TextBox ID="txtBill_ID" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
-                        placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
+                    placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -125,19 +125,19 @@
         <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
             <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 10px;">
                 <div style="border: 1px solid black">
-                    <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات الفاتورة</p>
+                    <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات العرض</p>
                 </div>
             </header>
             <table class="AddProductsTable">
                 <tr>
                     <td>
-                        <asp:Label ID="Label1" runat="server" Text="تاريخ الفاتورة : " CssClass="lblInfo"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
                     </td>
                     <td style="width: 125px">
                         <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2"></asp:Label>
                     </td>
                     <td>
-                        <asp:Label ID="Label2" runat="server" Text="رقم الفاتورة : " CssClass="lblInfo"></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
                     </td>
                     <td style="width: 120px">
                         <asp:Label ID="lblBill_ID" runat="server" CssClass="lblInfo2"></asp:Label>
@@ -162,7 +162,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="تكلفة الفاتورة : "></asp:Label>
+                        <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="الاجمالى : "></asp:Label>
                     </td>
                     <td style="width: 120px">
                         <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
@@ -212,7 +212,7 @@
                     <p class="RHSP">الخصم (ان وجد) :</p>
                 </td>
                 <td style="text-align: right">
-                    <asp:TextBox runat="server" ID="txtDiscount" CssClass="txts2" PlaceHolder="القيمه المخصومه من تكلفة الفاتورة ان وجد" AutoCompleteType="Disabled"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtDiscount" CssClass="txts2" PlaceHolder="القيمه المخصومه من الاجمالى ان وجد" AutoCompleteType="Disabled"></asp:TextBox>
                 </td>
             </tr>
             <tr>
