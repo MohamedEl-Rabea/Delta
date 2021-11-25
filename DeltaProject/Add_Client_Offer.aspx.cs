@@ -1,6 +1,7 @@
 ﻿using Business_Logic;
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace DeltaProject
 {
@@ -16,7 +17,8 @@ namespace DeltaProject
             var indexOfDot = fileUpload.FileName.IndexOf('.');
             var extension = fileUpload.FileName.Substring(indexOfDot, fileUpload.FileName.Length - indexOfDot);
             var fileName = $"{fileUpload.FileName.Replace(extension, "")}-{Guid.NewGuid()}{extension}";
-            var filePath = $"{Server.MapPath("~/Files/")}{fileName}";
+            var directory = Directory.CreateDirectory(Server.MapPath("~/Files/"));
+            var filePath = $"{directory.FullName}{fileName}";
             fileUpload.SaveAs(filePath);
 
             ClientOffer clientOffer = new ClientOffer();

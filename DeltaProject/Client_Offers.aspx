@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Client_Offers.aspx.cs" Inherits="DeltaProject.ClientOffers" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
@@ -36,23 +37,23 @@
             <tr>
                 <td class="Image_td">
                     <asp:ImageButton ID="ImageButtonSearch" runat="server" ImageUrl="~/Images/common_search_lookup.png"
-                                     Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_Click" />
+                        Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_Click" />
                 </td>
                 <td class="Search_td">
                     <asp:TextBox ID="txtClientName" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
-                                 placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                        placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                 </td>
             </tr>
 
         </table>
     </section>
-    
+
     <asp:Panel ID="PanelErrorMessage" runat="server" CssClass="ErrorMessagePanal" Visible="false">
         <article class="Errorarticle">
             <asp:Label ID="lblErrorMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد عروض اسعار لهذا العميل"></asp:Label>
         </article>
     </asp:Panel>
-    
+
     <asp:Panel runat="server" ID="PanelClientOffers">
         <header class="PreSectionTab">
             <div>
@@ -60,29 +61,39 @@
                     ToolTip="عرض كل عروض الاسعار الخاصه بهذا العميل">الكـــــل</asp:LinkButton>
             </div>
         </header>
-       
         <asp:Panel runat="server" ID="PanelAllClientsOffers" CssClass="PreReport_SectionTab" Visible="true">
             <asp:GridView ID="GridViewAllClientsOffers" runat="server" AutoGenerateColumns="False"
-                CssClass="Gridview_Style2" EmptyDataText="لا توجد عروض أسعار لهذا العميل" DataKeyNames="Id"
-                          OnRowCommand="GridViewAllClientsOffers_RowCommand">
+                CssClass="Gridview_Style2"
+                EmptyDataText="لا توجد عروض أسعار لهذا العميل"
+                DataKeyNames="Id"
+                OnRowCommand="GridViewAllClientsOffers_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="Id" Visible="false" SortExpression="Id" />
-                    <asp:BoundField DataField="Name" HeaderText="اسم العرض" SortExpression="ChequeNumber" />
-                    <asp:BoundField DataField="Date" HeaderText="تاريخ العرض" DataFormatString="{0:dd/MM/yyyy}" SortExpression="Date" />
+                    <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" />
+                    <asp:BoundField DataField="Name" HeaderText="اسم العرض" />
+                    <asp:BoundField DataField="Date" HeaderText="تاريخ العرض" DataFormatString="{0:dd/MM/yyyy}" />
                     <asp:BoundField DataField="Notes" HeaderText="ملاحظات" SortExpression="Notes" />
                     <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Label ID="lblFileName" runat="server" Text='<%# Bind("FileName") %>' Visible="False"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Label ID="lblFileName" runat="server" Text='<%# Bind("FileName") %>' Visible="False"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:ImageButton ID="ImageButtonDownload" runat="server" ImageUrl="~/Images/Download.png" Width="16" Height="16"
-                                             CausesValidation="false" CommandName="Download_File" />
+                            <asp:ImageButton ID="ImageButtonDownload" runat="server" ImageUrl="~/Images/Download.png"
+                                Width="16"
+                                Height="16"
+                                CausesValidation="false"
+                                CommandName="Download_File" 
+                                ToolTip="تنزيل الملف"/>
                             &nbsp;&nbsp;
-                            <asp:ImageButton ID="ImageButtonDelete" runat="server" ImageUrl="~/Images/Delete.png" Width="16" Height="16"
-                                CausesValidation="false" CommandName="Delete_Row"
-                                OnClientClick="return confirm('سيتم مسح هذا الشيك نهائيا. . . هل تريد المتابعه ؟');" />
+                            <asp:ImageButton ID="ImageButtonDelete" runat="server" ImageUrl="~/Images/Delete.png"
+                                Width="16"
+                                Height="16"
+                                CausesValidation="false"
+                                CommandName="Delete_Row"
+                                ToolTip="مسح الملف"
+                                OnClientClick="return confirm('سيتم مسح هذا العرض نهائيا. . . هل تريد المتابعه ؟');" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -90,7 +101,6 @@
                 <EmptyDataRowStyle CssClass="Empty_Style" />
             </asp:GridView>
         </asp:Panel>
-
         <div class="MsgDiv">
             <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
         </div>

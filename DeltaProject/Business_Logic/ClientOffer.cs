@@ -72,7 +72,9 @@ namespace Business_Logic
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("GetClientOffersByClientNameProc", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@ClientName", SqlDbType.NVarChar).Value = clientName;
+            if (!string.IsNullOrEmpty(clientName))
+                cmd.Parameters.Add("@ClientName", SqlDbType.NVarChar).Value = clientName;
+
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())

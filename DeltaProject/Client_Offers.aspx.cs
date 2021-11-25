@@ -12,11 +12,11 @@ namespace DeltaProject
         {
             if (!IsPostBack)
             {
-                ReboundGridView();
+                BindOffersGridView();
             }
         }
 
-        private void ReboundGridView()
+        private void BindOffersGridView()
         {
             var clientName = txtClientName.Text;
             GridViewAllClientsOffers.DataSource = ClientOffer.GetClientOffersByClientName(clientName);
@@ -25,9 +25,7 @@ namespace DeltaProject
 
         protected void GridViewAllClientsOffers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            var clientName = txtClientName.Text;
             var selectedRow = ((GridViewRow)((ImageButton)e.CommandSource).NamingContainer);
-
             var fileName = ((Label)selectedRow.FindControl("lblFileName")).Text;
             var filePath = $"{Server.MapPath("~/Files/")}{fileName}";
 
@@ -47,18 +45,19 @@ namespace DeltaProject
                 {
                     if (File.Exists(filePath))
                         File.Delete(filePath);
-                    lblFinishMsg.Text = $"تم مسح عرض : '{selectedRow.Cells[1].Text}' للعميل {clientName} بنجاح";
+
+                    var clientName = selectedRow.Cells[1].Text;
+                    var offerName = selectedRow.Cells[2].Text;
+                    lblFinishMsg.Text = $"تم مسح عرض : '{offerName}' للعميل {clientName} بنجاح";
                     lblFinishMsg.ForeColor = System.Drawing.Color.Green;
-                    ReboundGridView();
+                    BindOffersGridView();
                 }
-                ;
             }
             else if (e.CommandName == "Download_File")
             {
                 if (File.Exists(filePath))
                 {
                     FileInfo file = new FileInfo(filePath);
-
                     Response.AddHeader("content-disposition", "attachment; filename=" + file.Name);
                     Response.AddHeader("Content-Length", filePath.Length.ToString());
                     Response.ContentType = "application/octet-stream";
@@ -76,9 +75,8 @@ namespace DeltaProject
         {
             if (txtClientName.Visible)
             {
-                ReboundGridView();
+                BindOffersGridView();
             }
-
         }
     }
 }
