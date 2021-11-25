@@ -59,7 +59,7 @@
                     <asp:TextBox ID="TextBoxSearch" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
                         placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                     <asp:TextBox ID="txtBill_ID" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
-                        placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
+                    placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -198,16 +198,16 @@
                     <table>
                         <tr>
                             <td>
-                                <asp:Label ID="Label1" runat="server" Text="تاريخ الفاتورة : " CssClass="lblInfo"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 125px">
                                 <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
                             </td>
                             <td>
-                                <asp:Label ID="Label2" runat="server" Text="رقم الفاتورة : " CssClass="lblInfo"></asp:Label>
+                                <asp:Label ID="Label2" runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 120px">
-                                <asp:Label ID="lblBill_ID" runat="server" CssClass="lblInfo2" Text="رقم الفاتورة"></asp:Label>
+                                <asp:Label ID="lblBill_ID" runat="server" CssClass="lblInfo2" Text="رقم العرض"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label3" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
@@ -229,7 +229,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="تكلفة الفاتورة : "></asp:Label>
+                                <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="الاجمالى : "></asp:Label>
                             </td>
                             <td style="width: 120px">
                                 <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>

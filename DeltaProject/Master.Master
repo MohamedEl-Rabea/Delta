@@ -73,6 +73,10 @@
                                         <asp:MenuItem Text="جميع العملاء" ToolTip="عرض العملاء المسجلين لدى النظام" NavigateUrl="~/All_Clients_Report.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="سداد ديون" Value="Debts" ToolTip="سداد ديون العملاء المسجلين لدى النظام" NavigateUrl="~/Pay_Client_Debts.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="كشف حساب" ToolTip="كشف حساب لكل التعاملات المادية للعميل" NavigateUrl="~/Client_Statement.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="عروض أسعار">
+                                            <asp:MenuItem Text="إضافة" ToolTip="إضافة عرض سعر لعميل" NavigateUrl="~/Add_Client_Offer.aspx"></asp:MenuItem>
+                                            <asp:MenuItem Text="استعلام" ToolTip="استعلام عن عروض اسعار العملاء" NavigateUrl="~/Client_Offers.aspx"></asp:MenuItem>
+                                        </asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="الفواتيــــــر" Value="m2">
                                         <asp:MenuItem Text="دفع فاتـــورة" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/Pay_Bill.aspx"></asp:MenuItem>
