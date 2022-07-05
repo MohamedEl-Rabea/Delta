@@ -18,9 +18,6 @@ namespace DeltaProject
             {
                 if (!IsPostBack)
                 {
-                    if (TrialExpired())
-                        Response.Redirect("~/TrialExpired.aspx");
-
                     if (!Convert.ToBoolean(Session["isAuthenticated"]))
                         Response.Redirect("~/Login.aspx");
 

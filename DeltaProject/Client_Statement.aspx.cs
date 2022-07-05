@@ -44,5 +44,31 @@ namespace DeltaProject
                 e.Row.Cells[0].Text = string.IsNullOrWhiteSpace(result) ? "--------" : result;
             }
         }
+
+        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        {
+            GeneratePdf(pdfHiddenContentField.Value, $"كشف حساب [{lblClientName.Text}]");
+        }
+
+        private void GeneratePdf(string html, string fileName)
+        {
+            var renderer = new IronPdf.ChromePdfRenderer();
+            renderer.RenderingOptions.MarginTop = 5;
+            renderer.RenderingOptions.MarginBottom = 5;
+            renderer.RenderingOptions.MarginLeft = 5;
+            renderer.RenderingOptions.MarginRight = 5;
+
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Response.ContentType = "application/pdf";//pdf type
+
+            var binaryData = renderer.RenderHtmlAsPdf(html).BinaryData;
+
+            Response.BinaryWrite(binaryData);
+
+            Response.Flush();
+            Response.Close();
+        }
     }
 }

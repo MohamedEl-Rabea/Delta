@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Client_Statement.aspx.cs" Inherits="DeltaProject.Client_Statement" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="Client_Statement.aspx.cs" Inherits="DeltaProject.Client_Statement" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
@@ -34,6 +34,16 @@
             );
             $('#<%= txtStartDate.ClientID%>').datepicker(options);
         });
+
+        function storeContentToExportPdf(divId) {
+            var pdfContent = '<html><head><title></title>';
+            pdfContent += '<link rel="stylesheet" href="CSS/Pages_Style_Sheet.css" type="text/css" />';
+            pdfContent += '</head><body >';
+            pdfContent += $('#' + divId).html();
+            pdfContent += '</body></html>';
+            $('#<%= pdfHiddenContentField.ClientID %>').val(pdfContent);
+        }
+
         function PrintDivContent(divId) {
             var printContent = document.getElementById(divId);
             var WinPrint = window.open('', '', 'height=auto,width=auto,resizable=1,scrollbars=1,toolbar=1,sta­tus=0');
@@ -77,7 +87,9 @@
     <asp:Panel runat="server" ID="PanelStatement" Visible="false">
         <header class="Sec_footer" style="text-align: left; margin-top: 25px">
             <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/printer.png" Width="28" Height="28" OnClientClick="PrintDivContent('divToPrint');" ToolTip="اطبع التقرير" />
+            <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Images/pdf.png" Width="28" Height="28" OnClick="ImageButton2_Click" OnClientClick="storeContentToExportPdf('divToPrint');" ToolTip="استخراج PDF" />
         </header>
+        <asp:HiddenField ID="pdfHiddenContentField" runat="server" />
         <div id="divToPrint" class="Prices_Offer_DivBill">
             <%--Report Headre--%>
             <header class="Bill_header">
