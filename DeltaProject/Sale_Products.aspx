@@ -113,13 +113,6 @@
     <header class="Header">
         <p>عملية بيع</p>
     </header>
-    <asp:Panel runat="server" ID="PanelCustomerType">
-        <asp:RadioButtonList ID="Custmer" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories"
-            OnSelectedIndexChanged="Custmer_SelectedIndexChanged" AutoPostBack="true">
-            <asp:ListItem Value="Special">بيع جمله</asp:ListItem>
-            <asp:ListItem Value="Regular">بيع قطاعى</asp:ListItem>
-        </asp:RadioButtonList>
-    </asp:Panel>
     <asp:Panel runat="server" ID="PanelSearch" Visible="false">
         <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal"
             CssClass="RBLCategories"
