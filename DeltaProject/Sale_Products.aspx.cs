@@ -122,14 +122,14 @@ namespace DeltaProject
                     product.Inch = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[2].Text);
                     product.Style = GridViewProducts.Rows[row_index].Cells[3].Text;
                 }
-                if (Custmer.SelectedIndex == 0) // special
-                {
-                    product.Specified_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[4].Text);
-                }
-                else
-                {
+                //if (Custmer.SelectedIndex == 0) // special
+                //{
+                //    product.Specified_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[4].Text);
+                //}
+                //else
+                //{
                     product.Specified_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[5].Text);
-                }
+                //}
                 if (ViewState["ProductsList"] != null && ((List<Product>)ViewState["ProductsList"]).Contains(product))
                 {
                     lblFinishMsg.Text = "! هذا المنتج مسجل فى القائمة";
@@ -155,21 +155,21 @@ namespace DeltaProject
                 }
             }
         }
-        protected void Custmer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            PanelCustomerType.Visible = false;
-            PanelSearch.Visible = true;
-            if (Custmer.SelectedIndex == 0)
-            {
-                GridViewProducts.Columns[5].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[5].HeaderStyle.CssClass = "NoDispaly";
-            }
-            else
-            {
-                GridViewProducts.Columns[4].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[4].HeaderStyle.CssClass = "NoDispaly";
-            }
-        }
+        //protected void Custmer_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    PanelCustomerType.Visible = false;
+        //    PanelSearch.Visible = true;
+        //    if (Custmer.SelectedIndex == 0)
+        //    {
+        //        GridViewProducts.Columns[5].ItemStyle.CssClass = "NoDispaly";
+        //        GridViewProducts.Columns[5].HeaderStyle.CssClass = "NoDispaly";
+        //    }
+        //    else
+        //    {
+        //        GridViewProducts.Columns[4].ItemStyle.CssClass = "NoDispaly";
+        //        GridViewProducts.Columns[4].HeaderStyle.CssClass = "NoDispaly";
+        //    }
+        //}
         protected void BtnFinish_Click(object sender, EventArgs e)
         {
             PanelSearch.Visible = false;

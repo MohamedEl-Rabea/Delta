@@ -113,7 +113,7 @@
     <header class="Header">
         <p>عملية بيع</p>
     </header>
-    <asp:Panel runat="server" ID="PanelSearch" Visible="false">
+    <asp:Panel runat="server" ID="PanelSearch" Visible="true">
         <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal"
             CssClass="RBLCategories"
             OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged"
@@ -149,7 +149,7 @@
                     <asp:BoundField DataField="Mark" HeaderText="الماركه" />
                     <asp:BoundField DataField="Inch" HeaderText="البوصه" />
                     <asp:BoundField DataField="Style" HeaderText="الطراز" />
-                    <asp:BoundField DataField="Special_Price" HeaderText="سعر البيع" />
+<%--                    <asp:BoundField DataField="Special_Price" HeaderText="سعر البيع" />--%>
                     <asp:BoundField DataField="Regulare_Price" HeaderText="سعر البيع" />
                     <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="Amount" HeaderText="الكميه المتاحه" />
@@ -223,6 +223,7 @@
             </asp:Panel>
             <asp:Panel runat="server" ID="PanelFinish" Visible="false">
                 <footer class="AddSupplierFooter" style="text-align: center">
+                    <br />
                     <asp:Button ID="BtnFinish" runat="server" Text="تم" CssClass="BtnNext" OnClick="BtnFinish_Click" />
                     <div class="MsgDiv">
                         <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
@@ -408,7 +409,7 @@
         </section>
         <br />
         <footer class="AddSupplierFooter">
-            <asp:Button ID="BtnConfirm" runat="server" Text="انهاء" CssClass="BtnNext" OnClick="BtnConfirm_Click" />
+            <asp:Button ID="BtnConfirm" runat="server" Text="التالي" CssClass="BtnNext" OnClick="BtnConfirm_Click" />
             <div class="MsgDiv">
                 <asp:Label ID="lblConfirmMsg" runat="server" CssClass="MessageLabel"></asp:Label>
             </div>
