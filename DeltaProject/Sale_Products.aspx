@@ -149,7 +149,6 @@
                     <asp:BoundField DataField="Mark" HeaderText="الماركه" />
                     <asp:BoundField DataField="Inch" HeaderText="البوصه" />
                     <asp:BoundField DataField="Style" HeaderText="الطراز" />
-<%--                    <asp:BoundField DataField="Special_Price" HeaderText="سعر البيع" />--%>
                     <asp:BoundField DataField="Regulare_Price" HeaderText="سعر البيع" />
                     <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="Amount" HeaderText="الكميه المتاحه" />
