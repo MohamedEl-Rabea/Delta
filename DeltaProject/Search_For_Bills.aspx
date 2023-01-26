@@ -190,7 +190,8 @@
             <%--Report PreSection--%>
             <header class="Prices_Offer_SubHeaderBill">
                 <div>
-                    <p>فاتورة بيع</p>
+                    <%--<p>فاتورة بيع</p>--%>
+                    <p>عرض سعر</p>
                 </div>
             </header>
             <section class="ReportDeclarationSection">
