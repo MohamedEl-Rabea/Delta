@@ -15,24 +15,6 @@ namespace DeltaProject
     {
 
         /// <summary>
-        /// PanelCustomerType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCustomerType;
-
-        /// <summary>
-        /// Custmer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList Custmer;
-
-        /// <summary>
         /// PanelSearch control.
         /// </summary>
         /// <remarks>
