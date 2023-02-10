@@ -71,8 +71,10 @@
     <Content Include="Add_Client_Offer.aspx" />
     <Content Include="Add_Income.aspx" />
     <Content Include="Add_Items_To_Invoice.aspx" />
+    <Content Include="Add_Maintenance.aspx" />
     <Content Include="Add_Supplier.aspx" />
     <Content Include="Add_SupplierCheque.aspx" />
+    <Content Include="Add_Workshop.aspx" />
     <Content Include="All_Clients_Report.aspx" />
     <Content Include="Client_Offers.aspx" />
     <Content Include="Clients_Report.aspx" />
@@ -141,6 +143,9 @@
     <Content Include="Script\jquery-ui.min.js" />
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
+    <Content Include="SearchForMaintenances.aspx" />
+    <Content Include="SearchForNotDeliveredMaintenance.aspx" />
+    <Content Include="SearchForMaintenanceWithRemaining.aspx" />
     <Content Include="Search_For_Bills.aspx" />
     <Content Include="Search_For_Client.aspx" />
     <Content Include="Search_For_ClientCheque.aspx" />
@@ -205,6 +210,13 @@
     <Compile Include="Add_Items_To_Invoice.aspx.designer.cs">
       <DependentUpon>Add_Items_To_Invoice.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Add_Maintenance.aspx.cs">
+      <DependentUpon>Add_Maintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_Maintenance.aspx.designer.cs">
+      <DependentUpon>Add_Maintenance.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Add_Supplier.aspx.cs">
       <DependentUpon>Add_Supplier.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -218,6 +230,13 @@
     </Compile>
     <Compile Include="Add_SupplierCheque.aspx.designer.cs">
       <DependentUpon>Add_SupplierCheque.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Workshop.aspx.cs">
+      <DependentUpon>Add_Workshop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_Workshop.aspx.designer.cs">
+      <DependentUpon>Add_Workshop.aspx</DependentUpon>
     </Compile>
     <Compile Include="All_Clients_Report.aspx.cs">
       <DependentUpon>All_Clients_Report.aspx</DependentUpon>
@@ -236,6 +255,8 @@
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
+    <Compile Include="Business_Logic\Maintenance.cs" />
+    <Compile Include="Business_Logic\MaintenancePayment.cs" />
     <Compile Include="Business_Logic\Product.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />
@@ -245,6 +266,7 @@
     <Compile Include="Business_Logic\Supplier_Payment_Record.cs" />
     <Compile Include="Business_Logic\Supplier_Phone.cs" />
     <Compile Include="Business_Logic\User.cs" />
+    <Compile Include="Business_Logic\Workshop.cs" />
     <Compile Include="Client_Offers.aspx.cs">
       <DependentUpon>Client_Offers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -427,6 +449,27 @@
     </Compile>
     <Compile Include="Sale_Products.aspx.designer.cs">
       <DependentUpon>Sale_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForMaintenances.aspx.cs">
+      <DependentUpon>SearchForMaintenances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForMaintenances.aspx.designer.cs">
+      <DependentUpon>SearchForMaintenances.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForNotDeliveredMaintenance.aspx.cs">
+      <DependentUpon>SearchForNotDeliveredMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForNotDeliveredMaintenance.aspx.designer.cs">
+      <DependentUpon>SearchForNotDeliveredMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForMaintenanceWithRemaining.aspx.cs">
+      <DependentUpon>SearchForMaintenanceWithRemaining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForMaintenanceWithRemaining.aspx.designer.cs">
+      <DependentUpon>SearchForMaintenanceWithRemaining.aspx</DependentUpon>
     </Compile>
     <Compile Include="Search_For_Bills.aspx.cs">
       <DependentUpon>Search_For_Bills.aspx</DependentUpon>

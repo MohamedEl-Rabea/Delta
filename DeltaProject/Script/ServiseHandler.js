@@ -25,4 +25,3 @@ function GetDate2(day, month, year) {
 
     return false; // to prevent postback
 }
-
