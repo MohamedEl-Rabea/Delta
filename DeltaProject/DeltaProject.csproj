@@ -111,6 +111,7 @@
     <Content Include="Images\Extend.png" />
     <Content Include="Images\fax.png" />
     <Content Include="Images\Home_Page.jpg" />
+    <Content Include="Images\LeftArrow.png" />
     <Content Include="Images\Login_footer.png" />
     <Content Include="Images\Login_header.png" />
     <Content Include="Images\Logo.jpg" />
@@ -123,6 +124,7 @@
     <Content Include="Images\Up.png" />
     <Content Include="Income_Report.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MaintenanceStatement.aspx" />
     <Content Include="Manage_Permissions.aspx" />
     <Content Include="Needs_Report.aspx" />
     <Content Include="New_Client_Interaction.aspx" />
@@ -251,6 +253,7 @@
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
     <Compile Include="Business_Logic\ClientDebtsSchedule.cs" />
+    <Compile Include="Business_Logic\ClientMaintenanceStatement.cs" />
     <Compile Include="Business_Logic\ClientOffer.cs" />
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
@@ -350,6 +353,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenanceStatement.aspx.cs">
+      <DependentUpon>MaintenanceStatement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintenanceStatement.aspx.designer.cs">
+      <DependentUpon>MaintenanceStatement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage_Permissions.aspx.cs">
       <DependentUpon>Manage_Permissions.aspx</DependentUpon>

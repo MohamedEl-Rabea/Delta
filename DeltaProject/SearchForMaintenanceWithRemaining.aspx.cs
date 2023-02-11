@@ -58,34 +58,30 @@ namespace DeltaProject
             GridViewMaintenance.DataBind();
         }
 
-        protected void GridViewMaintenance_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        protected void btnPay_OnClick(object sender, EventArgs e)
         {
+            var gridRow = (GridViewRow) ((Button) sender).NamingContainer;
+            int rowIndex = gridRow.RowIndex;
 
-            if (e.CommandName == "Pay")
+            MaintenancePayment maintenancePayment = new MaintenancePayment();
+            maintenancePayment.Id = Convert.ToInt32(gridRow.Cells[0].Text);
+            var title = gridRow.Cells[1].Text;
+            maintenancePayment.PaymentDate = DateTime.ParseExact(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaymentDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            maintenancePayment.PaidAmount = Convert.ToDecimal(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
+
+            string m = "";
+
+            if (!maintenancePayment.PayMaintenance(out m))
             {
-                var gridRow = ((GridViewRow)((ImageButton)e.CommandSource).NamingContainer);
-                int rowIndex = gridRow.RowIndex;
-
-                MaintenancePayment maintenancePayment = new MaintenancePayment();
-                maintenancePayment.Id = Convert.ToInt32(gridRow.Cells[0].Text);
-                var title = gridRow.Cells[1].Text;
-                maintenancePayment.PaymentDate = DateTime.ParseExact(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaymentDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                maintenancePayment.PaidAmount = Convert.ToDecimal(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
-
-                string m = "";
-
-                if (!maintenancePayment.PayMaintenance(out m))
-                {
-                    lblSaveMsg.Text = m;
-                    lblSaveMsg.ForeColor = System.Drawing.Color.Red;
-                }
-                else
-                {
-                    ImageButtonSearch_Click(sender, null);
-                    lblSaveMsg.Visible = true;
-                    lblSaveMsg.Text = $"تم دفع مبلغ ({maintenancePayment.PaidAmount}) على صيانة ({title}) بنجاح";
-                    lblSaveMsg.ForeColor = System.Drawing.Color.Green;
-                }
+                lblSaveMsg.Text = m;
+                lblSaveMsg.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                ImageButtonSearch_Click(sender, null);
+                lblSaveMsg.Visible = true;
+                lblSaveMsg.Text = $"تم دفع مبلغ ({maintenancePayment.PaidAmount}) على صيانة ({title}) بنجاح";
+                lblSaveMsg.ForeColor = System.Drawing.Color.Green;
             }
         }
     }

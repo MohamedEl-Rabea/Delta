@@ -40,7 +40,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>استعلام عن الصيانات الغير مستلمة</p>
+        <p>تسليم</p>
     </header>
     <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
         OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
@@ -82,12 +82,6 @@
         </article>
     </asp:Panel>
     <asp:Panel runat="server" ID="PanelAllMaintenance" Visible="false">
-        <header class="PreSectionTab">
-            <div>
-                <asp:LinkButton ID="lnkBtnMaintenance" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض الصيانات الغير مستلمة الخاصه بهذا العميل">الصيانات</asp:LinkButton>
-            </div>
-        </header>
         <asp:Panel runat="server" ID="PanelMaintenance" CssClass="PreReport_SectionTab">
             <asp:GridView ID="GridViewMaintenance" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
                 EmptyDataText="لا توجد صيانات غير مستلمة لهذا العميل"
@@ -102,7 +96,7 @@
                     <asp:BoundField DataField="AgreedCost" HeaderText="التكلفة" SortExpression="AgreedCost" DataFormatString="{0:0.##}" />
                     <asp:TemplateField HeaderText="تسليم" SortExpression="Id">
                         <ItemTemplate>
-                            <asp:ImageButton ID="LinkButtonDeliver" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
+                            <asp:ImageButton ID="LinkButtonDeliver" runat="server" ImageUrl="~/Images/LeftArrow.png" Width="20" Height="20"
                                 ToolTip="الانتقال الى تفاصيل التسليم" CommandName="Deliver"></asp:ImageButton>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -114,14 +108,18 @@
         </asp:Panel>
     </asp:Panel>
     <asp:Panel runat="server" ID="PanelDeliverMaintenance" Visible="false">
-     <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
+        <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
+            <header style="text-align: left">
+                <asp:ImageButton ID="ImageButtonBackMaintenance" runat="server" ImageUrl="~/Images/back.png" Width="24" Height="24"
+                                 ToolTip="رجوع" OnClick="btnBack_OnClick" CausesValidation="false" />
+            </header>
             <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 20px;">
                 <div style="border: 1px solid black">
                     <p style="font: bold 14px arial; margin: 0; padding: 0">تفاصيل التسليم</p>
                 </div>
             </header>
             <table class="AddProductsTable" style="width:98%">
-                <tr style="height: 45px">
+                <tr>
                     <td class="RHSTD">
                         <p class="RHSP">اسم الصيانة :</p>
                     </td>
@@ -133,6 +131,10 @@
                     </td>
                     <td style="text-align: right">
                         <asp:Label runat="server" ID="lblAgreedCost" Text=''/>
+                    </td>
+                </tr>
+                <tr style="height: 37px">
+                    <td colspan="4">
                     </td>
                 </tr>
                 <tr>
@@ -248,7 +250,6 @@
                              UseSubmitBehavior="false"
                              ValidationGroup="SaveGroup" 
                              maintenanceId =""/>
-                 <asp:Button ID="btnBack" runat="server" Text="الرجوع" CssClass="BtnNext" OnClick="btnBack_OnClick"/>
              </div>
              <div class="MsgDiv">
                  <asp:Label ID="lblSaveMsg" runat="server" CssClass="MessageLabel" ForeColor="Green"></asp:Label>

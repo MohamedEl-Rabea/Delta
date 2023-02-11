@@ -1,6 +1,8 @@
 ﻿using Business_Logic;
+using DeltaProject.Business_Logic;
 using System;
 using System.Globalization;
+using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
@@ -8,17 +10,25 @@ namespace DeltaProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Workshop workshop = new Workshop();
+                ddlWorkshops.DataSource = workshop.GetWorkshops();
+                ddlWorkshops.DataBind();
+                ddlWorkshops.Items.Insert(0, new ListItem("إختر ورشة", ""));
+                ddlWorkshops.SelectedIndex = 0;
+            }
         }
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             ViewState["C_Name"] = txtClientName.Text;
             Maintenance maintenance = new Maintenance();
+            maintenance.PhoneNumber = txtPhoneNumber.Text;
             maintenance.Title = txtTitle.Text;
             maintenance.AgreedCost = Convert.ToDecimal(txtAgreedCost.Text);
             maintenance.ClientName = txtClientName.Text;
-            maintenance.WorkshopName = txtWorkshop_Name.Text;
+            maintenance.WorkshopId = ddlWorkshops.SelectedIndex;
             maintenance.OrderDate = DateTime.ParseExact(OrderDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.ExpectedDeliveryDate = DateTime.ParseExact(ExpectedDeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.Description = txtDescription.Text;
@@ -31,12 +41,12 @@ namespace DeltaProject
             }
             else
             {
-                lblFinishMsg.Text = "تم بنجاح";
+                lblFinishMsg.Text = $"تم حفظ صيانة ({maintenance.Title}) للعميل ({maintenance.ClientName}) بنجاح";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
                 txtTitle.Text = string.Empty;
                 txtAgreedCost.Text = string.Empty;
                 txtClientName.Text = string.Empty;
-                txtWorkshop_Name.Text = string.Empty;
+                ddlWorkshops.SelectedIndex = 0;
                 OrderDate.Text = string.Empty;
                 ExpectedDeliveryDate.Text = string.Empty;
                 txtDescription.Text = string.Empty;

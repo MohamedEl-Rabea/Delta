@@ -87,15 +87,6 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Panel PanelAllMaintenance;
 
         /// <summary>
-        /// lnkBtnMaintenance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnMaintenance;
-
-        /// <summary>
         /// PanelMaintenance control.
         /// </summary>
         /// <remarks>
@@ -121,6 +112,15 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelDeliverMaintenance;
+
+        /// <summary>
+        /// ImageButtonBackMaintenance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButtonBackMaintenance;
 
         /// <summary>
         /// lblTitle control.
@@ -247,15 +247,6 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-
-        /// <summary>
-        /// btnBack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBack;
 
         /// <summary>
         /// lblSaveMsg control.

@@ -962,3 +962,7 @@
     white-space: nowrap;
     padding: 1px 5px;
 }
+
+.maintenanceDetails tr {
+    height: 45px;
+}

@@ -82,31 +82,89 @@
     <asp:Panel runat="server" ID="PanelAllMaintenance" Visible="false">
         <header class="PreSectionTab">
             <div>
-                <asp:LinkButton ID="lnkBtnMaintenance" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض كافة الصيانات الخاصه بهذا العميل">الصيانات</asp:LinkButton>
+                <asp:LinkButton ID="lnkBtnAllMaintenance" runat="server" CssClass="TabLnks"
+                                ToolTip="عرض كل الصيانات الخاصه بهذا العميل" OnClick="lnkBtnAllMaintenance_OnClick">الكـــــل</asp:LinkButton>
             </div>
         </header>
+        <header class="PreSectionTab">
+            <div>
+                <asp:LinkButton ID="lnkBtnDeliveredMaintenance" runat="server" CssClass="TabLnks"
+                                ToolTip="عرض الصيانات المستلمة الخاصه بهذا العميل" OnClick="lnkBtnDeliveredMaintenance_OnClick">المستلمة</asp:LinkButton>
+            </div>
+        </header>
+        <header class="PreSectionTab">
+            <div>
+                <asp:LinkButton ID="lnkBtnMaintenanceWithRemaining" runat="server" CssClass="TabLnks"
+                                ToolTip="عرض الصيانات الغير مكتملة الدفع الخاصه بهذا العميل" OnClick="lnkBtnMaintenanceWithRemaining_OnClick">الغير مكتملة الدفع</asp:LinkButton>
+            </div>
+        </header>
+
         <asp:Panel runat="server" ID="PanelMaintenance" CssClass="PreReport_SectionTab">
             <asp:GridView ID="GridViewMaintenance" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
                           EmptyDataText="لا توجد صيانات لهذا العميل"
                           HeaderText="اسم الصيانة"
-                          SortExpression="Title">
+                          SortExpression="Title" 
+                          OnRowCommand="GridViewMaintenance_OnRowCommand">
             <columns>
+                <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                 <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
-                <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
+                <asp:BoundField DataField="WorkshopName" HeaderText="الورشة" SortExpression="WorkshopName" />
                 <asp:BoundField DataField="OrderDate" HeaderText="تاريخ الصيانة" SortExpression="OrderDate"  DataFormatString="{0:dd/MM/yyyy}" />
                 <asp:BoundField DataField="StatusName" HeaderText="الحالة" SortExpression="StatusName" />
-                <asp:BoundField DataField="AgreedCost" HeaderText="التكلفة" SortExpression="AgreedCost" DataFormatString="{0:0.##}" />
-                <asp:BoundField DataField="RemainingAmount" HeaderText="المتبقى" SortExpression="RemainingAmount" DataFormatString="{0:0.##}"  />
-                <asp:BoundField DataField="Description" HeaderText="الوصف" SortExpression="Description" >
-                    <HeaderStyle Width="50%"></HeaderStyle>
-                    <ItemStyle CssClass="textWithDotsCollapse textWithDots"></ItemStyle>
-                </asp:BoundField>
+                <asp:BoundField DataField="ExpiryWarrantyDateText" HeaderText="انتهاء الضمان" SortExpression="ExpiryWarrantyDateText" />
+                <asp:BoundField DataField="AgreedCost" SortExpression="AgreedCost" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:BoundField DataField="RemainingAmount" SortExpression="RemainingAmount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:BoundField DataField="Description" SortExpression="Description" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:TemplateField SortExpression="Id">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="LnkSelect" runat="server" CssClass="lnkbtnSelect"  CausesValidation="false"  CommandName="Select">اختر</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </columns>
             <rowstyle cssclass="Row_Style nowrap" />
             <pagerstyle cssclass="PagerStyle" horizontalalign="Center" />
             <emptydatarowstyle cssclass="EmptyDataRowStyle" />
             </asp:GridView>
         </asp:Panel>
+
+    </asp:Panel>
+    <asp:Panel runat="server" ID="PanelMaintenanceDetails" Visible="false">
+        <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
+            <header style="text-align: left">
+                <asp:ImageButton ID="ImageButtonBackMaintenance" runat="server" ImageUrl="~/Images/back.png" Width="24" Height="24"
+                                 ToolTip="رجوع" OnClick="btnBack_OnClick" CausesValidation="false" />
+            </header>
+            <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 20px;">
+                <div style="border: 1px solid black">
+                    <p style="font: bold 14px arial; margin: 0; padding: 0">تفاصيل الصيانه</p>
+                </div>
+            </header>
+            <table class="AddProductsTable maintenanceDetails" style="width:98%">
+                <tr>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">اسم الصيانة :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblTitle" Text=''/></td>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">الورشة :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblWorkshop" Text=''/></td>
+                </tr>
+                <tr>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">تاريخ الصيانة :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblOrderDate" Text=''/></td>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">الحالة :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblStatus" Text=''/></td>
+                </tr>
+                <tr>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">التكلفة :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblAgreedCost" Text=''/></td>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">المتبقى :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblRemainingAmount" Text=''/></td>
+                </tr>
+                <tr>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">انتهاء الضمان :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblExpiryWarrantyDate" Text=''/></td>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">الوصف :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text=''/></td>
+                </tr>
+            </table>
+        </section>
     </asp:Panel>
 </asp:Content>

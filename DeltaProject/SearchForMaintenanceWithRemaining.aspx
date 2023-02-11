@@ -41,7 +41,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>استعلام عن الصيانات المتبقى لها تكلفة</p>
+        <p>دفع</p>
     </header>
     <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
         OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
@@ -82,82 +82,78 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد صيانات مسجله لهذا العميل / الرقم"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelAllMaintenance" Visible="false">
-        <header class="PreSectionTab">
-            <div>
-                <asp:LinkButton ID="lnkBtnMaintenance" runat="server" CssClass="TabLnks"
-                    ToolTip="عرض الصيانات المتبقى لها تكلفة الخاصه بهذا العميل">الصيانات</asp:LinkButton>
-            </div>
-        </header>
-            <asp:GridView ID="GridViewMaintenance" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
-                EmptyDataText="لا توجد صيانات متبقى لها تكلفة لهذا العميل"
-                HeaderText="اسم الصيانة"
-                SortExpression="Title"
-                DataKeyNames="Id"
-                OnRowCommand="GridViewMaintenance_OnRowCommand">
-                <Columns>
-                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
-                    <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
-                    <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
-                    <asp:BoundField DataField="AgreedCost" HeaderText="التكلفة" SortExpression="AgreedCost" DataFormatString="{0:0.##}" />
-                    <asp:BoundField DataField="RemainingAmount" HeaderText="المبلغ المتبقى" SortExpression="RemainingAmount" DataFormatString="{0:0.##}" />
-                    <asp:TemplateField HeaderText="المبلغ المدفوع">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtPaidAmount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="المبلغ المدفوع"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                                ControlToValidate="txtPaidAmount" Display="Dynamic" SetFocusOnError="true"
-                                ToolTip="المبلغ المدفوع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
+    <asp:Panel runat="server" ID="PanelAllMaintenance" CssClass="PanelProductList" Visible="false">
+        <asp:GridView ID="GridViewMaintenance" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
+            EmptyDataText="لا توجد صيانات متبقى لها تكلفة لهذا العميل"
+            HeaderText="اسم الصيانة"
+            SortExpression="Title"
+            DataKeyNames="Id">
+            <Columns>
+                <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
+                <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
+                <asp:BoundField DataField="AgreedCost" HeaderText="التكلفة" SortExpression="AgreedCost" DataFormatString="{0:0.##}" />
+                <asp:BoundField DataField="RemainingAmount" HeaderText="المبلغ المتبقى" SortExpression="RemainingAmount" DataFormatString="{0:0.##}" />
+                <asp:TemplateField HeaderText="المبلغ المدفوع">
+                    <ItemTemplate>
+                        <asp:TextBox ID="txtPaidAmount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" Style="height: 22px;" placeholder="المبلغ المدفوع"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                            ControlToValidate="txtPaidAmount" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="المبلغ المدفوع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
-                            </asp:RequiredFieldValidator>
-                            <asp:CustomValidator ID="CustomValidator5" runat="server"
-                                ValidationGroup="<%# Container.DataItemIndex %>"
-                                ToolTip="يجب كتابة المبلغ المدفوع بشكل صحيح"
-                                ControlToValidate="txtPaidAmount"
-                                Display="Dynamic"
-                                SetFocusOnError="true"
-                                ClientValidationFunction="IsValidDecimal">
+                        </asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="CustomValidator5" runat="server"
+                            ValidationGroup="<%# Container.DataItemIndex %>"
+                            ToolTip="يجب كتابة المبلغ المدفوع بشكل صحيح"
+                            ControlToValidate="txtPaidAmount"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ClientValidationFunction="IsValidDecimal">
                                 <img src="Images/Error.png" width="15" height="15"/>
-                            </asp:CustomValidator>
-                            <asp:CustomValidator ID="CustomValidator6" runat="server" SetFocusOnError="true" Display="Dynamic"
-                                                ControlToValidate="txtPaidAmount" ClientValidationFunction="IsNotZero" ToolTip="يجب الا تقل القيمة عن 1" ValidationGroup="<%# Container.DataItemIndex %>">
+                        </asp:CustomValidator>
+                        <asp:CustomValidator ID="CustomValidator6" runat="server" SetFocusOnError="true" Display="Dynamic"
+                            ControlToValidate="txtPaidAmount" ClientValidationFunction="IsNotZero" ToolTip="يجب الا تقل القيمة عن 1" ValidationGroup="<%# Container.DataItemIndex %>">
                             <img src="Images/Error.png" width="15" height="15"/>
-                            </asp:CustomValidator>
-                            <asp:CustomValidator ID="CustomValidator1" runat="server"
-                                                 ToolTip="يجب الا تزيد القيمه المدفوعه عن المتبقيه"
-                                                 ControlToValidate="txtPaidAmount"
-                                                 Display="Dynamic"
-                                                 SetFocusOnError="true"
-                                                 ClientValidationFunction="IsValidPaidAmount" ValidationGroup="<%# Container.DataItemIndex %>">
+                        </asp:CustomValidator>
+                        <asp:CustomValidator ID="CustomValidator1" runat="server"
+                            ToolTip="يجب الا تزيد القيمه المدفوعه عن المتبقيه"
+                            ControlToValidate="txtPaidAmount"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ClientValidationFunction="IsValidPaidAmount" ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
-                            </asp:CustomValidator>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="تاريخ الدفع">
-                        <ItemTemplate>
-                                <asp:TextBox runat="server" ID="txtPaymentDate" ClientIDMode="AutoID" CssClass="EditTxt dateInput" PlaceHolder="تاريخ الدفع" AutoCompleteType="Disabled"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
-                                                        ControlToValidate="txtPaymentDate" Display="Dynamic" SetFocusOnError="true"
-                                                        ToolTip="المبلغ المدفوع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
+                        </asp:CustomValidator>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="تاريخ الدفع">
+                    <ItemTemplate>
+                        <asp:TextBox runat="server" ID="txtPaymentDate" ClientIDMode="AutoID" CssClass="EditTxt dateInput" PlaceHolder="تاريخ الدفع" Style="height: 22px;" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+                            ControlToValidate="txtPaymentDate" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="المبلغ المدفوع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
-                            </asp:RequiredFieldValidator>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="دفع" SortExpression="Id">
-                        <ItemTemplate>
-                            <asp:ImageButton ID="LinkButtonPay" runat="server" ImageUrl="~/Images/AddNew.png" Width="16" Height="16"
-                                ToolTip="دفع" CommandName="Pay" ValidationGroup="<%# Container.DataItemIndex %>"></asp:ImageButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-                <RowStyle CssClass="Row_Style nowrap" />
-                <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
-                <EmptyDataRowStyle CssClass="EmptyDataRowStyle" />
-            </asp:GridView>
+                        </asp:RequiredFieldValidator>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField SortExpression="Id">
+                    <ItemTemplate>
+                        <asp:Button ID="btnPay" runat="server" Text="دفع" CssClass="BtnaddInGrid" OnClick="btnPay_OnClick" ValidationGroup="<%# Container.DataItemIndex %>" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+
+            <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />
+            <HeaderStyle CssClass="HeaderStyleList" />
+            <RowStyle CssClass="RowStyleListHigher" />
+            <AlternatingRowStyle CssClass="AlternateRowStyleListHigher" />
+            <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+            <SelectedRowStyle CssClass="SelectedRowStyle" />
+        </asp:GridView>
         <footer class="PayMaintenaceFooter">
             <div class="MsgDiv">
                 <asp:Label ID="lblSaveMsg" runat="server" CssClass="MessageLabel" ForeColor="Green"></asp:Label>
             </div>
         </footer>
-        </asp:Panel>
+    </asp:Panel>
 </asp:Content>
 
