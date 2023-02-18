@@ -28,7 +28,7 @@ namespace DeltaProject
             maintenance.Title = txtTitle.Text;
             maintenance.AgreedCost = Convert.ToDecimal(txtAgreedCost.Text);
             maintenance.ClientName = txtClientName.Text;
-            maintenance.WorkshopId = ddlWorkshops.SelectedIndex;
+            maintenance.WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue);
             maintenance.OrderDate = DateTime.ParseExact(OrderDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.ExpectedDeliveryDate = DateTime.ParseExact(ExpectedDeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.Description = txtDescription.Text;

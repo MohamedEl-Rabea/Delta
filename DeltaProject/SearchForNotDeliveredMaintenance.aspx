@@ -40,7 +40,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>تسليم</p>
+        <p>تسليم صيانه</p>
     </header>
     <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
         OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">

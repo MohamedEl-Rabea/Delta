@@ -66,8 +66,10 @@
                         <p class="RHSP">اسم الورشة :</p>
                     </td>
                     <td style="text-align: right">
-                        <asp:DropDownList ID="ddlWorkshops" runat="server" CssClass="txts3" Style="width: 100%; height: auto"
-                            DataTextField="Name" DataValueField="Id" AutoPostBack="true">
+                        <asp:DropDownList ID="ddlWorkshops" runat="server" CssClass="txts3"
+                            Style="width: 100%; height: auto"
+                            DataTextField="Name" 
+                            DataValueField="Id">
                         </asp:DropDownList>
                     </td>
                 </tr>
