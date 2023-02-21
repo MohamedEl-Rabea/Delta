@@ -54,13 +54,26 @@ namespace DeltaProject
                     PanelAllMaintenance.Visible = true;
                 }
             }
-            GridViewMaintenance.DataSource = maintenance.GetMaintenanceWithStatus("DeliveredWithRemaining");
+            ViewState["Maintenance"] = maintenance.GetAllMaintenance("DeliveredWithRemaining");
+            BindMaintenanceGrid();
+        }
+
+
+        protected void GridViewMaintenance_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewMaintenance.PageIndex = e.NewPageIndex;
+            BindMaintenanceGrid();
+        }
+
+        private void BindMaintenanceGrid()
+        {
+            GridViewMaintenance.DataSource = ViewState["Maintenance"];
             GridViewMaintenance.DataBind();
         }
 
         protected void btnPay_OnClick(object sender, EventArgs e)
         {
-            var gridRow = (GridViewRow) ((Button) sender).NamingContainer;
+            var gridRow = (GridViewRow)((Button)sender).NamingContainer;
             int rowIndex = gridRow.RowIndex;
 
             MaintenancePayment maintenancePayment = new MaintenancePayment();

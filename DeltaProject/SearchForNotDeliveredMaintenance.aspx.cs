@@ -57,7 +57,19 @@ namespace DeltaProject
             }
 
             HideDeliverPanel();
-            GridViewMaintenance.DataSource = maintenance.GetMaintenanceWithStatus("New");
+            ViewState["Maintenance"] = maintenance.GetAllMaintenance("New");
+            BindMaintenanceGrid();
+        }
+
+        protected void GridViewMaintenance_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewMaintenance.PageIndex = e.NewPageIndex;
+            BindMaintenanceGrid();
+        }
+
+        private void BindMaintenanceGrid()
+        {
+            GridViewMaintenance.DataSource = ViewState["Maintenance"];
             GridViewMaintenance.DataBind();
         }
 
@@ -127,5 +139,6 @@ namespace DeltaProject
         {
             ImageButtonSearch_Click(sender, null);
         }
+
     }
 }

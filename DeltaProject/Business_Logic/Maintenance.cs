@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace Business_Logic
 {
+    [Serializable]
     public class Maintenance
     {
         public int Id { get; set; }
@@ -56,37 +57,7 @@ namespace Business_Logic
             return b;
         }
 
-        public List<Maintenance> GetAllMaintenance()
-        {
-            List<Maintenance> maintenanceList = new List<Maintenance>();
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("SearchForMaintenance", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
-            cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
-            con.Open();
-            SqlDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                Maintenance maintenance = new Maintenance();
-                maintenance.Title = rdr["Title"].ToString();
-                maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
-                maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
-                maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
-                maintenance.AgreedCost = Convert.ToDecimal(rdr["AgreedCost"]);
-                maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ? Convert.ToDecimal(rdr["AgreedCost"]) : Convert.ToDecimal(rdr["RemainingAmount"]);
-                maintenance.WorkshopName = rdr["WorkshopName"].ToString();
-                maintenance.StatusName = rdr["StatusName"].ToString();
-                maintenance.Description = rdr["Description"].ToString();
-                maintenanceList.Add(maintenance);
-            }
-            rdr.Close();
-            con.Close();
-            return maintenanceList;
-        }
-
-        public List<Maintenance> GetMaintenanceWithStatus(string statusName)
+        public List<Maintenance> GetAllMaintenance(string statusName)
         {
             List<Maintenance> maintenanceList = new List<Maintenance>();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -96,6 +67,7 @@ namespace Business_Logic
             cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
             cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
             cmd.Parameters.Add("@statusName", SqlDbType.NVarChar).Value = statusName;
+
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -103,9 +75,14 @@ namespace Business_Logic
                 Maintenance maintenance = new Maintenance();
                 maintenance.Id = Convert.ToInt32(rdr["Id"]);
                 maintenance.Title = rdr["Title"].ToString();
-                maintenance.WorkshopName = rdr["WorkshopName"].ToString();
+                maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
+                maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
+                maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
                 maintenance.AgreedCost = Convert.ToDecimal(rdr["AgreedCost"]);
                 maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ? Convert.ToDecimal(rdr["AgreedCost"]) : Convert.ToDecimal(rdr["RemainingAmount"]);
+                maintenance.WorkshopName = rdr["WorkshopName"].ToString();
+                maintenance.StatusName = rdr["StatusName"].ToString();
+                maintenance.Description = rdr["Description"].ToString();
                 maintenanceList.Add(maintenance);
             }
             rdr.Close();

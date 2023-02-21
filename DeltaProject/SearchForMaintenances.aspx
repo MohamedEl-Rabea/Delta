@@ -104,7 +104,9 @@
                           EmptyDataText="لا توجد صيانات لهذا العميل"
                           HeaderText="اسم الصيانة"
                           SortExpression="Title" 
-                          OnRowCommand="GridViewMaintenance_OnRowCommand">
+                          OnRowCommand="GridViewMaintenance_OnRowCommand"
+                          AllowPaging="True"
+                          OnPageIndexChanging="GridViewMaintenance_OnPageIndexChanging">
             <columns>
                 <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                 <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />

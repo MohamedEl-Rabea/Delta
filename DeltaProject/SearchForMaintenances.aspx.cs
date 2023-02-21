@@ -1,6 +1,5 @@
 ﻿using Business_Logic;
 using System;
-using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -89,8 +88,8 @@ namespace DeltaProject
             maintenance.ClientName = txtClientName.Text;
             maintenance.PhoneNumber = txtPhoneNumber.Text;
 
-            GridViewMaintenance.DataSource = maintenance.GetAllMaintenance();
-            GridViewMaintenance.DataBind();
+            ViewState["Maintenance"] = maintenance.GetAllMaintenance(null);
+            BindMaintenanceGrid();
 
             lnkBtnAllMaintenance.ForeColor = System.Drawing.Color.White;
             lnkBtnDeliveredMaintenance.ForeColor = System.Drawing.Color.Black;
@@ -103,8 +102,8 @@ namespace DeltaProject
             maintenance.ClientName = txtClientName.Text;
             maintenance.PhoneNumber = txtPhoneNumber.Text;
 
-            GridViewMaintenance.DataSource = maintenance.GetAllMaintenance().Where(m => m.StatusName == "تم استلامه");
-            GridViewMaintenance.DataBind();
+            ViewState["Maintenance"] = maintenance.GetAllMaintenance("Delivered");
+            BindMaintenanceGrid();
 
             lnkBtnAllMaintenance.ForeColor = System.Drawing.Color.Black;
             lnkBtnDeliveredMaintenance.ForeColor = System.Drawing.Color.White;
@@ -117,12 +116,24 @@ namespace DeltaProject
             maintenance.ClientName = txtClientName.Text;
             maintenance.PhoneNumber = txtPhoneNumber.Text;
 
-            GridViewMaintenance.DataSource = maintenance.GetAllMaintenance().Where(m => m.StatusName == "تم استلامه ويوجد باقى");
-            GridViewMaintenance.DataBind();
+            ViewState["Maintenance"] = maintenance.GetAllMaintenance("DeliveredWithRemaining");
+            BindMaintenanceGrid();
 
             lnkBtnAllMaintenance.ForeColor = System.Drawing.Color.Black;
             lnkBtnDeliveredMaintenance.ForeColor = System.Drawing.Color.Black;
             lnkBtnMaintenanceWithRemaining.ForeColor = System.Drawing.Color.White;
+        }
+
+        protected void GridViewMaintenance_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewMaintenance.PageIndex = e.NewPageIndex;
+            BindMaintenanceGrid();
+        }
+
+        private void BindMaintenanceGrid()
+        {
+            GridViewMaintenance.DataSource = ViewState["Maintenance"];
+            GridViewMaintenance.DataBind();
         }
     }
 }
