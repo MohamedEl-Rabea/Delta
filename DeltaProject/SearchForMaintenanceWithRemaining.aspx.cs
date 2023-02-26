@@ -34,6 +34,8 @@ namespace DeltaProject
         {
             PanelAllMaintenance.Visible = false;
             PanelErrorMessage.Visible = false;
+            lblSaveMsg.Text = "";
+
 
             Maintenance maintenance = new Maintenance();
             if (txtClientName.Visible)

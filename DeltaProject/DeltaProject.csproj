@@ -71,6 +71,7 @@
     <Content Include="Add_Client_Offer.aspx" />
     <Content Include="Add_Income.aspx" />
     <Content Include="Add_Items_To_Invoice.aspx" />
+    <Content Include="Add_Loader.aspx" />
     <Content Include="Add_Maintenance.aspx" />
     <Content Include="Add_Supplier.aspx" />
     <Content Include="Add_SupplierCheque.aspx" />
@@ -84,6 +85,7 @@
     <Content Include="CSS\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="CSS\jquery-ui-smoothness.css" />
     <Content Include="CSS\jquery-ui.min.css" />
+    <Content Include="CSS\jquery.datetimepicker.css" />
     <Content Include="CSS\LoginStyleSheet.css" />
     <Content Include="CSS\Master_style_sheet.css" />
     <Content Include="CSS\Pages_Style_Sheet.css" />
@@ -130,11 +132,13 @@
     <Content Include="New_Client_Interaction.aspx" />
     <Content Include="New_Supplier_Interaction.aspx" />
     <Content Include="NotAuthorized.aspx" />
+    <Content Include="PayLoaderProcess.aspx" />
     <Content Include="Pay_Bill.aspx" />
     <Content Include="Pay_Client_Debts.aspx" />
     <Content Include="Public\Permission_Page.aspx" />
     <Content Include="Products_Inventory.aspx" />
     <Content Include="Public_Prices_List.aspx" />
+    <Content Include="RegisterLoaderProcess.aspx" />
     <Content Include="Return_Products.aspx" />
     <Content Include="Sales_Report.aspx" />
     <Content Include="Sale_Products.aspx" />
@@ -143,8 +147,14 @@
     <Content Include="Script\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Script\jquery-ui-i18n.min.js" />
     <Content Include="Script\jquery-ui.min.js" />
+    <Content Include="Script\jquery.datetimepicker.full.js" />
+    <Content Include="Script\jquery.datetimepicker.full.min.js" />
+    <Content Include="Script\jquery.datetimepicker.js" />
+    <Content Include="CSS\jquery.datetimepicker.min.css" />
+    <Content Include="Script\jquery.datetimepicker.min.js" />
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
+    <Content Include="SearchForLoaderProcess.aspx" />
     <Content Include="SearchForMaintenances.aspx" />
     <Content Include="SearchForNotDeliveredMaintenance.aspx" />
     <Content Include="SearchForMaintenanceWithRemaining.aspx" />
@@ -212,6 +222,13 @@
     <Compile Include="Add_Items_To_Invoice.aspx.designer.cs">
       <DependentUpon>Add_Items_To_Invoice.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Add_Loader.aspx.cs">
+      <DependentUpon>Add_Loader.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Add_Loader.aspx.designer.cs">
+      <DependentUpon>Add_Loader.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Add_Maintenance.aspx.cs">
       <DependentUpon>Add_Maintenance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -258,6 +275,8 @@
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
+    <Compile Include="Business_Logic\Loader.cs" />
+    <Compile Include="Business_Logic\LoaderProcess.cs" />
     <Compile Include="Business_Logic\Maintenance.cs" />
     <Compile Include="Business_Logic\MaintenancePayment.cs" />
     <Compile Include="Business_Logic\Product.cs" />
@@ -403,6 +422,13 @@
     <Compile Include="NotAuthorized.aspx.designer.cs">
       <DependentUpon>NotAuthorized.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PayLoaderProcess.aspx.cs">
+      <DependentUpon>PayLoaderProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PayLoaderProcess.aspx.designer.cs">
+      <DependentUpon>PayLoaderProcess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pay_Bill.aspx.cs">
       <DependentUpon>Pay_Bill.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -439,6 +465,13 @@
     <Compile Include="Public_Prices_List.aspx.designer.cs">
       <DependentUpon>Public_Prices_List.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RegisterLoaderProcess.aspx.cs">
+      <DependentUpon>RegisterLoaderProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterLoaderProcess.aspx.designer.cs">
+      <DependentUpon>RegisterLoaderProcess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Return_Products.aspx.cs">
       <DependentUpon>Return_Products.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -459,6 +492,13 @@
     </Compile>
     <Compile Include="Sale_Products.aspx.designer.cs">
       <DependentUpon>Sale_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForLoaderProcess.aspx.cs">
+      <DependentUpon>SearchForLoaderProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForLoaderProcess.aspx.designer.cs">
+      <DependentUpon>SearchForLoaderProcess.aspx</DependentUpon>
     </Compile>
     <Compile Include="SearchForMaintenances.aspx.cs">
       <DependentUpon>SearchForMaintenances.aspx</DependentUpon>

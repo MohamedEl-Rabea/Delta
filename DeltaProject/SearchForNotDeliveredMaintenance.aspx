@@ -193,7 +193,7 @@
                 
                 <tr>
                     <td class="RHSTD">
-                        <p class="RHSP">مدة التأمين :</p>
+                        <p class="RHSP">مدة الضمان :</p>
                     </td>
                     <td class="tdDateAuto">
                         <asp:TextBox runat="server" ID="txtDay" ClientIDMode="Static" CssClass="txtAuto " PlaceHolder="يوم" AutoCompleteType="Disabled"></asp:TextBox>
