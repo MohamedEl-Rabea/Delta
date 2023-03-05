@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="RegisterLoaderProcess.aspx.cs" Inherits="DeltaProject.RegisterLoaderProcess" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="RegisterLoaderProcess.aspx.cs" Inherits="DeltaProject.RegisterLoaderProcess"  Culture = "ar-EG" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <link href="CSS/jquery.datetimepicker.min.css" rel="stylesheet" /> 
     <script type="text/javascript" src="Script/ValidationScript.js"></script>
-    <script src="Script/jquery.datetimepicker.full.min.js"></script>  
-    <script src="Script/jquery.datetimepicker.min.js"></script>
+    <script src="Script/jquery.datetimepicker.full.js"></script>
+    <script src="Script/jquery.datetimepicker.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#<%= txtClientName.ClientID%>').autocomplete({
@@ -30,6 +30,7 @@
         $(function () {
             $('#<%= date.ClientID%>').datetimepicker({
                 value: new Date(),
+                isRTL: false,
                 format: 'd/m/Y h:i A',
                 formatTime: 'h:i A',
                 formatDate: 'd/m/Y',

@@ -97,15 +97,15 @@ var datetimepickerFactory = function ($) {
 				],
 				dayOfWeek: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
 			},
-			en: { // English
-				months: [
-					"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-				],
-				dayOfWeekShort: [
-					"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-				],
-				dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-			},
+            en: { // English
+                months: [
+                    "يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                ],
+                dayOfWeekShort: [
+                    "ن", "ث", "ع", "خ", "ج", "س", "ح"
+                ],
+                dayOfWeek: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
+            },
 			el: { // Ελληνικά
 				months: [
 					"Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"

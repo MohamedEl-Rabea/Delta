@@ -38,7 +38,7 @@ namespace DeltaProject
             }
             else
             {
-                lblFinishMsg.Text = $"تم حفظ العملية ({loaderProcess.PermissionNumber}) بالونش ({ddlLoaders.Text}) للعميل ({loaderProcess.ClientName}) بنجاح";
+                lblFinishMsg.Text = $"تم حفظ العملية ({loaderProcess.PermissionNumber}) بالونش ({ddlLoaders.SelectedItem.Text}) للعميل ({loaderProcess.ClientName}) بنجاح";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
                 ddlLoaders.SelectedIndex = 0;
                 txtPermissionNumber.Text = string.Empty;
