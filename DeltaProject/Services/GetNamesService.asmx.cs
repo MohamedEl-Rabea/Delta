@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
+using System.Web.Services;
 
 namespace DeltaProject.Services
 {
@@ -97,6 +94,27 @@ namespace DeltaProject.Services
                 }
             }
             return Clients_Names;
+        }
+
+
+        [WebMethod]
+        public List<string> Get_Workshops_Names(string workshop_Name)
+        {
+            List<string> workshops_Names = new List<string>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("Get_Workshops_Names", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = workshop_Name;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    workshops_Names.Add(rdr["Name"].ToString());
+                }
+            }
+            return workshops_Names;
         }
     }
 }

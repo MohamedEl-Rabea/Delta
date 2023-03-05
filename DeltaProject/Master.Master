@@ -44,7 +44,7 @@
                 </header>
                 <div class="Content_div">
                     <nav class="Content_Nav_Bar">
-                        <table style="width: 130px; float: left">
+                        <table style="width: 75px; float: left">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="lnkLogOut" runat="server" CssClass="lnk" CausesValidation="false" OnClick="lnkLogOut_Click">تسجيل خروج</asp:LinkButton>
@@ -67,6 +67,14 @@
                                         <asp:MenuItem Text="تقارير موردين" ToolTip="عرض تقرير عن كامل موردى الشركه وبياناتهم المتعلقه" NavigateUrl="~/Suppliers_report.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="عرض سعر خاص" NavigateUrl="~/Special_Prices_List.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="عرض سعر عام" NavigateUrl="~/Public_Prices_List.aspx"></asp:MenuItem>
+                                    </asp:MenuItem>
+                                    <asp:MenuItem Text="الصيانة">
+                                        <asp:MenuItem Text="إضافة" ToolTip="إضافة صيانة جديدة" NavigateUrl="~/Add_Maintenance.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تسليم" ToolTip="تسليم صيانة" NavigateUrl="~/SearchForNotDeliveredMaintenance.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="دفع" ToolTip="دفع صيانة" NavigateUrl="~/SearchForMaintenanceWithRemaining.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إستعلام" ToolTip="استعلام عن الصيانات" NavigateUrl="~/SearchForMaintenances.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="كشف حساب" ToolTip="كشف حساب" NavigateUrl="~/MaintenanceStatement.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة ورشة" ToolTip="إضافة ورشة" NavigateUrl="~/Add_Workshop.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="العملاء" ToolTip="عرض تقرير كامل عن العملاء المدانين للشركه" Value="Clients">
                                         <asp:MenuItem Text="عملاء الديون" ToolTip="عرض العملاء المتبقى بينهم وبين الشركه بواقى تعاملات ماديه" NavigateUrl="~/Clients_Report.aspx"></asp:MenuItem>
