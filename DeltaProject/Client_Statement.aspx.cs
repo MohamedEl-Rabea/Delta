@@ -1,5 +1,6 @@
 ﻿using Business_Logic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -25,10 +26,28 @@ namespace DeltaProject
             {
                 PanelStatement.Visible = true;
                 PanelErrorMessage.Visible = false;
-                Client client = new Client { C_name = txtClientName.Text };
+                string clientName = txtClientName.Text;
                 DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text) ? null : (DateTime?)Convert.ToDateTime(txtStartDate.Text);
-                var statmentList = client.GetClientStatement(startDate);
-                lblClientName.Text = client.C_name;
+                var statmentList = new List<ClientStatement>();
+
+                if (RadioButtonListCategories.SelectedIndex == 0) //All
+                {
+                    statmentList = ClientStatement.GetAllStatement(clientName, startDate);
+                }
+                else if (RadioButtonListCategories.SelectedIndex == 1) //Invoices
+                {
+                    statmentList = ClientStatement.GetInvoicesStatement(clientName, startDate);
+                }
+                else if (RadioButtonListCategories.SelectedIndex == 2) //Maintenance
+                {
+                    statmentList = ClientStatement.GetMaintenanceStatement(clientName, startDate);
+
+                }
+                else if (RadioButtonListCategories.SelectedIndex == 3) //Loaders
+                {
+                    statmentList = ClientStatement.GetLoadersStatement(clientName, startDate);
+                }
+                lblClientName.Text = clientName;
                 lblStartDate.Text = startDate.HasValue ? startDate.Value.ToShortDateString() : "شامل";
                 lblBalance.Text = statmentList.LastOrDefault() != null ? statmentList.Last().Balance.ToString() : "0";
                 GridViewStatement.DataSource = statmentList;
@@ -69,6 +88,11 @@ namespace DeltaProject
 
             Response.Flush();
             Response.Close();
+        }
+
+        protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PanelStatement.Visible = false;
         }
     }
 }
