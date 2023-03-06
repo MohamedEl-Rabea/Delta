@@ -105,6 +105,8 @@
 .xdsoft_datetimepicker .xdsoft_monthpicker {
 	position: relative;
 	text-align: center;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .xdsoft_datetimepicker .xdsoft_label i,
@@ -124,8 +126,8 @@
 }
 
 .xdsoft_datetimepicker .xdsoft_prev {
-	float: left;
-	background-position: -20px 0;
+	float: right;
+    background-position: 0 0;
 }
 .xdsoft_datetimepicker .xdsoft_today_button {
 	float: left;
@@ -134,8 +136,8 @@
 }
 
 .xdsoft_datetimepicker .xdsoft_next {
-	float: right;
-	background-position: 0 0;
+	float: left;
+    background-position: -20px 0;
 }
 
 .xdsoft_datetimepicker .xdsoft_next,
@@ -268,8 +270,8 @@
 }
 
 .xdsoft_datetimepicker .xdsoft_month {
-	width: 100px;
-	text-align: right;
+	width: 85px;
+	text-align: center;
 }
 
 .xdsoft_datetimepicker .xdsoft_calendar {
@@ -277,7 +279,8 @@
 }
 
 .xdsoft_datetimepicker .xdsoft_year{
-	width: 48px;
+	width: 65px;
+    text-align: right;
 	margin-left: 5px;
 }
 
@@ -565,4 +568,8 @@
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f8fa', endColorstr='#FFF',GradientType=0 );
   /* IE6-9 */
+}
+
+.xdsoft_time_variant, .xdsoft_time {
+    direction: rtl;
 }
