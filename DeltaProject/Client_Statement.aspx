@@ -62,6 +62,13 @@
     <header class="Header">
         <p>كشف حساب عميل</p>
     </header>
+    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2" 
+                         OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
+        <asp:ListItem Value="All" Selected="True">الكل</asp:ListItem>
+        <asp:ListItem Value="Invoices">الفواتير</asp:ListItem>
+        <asp:ListItem Value="Maintenance">الصيانات</asp:ListItem>
+        <asp:ListItem Value="Loaders">الونش</asp:ListItem>
+    </asp:RadioButtonList>
     <section class="Search_Section">
         <table class="Search_table">
             <tr>

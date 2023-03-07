@@ -116,30 +116,5 @@ namespace Business_Logic
             }
             return b;
         }
-
-        public List<ClientMaintenanceStatement> GetClientStatement()
-        {
-            List<ClientMaintenanceStatement> clientMaintenanceStatements = new List<ClientMaintenanceStatement>();
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("GetClientMaintenanceStatement", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
-            con.Open();
-            SqlDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
-            {
-                var clientMaintenanceStatement = new ClientMaintenanceStatement();
-                clientMaintenanceStatement.TransactionDate = rdr["TransactionDate"] is DBNull ? (DateTime?)null : Convert.ToDateTime(rdr["TransactionDate"]);
-                clientMaintenanceStatement.Debit = Convert.ToDouble(rdr["Debit"]);
-                clientMaintenanceStatement.Credit = Convert.ToDouble(rdr["Credit"]);
-                clientMaintenanceStatement.Balance = Convert.ToDouble(rdr["Balance"]);
-                clientMaintenanceStatement.Statement = rdr["Statement"].ToString();
-                clientMaintenanceStatements.Add(clientMaintenanceStatement);
-            }
-            rdr.Close();
-            con.Close();
-            return clientMaintenanceStatements;
-        }
     }
 }
