@@ -21,11 +21,29 @@ namespace Business_Logic
             var maintenanceStatement = GetMaintenanceStatement(clientName, startDate);
             var loadersStatement = GetLoadersStatement(clientName, startDate);
 
-            var allStatements = invoicesStatement
+            var allStatements = new List<ClientStatement>();
+
+            //Prev balance
+            if (startDate.HasValue)
+                allStatements.Add(
+                    invoicesStatement
+                    .Union(maintenanceStatement)
+                    .Union(loadersStatement)
+                    .Where(p => p.TransactionDate is null)
+                    .Aggregate((accClientStatement, currentClientStatement) => new ClientStatement
+                    {
+                        Debit = accClientStatement.Debit + currentClientStatement.Debit,
+                        Credit = accClientStatement.Credit + currentClientStatement.Credit,
+                        Balance = accClientStatement.Balance + currentClientStatement.Balance,
+                        Statement = accClientStatement.Statement
+                    }));
+
+            allStatements.AddRange(invoicesStatement
                 .Union(maintenanceStatement)
                 .Union(loadersStatement)
-                .OrderBy(p => p.TransactionDate)
-                .ToList();
+                .Where(p => p.TransactionDate != null)
+                .OrderBy(p => p.TransactionDate));
+
             var prevBalance = allStatements.FirstOrDefault()?.Balance ?? 0;
 
             for (int i = 1; i < allStatements.Count; i++)

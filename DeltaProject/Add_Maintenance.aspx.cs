@@ -46,6 +46,7 @@ namespace DeltaProject
                 txtTitle.Text = string.Empty;
                 txtAgreedCost.Text = string.Empty;
                 txtClientName.Text = string.Empty;
+                txtPhoneNumber.Text = string.Empty;
                 ddlWorkshops.SelectedIndex = 0;
                 OrderDate.Text = string.Empty;
                 ExpectedDeliveryDate.Text = string.Empty;
