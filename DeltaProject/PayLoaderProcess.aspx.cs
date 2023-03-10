@@ -60,7 +60,9 @@ namespace DeltaProject
 
             LoaderProcess loaderProcess = new LoaderProcess();
             loaderProcess.Id = Convert.ToInt32(gridRow.Cells[0].Text);
-            loaderProcess.Date = DateTime.ParseExact(((TextBox)GridViewProcessess.Rows[rowIndex].FindControl("txtPaymentDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var date = Convert.ToDateTime(((TextBox)GridViewProcessess.Rows[rowIndex].FindControl("txtPaymentDate")).Text);
+            loaderProcess.Date = new DateTime(date.Year, date.Month, date.Day,
+                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             loaderProcess.PaidAmount = Convert.ToDecimal(((TextBox)GridViewProcessess.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
 
             var loaderName = gridRow.Cells[1].Text;

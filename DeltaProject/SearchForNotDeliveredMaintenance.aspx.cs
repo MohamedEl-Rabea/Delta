@@ -94,8 +94,12 @@ namespace DeltaProject
             var deliveryDate = DateTime.ParseExact(DeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.Id = Convert.ToInt32(btnSave.Attributes["maintenanceId"]);
             maintenance.PaidAmount = Convert.ToDecimal(txtPaidAmount.Text);
-            maintenance.DeliveryDate = deliveryDate;
-            maintenance.ExpiryWarrantyDate = CalculateExpiryWarrantyDate(deliveryDate);
+            maintenance.DeliveryDate = new DateTime(deliveryDate.Year, deliveryDate.Month, deliveryDate.Day,
+                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            var expiryWarrantyDate = CalculateExpiryWarrantyDate(deliveryDate);
+            maintenance.ExpiryWarrantyDate = new DateTime(expiryWarrantyDate.Year, expiryWarrantyDate.Month, expiryWarrantyDate.Day,
+                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
             string m = "";
 
             if (!maintenance.DeliverMaintenance(out m))
