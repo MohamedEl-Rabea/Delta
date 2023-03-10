@@ -55,7 +55,14 @@ namespace DeltaProject
                     PanelAllMaintenance.Visible = true;
                 }
             }
-            ViewState["Maintenance"] = maintenance.GetAllMaintenance("DeliveredWithRemaining");
+            var data = maintenance.GetAllMaintenance("DeliveredWithRemaining");
+            ViewState["Maintenance"] = data;
+
+            if (e == null && data.Count == 0)
+                GridViewMaintenance.EmptyDataText = "";
+            else
+                GridViewMaintenance.EmptyDataText = "لا توجد صيانات متبقى لها تكلفة لهذا العميل";
+
             BindMaintenanceGrid();
         }
 

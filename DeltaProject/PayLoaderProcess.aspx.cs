@@ -34,7 +34,14 @@ namespace DeltaProject
             }
             else
             {
-                ViewState["Processess"] = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate, true);
+                var data = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate, true);
+                ViewState["Processess"] = data;
+
+                if (e == null && data.Count == 0)
+                    GridViewProcessess.EmptyDataText = "";
+                else
+                    GridViewProcessess.EmptyDataText = "لا توجد عمليات مسجله لهذا العميل / الفترة";
+
                 BindLoaderProcessGrid();
                 PanelAllProcessess.Visible = true;
                 PanelErrorMessage.Visible = false;
