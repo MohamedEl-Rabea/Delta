@@ -1,7 +1,6 @@
 ﻿using Business_Logic;
 using DeltaProject.Business_Logic;
 using System;
-using System.Globalization;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
@@ -29,8 +28,12 @@ namespace DeltaProject
             maintenance.AgreedCost = Convert.ToDecimal(txtAgreedCost.Text);
             maintenance.ClientName = txtClientName.Text;
             maintenance.WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue);
-            maintenance.OrderDate = DateTime.ParseExact(OrderDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            maintenance.ExpectedDeliveryDate = DateTime.ParseExact(ExpectedDeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var orderDate = Convert.ToDateTime(OrderDate.Text);
+            maintenance.OrderDate = new DateTime(orderDate.Year, orderDate.Month, orderDate.Day,
+                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            var expectedDeliveryDate = Convert.ToDateTime(ExpectedDeliveryDate.Text);
+            maintenance.ExpectedDeliveryDate = new DateTime(expectedDeliveryDate.Year, expectedDeliveryDate.Month, expectedDeliveryDate.Day,
+                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenance.Description = txtDescription.Text;
 
             string m = "";

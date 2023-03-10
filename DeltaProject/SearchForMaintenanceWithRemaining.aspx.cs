@@ -1,6 +1,5 @@
 ﻿using Business_Logic;
 using System;
-using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -81,7 +80,9 @@ namespace DeltaProject
             MaintenancePayment maintenancePayment = new MaintenancePayment();
             maintenancePayment.Id = Convert.ToInt32(gridRow.Cells[0].Text);
             var title = gridRow.Cells[1].Text;
-            maintenancePayment.PaymentDate = DateTime.ParseExact(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaymentDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var paymentDate = Convert.ToDateTime(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaymentDate")).Text);
+            maintenancePayment.PaymentDate = new DateTime(paymentDate.Year, paymentDate.Month, paymentDate.Day,
+                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenancePayment.PaidAmount = Convert.ToDecimal(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
 
             string m = "";
