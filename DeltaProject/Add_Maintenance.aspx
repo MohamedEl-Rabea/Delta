@@ -13,18 +13,21 @@
             $('#<%= txtClientName.ClientID%>').autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: "Services/GetNamesService.asmx/Get_Clients_Names",
-                        data: "{ 'Client_Name': '" + request.term + "' }",
+                        url: "Services/GetNamesService.asmx/Get_Clients_Basic_Data",
+                                                data: "{ 'Client_Name': '" + request.term + "' }",
                         type: "POST",
                         dataType: "json",
                         contentType: "application/json;charset=utf-8",
                         success: function (result) {
-                            response(result.d);
+                            response(result.d.map(r => ({ label: r.Item1, value: r.Item1, phone: r.Item2 })));
                         },
                         error: function (result) {
                             alert('Problem');
                         }
                     });
+                },
+                select: function (event, ui) {
+                    $('#<%= txtPhoneNumber.ClientID%>').val(ui.item.phone.toString());
                 }
             });
         });
@@ -105,8 +108,8 @@
                     <td style="text-align: right">
                         <asp:TextBox runat="server" ID="txtClientName" CssClass="txts3" PlaceHolder="اسم العميل" AutoCompleteType="Disabled"></asp:TextBox>
                     </td>
-                    <td class="RHSTD">
-                        <p class="RHSP">رقم التليفون :</p>
+                    <td class="RHSTD" >
+                        <p class="RHSP" style="white-space: nowrap">رقم التليفون :</p>
                     </td>
                     <td style="text-align: right">
                         <asp:TextBox runat="server" ID="txtPhoneNumber" CssClass="txts3" PlaceHolder="رقم التليفون" AutoCompleteType="Disabled"></asp:TextBox>
@@ -128,8 +131,12 @@
                         <br />
                         <br />
                     </td>
-                    <td>
-                        <asp:Label ID="lblPhoneMsg" runat="server" CssClass="MessageLabel"></asp:Label>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                                    ControlToValidate="txtPhoneNumber" Display="Dynamic" SetFocusOnError="true"
+                                                    ToolTip="رقم التليفون متطلب اساسى">
+                            <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="CustomValidator1" runat="server"
                             ToolTip="يجب كتابة الرقم بشكل صحيح"
                             ControlToValidate="txtPhoneNumber"

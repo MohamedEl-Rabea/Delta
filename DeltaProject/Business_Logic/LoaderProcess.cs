@@ -19,6 +19,7 @@ namespace DeltaProject.Business_Logic
         public decimal PaidAmount { get; set; }
         public decimal RemainingAmount { get; set; }
         public DateTime Date { get; set; }
+        public string Description { get; set; }
 
 
         public bool RegisterLoaderProcess(out string m)
@@ -38,6 +39,7 @@ namespace DeltaProject.Business_Logic
                 cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
                 cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
                 cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
+                cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Description;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -75,6 +77,7 @@ namespace DeltaProject.Business_Logic
                 loaderProcess.Cost = Convert.ToDecimal(rdr["Cost"]);
                 loaderProcess.RemainingAmount = Convert.ToDecimal(rdr["RemainingAmount"]);
                 loaderProcess.Date = Convert.ToDateTime(rdr["Date"]);
+                loaderProcess.Description = rdr["Description"].ToString();
                 loaderProcesses.Add(loaderProcess);
             }
             rdr.Close();
