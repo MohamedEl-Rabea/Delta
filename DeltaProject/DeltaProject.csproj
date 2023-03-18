@@ -85,6 +85,7 @@
     <Content Include="Client_Debts_Schedule.aspx" />
     <Content Include="Client_Statement.aspx" />
     <Content Include="Collect_Product.aspx" />
+    <Content Include="AddOrder.aspx" />
     <Content Include="CSS\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="CSS\jquery-ui-smoothness.css" />
     <Content Include="CSS\jquery-ui.min.css" />
@@ -280,6 +281,8 @@
     <Compile Include="Business_Logic\LoaderProcess.cs" />
     <Compile Include="Business_Logic\Maintenance.cs" />
     <Compile Include="Business_Logic\MaintenancePayment.cs" />
+    <Compile Include="Business_Logic\Order.cs" />
+    <Compile Include="Business_Logic\OrderDetails.cs" />
     <Compile Include="Business_Logic\Product.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />
@@ -324,6 +327,13 @@
     </Compile>
     <Compile Include="Collect_Product.aspx.designer.cs">
       <DependentUpon>Collect_Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddOrder.aspx.cs">
+      <DependentUpon>AddOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddOrder.aspx.designer.cs">
+      <DependentUpon>AddOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
