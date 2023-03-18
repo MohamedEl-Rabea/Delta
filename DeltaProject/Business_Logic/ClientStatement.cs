@@ -25,18 +25,21 @@ namespace Business_Logic
 
             //Prev balance
             if (startDate.HasValue)
-                allStatements.Add(
-                    invoicesStatement
+            {
+                var prevStatement = invoicesStatement
                     .Union(maintenanceStatement)
                     .Union(loadersStatement)
-                    .Where(p => p.TransactionDate is null)
-                    .Aggregate((accClientStatement, currentClientStatement) => new ClientStatement
+                    .Where(p => p.TransactionDate is null);
+
+                if (prevStatement.Any())
+                    allStatements.Add(prevStatement.Aggregate((accClientStatement, currentClientStatement) => new ClientStatement
                     {
                         Debit = accClientStatement.Debit + currentClientStatement.Debit,
                         Credit = accClientStatement.Credit + currentClientStatement.Credit,
                         Balance = accClientStatement.Balance + currentClientStatement.Balance,
                         Statement = accClientStatement.Statement
                     }));
+            }
 
             allStatements.AddRange(invoicesStatement
                 .Union(maintenanceStatement)

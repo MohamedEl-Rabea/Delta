@@ -26,6 +26,7 @@
                 },
                 select: function (event, ui) {
                     $('#<%= txtPhoneNumber.ClientID%>').val(ui.item.phone.toString());
+                    $('#<%= txtPhoneNumber.ClientID%>').change();
                 }
             });
         });

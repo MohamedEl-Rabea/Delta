@@ -106,7 +106,7 @@
                                 <img src="Images/Error.png" width="15" height="15"/>
                             </asp:CustomValidator>
                             <asp:CustomValidator ID="CustomValidator6" runat="server" SetFocusOnError="true" Display="Dynamic"
-                                ControlToValidate="txtPaidAmount" ClientValidationFunction="IsNotZero" ToolTip="يجب الا تقل القيمة عن 1" ValidationGroup="<%# Container.DataItemIndex %>">
+                                ControlToValidate="txtPaidAmount" ClientValidationFunction="IsValidNumber" ToolTip="يجب الا تقل القيمة عن 1" ValidationGroup="<%# Container.DataItemIndex %>">
                             <img src="Images/Error.png" width="15" height="15"/>
                             </asp:CustomValidator>
                             <asp:CustomValidator ID="CustomValidator1" runat="server"
