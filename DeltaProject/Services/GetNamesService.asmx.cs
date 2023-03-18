@@ -57,6 +57,26 @@ namespace DeltaProject.Services
         }
 
         [WebMethod]
+        public List<(string, string)> Get_Clients_Basic_Data(string Client_Name)
+        {
+            List<(string, string)> Client_Data = new List<(string, string)>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("Get_Clients_Basic_Data", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@C_Name", SqlDbType.NVarChar).Value = Client_Name;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Client_Data.Add((rdr["Client_Name"].ToString(), rdr["Phone"].ToString()));
+                }
+            }
+            return Client_Data;
+        }
+
+        [WebMethod]
         public List<string> Get_Cheques_Clients_Names(string Client_Name)
         {
             List<string> Clients_Names = new List<string>();

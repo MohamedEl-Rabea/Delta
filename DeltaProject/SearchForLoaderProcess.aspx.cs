@@ -15,6 +15,10 @@ namespace DeltaProject
 
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
+            PanelAllProcessess.Visible = false;
+            PanelLoaderDetails.Visible = false;
+            PanelErrorMessage.Visible = false;
+
             LoaderProcess loaderProcess = new LoaderProcess
             { ClientName = string.IsNullOrEmpty(txtClientName.Text) ? null : txtClientName.Text };
             DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text)
@@ -28,27 +32,47 @@ namespace DeltaProject
                 string.IsNullOrEmpty(txtEndDate.Text))
             {
                 PanelErrorMessage.Visible = true;
-                PanelAllProcessess.Visible = false;
             }
             else
             {
                 ViewState["Processess"] = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate);
                 BindLoaderProcessGrid();
                 PanelAllProcessess.Visible = true;
-                PanelErrorMessage.Visible = false;
+            }
+        }
+
+        protected void GridViewProcess_OnRowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Details")
+            {
+                var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
+                lblLoaderName.Text = gridRow.Cells[1].Text;
+                lblPermissionNumber.Text = gridRow.Cells[2].Text;
+                lblClientName.Text = gridRow.Cells[3].Text;
+                lblDate.Text = gridRow.Cells[4].Text;
+                lblCost.Text = gridRow.Cells[5].Text;
+                lblRemainingAmount.Text = gridRow.Cells[6].Text;
+                lblDescription.Text = gridRow.Cells[7].Text;
+                PanelAllProcessess.Visible = false;
+                PanelLoaderDetails.Visible = true;
             }
         }
 
         protected void GridViewMaintenance_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            GridViewProcessess.PageIndex = e.NewPageIndex;
+            GridViewProcess.PageIndex = e.NewPageIndex;
             BindLoaderProcessGrid();
         }
 
         private void BindLoaderProcessGrid()
         {
-            GridViewProcessess.DataSource = ViewState["Processess"];
-            GridViewProcessess.DataBind();
+            GridViewProcess.DataSource = ViewState["Processess"];
+            GridViewProcess.DataBind();
+        }
+
+        protected void btnBack_OnClick(object sender, ImageClickEventArgs e)
+        {
+            ImageButtonSearch_Click(sender, null);
         }
     }
 }

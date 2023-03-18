@@ -29,6 +29,7 @@ namespace DeltaProject
             loaderProcess.Cost = Convert.ToDecimal(txtCost.Text);
             loaderProcess.PaidAmount = Convert.ToDecimal(txtPaid.Text);
             loaderProcess.Date = Convert.ToDateTime(date.Text);
+            loaderProcess.Description = txtDescription.Text;
 
             string m = "";
             if (!loaderProcess.RegisterLoaderProcess(out m))
@@ -47,6 +48,7 @@ namespace DeltaProject
                 txtCost.Text = string.Empty;
                 txtPaid.Text = string.Empty;
                 date.Text = string.Empty;
+                txtDescription.Text = string.Empty;
             }
         }
     }
