@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace Business_Logic
 {
-    public class ClientStatement 
+    public class ClientStatement
     {
         public DateTime? TransactionDate { get; set; }
         public double Debit { get; set; }
