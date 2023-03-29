@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,26 +48,29 @@
     <Reference Include="Select.Pdf, Version=21.2.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
       <HintPath>..\packages\Select.Pdf.21.2.0\lib\net40\Select.Pdf.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
     <Content Include="AddProducts.aspx" />
+    <Content Include="AddUnit.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
     <Content Include="Add_Client_Offer.aspx" />
     <Content Include="Add_Income.aspx" />
@@ -89,6 +93,7 @@
     <Content Include="Delete_Client.aspx" />
     <Content Include="Delete_Products.aspx" />
     <Content Include="Delete_Supplier.aspx" />
+    <Content Include="EditUnit.aspx" />
     <Content Include="Expenses.aspx" />
     <Content Include="Images\AddNew.png" />
     <Content Include="Images\alert.png" />
@@ -112,10 +117,12 @@
     <Content Include="Images\Login_footer.png" />
     <Content Include="Images\Login_header.png" />
     <Content Include="Images\Logo.jpg" />
+    <Content Include="Images\minus.png" />
     <Content Include="Images\Next.png" />
     <Content Include="Images\NextDisabled.png" />
     <Content Include="Images\ok.png" />
     <Content Include="Images\phone.png" />
+    <Content Include="Images\plus.png" />
     <Content Include="Images\printer.png" />
     <Content Include="Images\home.png" />
     <Content Include="Images\Up.png" />
@@ -153,6 +160,7 @@
     <Content Include="Suppliers_Search.aspx" />
     <Content Include="Supplier_Products.aspx" />
     <Content Include="Supplier_Returned_Products.aspx" />
+    <Content Include="Units.aspx" />
     <Content Include="Unpaid_ClientCheque.aspx" />
     <Content Include="Update_Client_Info.aspx" />
     <Content Include="Update_Products_Amounts.aspx" />
@@ -176,6 +184,13 @@
     </Compile>
     <Compile Include="AddProducts.aspx.designer.cs">
       <DependentUpon>AddProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddUnit.aspx.cs">
+      <DependentUpon>AddUnit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUnit.aspx.designer.cs">
+      <DependentUpon>AddUnit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Add_ClientCheque.aspx.cs">
       <DependentUpon>Add_ClientCheque.aspx</DependentUpon>
@@ -244,6 +259,8 @@
     <Compile Include="Business_Logic\Supplier_Payments_Documents.cs" />
     <Compile Include="Business_Logic\Supplier_Payment_Record.cs" />
     <Compile Include="Business_Logic\Supplier_Phone.cs" />
+    <Compile Include="Business_Logic\Unit.cs" />
+    <Compile Include="Business_Logic\UnitFactor.cs" />
     <Compile Include="Business_Logic\User.cs" />
     <Compile Include="Client_Offers.aspx.cs">
       <DependentUpon>Client_Offers.aspx</DependentUpon>
@@ -307,6 +324,13 @@
     </Compile>
     <Compile Include="Delete_Supplier.aspx.designer.cs">
       <DependentUpon>Delete_Supplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditUnit.aspx.cs">
+      <DependentUpon>EditUnit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditUnit.aspx.designer.cs">
+      <DependentUpon>EditUnit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Expenses.aspx.cs">
       <DependentUpon>Expenses.aspx</DependentUpon>
@@ -506,6 +530,13 @@
     </Compile>
     <Compile Include="Supplier_Returned_Products.aspx.designer.cs">
       <DependentUpon>Supplier_Returned_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Units.aspx.cs">
+      <DependentUpon>Units.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Units.aspx.designer.cs">
+      <DependentUpon>Units.aspx</DependentUpon>
     </Compile>
     <Compile Include="Unpaid_ClientCheque.aspx.cs">
       <DependentUpon>Unpaid_ClientCheque.aspx</DependentUpon>

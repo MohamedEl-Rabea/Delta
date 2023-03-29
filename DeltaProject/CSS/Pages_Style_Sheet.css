@@ -937,3 +937,28 @@
 .gridActionlnkBtn {
     margin: 5px;
 }
+
+.textWithDotsCollapse {
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+}
+
+.textWithDots {
+    white-space: break-spaces !important;
+    cursor: pointer;
+}
+
+.nowrap td {
+    white-space: nowrap;
+    padding: 1px 5px;
+}
+
+.maintenanceDetails tr {
+    height: 45px;
+}
+
+.w200 {
+    width: 200px;
+}
