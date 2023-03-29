@@ -8,11 +8,12 @@
     <link href="Images/Logo.png" rel="icon" />
     <link href="CSS/Master_style_sheet.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link href="CSS/jquery-ui-smoothness.css" rel="stylesheet" />
+    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <script src="Script/jquery-1.10.2.js"></script>
     <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script src="Script/jquery-ui.min.js"></script>
-    <link href="CSS/jquery-ui-smoothness.css" rel="stylesheet" />
     <script src="Script/jquery-ui-i18n.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -25,7 +26,7 @@
                     <table class="Logo_Table" style="float: left">
                         <tr>
                             <td>
-                                <%--                                <img width="44" height="44" src="Images/Logo.jpg" />--%>
+                                <%--<img width="44" height="44" src="Images/Logo.jpg" />--%>
                             </td>
                         </tr>
                     </table>
@@ -118,7 +119,11 @@
                             </LevelStyles>
                             <Nodes>
                                 <asp:TreeNode Text="المخــــــــــــــــازن">
-                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="وحدات القياس" Expanded="false">
+                                        <asp:TreeNode Text="إضافة" ToolTip="إضافة وحدة قياس" NavigateUrl="~/AddUnit.aspx"></asp:TreeNode>
+                                        <asp:TreeNode Text="تعديل" ToolTip="تعديل وحدة قياس" NavigateUrl="~/EditUnit.aspx"></asp:TreeNode>
+                                        <asp:TreeNode Text="استعلام" ToolTip="عرض وحدات القياس" NavigateUrl="~/Units.aspx"></asp:TreeNode>
+                                    </asp:TreeNode> <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تحديث كميـات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانـــات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مسح منتجــات" NavigateUrl="~/Delete_Products.aspx"></asp:TreeNode>

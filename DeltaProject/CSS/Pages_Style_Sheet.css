@@ -966,3 +966,7 @@
 .maintenanceDetails tr {
     height: 45px;
 }
+
+.w200 {
+    width: 200px;
+}
