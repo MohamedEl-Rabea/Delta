@@ -37,7 +37,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <h5 style="letter-spacing: 2px; color: #808080">Trading - Maintenance - supplies - Imports . . . . . . . </h5>
+                                <h5 style="letter-spacing: 2px; color: #808080">Trading - Maintenance - Supplies - Imports . . . . . . . </h5>
                             </td>
                         </tr>
                     </table>
@@ -94,7 +94,9 @@
                                         <asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية ارتجاع منتجات من فاتورة موجوده" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/Add_Items_To_Invoice.aspx"></asp:MenuItem>
-                                    </asp:MenuItem>
+                                        <asp:MenuItem Text="طلبيات">
+                                            <asp:MenuItem Text="إضافة" ToolTip="إضافة طلبية" NavigateUrl="~/AddOrder.aspx"></asp:MenuItem>
+                                        </asp:MenuItem></asp:MenuItem>
                                 </Items>
                             </asp:Menu>
                         </div>
