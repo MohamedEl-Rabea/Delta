@@ -6,6 +6,12 @@
             width: 120px;
         }
     </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#<%= ddlUnits.ClientID%>').select2();
+            $('.ddlSubUnits').select2();
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
@@ -50,8 +56,7 @@
                             <asp:Label ID="lblUnitName" runat="server" Text='<%# Bind("SubUnitName") %>'></asp:Label>
                         </ItemTemplate>
                         <FooterTemplate>
-                            <%--<asp:TextBox ID="txtSubUnitName" placeholder="اسم الوحدة" runat="server" CssClass="EditTxt-md"></asp:TextBox>--%>
-                            <asp:DropDownList ID="ddlSubUnits" runat="server" CssClass="EditTxt-md"
+                            <asp:DropDownList ID="ddlSubUnits" runat="server" CssClass="EditTxt-md ddlSubUnits"
                                               Style="height: auto"
                                               DataTextField="Name"
                                               DataValueField="Id"

@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>ElRabea MIS</title>
+    <link href="CSS/select2.css" rel="stylesheet" />
     <link href="Images/Logo.png" rel="icon" />
     <link href="CSS/Master_style_sheet.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
@@ -14,7 +15,9 @@
     <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script src="Script/jquery-ui.min.js"></script>
-    <script src="Script/jquery-ui-i18n.min.js"></script>
+    <script src="Script/jquery-ui-i18n.min.js"></script>   
+    <script src="Script/select2.js"></script>
+    <script src="Script/select2.full.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

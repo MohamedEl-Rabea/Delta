@@ -93,6 +93,8 @@
     <Content Include="CSS\LoginStyleSheet.css" />
     <Content Include="CSS\Master_style_sheet.css" />
     <Content Include="CSS\Pages_Style_Sheet.css" />
+    <Content Include="CSS\select2.css" />
+    <Content Include="CSS\select2.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="Delete_Client.aspx" />
     <Content Include="Delete_Products.aspx" />
@@ -158,6 +160,10 @@
     <Content Include="Script\jquery.datetimepicker.js" />
     <Content Include="CSS\jquery.datetimepicker.min.css" />
     <Content Include="Script\jquery.datetimepicker.min.js" />
+    <Content Include="Script\select2.full.js" />
+    <Content Include="Script\select2.full.min.js" />
+    <Content Include="Script\select2.js" />
+    <Content Include="Script\select2.min.js" />
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
     <Content Include="SearchForLoaderProcess.aspx" />

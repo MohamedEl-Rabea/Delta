@@ -6,6 +6,11 @@
             text-align: -webkit-center;
         }
     </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#<%= ddlUnits.ClientID%>').select2();
+        });
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
