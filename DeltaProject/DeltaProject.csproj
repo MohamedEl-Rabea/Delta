@@ -130,6 +130,7 @@
     <Content Include="Images\Up.png" />
     <Content Include="Income_Report.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MaintenancePricing.aspx" />
     <Content Include="Manage_Permissions.aspx" />
     <Content Include="Needs_Report.aspx" />
     <Content Include="New_Client_Interaction.aspx" />
@@ -383,6 +384,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenancePricing.aspx.cs">
+      <DependentUpon>MaintenancePricing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintenancePricing.aspx.designer.cs">
+      <DependentUpon>MaintenancePricing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage_Permissions.aspx.cs">
       <DependentUpon>Manage_Permissions.aspx</DependentUpon>

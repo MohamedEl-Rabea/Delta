@@ -95,7 +95,7 @@
                     <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
                     <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
-                    <asp:BoundField DataField="AgreedCost" HeaderText="التكلفة" SortExpression="AgreedCost" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Price" HeaderText="السعر" SortExpression="Price" DataFormatString="{0:0.##}" />
                     <asp:TemplateField HeaderText="تسليم" SortExpression="Id">
                         <ItemTemplate>
                             <asp:ImageButton ID="LinkButtonDeliver" runat="server" ImageUrl="~/Images/LeftArrow.png" Width="20" Height="20"
@@ -129,10 +129,10 @@
                         <asp:Label runat="server" ID="lblTitle" Text=''/>
                     </td>
                     <td class="RHSTD">
-                        <p class="RHSP">التكلفة :</p>
+                        <p class="RHSP">السعر :</p>
                     </td>
                     <td style="text-align: right">
-                        <asp:Label runat="server" ID="lblAgreedCost" Text=''/>
+                        <asp:Label runat="server" ID="lblPrice" Text=''/>
                     </td>
                 </tr>
                 <tr style="height: 37px">

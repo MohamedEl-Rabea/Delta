@@ -177,6 +177,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblOrderDate;
 
         /// <summary>
+        /// lblExpiryWarrantyDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblExpiryWarrantyDate;
+
+        /// <summary>
         /// lblStatus control.
         /// </summary>
         /// <remarks>
@@ -186,13 +195,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
-        /// lblAgreedCost control.
+        /// lblCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAgreedCost;
+        protected global::System.Web.UI.WebControls.Label lblCost;
+
+        /// <summary>
+        /// lblPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrice;
 
         /// <summary>
         /// lblRemainingAmount control.
@@ -202,15 +220,6 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRemainingAmount;
-
-        /// <summary>
-        /// lblExpiryWarrantyDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExpiryWarrantyDate;
 
         /// <summary>
         /// lblDescription control.

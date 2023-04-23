@@ -94,7 +94,7 @@
                 <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                 <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
                 <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
-                <asp:BoundField DataField="AgreedCost" HeaderText="التكلفة" SortExpression="AgreedCost" DataFormatString="{0:0.##}" />
+                <asp:BoundField DataField="Price" HeaderText="السعر" SortExpression="Price" DataFormatString="{0:0.##}" />
                 <asp:BoundField DataField="RemainingAmount" HeaderText="المبلغ المتبقى" SortExpression="RemainingAmount" DataFormatString="{0:0.##}" />
                 <asp:TemplateField HeaderText="المبلغ المدفوع">
                     <ItemTemplate>

@@ -42,8 +42,8 @@
     </header>
     <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
         OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
-        <asp:ListItem Value="Normal" Selected="True">اسم العميل</asp:ListItem>
-        <asp:ListItem Value="Motors">رقم التليفون</asp:ListItem>
+        <asp:ListItem Value="ClientName" Selected="True">اسم العميل</asp:ListItem>
+        <asp:ListItem Value="PhoneNumber">رقم التليفون</asp:ListItem>
     </asp:RadioButtonList>
     <section class="Search_Section">
         <table class="Search_table">
@@ -114,8 +114,9 @@
                 <asp:BoundField DataField="OrderDate" HeaderText="تاريخ الصيانة" SortExpression="OrderDate"  DataFormatString="{0:dd/MM/yyyy}" />
                 <asp:BoundField DataField="StatusName" HeaderText="الحالة" SortExpression="StatusName" />
                 <asp:BoundField DataField="ExpiryWarrantyDateText" HeaderText="انتهاء الضمان" SortExpression="ExpiryWarrantyDateText" />
-                <asp:BoundField DataField="AgreedCost" SortExpression="AgreedCost" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
-                <asp:BoundField DataField="RemainingAmount" SortExpression="RemainingAmount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:BoundField DataField="Cost" SortExpression="Cost" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" DataFormatString="{0:0.##}" />
+                <asp:BoundField DataField="Price" SortExpression="Price" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" DataFormatString="{0:0.##}" />
+                <asp:BoundField DataField="RemainingAmount" SortExpression="RemainingAmount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" DataFormatString="{0:0.##}" />
                 <asp:BoundField DataField="Description" SortExpression="Description" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                 <asp:TemplateField SortExpression="Id">
                     <ItemTemplate>
@@ -151,20 +152,24 @@
                 <tr>
                     <td class="RHSTD" style="width: 15%"><p class="RHSP">تاريخ الصيانة :</p></td>
                     <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblOrderDate" Text=''/></td>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">الحالة :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblStatus" Text=''/></td>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">انتهاء الضمان :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblExpiryWarrantyDate" Text=''/></td>
                 </tr>
                 <tr>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">الحالة :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblStatus" Text=''/></td>
                     <td class="RHSTD" style="width: 15%"><p class="RHSP">التكلفة :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblAgreedCost" Text=''/></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblCost" Text=''/></td>
+                </tr>
+                <tr>
+                    <td class="RHSTD" style="width: 15%"><p class="RHSP">السعر :</p></td>
+                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblPrice" Text=''/></td>
                     <td class="RHSTD" style="width: 15%"><p class="RHSP">المتبقى :</p></td>
                     <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblRemainingAmount" Text=''/></td>
                 </tr>
                 <tr>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">انتهاء الضمان :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblExpiryWarrantyDate" Text=''/></td>
                     <td class="RHSTD" style="width: 15%"><p class="RHSP">الوصف :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text=''/></td>
+                    <td class="RHSTD" colspan="3"><asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text=''/></td>
                 </tr>
             </table>
         </section>

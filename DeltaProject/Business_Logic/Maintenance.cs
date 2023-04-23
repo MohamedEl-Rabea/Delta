@@ -17,7 +17,8 @@ namespace Business_Logic
         public string WorkshopName { get; set; }
         public DateTime OrderDate { get; set; }
         public string StatusName { get; set; }
-        //public decimal AgreedCost { get; set; }
+        public decimal Cost { get; set; }
+        public decimal Price { get; set; }
         public decimal RemainingAmount { get; set; }
         public string Description { get; set; }
         public DateTime ExpectedDeliveryDate { get; set; }
@@ -56,37 +57,30 @@ namespace Business_Logic
             return b;
         }
 
-        public List<Maintenance> GetAllMaintenance(string statusName)
+        public bool PriceMaintenance(out string m)
         {
-            List<Maintenance> maintenanceList = new List<Maintenance>();
+            bool b = true;
+            m = "";
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("SearchForMaintenance", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
-            cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
-            cmd.Parameters.Add("@statusName", SqlDbType.NVarChar).Value = statusName;
-
-            con.Open();
-            SqlDataReader rdr = cmd.ExecuteReader();
-            while (rdr.Read())
+            try
             {
-                Maintenance maintenance = new Maintenance();
-                maintenance.Id = Convert.ToInt32(rdr["Id"]);
-                maintenance.Title = rdr["Title"].ToString();
-                maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
-                maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
-                maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
-                //maintenance.AgreedCost = Convert.ToDecimal(rdr["AgreedCost"]);
-                maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ? Convert.ToDecimal(rdr["AgreedCost"]) : Convert.ToDecimal(rdr["RemainingAmount"]);
-                maintenance.WorkshopName = rdr["WorkshopName"].ToString();
-                maintenance.StatusName = rdr["StatusName"].ToString();
-                maintenance.Description = rdr["Description"].ToString();
-                maintenanceList.Add(maintenance);
+                SqlCommand cmd = new SqlCommand("PriceMaintenance", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@maintenanceId", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
+                cmd.Parameters.Add("@price", SqlDbType.Money).Value = Price;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
             }
-            rdr.Close();
-            con.Close();
-            return maintenanceList;
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
         }
 
         public bool DeliverMaintenance(out string m)
@@ -114,6 +108,43 @@ namespace Business_Logic
                 b = false;
             }
             return b;
+        }
+
+        public List<Maintenance> GetAllMaintenance(string statusName)
+        {
+            List<Maintenance> maintenanceList = new List<Maintenance>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("SearchForMaintenance", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@title", SqlDbType.NVarChar).Value = Title;
+            cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
+            cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
+            cmd.Parameters.Add("@statusName", SqlDbType.NVarChar).Value = statusName;
+
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                Maintenance maintenance = new Maintenance();
+                maintenance.Id = Convert.ToInt32(rdr["Id"]);
+                maintenance.ClientName = rdr["ClientName"].ToString();
+                maintenance.Title = rdr["Title"].ToString();
+                maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
+                maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
+                maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
+                maintenance.Cost = string.IsNullOrEmpty(rdr["Cost"].ToString()) ? 0 : Convert.ToDecimal(rdr["Cost"]);
+                maintenance.Price = string.IsNullOrEmpty(rdr["Price"].ToString()) ? 0 : Convert.ToDecimal(rdr["Price"]);
+                maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ?
+                    maintenance.Price : Convert.ToDecimal(rdr["RemainingAmount"]);
+                maintenance.WorkshopName = rdr["WorkshopName"].ToString();
+                maintenance.StatusName = rdr["StatusName"].ToString();
+                maintenance.Description = rdr["Description"].ToString();
+                maintenanceList.Add(maintenance);
+            }
+            rdr.Close();
+            con.Close();
+            return maintenanceList;
         }
     }
 }

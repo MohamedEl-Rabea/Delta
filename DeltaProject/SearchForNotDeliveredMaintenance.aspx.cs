@@ -57,7 +57,7 @@ namespace DeltaProject
             }
 
             HideDeliverPanel();
-            ViewState["Maintenance"] = maintenance.GetAllMaintenance("New");
+            ViewState["Maintenance"] = maintenance.GetAllMaintenance("Priced");
             BindMaintenanceGrid();
         }
 
@@ -79,7 +79,7 @@ namespace DeltaProject
             {
                 var gridRow = (GridViewRow)((ImageButton)e.CommandSource).NamingContainer;
                 lblTitle.Text = gridRow.Cells[1].Text;
-                lblAgreedCost.Text = gridRow.Cells[3].Text;
+                lblPrice.Text = gridRow.Cells[3].Text;
                 txtPaidAmount.Text = gridRow.Cells[3].Text;
                 btnSave.Attributes["maintenanceId"] = gridRow.Cells[0].Text;
                 PanelAllMaintenance.Visible = false;
