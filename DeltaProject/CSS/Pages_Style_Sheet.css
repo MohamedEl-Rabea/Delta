@@ -63,15 +63,18 @@
     font-size: 15px;
     font-weight: 700;
     color: #2c3e50;
+    white-space: nowrap;
 }
 
 .RHSPSmall {
     font-size: 12px;
     font-weight: 800;
+    white-space: nowrap;
 }
 
 .RHSPModified {
     font-size: 12px;
+    white-space: nowrap;
 }
 
 .txts, .txts2, .DateTxts, .DateTxts_MID, .txtsModified, .TxtMultiline, .Smalltxts, .MidTexts, .Smalltxts2, .txts3, .txtAuto {

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
+using System.Web.Services;
 
 namespace DeltaProject.Services
 {
@@ -39,6 +37,27 @@ namespace DeltaProject.Services
             }
             return Products_Names;
         }
+
+        [WebMethod]
+        public List<string> GetProductNames(string name)
+        {
+            List<string> ProductsNames = new List<string>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetProductsNames", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ProductsNames.Add(rdr["Name"].ToString());
+                }
+            }
+            return ProductsNames;
+        }
+
 
         [WebMethod]
         public List<string> Get_MotorsProducts_Names(string p_name)
@@ -79,8 +98,8 @@ namespace DeltaProject.Services
             }
             return Products_Names;
         }
-        
-        [WebMethod(EnableSession=true)]
+
+        [WebMethod(EnableSession = true)]
         public List<string> Get_Products_Names_Form_Bills(string p_name)
         {
             List<string> Products_Names = new List<string>();

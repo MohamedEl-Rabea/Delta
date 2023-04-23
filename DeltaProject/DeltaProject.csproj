@@ -45,6 +45,9 @@
       <HintPath>..\packages\IronPdf.Slim.2022.1.4599\lib\net40\IronPdf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Select.Pdf, Version=21.2.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
       <HintPath>..\packages\Select.Pdf.21.2.0\lib\net40\Select.Pdf.dll</HintPath>
     </Reference>
@@ -68,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
+    <Content Include="AddProduct.aspx" />
+    <Content Include="AddProductClassification.aspx" />
     <Content Include="AddProducts.aspx" />
     <Content Include="AddUnit.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
@@ -200,6 +205,20 @@
     <Compile Include="Accounts_Settings.aspx.designer.cs">
       <DependentUpon>Accounts_Settings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddProduct.aspx.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProduct.aspx.designer.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddProductClassification.aspx.cs">
+      <DependentUpon>AddProductClassification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProductClassification.aspx.designer.cs">
+      <DependentUpon>AddProductClassification.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddProducts.aspx.cs">
       <DependentUpon>AddProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -287,6 +306,7 @@
     <Compile Include="Business_Logic\Bill.cs" />
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
+    <Compile Include="Business_Logic\ClassificationAttribute.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
     <Compile Include="Business_Logic\ClientDebtsSchedule.cs" />
@@ -301,6 +321,7 @@
     <Compile Include="Business_Logic\Order.cs" />
     <Compile Include="Business_Logic\OrderDetails.cs" />
     <Compile Include="Business_Logic\Product.cs" />
+    <Compile Include="Business_Logic\ProductClassification.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />
     <Compile Include="Business_Logic\Suppliers_Products.cs" />

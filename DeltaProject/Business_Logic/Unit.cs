@@ -32,6 +32,30 @@ namespace DeltaProject.Business_Logic
             return units;
         }
 
+        public List<Unit> GetProductUnits(string productName)
+        {
+            List<Unit> units = new List<Unit>();
+
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("GetAvailableUnitsForProduct", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@productName", SqlDbType.NVarChar).Value = productName;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    if (!units.Any(p => p.Id == (int)rdr["SubUnitId"] && p.Name == rdr["SubUnitName"].ToString()))
+                        units.Add(new Unit { Id = (int)rdr["SubUnitId"], Name = rdr["SubUnitName"].ToString() });
+                    if (!units.Any(p => p.Id == (int)rdr["MainUnitId"] && p.Name == rdr["MainUnitName"].ToString()))
+                        units.Add(new Unit { Id = (int)rdr["MainUnitId"], Name = rdr["MainUnitName"].ToString() });
+                }
+            }
+
+            return units;
+        }
+
         public bool AddUnit(out string m)
         {
             bool b = true;
