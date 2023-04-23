@@ -53,7 +53,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>اضافــــة صيانه</p>
+        <p>اضافــــة طلب</p>
     </header>
     <asp:Panel runat="server" ID="PanelAddClientCheque">
         <section>
@@ -187,35 +187,7 @@
                         </asp:RequiredFieldValidator>
                     </td>
                 </tr>
-                <tr>
-                    <td class="RHSTD">
-                        <p class="RHSP">المبلغ :</p>
-                    </td>
-                    <td style="text-align: right">
-                        <asp:TextBox runat="server" ID="txtAgreedCost" CssClass="txts3" PlaceHolder="المبلغ" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="RHSTD">
-                        <br />
-                        <br />
-                    </td>
-                    <td class="ValodationTD">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                            ControlToValidate="txtAgreedCost" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="المبلغ متطلب اساسى">
-                            <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                        <asp:CustomValidator ID="CustomValidator5" runat="server"
-                            ToolTip="يجب كتابة المبلغ بشكل صحيح"
-                            ControlToValidate="txtAgreedCost"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ClientValidationFunction="IsValidDecimal">
-                            <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CustomValidator>
-                    </td>
-                </tr>
+                
                 <tr>
                     <td style="vertical-align: top">
                         <p class="RHSP">الوصـــــــف :</p>

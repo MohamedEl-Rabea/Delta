@@ -17,7 +17,7 @@ namespace Business_Logic
         public string WorkshopName { get; set; }
         public DateTime OrderDate { get; set; }
         public string StatusName { get; set; }
-        public decimal AgreedCost { get; set; }
+        //public decimal AgreedCost { get; set; }
         public decimal RemainingAmount { get; set; }
         public string Description { get; set; }
         public DateTime ExpectedDeliveryDate { get; set; }
@@ -40,7 +40,6 @@ namespace Business_Logic
                 cmd.Parameters.Add("@WorkshopId", SqlDbType.Int).Value = WorkshopId;
                 cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
                 cmd.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
-                cmd.Parameters.Add("@AgreedCost", SqlDbType.Money).Value = AgreedCost;
                 cmd.Parameters.Add("@OrderDate", SqlDbType.DateTime).Value = OrderDate;
                 cmd.Parameters.Add("@ExpectedDeliveryDate", SqlDbType.DateTime).Value = ExpectedDeliveryDate;
                 cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Description;
@@ -78,7 +77,7 @@ namespace Business_Logic
                 maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
                 maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
                 maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
-                maintenance.AgreedCost = Convert.ToDecimal(rdr["AgreedCost"]);
+                //maintenance.AgreedCost = Convert.ToDecimal(rdr["AgreedCost"]);
                 maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ? Convert.ToDecimal(rdr["AgreedCost"]) : Convert.ToDecimal(rdr["RemainingAmount"]);
                 maintenance.WorkshopName = rdr["WorkshopName"].ToString();
                 maintenance.StatusName = rdr["StatusName"].ToString();
