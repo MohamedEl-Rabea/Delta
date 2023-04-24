@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="SearchForMaintenanceWithRemaining.aspx.cs" Inherits="DeltaProject.SearchForMaintenanceWithRemaining" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <script type="text/javascript">
         $(function () {
             $('#<%= txtClientName.ClientID%>').autocomplete({

@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Add_Maintenance.aspx.cs" Inherits="DeltaProject.Add_Maintenance" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <style>
         .RHSTD {
             width: auto !important;
@@ -194,7 +193,7 @@
                     </td>
                     <td colspan="3">
                         <asp:TextBox ID="txtDescription" runat="server" CssClass="TxtMultiline" AutoCompleteType="Disabled" Width="98%"
-                            TextMode="MultiLine" placeholder="اضف وصفا للصيانه ....."></asp:TextBox>
+                            TextMode="MultiLine" Style="resize: vertical;" placeholder="اضف وصفا للصيانه ....."></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

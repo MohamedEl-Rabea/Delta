@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="MaintenancePricing.aspx.cs" Inherits="DeltaProject.MaintenancePricing" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <style>
         .RBLCategories2 {
             width: 290px;

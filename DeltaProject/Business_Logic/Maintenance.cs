@@ -146,5 +146,38 @@ namespace Business_Logic
             con.Close();
             return maintenanceList;
         }
+
+        public static List<Maintenance> GetMaintenanceReport(int workshopId, DateTime? startDate, DateTime? endDate)
+        {
+            List<Maintenance> maintenanceList = new List<Maintenance>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("GetMaintenanceReport", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@workshopId", SqlDbType.Int).Value = workshopId;
+            if (startDate.HasValue)
+                cmd.Parameters.AddWithValue("@startDate", startDate);
+            if (endDate.HasValue)
+                cmd.Parameters.AddWithValue("@endDate", endDate);
+
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                Maintenance maintenance = new Maintenance();
+                maintenance.Id = Convert.ToInt32(rdr["Id"]);
+                maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
+                maintenance.Title = rdr["Title"].ToString();
+                maintenance.ClientName = rdr["ClientName"].ToString();
+                maintenance.Cost = string.IsNullOrEmpty(rdr["Cost"].ToString()) ? 0 : Convert.ToDecimal(rdr["Cost"]);
+                maintenance.Price = string.IsNullOrEmpty(rdr["Price"].ToString()) ? 0 : Convert.ToDecimal(rdr["Price"]);
+                maintenance.PaidAmount = string.IsNullOrEmpty(rdr["Paid"].ToString()) ? 0 : Convert.ToDecimal(rdr["Paid"]);
+                maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ? 0 : Convert.ToDecimal(rdr["RemainingAmount"]);
+                maintenanceList.Add(maintenance);
+            }
+            rdr.Close();
+            con.Close();
+            return maintenanceList;
+        }
     }
 }

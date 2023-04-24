@@ -15,7 +15,7 @@ namespace DeltaProject
 
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
-            PanelAllProcessess.Visible = false;
+            PanelAllProcesses.Visible = false;
             PanelLoaderDetails.Visible = false;
             PanelErrorMessage.Visible = false;
 
@@ -35,9 +35,9 @@ namespace DeltaProject
             }
             else
             {
-                ViewState["Processess"] = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate);
+                ViewState["Processes"] = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate);
                 BindLoaderProcessGrid();
-                PanelAllProcessess.Visible = true;
+                PanelAllProcesses.Visible = true;
             }
         }
 
@@ -53,12 +53,12 @@ namespace DeltaProject
                 lblCost.Text = gridRow.Cells[5].Text;
                 lblRemainingAmount.Text = gridRow.Cells[6].Text;
                 lblDescription.Text = gridRow.Cells[7].Text;
-                PanelAllProcessess.Visible = false;
+                PanelAllProcesses.Visible = false;
                 PanelLoaderDetails.Visible = true;
             }
         }
 
-        protected void GridViewMaintenance_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void GridViewProcess_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridViewProcess.PageIndex = e.NewPageIndex;
             BindLoaderProcessGrid();
@@ -66,7 +66,7 @@ namespace DeltaProject
 
         private void BindLoaderProcessGrid()
         {
-            GridViewProcess.DataSource = ViewState["Processess"];
+            GridViewProcess.DataSource = ViewState["Processes"];
             GridViewProcess.DataBind();
         }
 

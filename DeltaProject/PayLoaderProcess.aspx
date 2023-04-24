@@ -71,9 +71,9 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد عمليات مسجله لهذا العميل / الفترة"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelAllProcessess" Visible="false">
-        <asp:Panel runat="server" ID="PanelProcessess" CssClass="PreReport_SectionTab">
-            <asp:GridView ID="GridViewProcessess" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
+    <asp:Panel runat="server" ID="PanelAllProcesses" Visible="false">
+        <asp:Panel runat="server" ID="PanelProcesses" CssClass="PreReport_SectionTab">
+            <asp:GridView ID="GridViewProcesses" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
                 EmptyDataText="لا توجد عمليات مسجله لهذا العميل / الفترة"
                 HeaderText="اسم الونش"
                 SortExpression="LoaderName"

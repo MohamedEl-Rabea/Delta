@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="SearchForLoaderProcess.aspx.cs" Inherits="DeltaProject.SearchForLoaderProcess" Culture = "ar-EG" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <script type="text/javascript">
         $(function () {
             $('#<%= txtClientName.ClientID%>').autocomplete({
@@ -78,8 +77,8 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد عمليات مسجله لهذا العميل / الفترة"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelAllProcessess" Visible="false">
-        <asp:Panel runat="server" ID="PanelProcessess" CssClass="PreReport_SectionTab">
+    <asp:Panel runat="server" ID="PanelAllProcesses" Visible="false">
+        <asp:Panel runat="server" ID="PanelProcesses" CssClass="PreReport_SectionTab">
             <asp:GridView ID="GridViewProcess" runat="server" AutoGenerateColumns="False" CssClass="Gridview_Style2"
                 EmptyDataText="لا توجد عمليات مسجله لهذا العميل / الفترة"
                 HeaderText="اسم الونش"
@@ -87,7 +86,7 @@
                 DataKeyNames="Id"
                 OnRowCommand="GridViewProcess_OnRowCommand"
                 AllowPaging="True"
-                OnPageIndexChanging="GridViewMaintenance_OnPageIndexChanging">
+                OnPageIndexChanging="GridViewProcess_OnPageIndexChanging">
                 <Columns>
                     <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="LoaderName" HeaderText="اسم الونش" SortExpression="LoaderName" />
