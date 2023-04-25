@@ -69,22 +69,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label LabelErrMsg;
 
         /// <summary>
-        /// PanelAllProcessess control.
+        /// PanelAllProcesses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAllProcessess;
+        protected global::System.Web.UI.WebControls.Panel PanelAllProcesses;
 
         /// <summary>
-        /// PanelProcessess control.
+        /// PanelProcesses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelProcessess;
+        protected global::System.Web.UI.WebControls.Panel PanelProcesses;
 
         /// <summary>
         /// GridViewProcess control.

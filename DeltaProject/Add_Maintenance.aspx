@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Add_Maintenance.aspx.cs" Inherits="DeltaProject.Add_Maintenance" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <style>
         .RHSTD {
             width: auto !important;
@@ -53,7 +52,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>اضافــــة صيانه</p>
+        <p>اضافــــة طلب</p>
     </header>
     <asp:Panel runat="server" ID="PanelAddClientCheque">
         <section>
@@ -187,42 +186,14 @@
                         </asp:RequiredFieldValidator>
                     </td>
                 </tr>
-                <tr>
-                    <td class="RHSTD">
-                        <p class="RHSP">المبلغ :</p>
-                    </td>
-                    <td style="text-align: right">
-                        <asp:TextBox runat="server" ID="txtAgreedCost" CssClass="txts3" PlaceHolder="المبلغ" AutoCompleteType="Disabled"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="RHSTD">
-                        <br />
-                        <br />
-                    </td>
-                    <td class="ValodationTD">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
-                            ControlToValidate="txtAgreedCost" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="المبلغ متطلب اساسى">
-                            <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
-                        <asp:CustomValidator ID="CustomValidator5" runat="server"
-                            ToolTip="يجب كتابة المبلغ بشكل صحيح"
-                            ControlToValidate="txtAgreedCost"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ClientValidationFunction="IsValidDecimal">
-                            <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CustomValidator>
-                    </td>
-                </tr>
+                
                 <tr>
                     <td style="vertical-align: top">
                         <p class="RHSP">الوصـــــــف :</p>
                     </td>
                     <td colspan="3">
                         <asp:TextBox ID="txtDescription" runat="server" CssClass="TxtMultiline" AutoCompleteType="Disabled" Width="98%"
-                            TextMode="MultiLine" placeholder="اضف وصفا للصيانه ....."></asp:TextBox>
+                            TextMode="MultiLine" Style="resize: vertical;" placeholder="اضف وصفا للصيانه ....."></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

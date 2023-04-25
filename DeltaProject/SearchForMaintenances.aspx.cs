@@ -69,9 +69,10 @@ namespace DeltaProject
                 lblOrderDate.Text = gridRow.Cells[3].Text;
                 lblStatus.Text = gridRow.Cells[4].Text;
                 lblExpiryWarrantyDate.Text = gridRow.Cells[5].Text;
-                lblAgreedCost.Text = gridRow.Cells[6].Text;
-                lblRemainingAmount.Text = gridRow.Cells[7].Text;
-                lblDescription.Text = gridRow.Cells[8].Text;
+                lblCost.Text = gridRow.Cells[6].Text;
+                lblPrice.Text = gridRow.Cells[7].Text;
+                lblRemainingAmount.Text = gridRow.Cells[8].Text;
+                lblDescription.Text = gridRow.Cells[9].Text;
                 PanelAllMaintenance.Visible = false;
                 PanelMaintenanceDetails.Visible = true;
             }

@@ -11,17 +11,8 @@ namespace DeltaProject
 {
 
 
-    public partial class SearchForMaintenances
+    public partial class LoaderExpensesReport
     {
-
-        /// <summary>
-        /// RadioButtonListCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonListCategories;
 
         /// <summary>
         /// ImageButtonSearch control.
@@ -33,31 +24,31 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonSearch;
 
         /// <summary>
-        /// txtClientName control.
+        /// ddlLoaders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtClientName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLoaders;
 
         /// <summary>
-        /// txtPhoneNumber control.
+        /// txtStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtStartDate;
 
         /// <summary>
-        /// CustomValidator1 control.
+        /// txtEndDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
+        protected global::System.Web.UI.WebControls.TextBox txtEndDate;
 
         /// <summary>
         /// PanelErrorMessage control.
@@ -78,156 +69,129 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label LabelErrMsg;
 
         /// <summary>
-        /// PanelAllMaintenance control.
+        /// PanelReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAllMaintenance;
+        protected global::System.Web.UI.WebControls.Panel PanelReport;
 
         /// <summary>
-        /// lnkBtnAllMaintenance control.
+        /// ImageButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnAllMaintenance;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
 
         /// <summary>
-        /// lnkBtnDeliveredMaintenance control.
+        /// ImageButton2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnDeliveredMaintenance;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
 
         /// <summary>
-        /// lnkBtnMaintenanceWithRemaining control.
+        /// pdfHiddenContentField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtnMaintenanceWithRemaining;
+        protected global::System.Web.UI.WebControls.HiddenField pdfHiddenContentField;
 
         /// <summary>
-        /// PanelMaintenance control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelMaintenance;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// GridViewMaintenance control.
+        /// lblStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewMaintenance;
+        protected global::System.Web.UI.WebControls.Label lblStartDate;
 
         /// <summary>
-        /// PanelMaintenanceDetails control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelMaintenanceDetails;
+        protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// ImageButtonBackMaintenance control.
+        /// lblEndDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButtonBackMaintenance;
+        protected global::System.Web.UI.WebControls.Label lblEndDate;
 
         /// <summary>
-        /// lblTitle control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTitle;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// lblWorkshop control.
+        /// lblLoaderName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWorkshop;
+        protected global::System.Web.UI.WebControls.Label lblLoaderName;
 
         /// <summary>
-        /// lblOrderDate control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrderDate;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// lblExpiryWarrantyDate control.
+        /// lblProfit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExpiryWarrantyDate;
+        protected global::System.Web.UI.WebControls.Label lblProfit;
 
         /// <summary>
-        /// lblStatus control.
+        /// GridViewLoaderProcesses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus;
+        protected global::System.Web.UI.WebControls.GridView GridViewLoaderProcesses;
 
         /// <summary>
-        /// lblCost control.
+        /// GridViewExpenses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCost;
-
-        /// <summary>
-        /// lblPrice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrice;
-
-        /// <summary>
-        /// lblRemainingAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRemainingAmount;
-
-        /// <summary>
-        /// lblDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescription;
+        protected global::System.Web.UI.WebControls.GridView GridViewExpenses;
     }
 }

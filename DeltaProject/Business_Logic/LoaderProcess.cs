@@ -21,7 +21,6 @@ namespace DeltaProject.Business_Logic
         public DateTime Date { get; set; }
         public string Description { get; set; }
 
-
         public bool RegisterLoaderProcess(out string m)
         {
             bool b = true;
@@ -109,6 +108,37 @@ namespace DeltaProject.Business_Logic
                 b = false;
             }
             return b;
+        }
+
+        public static List<LoaderProcess> GetLoaderProcessesReport(int workshopId, DateTime? startDate, DateTime? endDate)
+        {
+            List<LoaderProcess> loaderProcesses = new List<LoaderProcess>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("GetLoaderProcessesReport", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@loaderId", SqlDbType.Int).Value = workshopId;
+            if (startDate.HasValue)
+                cmd.Parameters.AddWithValue("@startDate", startDate);
+            if (endDate.HasValue)
+                cmd.Parameters.AddWithValue("@endDate", endDate);
+
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                LoaderProcess loaderProcess = new LoaderProcess();
+                loaderProcess.Id = Convert.ToInt32(rdr["Id"]);
+                loaderProcess.Date = Convert.ToDateTime(rdr["Date"]);
+                loaderProcess.ClientName = rdr["ClientName"].ToString();
+                loaderProcess.Cost = string.IsNullOrEmpty(rdr["Cost"].ToString()) ? 0 : Convert.ToDecimal(rdr["Cost"]);
+                loaderProcess.PaidAmount = string.IsNullOrEmpty(rdr["Paid"].ToString()) ? 0 : Convert.ToDecimal(rdr["Paid"]);
+                loaderProcess.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ? 0 : Convert.ToDecimal(rdr["RemainingAmount"]);
+                loaderProcesses.Add(loaderProcess);
+            }
+            rdr.Close();
+            con.Close();
+            return loaderProcesses;
         }
     }
 }

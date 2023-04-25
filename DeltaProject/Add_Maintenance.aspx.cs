@@ -25,7 +25,6 @@ namespace DeltaProject
             Maintenance maintenance = new Maintenance();
             maintenance.PhoneNumber = txtPhoneNumber.Text;
             maintenance.Title = txtTitle.Text;
-            maintenance.AgreedCost = Convert.ToDecimal(txtAgreedCost.Text);
             maintenance.ClientName = txtClientName.Text;
             maintenance.WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue);
             var orderDate = Convert.ToDateTime(OrderDate.Text);
@@ -47,7 +46,6 @@ namespace DeltaProject
                 lblFinishMsg.Text = $"تم حفظ صيانة ({maintenance.Title}) للعميل ({maintenance.ClientName}) بنجاح";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
                 txtTitle.Text = string.Empty;
-                txtAgreedCost.Text = string.Empty;
                 txtClientName.Text = string.Empty;
                 txtPhoneNumber.Text = string.Empty;
                 ddlWorkshops.SelectedIndex = 0;

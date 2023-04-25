@@ -30,34 +30,34 @@ namespace DeltaProject
                 string.IsNullOrEmpty(txtEndDate.Text))
             {
                 PanelErrorMessage.Visible = true;
-                PanelAllProcessess.Visible = false;
+                PanelAllProcesses.Visible = false;
             }
             else
             {
                 var data = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate, true);
-                ViewState["Processess"] = data;
+                ViewState["Processes"] = data;
 
                 if (e == null && data.Count == 0)
-                    GridViewProcessess.EmptyDataText = "";
+                    GridViewProcesses.EmptyDataText = "";
                 else
-                    GridViewProcessess.EmptyDataText = "لا توجد عمليات مسجله لهذا العميل / الفترة";
+                    GridViewProcesses.EmptyDataText = "لا توجد عمليات مسجله لهذا العميل / الفترة";
 
                 BindLoaderProcessGrid();
-                PanelAllProcessess.Visible = true;
+                PanelAllProcesses.Visible = true;
                 PanelErrorMessage.Visible = false;
             }
         }
 
         protected void GridViewMaintenance_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            GridViewProcessess.PageIndex = e.NewPageIndex;
+            GridViewProcesses.PageIndex = e.NewPageIndex;
             BindLoaderProcessGrid();
         }
 
         private void BindLoaderProcessGrid()
         {
-            GridViewProcessess.DataSource = ViewState["Processess"];
-            GridViewProcessess.DataBind();
+            GridViewProcesses.DataSource = ViewState["Processes"];
+            GridViewProcesses.DataBind();
         }
 
         protected void btnPay_OnClick(object sender, EventArgs e)
@@ -67,10 +67,10 @@ namespace DeltaProject
 
             LoaderProcess loaderProcess = new LoaderProcess();
             loaderProcess.Id = Convert.ToInt32(gridRow.Cells[0].Text);
-            var date = Convert.ToDateTime(((TextBox)GridViewProcessess.Rows[rowIndex].FindControl("txtPaymentDate")).Text);
+            var date = Convert.ToDateTime(((TextBox)GridViewProcesses.Rows[rowIndex].FindControl("txtPaymentDate")).Text);
             loaderProcess.Date = new DateTime(date.Year, date.Month, date.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-            loaderProcess.PaidAmount = Convert.ToDecimal(((TextBox)GridViewProcessess.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
+            loaderProcess.PaidAmount = Convert.ToDecimal(((TextBox)GridViewProcesses.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
 
             var loaderName = gridRow.Cells[1].Text;
             var clientName = gridRow.Cells[3].Text;

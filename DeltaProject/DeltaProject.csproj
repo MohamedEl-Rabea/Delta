@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
+    <Content Include="AddLoaderExpense.aspx" />
+    <Content Include="AddMaintenanceExpense.aspx" />
     <Content Include="AddProducts.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
     <Content Include="Add_Client_Offer.aspx" />
@@ -129,7 +131,10 @@
     <Content Include="Images\home.png" />
     <Content Include="Images\Up.png" />
     <Content Include="Income_Report.aspx" />
+    <Content Include="LoaderExpensesReport.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MaintenanceExpensesReport.aspx" />
+    <Content Include="MaintenancePricing.aspx" />
     <Content Include="Manage_Permissions.aspx" />
     <Content Include="Needs_Report.aspx" />
     <Content Include="New_Client_Interaction.aspx" />
@@ -189,6 +194,20 @@
     </Compile>
     <Compile Include="Accounts_Settings.aspx.designer.cs">
       <DependentUpon>Accounts_Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddLoaderExpense.aspx.cs">
+      <DependentUpon>AddLoaderExpense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddLoaderExpense.aspx.designer.cs">
+      <DependentUpon>AddLoaderExpense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddMaintenanceExpense.aspx.cs">
+      <DependentUpon>AddMaintenanceExpense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMaintenanceExpense.aspx.designer.cs">
+      <DependentUpon>AddMaintenanceExpense.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddProducts.aspx.cs">
       <DependentUpon>AddProducts.aspx</DependentUpon>
@@ -278,8 +297,10 @@
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
     <Compile Include="Business_Logic\Loader.cs" />
+    <Compile Include="Business_Logic\LoaderExpense.cs" />
     <Compile Include="Business_Logic\LoaderProcess.cs" />
     <Compile Include="Business_Logic\Maintenance.cs" />
+    <Compile Include="Business_Logic\MaintenanceExpense.cs" />
     <Compile Include="Business_Logic\MaintenancePayment.cs" />
     <Compile Include="Business_Logic\Order.cs" />
     <Compile Include="Business_Logic\OrderDetails.cs" />
@@ -377,12 +398,33 @@
     <Compile Include="Income_Report.aspx.designer.cs">
       <DependentUpon>Income_Report.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LoaderExpensesReport.aspx.cs">
+      <DependentUpon>LoaderExpensesReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoaderExpensesReport.aspx.designer.cs">
+      <DependentUpon>LoaderExpensesReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenanceExpensesReport.aspx.cs">
+      <DependentUpon>MaintenanceExpensesReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintenanceExpensesReport.aspx.designer.cs">
+      <DependentUpon>MaintenanceExpensesReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MaintenancePricing.aspx.cs">
+      <DependentUpon>MaintenancePricing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintenancePricing.aspx.designer.cs">
+      <DependentUpon>MaintenancePricing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage_Permissions.aspx.cs">
       <DependentUpon>Manage_Permissions.aspx</DependentUpon>
