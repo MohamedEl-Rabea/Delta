@@ -52,9 +52,7 @@ namespace DeltaProject
                 GridViewExpenses.Columns[1].FooterText = expensesList.Sum(p => p.Amount).ToString("0.##");
                 GridViewExpenses.DataBind();
 
-                var profit = maintenanceList.Sum(p => p.PaidAmount) -
-                             maintenanceList.Sum(p => p.Cost) -
-                             expensesList.Sum(p => p.Amount);
+                var profit = maintenanceList.Sum(p => p.PaidAmount) - expensesList.Sum(p => p.Amount);
                 lblProfit.Text = profit.ToString("0.##");
 
                 if (profit < 0)
