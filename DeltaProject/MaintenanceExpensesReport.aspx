@@ -38,8 +38,10 @@
                 html = `<div><p>- ${partnerData[0].PartnerName.trim()} :</p></div>` + initHtml;
 
                 for (let w = 0; w < partnerData.length; w++) {
+                    var date = partnerData[w].Date.slice(0, partnerData[w].Date.indexOf('T')).replaceAll('-', ', ');
+                    date = date.split(', ').reverse().join(', ');
                     html += `<tr class="RowStyleList">
-                             <td>${partnerData[w].Date.trim()}</td>
+                             <td>${date}</td>
                              <td>${partnerData[w].Amount}</td>
                              <td>${partnerData[w].Notes.trim()}</td></tr>`;
                 }
