@@ -230,7 +230,6 @@
                     </asp:GridView>
                 </section>
                 <br />
-                <
                 <asp:Panel runat="server" ID="PanelPastMaintenance" Visible="False">
                     <div>
                         <p>جدول الصيانات السابقة</p>
