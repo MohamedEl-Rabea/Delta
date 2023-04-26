@@ -11,17 +11,17 @@ namespace DeltaProject
 {
 
 
-    public partial class AddMaintenanceExpenses
+    public partial class AddMaintenanceWithdraw
     {
 
         /// <summary>
-        /// PanelAddMaintenanceExpense control.
+        /// PanelAddMaintenanceWithdraw control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAddMaintenanceExpense;
+        protected global::System.Web.UI.WebControls.Panel PanelAddMaintenanceWithdraw;
 
         /// <summary>
         /// ddlWorkshops control.
@@ -33,13 +33,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.DropDownList ddlWorkshops;
 
         /// <summary>
-        /// txtDate control.
+        /// ddlPartners control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDate;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPartners;
 
         /// <summary>
         /// RequiredFieldValidator1 control.
@@ -60,6 +60,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
+        /// txtDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDate;
+
+        /// <summary>
         /// txtAmount control.
         /// </summary>
         /// <remarks>
@@ -69,15 +78,6 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.TextBox txtAmount;
 
         /// <summary>
-        /// txtReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReason;
-
-        /// <summary>
         /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
@@ -85,6 +85,15 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+
+        /// <summary>
+        /// RequiredFieldValidator4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
 
         /// <summary>
         /// CustomValidator1 control.
@@ -105,13 +114,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator2;
 
         /// <summary>
-        /// RequiredFieldValidator4 control.
+        /// txtNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        protected global::System.Web.UI.WebControls.TextBox txtNotes;
 
         /// <summary>
         /// BtnSave control.

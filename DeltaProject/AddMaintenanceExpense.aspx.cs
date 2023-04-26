@@ -10,8 +10,7 @@ namespace DeltaProject
         {
             if (!IsPostBack)
             {
-                Workshop workshop = new Workshop();
-                ddlWorkshops.DataSource = workshop.GetWorkshops();
+                ddlWorkshops.DataSource = Workshop.GetWorkshops();
                 ddlWorkshops.DataBind();
                 ddlWorkshops.Items.Insert(0, new ListItem("إختر ورشة", ""));
                 ddlWorkshops.SelectedIndex = 0;

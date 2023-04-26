@@ -10,8 +10,9 @@ namespace DeltaProject.Business_Logic
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public IEnumerable<Partner> Partners { get; set; }
 
-        public List<Workshop> GetWorkshops()
+        public static List<Workshop> GetWorkshops()
         {
             List<Workshop> workshops = new List<Workshop>();
 
@@ -40,6 +41,7 @@ namespace DeltaProject.Business_Logic
                 SqlCommand cmd = new SqlCommand("AddWorkshop", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = this.Name;
+                cmd.Parameters.Add("@partners", SqlDbType.Structured).Value = ToDataTable();
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -53,5 +55,16 @@ namespace DeltaProject.Business_Logic
             return b;
         }
 
+        private DataTable ToDataTable()
+        {
+            var table = new DataTable();
+            table.Columns.Add("WorkshopId", typeof(int));
+            table.Columns.Add("Name", typeof(string));
+
+            foreach (var item in Partners)
+                table.Rows.Add(item.WorkshopId, item.Name);
+
+            return table;
+        }
     }
 }
