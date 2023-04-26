@@ -240,6 +240,24 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.GridView GridViewMaintenance;
 
         /// <summary>
+        /// PanelPastMaintenance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPastMaintenance;
+
+        /// <summary>
+        /// GridPastViewMaintenance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridPastViewMaintenance;
+
+        /// <summary>
         /// GridViewExpenses control.
         /// </summary>
         /// <remarks>
@@ -247,14 +265,5 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewExpenses;
-
-        /// <summary>
-        /// GridViewWithdraws control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewWithdraws;
     }
 }

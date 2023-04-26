@@ -15,6 +15,52 @@
             $('#<%= txtEndDate.ClientID%>').datepicker(options);
         });
 
+        function AddPartnersGridViews(data) {
+            debugger;
+            var partners = data.map(x => x.PartnerId).filter(onlyUnique);
+
+            var initHtml = 
+                '<table class="GridViewBill" cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">' +
+                    '<tbody><tr class="HeaderStyleBill">' +
+                    '<th scope="col">التاريخ</th>' +
+                    '<th scope="col">القيمة</th>' +
+                    '<th scope="col">ملاحظات</th></tr>';
+
+            var html;
+            var finalHtml = "";
+
+            $('#divWithdraws').html('');
+
+            for (let p = 0; p < partners.length; p++) {
+                var partnerId = partners[p];
+                var partnerData = data.filter(c=> c.PartnerId === partnerId);
+                   
+                html = `<div><p>- ${partnerData[0].PartnerName.trim()} :</p></div>` + initHtml;
+
+                for (let w = 0; w < partnerData.length; w++) {
+                    html += `<tr class="RowStyleList">
+                             <td>${partnerData[w].Date.trim()}</td>
+                             <td>${partnerData[w].Amount}</td>
+                             <td>${partnerData[w].Notes.trim()}</td></tr>`;
+                }
+
+                let sumAmount = 0;
+                partnerData.map(c => c.Amount).forEach(item => {
+                    sumAmount += item;
+                });
+
+                html +=
+                    `<tr class="FooterStyleBill"><td>&nbsp;</td><td>${sumAmount}</td><td>&nbsp;</td></tr></tbody></table>`;
+                finalHtml += html;
+            }
+
+            $('#divWithdraws').html(finalHtml);
+        }
+
+        function onlyUnique(value, index, array) {
+            return array.indexOf(value) === index;
+        }
+
         function storeContentToExportPdf(divId) {
             var pdfContent = '<html><head><title></title>';
             pdfContent += '<link rel="stylesheet" href="CSS/Pages_Style_Sheet.css" type="text/css" />';
@@ -184,6 +230,29 @@
                     </asp:GridView>
                 </section>
                 <br />
+                <
+                <asp:Panel runat="server" ID="PanelPastMaintenance" Visible="False">
+                    <div>
+                        <p>جدول الصيانات السابقة</p>
+                    </div>
+                    <asp:GridView runat="server" ID="GridPastViewMaintenance" CssClass="GridViewBill"
+                                  AutoGenerateColumns="False" EmptyDataText="لا توجد صيانات" ShowFooter="true">
+                        <Columns>
+                            <asp:BoundField DataField="OrderDate" HeaderText="تاريخ الصيانة" SortExpression="OrderDate" DataFormatString="{0:dd/MM/yyyy}" />
+                            <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
+                            <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" />
+                            <asp:BoundField DataField="Cost" HeaderText="التكلفة" SortExpression="Cost" DataFormatString="{0:0.##}" />
+                            <asp:BoundField DataField="PaidAmount" HeaderText="المدفوع" SortExpression="Price" DataFormatString="{0:0.##}" />
+                            <asp:BoundField DataField="RemainingAmount" HeaderText="المتبقى" SortExpression="RemainingAmount" DataFormatString="{0:0.##}" />
+                        </Columns>
+                        <HeaderStyle CssClass="HeaderStyleBill" />
+                        <RowStyle CssClass="RowStyleList" />
+                        <AlternatingRowStyle CssClass="AlternateRowStyleList" />
+                        <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                        <FooterStyle CssClass="FooterStyleBill" />
+                    </asp:GridView>
+                </asp:Panel>
+                <br />
                 <section>
                     <div>
                         <p>جدول المصروفات</p>
@@ -207,20 +276,10 @@
                     <div>
                         <p>جدول السحوبات</p>
                     </div>
-                    <asp:GridView runat="server" ID="GridViewWithdraws" CssClass="GridViewBill"
-                                  AutoGenerateColumns="False" EmptyDataText="لا توجد سحوبات" ShowFooter="true">
-                        <Columns>
-                            <asp:BoundField DataField="PartnerName" HeaderText="اسم الشريك" SortExpression="PartnerName"/>
-                            <asp:BoundField DataField="Date" HeaderText="التاريخ" SortExpression="Date" DataFormatString="{0:dd/MM/yyyy}" />
-                            <asp:BoundField DataField="Amount" HeaderText="القيمة" SortExpression="Amount" DataFormatString="{0:0.##}" />
-                            <asp:BoundField DataField="Notes" HeaderText="ملاحظات" SortExpression="Reason" />
-                        </Columns>
-                        <HeaderStyle CssClass="HeaderStyleBill" />
-                        <RowStyle CssClass="RowStyleList" />
-                        <AlternatingRowStyle CssClass="AlternateRowStyleList" />
-                        <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
-                        <FooterStyle CssClass="FooterStyleBill" />
-                    </asp:GridView>
+                    <br/>
+                    <div id="divWithdraws">
+
+                    </div>
                 </section>
             </section>
             <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center; height: auto">

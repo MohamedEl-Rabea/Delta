@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace DeltaProject.Business_Logic
 {
+    [Serializable]
     public class MaintenanceWithdraw
     {
         public int Id { get; set; }

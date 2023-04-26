@@ -1,5 +1,6 @@
 ﻿using Business_Logic;
 using DeltaProject.Business_Logic;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -71,11 +72,12 @@ namespace DeltaProject
 
         private void BindPastMaintenanceGridView(List<Maintenance> pastMaintenanceList)
         {
-            //GridPastViewMaintenance.DataSource = pastMaintenanceList;
-            //GridPastViewMaintenance.Columns[3].FooterText = pastMaintenanceList.Sum(p => p.Cost).ToString("0.##");
-            //GridPastViewMaintenance.Columns[4].FooterText = pastMaintenanceList.Sum(p => p.PaidAmount).ToString("0.##");
-            //GridPastViewMaintenance.Columns[5].FooterText = pastMaintenanceList.Sum(p => p.RemainingAmount).ToString("0.##");
-            //GridPastViewMaintenance.DataBind();
+            PanelPastMaintenance.Visible = pastMaintenanceList.Any();
+            GridPastViewMaintenance.DataSource = pastMaintenanceList;
+            GridPastViewMaintenance.Columns[3].FooterText = pastMaintenanceList.Sum(p => p.Cost).ToString("0.##");
+            GridPastViewMaintenance.Columns[4].FooterText = pastMaintenanceList.Sum(p => p.PaidAmount).ToString("0.##");
+            GridPastViewMaintenance.Columns[5].FooterText = pastMaintenanceList.Sum(p => p.RemainingAmount).ToString("0.##");
+            GridPastViewMaintenance.DataBind();
         }
 
         private void BindExpensesGridView(List<MaintenanceExpense> expensesList)
@@ -87,10 +89,12 @@ namespace DeltaProject
 
         private void BindWithdrawsGridView(List<MaintenanceWithdraw> withdrawsList)
         {
-            withdrawsList = withdrawsList.OrderByDescending(p => p.PartnerId).ToList();
-            GridViewWithdraws.DataSource = withdrawsList;
-            GridViewWithdraws.Columns[2].FooterText = withdrawsList.Sum(p => p.Amount).ToString("0.##");
-            GridViewWithdraws.DataBind();
+            Page.ClientScript.RegisterStartupScript(GetType(), "text", $"AddPartnersGridViews({JsonConvert.SerializeObject(withdrawsList)})", true);
+
+            //withdrawsList = withdrawsList.OrderByDescending(p => p.PartnerId).ToList();
+            //GridViewWithdraws.DataSource = withdrawsList;
+            //GridViewWithdraws.Columns[2].FooterText = withdrawsList.Sum(p => p.Amount).ToString("0.##");
+            //GridViewWithdraws.DataBind();
         }
 
         private void SetSummary(List<Maintenance> maintenanceList, List<MaintenanceExpense> expensesList, List<MaintenanceWithdraw> withdrawList)
