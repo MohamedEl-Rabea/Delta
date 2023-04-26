@@ -42,6 +42,24 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
+        /// PanelPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPartners;
+
+        /// <summary>
+        /// gridViewPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridViewPartners;
+
+        /// <summary>
         /// BtnSave control.
         /// </summary>
         /// <remarks>
