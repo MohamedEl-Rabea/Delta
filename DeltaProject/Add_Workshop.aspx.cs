@@ -12,27 +12,25 @@ namespace DeltaProject
     {
         private List<Partner> Partners
         {
-            get => ViewState["Partners"] == null
+            get => ViewState["PartnerList"] == null
                 ? new List<Partner>()
-                : (List<Partner>)ViewState["Partners"];
-            set => ViewState["Partners"] = value;
+                : (List<Partner>)ViewState["PartnerList"];
+            set => ViewState["PartnerList"] = value;
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblSaveMsg.Text = "";
-            lblSaveMsg.Visible = false;
-            ViewState["Partners"] = null;
-            BindPartnersGridView();
+            if (!IsPostBack)
+                BindPartnersGridView();
         }
 
         protected void gridViewPartners_OnRowDataBound(object sender, GridViewRowEventArgs e)
         {
+
             var isDataRow = e.Row.RowType == DataControlRowType.DataRow;
             if (isDataRow && gridViewPartners.DataKeys[e.Row.RowIndex]?.Value is DBNull)
                 return;
-            var isNew = isDataRow && Convert.ToInt32(gridViewPartners.DataKeys[e.Row.RowIndex]?.Value) == 0;
-            if (isNew)
+            if (isDataRow)
                 ((ImageButton)e.Row.FindControl("btnDelete")).Visible = true;
         }
 
@@ -49,13 +47,11 @@ namespace DeltaProject
 
                 if (Partners.Select(p => p.Name).Contains(partner.Name))
                 {
-                    lblSaveMsg.Visible = true;
                     lblSaveMsg.Text = "! هذا الشريك مسجل فى القائمة";
                     lblSaveMsg.ForeColor = System.Drawing.Color.Red;
                 }
                 else
                 {
-                    lblSaveMsg.Visible = false;
                     lblSaveMsg.Text = "";
                     lblSaveMsg.ForeColor = System.Drawing.Color.Green;
                     AddNewPartner(partner);
@@ -74,8 +70,12 @@ namespace DeltaProject
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             ViewState["W_Name"] = txtWorkshop_Name.Text;
-            Workshop workshop = new Workshop();
-            workshop.Name = txtWorkshop_Name.Text;
+            Workshop workshop = new Workshop
+            {
+                Name = txtWorkshop_Name.Text,
+                Partners = Partners
+            };
+
             string m = "";
             if (!workshop.Add_Workshop(out m))
             {
@@ -84,32 +84,37 @@ namespace DeltaProject
             }
             else
             {
-                lblSaveMsg.Text = "تم بنجاح";
-                lblSaveMsg.ForeColor = System.Drawing.Color.Green;
+                txtWorkshop_Name.Text = "";
+                ViewState["PartnerList"] = null;
+                BindPartnersGridView();
+                Success("تم بنجاح");
             }
         }
 
         private void AddNewPartner(Partner partner)
         {
-            ViewState["Partners"] = ViewState["Partners"] ?? new List<Partner>();
-            var unitFactors = (List<Partner>)ViewState["Partners"];
-            unitFactors.Add(partner);
+            ViewState["PartnerList"] = ViewState["PartnerList"] ?? new List<Partner>();
+            var partners = (List<Partner>)ViewState["PartnerList"];
+            partners.Add(partner);
         }
 
         private void BindPartnersGridView()
         {
-            var gridDataSource = (List<Partner>)ViewState["Partners"];
-            gridViewPartners.DataSource = ToDataTable(gridDataSource);
+            BtnSave.Enabled = Partners.Any();
+            BtnSave.BackColor = Color.FromName(Partners.Any() ? "#1abc9c" : "#aaa");
+
+            gridViewPartners.DataSource = ToDataTable(Partners);
             gridViewPartners.DataBind();
         }
 
         private DataTable ToDataTable(IEnumerable<Partner> partners)
         {
             var table = new DataTable();
+            table.Columns.Add("Id", typeof(int));
             table.Columns.Add("Name", typeof(string));
 
             foreach (var item in partners)
-                table.Rows.Add(item.Name);
+                table.Rows.Add(item.Id, item.Name);
 
             if (table.Rows.Count == 0)
             {
@@ -122,11 +127,7 @@ namespace DeltaProject
         private void Success(string msg)
         {
             lblSaveMsg.Text = msg;
-            lblSaveMsg.Visible = true;
             lblSaveMsg.ForeColor = Color.Green;
-            BtnSave.BackColor = Color.FromName("#1abc9c");
-            BtnSave.Enabled = true;
         }
-
     }
 }

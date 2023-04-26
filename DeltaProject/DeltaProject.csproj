@@ -71,6 +71,7 @@
     <Content Include="Accounts_Settings.aspx" />
     <Content Include="AddLoaderExpense.aspx" />
     <Content Include="AddMaintenanceExpense.aspx" />
+    <Content Include="AddMaintenanceWithdraw.aspx" />
     <Content Include="AddProducts.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
     <Content Include="Add_Client_Offer.aspx" />
@@ -209,6 +210,13 @@
     <Compile Include="AddMaintenanceExpense.aspx.designer.cs">
       <DependentUpon>AddMaintenanceExpense.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddMaintenanceWithdraw.aspx.cs">
+      <DependentUpon>AddMaintenanceWithdraw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMaintenanceWithdraw.aspx.designer.cs">
+      <DependentUpon>AddMaintenanceWithdraw.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddProducts.aspx.cs">
       <DependentUpon>AddProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -302,6 +310,7 @@
     <Compile Include="Business_Logic\Maintenance.cs" />
     <Compile Include="Business_Logic\MaintenanceExpense.cs" />
     <Compile Include="Business_Logic\MaintenancePayment.cs" />
+    <Compile Include="Business_Logic\MaintenanceWithdraw.cs" />
     <Compile Include="Business_Logic\Order.cs" />
     <Compile Include="Business_Logic\OrderDetails.cs" />
     <Compile Include="Business_Logic\Partner.cs" />

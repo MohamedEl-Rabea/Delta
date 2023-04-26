@@ -131,11 +131,32 @@
                             <td style="width: 125px">
                                 <asp:Label ID="lblWorkshopName" runat="server" CssClass="lblInfo2" Text="اسم الورشة"></asp:Label>
                             </td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <td>
-                                <asp:Label ID="Label2" runat="server" Text="صافى الأرباح : " CssClass="lblInfo"></asp:Label>
+                                <asp:Label ID="Label2" runat="server" Text="الأرباح : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 125px">
-                                <asp:Label ID="lblProfit" runat="server" CssClass="lblInfo2" Text="صافى الأرباح" DataFormatString="{0:0.##}"></asp:Label>
+                                <asp:Label ID="lblProfit" runat="server" CssClass="lblInfo2" Text="------" DataFormatString="{0:0.##}"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="Label5" runat="server" Text="الديون : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 125px">
+                                <asp:Label ID="lblDebit" runat="server" CssClass="lblInfo2" Text="------" DataFormatString="{0:0.##}"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="Label7" runat="server" Text="السحوبات : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 125px">
+                                <asp:Label ID="lblWithdraw" runat="server" CssClass="lblInfo2" Text="------" DataFormatString="{0:0.##}"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="Label9" runat="server" Text="صافى الايراد : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 125px">
+                                <asp:Label ID="lblNetIncome" runat="server" CssClass="lblInfo2" Text="------" DataFormatString="{0:0.##}"></asp:Label>
                             </td>
                         </tr>
                     </table>
@@ -173,6 +194,26 @@
                             <asp:BoundField DataField="Date" HeaderText="التاريخ" SortExpression="Date" DataFormatString="{0:dd/MM/yyyy}" />
                             <asp:BoundField DataField="Amount" HeaderText="القيمة" SortExpression="Amount" DataFormatString="{0:0.##}" />
                             <asp:BoundField DataField="Reason" HeaderText="السبب" SortExpression="Reason" />
+                        </Columns>
+                        <HeaderStyle CssClass="HeaderStyleBill" />
+                        <RowStyle CssClass="RowStyleList" />
+                        <AlternatingRowStyle CssClass="AlternateRowStyleList" />
+                        <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                        <FooterStyle CssClass="FooterStyleBill" />
+                    </asp:GridView>
+                </section>
+                <br />
+                <section>
+                    <div>
+                        <p>جدول السحوبات</p>
+                    </div>
+                    <asp:GridView runat="server" ID="GridViewWithdraws" CssClass="GridViewBill"
+                                  AutoGenerateColumns="False" EmptyDataText="لا توجد سحوبات" ShowFooter="true">
+                        <Columns>
+                            <asp:BoundField DataField="PartnerName" HeaderText="اسم الشريك" SortExpression="PartnerName"/>
+                            <asp:BoundField DataField="Date" HeaderText="التاريخ" SortExpression="Date" DataFormatString="{0:dd/MM/yyyy}" />
+                            <asp:BoundField DataField="Amount" HeaderText="القيمة" SortExpression="Amount" DataFormatString="{0:0.##}" />
+                            <asp:BoundField DataField="Notes" HeaderText="ملاحظات" SortExpression="Reason" />
                         </Columns>
                         <HeaderStyle CssClass="HeaderStyleBill" />
                         <RowStyle CssClass="RowStyleList" />

@@ -27,6 +27,7 @@
                 </tr>
             </table>
         </section>
+        <br/>
         <asp:Panel runat="server" ID="PanelPartners">
             <section>
                 <asp:GridView runat="server" ID="gridViewPartners" CssClass="GridViewBill"
@@ -82,7 +83,7 @@
             </section>
             <footer class="AddWorkshopFooter">
                 <div class="MsgDiv" style="text-align: center">
-                    <asp:Button ID="BtnSave" runat="server" Text="حفظ" CssClass="BtnNext" OnClick="BtnSave_Click" />
+                    <asp:Button ID="BtnSave" runat="server" Text="حفظ" CssClass="BtnNext" OnClick="BtnSave_Click" Enabled="False" />
                 </div>
             </footer>
         </asp:Panel>

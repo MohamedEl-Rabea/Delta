@@ -75,6 +75,7 @@
                                         <asp:MenuItem Text="دفع" ToolTip="دفع صيانة" NavigateUrl="~/SearchForMaintenanceWithRemaining.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إستعلام" ToolTip="استعلام عن الصيانات" NavigateUrl="~/SearchForMaintenances.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إضافة مصروف" ToolTip="إضافة مصروف" NavigateUrl="~/AddMaintenanceExpense.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة سحب" ToolTip="إضافة سحب" NavigateUrl="~/AddMaintenanceWithdraw.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="تقرير الأرباح" ToolTip="تقرير الأرباح" NavigateUrl="~/MaintenanceExpensesReport.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إضافة ورشة" ToolTip="إضافة ورشة" NavigateUrl="~/Add_Workshop.aspx"></asp:MenuItem>
                                     </asp:MenuItem>

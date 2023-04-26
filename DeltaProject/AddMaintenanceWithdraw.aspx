@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AddMaintenanceExpense.aspx.cs" Inherits="DeltaProject.AddMaintenanceExpenses" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AddMaintenanceWithdraw.aspx.cs" Inherits="DeltaProject.AddMaintenanceWithdraw" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .RHSTD {
@@ -25,7 +25,7 @@
     <header class="Header">
         <p>اضافة مصروف صيانة</p>
     </header>
-    <asp:Panel runat="server" ID="PanelAddMaintenanceExpense">
+    <asp:Panel runat="server" ID="PanelAddMaintenanceWithdraw">
         <section>
             <table class="AddProductsTable">
                 <tr>
@@ -36,14 +36,20 @@
                         <asp:DropDownList ID="ddlWorkshops" runat="server" CssClass="txts3"
                             Style="width: 100%; height: auto"
                             DataTextField="Name" 
-                            DataValueField="Id">
+                            DataValueField="Id"
+                            OnSelectedIndexChanged="ddlWorkshops_OnSelectedIndexChanged"
+                            AutoPostBack="True">
                         </asp:DropDownList>
                     </td>
                     <td class="RHSTD">
-                        <p class="RHSP">ت. المصروف :</p>
+                        <p class="RHSP">اسم الشريك :</p>
                     </td>
                     <td style="text-align: right">
-                        <asp:TextBox runat="server" ID="txtDate" CssClass="txts3" PlaceHolder="تاريخ المصروف"></asp:TextBox>
+                        <asp:DropDownList ID="ddlPartners" runat="server" CssClass="txts3"
+                                          Style="width: 100%; height: auto" Enabled="False"
+                                          DataTextField="Name" 
+                                          DataValueField="Id">
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
@@ -64,27 +70,25 @@
                     </td>
                     <td class="ValodationTD">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
-                                                    ControlToValidate="txtDate" Display="Dynamic" SetFocusOnError="true"
-                                                    ToolTip="تاريخ المصروف متطلب اساسى">
+                                                    ControlToValidate="ddlPartners" Display="Dynamic" SetFocusOnError="true"
+                                                    ToolTip="اسم الشريك متطلب اساسى">
                             <img src="Images/Error.png" width="24" height="24"/>
                         </asp:RequiredFieldValidator>
-                    </td>
+                    </td> 
                 </tr>
 
                 <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">ت. السحب :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtDate" CssClass="txts3" PlaceHolder="تاريخ السحب"></asp:TextBox>
+                    </td>
                     <td class="RHSTD">
                         <p class="RHSP">القيمة :</p>
                     </td>
                     <td>
                         <asp:TextBox runat="server" ID="txtAmount" CssClass="txts3" PlaceHolder="القيمة"></asp:TextBox>
-                    </td>
-                    <td class="RHSTD">
-                        <p class="RHSP"> السبب :</p>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtReason" runat="server" CssClass="TxtMultiline" 
-                                     AutoCompleteType="Disabled" Width="96%" TextMode="MultiLine" 
-                                     placeholder="سبب المصروف" Style="min-height: auto;resize: vertical;"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -94,6 +98,17 @@
                     </td>
                     <td class="ValodationTD">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
+                                                    ControlToValidate="txtDate" Display="Dynamic" SetFocusOnError="true"
+                                                    ToolTip="تاريخ السحب متطلب اساسى">
+                            <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
                                                     ControlToValidate="txtAmount" Display="Dynamic" SetFocusOnError="true"
                                                     ToolTip="القيمة متطلب اساسى">
                             <img src="Images/Error.png" width="24" height="24"/>
@@ -111,19 +126,19 @@
                             <img src="Images/Error.png" width="24" height="24"/>
                         </asp:CustomValidator>
                     </td>
+                </tr>
+                <tr>
                     <td class="RHSTD">
-                        <br />
-                        <br />
+                        <p class="RHSP"> ملاحظات :</p>
                     </td>
-                    <td class="ValodationTD" colspan="3">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
-                            ControlToValidate="txtReason" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="السبب متطلب اساسى">
-                            <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:RequiredFieldValidator>
+                    <td colspan="3">
+                        <asp:TextBox ID="txtNotes" runat="server" CssClass="TxtMultiline" 
+                                     AutoCompleteType="Disabled" Width="98%" TextMode="MultiLine" 
+                                     placeholder="ملاحظات" Style="min-height: auto;resize: vertical;"></asp:TextBox>
                     </td>
                 </tr>
             </table>
+            <br/>
         </section>
         <footer class="AddMaintenanceFooter">
             <div class="MsgDiv" style="text-align: center">
