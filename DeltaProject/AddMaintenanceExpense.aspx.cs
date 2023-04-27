@@ -1,5 +1,6 @@
 ﻿using DeltaProject.Business_Logic;
 using System;
+using System.Globalization;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
@@ -21,7 +22,7 @@ namespace DeltaProject
         {
             MaintenanceExpense maintenanceExpense = new MaintenanceExpense();
             maintenanceExpense.WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue);
-            var expenseDate = Convert.ToDateTime(txtDate.Text);
+            var expenseDate = DateTime.ParseExact(txtDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenanceExpense.Date = new DateTime(expenseDate.Year, expenseDate.Month, expenseDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenanceExpense.Amount = Convert.ToDecimal(txtAmount.Text);

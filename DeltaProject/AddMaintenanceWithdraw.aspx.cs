@@ -1,5 +1,6 @@
 ﻿using DeltaProject.Business_Logic;
 using System;
+using System.Globalization;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
@@ -35,7 +36,7 @@ namespace DeltaProject
             MaintenanceWithdraw maintenanceWithdraw = new MaintenanceWithdraw();
             maintenanceWithdraw.WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue);
             maintenanceWithdraw.PartnerId = Convert.ToInt32(ddlPartners.SelectedValue);
-            var withdrawDate = Convert.ToDateTime(txtDate.Text);
+            var withdrawDate = DateTime.ParseExact(txtDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenanceWithdraw.Date = new DateTime(withdrawDate.Year, withdrawDate.Month, withdrawDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenanceWithdraw.Amount = Convert.ToDecimal(txtAmount.Text);
