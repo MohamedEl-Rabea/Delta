@@ -130,9 +130,7 @@ namespace DeltaProject
 
         private void FillDropDownList()
         {
-            Unit unit = new Unit();
-            ViewState["Units"] = unit.GetUnits();
-
+            ViewState["Units"] = Unit.GetUnits();
             ddlUnits.DataSource = (List<Unit>)ViewState["Units"];
             ddlUnits.DataBind();
             ddlUnits.Items.Insert(0, new ListItem("إختر وحدة قياس", ""));

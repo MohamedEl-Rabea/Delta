@@ -1,5 +1,4 @@
 ﻿using DeltaProject.Business_Logic;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +10,6 @@ namespace DeltaProject
 {
     public partial class AddProduct : System.Web.UI.Page
     {
-        private List<ProductClassification> Classifications
-        {
-            get => ViewState["Classifications"] == null
-                ? new List<ProductClassification>()
-                : (List<ProductClassification>)ViewState["Classifications"];
-            set => ViewState["Classifications"] = value;
-        }
-
         private List<Unit> Units
         {
             get => ViewState["Units"] == null
@@ -64,12 +55,9 @@ namespace DeltaProject
 
         private void FillDropDownList()
         {
-            Unit unit = new Unit();
-            ViewState["Units"] = unit.GetUnits();
+            ViewState["Units"] = Unit.GetUnits();
             FillUnitsDropDownList();
-            ProductClassification classification = new ProductClassification();
-            ViewState["Classifications"] = classification.GetClassifications();
-            ddlClassifications.DataSource = Classifications;
+            ddlClassifications.DataSource = Classification.GetClassifications();
             ddlClassifications.DataBind();
             ddlClassifications.Items.Insert(0, new ListItem("إختر تصنيف", ""));
             ddlClassifications.SelectedIndex = 0;
@@ -87,11 +75,21 @@ namespace DeltaProject
 
         protected void ddlClassifications_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            var classificationId =string.IsNullOrEmpty(ddlClassifications.SelectedValue) ? 0 : Convert.ToInt32(ddlClassifications.SelectedValue);
-            var classification = ((List<ProductClassification>)ViewState["Classifications"])
-                .FirstOrDefault(c => c.Id == classificationId);
-            var attributes = classification?.GetAttributesFromJson;
-            Page.ClientScript.RegisterStartupScript(GetType(), "text", $"AddClassificationElements({JsonConvert.SerializeObject(attributes)})", true);
+            if (ddlClassifications.SelectedItem.Text == "مواتير")
+            {
+                PanelClassificationMotors.Visible = true;
+                PanelClassificationPumps.Visible = false;
+            }
+            else if (ddlClassifications.SelectedItem.Text == "طلمبيات")
+            {
+                PanelClassificationMotors.Visible = true;
+                PanelClassificationPumps.Visible = true;
+            }
+            else
+            {
+                PanelClassificationMotors.Visible = false;
+                PanelClassificationPumps.Visible = false;
+            }
         }
     }
 }

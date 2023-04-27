@@ -14,7 +14,7 @@ namespace DeltaProject.Business_Logic
         public string Name { get; set; }
         public IEnumerable<UnitFactor> UnitFactors { get; set; }
 
-        public List<Unit> GetUnits()
+        public static List<Unit> GetUnits()
         {
             List<Unit> units = new List<Unit>();
 

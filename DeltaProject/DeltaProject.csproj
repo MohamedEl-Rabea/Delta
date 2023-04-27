@@ -72,7 +72,6 @@
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
     <Content Include="AddProduct.aspx" />
-    <Content Include="AddProductClassification.aspx" />
     <Content Include="AddProducts.aspx" />
     <Content Include="AddUnit.aspx" />
     <Content Include="Add_ClientCheque.aspx" />
@@ -212,13 +211,6 @@
     <Compile Include="AddProduct.aspx.designer.cs">
       <DependentUpon>AddProduct.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AddProductClassification.aspx.cs">
-      <DependentUpon>AddProductClassification.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddProductClassification.aspx.designer.cs">
-      <DependentUpon>AddProductClassification.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AddProducts.aspx.cs">
       <DependentUpon>AddProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -306,7 +298,7 @@
     <Compile Include="Business_Logic\Bill.cs" />
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
-    <Compile Include="Business_Logic\ClassificationAttribute.cs" />
+    <Compile Include="Business_Logic\Attribute.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
     <Compile Include="Business_Logic\ClientDebtsSchedule.cs" />
@@ -321,7 +313,7 @@
     <Compile Include="Business_Logic\Order.cs" />
     <Compile Include="Business_Logic\OrderDetails.cs" />
     <Compile Include="Business_Logic\Product.cs" />
-    <Compile Include="Business_Logic\ProductClassification.cs" />
+    <Compile Include="Business_Logic\Classification.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />
     <Compile Include="Business_Logic\Suppliers_Products.cs" />

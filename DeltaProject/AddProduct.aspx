@@ -57,63 +57,6 @@
             $('#<%= txtPurchaseDate.ClientID%>').datepicker(options);
             $('#<%= txtPurchaseDate.ClientID%>').datepicker("setDate", new Date());
         });
-
-        function AddClassificationElements(attributes) {
-            $('#divClassificationAttributes').html('');
-            var html = '<table class="AddProductsTable">';
-            for (let i = 0; i < attributes.length; i = i + 2) {
-                html += `<tr><td class="RHSTD"><p class="RHSP">${attributes[i].AttrName.trim()} :</p></td >`;
-                html +=
-                    `<td id="tdClassification" style="text-align: right"><input ID ="txtAttrName{${i}}" type="${attributes[i].Type}" class = "txts3" 
-                     style="margin-right: 5px;" PlaceHolder = "${attributes[i].AttrName.trim()}" AutoCompleteType = "Disabled"/></td>`;
-
-                if (i + 1 < attributes.length) {
-                    html += `<td class="RHSTD"><p class="RHSP">${attributes[i + 1].AttrName} :</p></td >`;
-                    html +=
-                        `<td id="tdClassification" style="text-align: right"><input ID ="txtAttrName{${i + 1}}" type="${attributes[i + 1].Type}" class = "txts3"
-                         PlaceHolder = "${attributes[i + 1].AttrName}" AutoCompleteType = "Disabled"/></td>`;
-                } else {
-                    html += '<td></td><td></td>';
-                }
-
-                html += '</tr><tr><td class="RHSTD"><br /><br /></td>';
-
-                if (attributes[i].Optional) {
-                    html+= `<td style="text-align: center"><span hidden="hidden" ID ="valAttrName{${i}}" title="${attributes[i].AttrName.trim()} متطلب اساسى">
-                         <img src="Images/Error.png" width="24" height="24"></span></td>`;
-                } else {
-                    html += '<td><br /><br /></td>';
-                }
-               
-                if (i + 1 < attributes.length && attributes[i + 1].Optional) {
-                    html += `<td class="RHSTD"><br /><br /></td>
-                             <td style="text-align: center"><span hidden="hidden" ID ="valAttrName{${i + 1}}" title="${attributes[i + 1].AttrName.trim()} متطلب اساسى">
-                             <img src="Images/Error.png" width="24" height="24"></span></td>`;
-                } else {
-                    html += '<td class="RHSTD"><br /><br /></td><td><br /><br /></td>';
-                }
-
-                html += '</tr>';
-            }
-            html += '</table>';
-            $('#divClassificationAttributes').html(html);
-        }
-
-
-        function CheckValidation() {
-            var classificationInputs = $('input[id^="txtAttrName"]');
-
-            for (var i = 0; i < classificationInputs.length; i++) {
-                var id = classificationInputs[i].id;
-                id = id.replace("txt", "val");
-                var valElement = document.getElementById(id);
-                if (classificationInputs[i].value === "") {
-                    $(valElement).show();
-                } else {
-                    $(valElement).hide();
-                }
-            }
-        }
     </script>
     
 </asp:Content>
@@ -193,7 +136,7 @@
                         Style="width: 100%; height: auto"
                         DataTextField="Name"
                         DataValueField="Id"
-                        AutoPostBack="true"
+                        AutoPostBack="True"
                         OnSelectedIndexChanged="ddlClassifications_OnSelectedIndexChanged">
                     </asp:DropDownList>
                 </td>
@@ -222,16 +165,77 @@
                     </asp:RequiredFieldValidator>
                 </td>
             </tr>
-            
-            <tr>
-                <td colspan="4">
-                    <asp:Panel runat="server" ID="PanelClassificationAttributes" Visible="True">
-                        <div id="divClassificationAttributes">
-
-                        </div>
-                    </asp:Panel>
-                </td>
-            </tr>
+            <asp:Panel runat="server" ID="PanelClassificationMotors" Visible="False">
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">الماركه :</p>
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txtMark" CssClass="txts3" PlaceHolder="الماركه" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+                    <td class="RHSTD">
+                        <p class="RHSP">البوصه :</p>
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txtInch" CssClass="txts3" PlaceHolder="البوصه" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                            ControlToValidate="txtMark" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="ماركة المنتج متطلب اساسى">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"
+                            ControlToValidate="txtInch" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="البوصه متطلب اساسى">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="CustomValidator10" runat="server"
+                            ToolTip="يجب كتابة البوصه بشكل صحيح"
+                            ControlToValidate="txtInch"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ClientValidationFunction="IsValidNumber">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CustomValidator>
+                    </td>
+                </tr>
+            </asp:Panel>
+            <asp:Panel runat="server" ID="PanelClassificationPumps" Visible="False">
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">الطراز :</p>
+                    </td>
+                    <td>
+                        <asp:TextBox runat="server" ID="txtStyle" CssClass="txts3" PlaceHolder="الطراز" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td style="text-align: center">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"
+                                                    ControlToValidate="txtStyle" Display="Dynamic" SetFocusOnError="true"
+                                                    ToolTip="الطراز متطلب اساسى">
+                            <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </asp:Panel>
 
             <tr>
                 <td class="RHSTD">
@@ -357,7 +361,7 @@
             <asp:Button ID="BtnNextToProductsList" runat="server" Text="التالى" CssClass="BtnNext"
                 UseSubmitBehavior="false" OnClick="btnNextToProductsList_Click" ToolTip="الانتقال الى القائمة" />
             <asp:Button ID="btnAddProduct" runat="server" Text="اضافه" CssClass="BtnAdd" OnClick="btnAddProduct_Click" ToolTip="اضف الى القائمة"
-                UseSubmitBehavior="false" OnClientClick="CheckValidation()"/>
+                UseSubmitBehavior="false"/>
         </footer>
     </asp:Panel>
 </asp:Content>
