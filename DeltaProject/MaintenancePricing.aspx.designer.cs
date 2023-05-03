@@ -11,8 +11,17 @@ namespace DeltaProject
 {
 
 
-    public partial class PayLoaderProcess
+    public partial class MaintenancePricing
     {
+
+        /// <summary>
+        /// RadioButtonListCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonListCategories;
 
         /// <summary>
         /// ImageButtonSearch control.
@@ -24,6 +33,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.ImageButton ImageButtonSearch;
 
         /// <summary>
+        /// txtMaintenanceTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMaintenanceTitle;
+
+        /// <summary>
         /// txtClientName control.
         /// </summary>
         /// <remarks>
@@ -33,22 +51,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.TextBox txtClientName;
 
         /// <summary>
-        /// txtStartDate control.
+        /// txtPhoneNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartDate;
+        protected global::System.Web.UI.WebControls.TextBox txtPhoneNumber;
 
         /// <summary>
-        /// txtEndDate control.
+        /// CustomValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndDate;
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
 
         /// <summary>
         /// PanelErrorMessage control.
@@ -69,31 +87,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label LabelErrMsg;
 
         /// <summary>
-        /// PanelAllProcesses control.
+        /// PanelAllMaintenance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAllProcesses;
+        protected global::System.Web.UI.WebControls.Panel PanelAllMaintenance;
 
         /// <summary>
-        /// PanelProcesses control.
+        /// GridViewMaintenance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelProcesses;
-
-        /// <summary>
-        /// GridViewProcesses control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewProcesses;
+        protected global::System.Web.UI.WebControls.GridView GridViewMaintenance;
 
         /// <summary>
         /// lblSaveMsg control.

@@ -2,6 +2,7 @@
 using DeltaProject.Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -155,8 +156,7 @@ namespace DeltaProject
         protected void btnSave_OnClick(object sender, EventArgs e)
         {
             btnSave.Enabled = false;
-
-            var deliveryDate = Convert.ToDateTime(lblDeliveryDate.Text);
+            var deliveryDate = DateTime.ParseExact(lblDeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             Order order = new Order
             {
                 ClientName = lblClientName.Text,

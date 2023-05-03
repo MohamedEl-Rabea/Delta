@@ -1,6 +1,7 @@
 ﻿using Business_Logic;
 using DeltaProject.Business_Logic;
 using System;
+using System.Globalization;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
@@ -11,8 +12,7 @@ namespace DeltaProject
         {
             if (!IsPostBack)
             {
-                Workshop workshop = new Workshop();
-                ddlWorkshops.DataSource = workshop.GetWorkshops();
+                ddlWorkshops.DataSource = Workshop.GetWorkshops();
                 ddlWorkshops.DataBind();
                 ddlWorkshops.Items.Insert(0, new ListItem("إختر ورشة", ""));
                 ddlWorkshops.SelectedIndex = 0;
@@ -25,13 +25,12 @@ namespace DeltaProject
             Maintenance maintenance = new Maintenance();
             maintenance.PhoneNumber = txtPhoneNumber.Text;
             maintenance.Title = txtTitle.Text;
-            maintenance.AgreedCost = Convert.ToDecimal(txtAgreedCost.Text);
             maintenance.ClientName = txtClientName.Text;
             maintenance.WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue);
-            var orderDate = Convert.ToDateTime(OrderDate.Text);
+            var orderDate = DateTime.ParseExact(OrderDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.OrderDate = new DateTime(orderDate.Year, orderDate.Month, orderDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-            var expectedDeliveryDate = Convert.ToDateTime(ExpectedDeliveryDate.Text);
+            var expectedDeliveryDate = DateTime.ParseExact(ExpectedDeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             maintenance.ExpectedDeliveryDate = new DateTime(expectedDeliveryDate.Year, expectedDeliveryDate.Month, expectedDeliveryDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenance.Description = txtDescription.Text;
@@ -47,7 +46,6 @@ namespace DeltaProject
                 lblFinishMsg.Text = $"تم حفظ صيانة ({maintenance.Title}) للعميل ({maintenance.ClientName}) بنجاح";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
                 txtTitle.Text = string.Empty;
-                txtAgreedCost.Text = string.Empty;
                 txtClientName.Text = string.Empty;
                 txtPhoneNumber.Text = string.Empty;
                 ddlWorkshops.SelectedIndex = 0;

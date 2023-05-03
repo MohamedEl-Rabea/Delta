@@ -68,12 +68,18 @@
                                         <asp:MenuItem Text="تسجيل عملية" ToolTip="تسجيل عملية ونش" NavigateUrl="~/RegisterLoaderProcess.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="دفع" ToolTip="دفع عملية ونش" NavigateUrl="~/PayLoaderProcess.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إستعلام" ToolTip="استعلام عن عمليات الونش" NavigateUrl="~/SearchForLoaderProcess.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة مصروف" ToolTip="إضافة مصروف" NavigateUrl="~/AddLoaderExpense.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تقرير الأرباح" ToolTip="تقرير الأرباح" NavigateUrl="~/LoaderExpensesReport.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="الصيانة">
-                                        <asp:MenuItem Text="إضافة" ToolTip="إضافة صيانة جديدة" NavigateUrl="~/Add_Maintenance.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة" ToolTip="إضافة طلب صيانة جديدة" NavigateUrl="~/Add_Maintenance.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تسعير" ToolTip="تسعير صيانة" NavigateUrl="~/MaintenancePricing.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="تسليم" ToolTip="تسليم صيانة" NavigateUrl="~/SearchForNotDeliveredMaintenance.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="دفع" ToolTip="دفع صيانة" NavigateUrl="~/SearchForMaintenanceWithRemaining.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إستعلام" ToolTip="استعلام عن الصيانات" NavigateUrl="~/SearchForMaintenances.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة مصروف" ToolTip="إضافة مصروف" NavigateUrl="~/AddMaintenanceExpense.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة سحب" ToolTip="إضافة سحب" NavigateUrl="~/AddMaintenanceWithdraw.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تقرير الأرباح" ToolTip="تقرير الأرباح" NavigateUrl="~/MaintenanceExpensesReport.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إضافة ورشة" ToolTip="إضافة ورشة" NavigateUrl="~/Add_Workshop.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="العملاء" ToolTip="عرض تقرير كامل عن العملاء المدانين للشركه" Value="Clients">

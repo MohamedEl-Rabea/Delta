@@ -5,25 +5,35 @@ using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class SearchForMaintenanceWithRemaining : System.Web.UI.Page
+    public partial class MaintenancePricing : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
         protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelAllMaintenance.Visible = false;
             PanelErrorMessage.Visible = false;
+            txtMaintenanceTitle.Text = "";
             txtClientName.Text = "";
             txtPhoneNumber.Text = "";
             if (RadioButtonListCategories.SelectedIndex == 0)
             {
+                txtMaintenanceTitle.Visible = true;
+                txtClientName.Visible = false;
+                txtPhoneNumber.Visible = false;
+            }
+            else if (RadioButtonListCategories.SelectedIndex == 1)
+            {
+                txtMaintenanceTitle.Visible = false;
                 txtClientName.Visible = true;
                 txtPhoneNumber.Visible = false;
             }
             else
             {
+                txtMaintenanceTitle.Visible = false;
                 txtClientName.Visible = false;
                 txtPhoneNumber.Visible = true;
             }
@@ -37,7 +47,15 @@ namespace DeltaProject
 
 
             Maintenance maintenance = new Maintenance();
-            if (txtClientName.Visible)
+            if (txtMaintenanceTitle.Visible)
+            {
+                maintenance.Title = txtMaintenanceTitle.Text;
+                if (string.IsNullOrEmpty(txtMaintenanceTitle.Text))
+                    PanelErrorMessage.Visible = true;
+                else
+                    PanelAllMaintenance.Visible = true;
+            }
+            else if (txtClientName.Visible)
             {
                 maintenance.ClientName = txtClientName.Text;
                 if (string.IsNullOrEmpty(txtClientName.Text))
@@ -55,13 +73,14 @@ namespace DeltaProject
                     PanelAllMaintenance.Visible = true;
                 }
             }
-            var data = maintenance.GetAllMaintenance("DeliveredWithRemaining");
+
+            var data = maintenance.GetAllMaintenance("New");
             ViewState["Maintenance"] = data;
 
             if (e == null && data.Count == 0)
                 GridViewMaintenance.EmptyDataText = "";
             else
-                GridViewMaintenance.EmptyDataText = "لا توجد صيانات متبقى لها تكلفة لهذا العميل";
+                GridViewMaintenance.EmptyDataText = "لا توجد صيانات";
 
             BindMaintenanceGrid();
         }
@@ -78,22 +97,20 @@ namespace DeltaProject
             GridViewMaintenance.DataBind();
         }
 
-        protected void btnPay_OnClick(object sender, EventArgs e)
+        protected void btnPricing_OnClick(object sender, EventArgs e)
         {
             var gridRow = (GridViewRow)((Button)sender).NamingContainer;
             int rowIndex = gridRow.RowIndex;
 
-            MaintenancePayment maintenancePayment = new MaintenancePayment();
-            maintenancePayment.Id = Convert.ToInt32(gridRow.Cells[0].Text);
             var title = gridRow.Cells[1].Text;
-            var paymentDate = Convert.ToDateTime(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaymentDate")).Text);
-            maintenancePayment.PaymentDate = new DateTime(paymentDate.Year, paymentDate.Month, paymentDate.Day,
-                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-            maintenancePayment.PaidAmount = Convert.ToDecimal(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPaidAmount")).Text);
+            Maintenance maintenance = new Maintenance();
+            maintenance.Id = Convert.ToInt32(gridRow.Cells[0].Text);
+            maintenance.Cost = Convert.ToDecimal(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtCost")).Text);
+            maintenance.Price = Convert.ToDecimal(((TextBox)GridViewMaintenance.Rows[rowIndex].FindControl("txtPrice")).Text);
 
             string m = "";
 
-            if (!maintenancePayment.PayMaintenance(out m))
+            if (!maintenance.PriceMaintenance(out m))
             {
                 lblSaveMsg.Text = m;
                 lblSaveMsg.ForeColor = System.Drawing.Color.Red;
@@ -102,7 +119,7 @@ namespace DeltaProject
             {
                 ImageButtonSearch_Click(sender, null);
                 lblSaveMsg.Visible = true;
-                lblSaveMsg.Text = $"تم دفع مبلغ ({maintenancePayment.PaidAmount}) على صيانة ({title}) بنجاح";
+                lblSaveMsg.Text = $"تم تسعير الصيانة ({title}) بتكلفة ({maintenance.Cost}) وسعر بيع ({maintenance.Price}) بنجاح";
                 lblSaveMsg.ForeColor = System.Drawing.Color.Green;
             }
         }

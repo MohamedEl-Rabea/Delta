@@ -52,6 +52,7 @@
     text-align: right;
     width: 80px;
     padding-right: 5px;
+    white-space: nowrap;
 }
 
 .RHSTD2 {
