@@ -126,7 +126,9 @@
                                         <asp:TreeNode Text="إضافة" ToolTip="إضافة وحدة قياس" NavigateUrl="~/AddUnit.aspx"></asp:TreeNode>
                                         <asp:TreeNode Text="تعديل" ToolTip="تعديل وحدة قياس" NavigateUrl="~/EditUnit.aspx"></asp:TreeNode>
                                         <asp:TreeNode Text="استعلام" ToolTip="عرض وحدات القياس" NavigateUrl="~/Units.aspx"></asp:TreeNode>
-                                    </asp:TreeNode> <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
+                                    </asp:TreeNode> 
+                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProduct.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تحديث كميـات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانـــات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مسح منتجــات" NavigateUrl="~/Delete_Products.aspx"></asp:TreeNode>

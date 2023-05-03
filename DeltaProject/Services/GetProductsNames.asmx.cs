@@ -39,9 +39,9 @@ namespace DeltaProject.Services
         }
 
         [WebMethod]
-        public List<string> GetProductNames(string name)
+        public List<(int, string)> GetProductNames(string name)
         {
-            List<string> ProductsNames = new List<string>();
+            List<(int, string)> products = new List<(int, string)>();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
@@ -52,10 +52,10 @@ namespace DeltaProject.Services
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    ProductsNames.Add(rdr["Name"].ToString());
+                    products.Add(((int)rdr["Id"], rdr["Name"].ToString()));
                 }
             }
-            return ProductsNames;
+            return products;
         }
 
 

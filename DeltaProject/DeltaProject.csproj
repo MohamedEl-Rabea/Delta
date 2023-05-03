@@ -299,6 +299,7 @@
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
     <Compile Include="Business_Logic\Attribute.cs" />
+    <Compile Include="Business_Logic\ClassificationDetails.cs" />
     <Compile Include="Business_Logic\Client.cs" />
     <Compile Include="Business_Logic\ClientCheque.cs" />
     <Compile Include="Business_Logic\ClientDebtsSchedule.cs" />
@@ -306,16 +307,19 @@
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
+    <Compile Include="Business_Logic\InvoicePayment.cs" />
     <Compile Include="Business_Logic\Loader.cs" />
     <Compile Include="Business_Logic\LoaderProcess.cs" />
     <Compile Include="Business_Logic\Maintenance.cs" />
     <Compile Include="Business_Logic\MaintenancePayment.cs" />
+    <Compile Include="Business_Logic\NewProduct.cs" />
     <Compile Include="Business_Logic\Order.cs" />
     <Compile Include="Business_Logic\OrderDetails.cs" />
     <Compile Include="Business_Logic\Product.cs" />
     <Compile Include="Business_Logic\Classification.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />
+    <Compile Include="Business_Logic\SupplierInvoice.cs" />
     <Compile Include="Business_Logic\Suppliers_Products.cs" />
     <Compile Include="Business_Logic\Supplier_Fax.cs" />
     <Compile Include="Business_Logic\Supplier_Payments_Documents.cs" />

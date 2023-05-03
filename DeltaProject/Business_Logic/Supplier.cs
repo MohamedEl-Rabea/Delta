@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Business_Logic
 {
     public class Supplier
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string S_name { get; set; }
         public string Address { get; set; }
         public string Account_Number { get; set; }
@@ -112,6 +112,23 @@ namespace Business_Logic
                 b = false;
             }
             return b;
+        }
+
+        public static List<Supplier> GetSuppliers()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT Id, Name FROM Supplier", con);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    suppliers.Add(new Supplier { Id = (int)rdr["Id"], Name = rdr["Name"].ToString() });
+                }
+            }
+            return suppliers;
         }
 
     }

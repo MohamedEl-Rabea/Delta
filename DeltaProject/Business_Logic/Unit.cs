@@ -12,6 +12,7 @@ namespace DeltaProject.Business_Logic
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public decimal Factor { get; set; }
         public IEnumerable<UnitFactor> UnitFactors { get; set; }
 
         public static List<Unit> GetUnits()
@@ -32,7 +33,7 @@ namespace DeltaProject.Business_Logic
             return units;
         }
 
-        public List<Unit> GetProductUnits(string productName)
+        public static List<Unit> GetProductUnits(string productName)
         {
             List<Unit> units = new List<Unit>();
 
@@ -47,9 +48,9 @@ namespace DeltaProject.Business_Logic
                 while (rdr.Read())
                 {
                     if (!units.Any(p => p.Id == (int)rdr["SubUnitId"] && p.Name == rdr["SubUnitName"].ToString()))
-                        units.Add(new Unit { Id = (int)rdr["SubUnitId"], Name = rdr["SubUnitName"].ToString() });
+                        units.Add(new Unit { Id = (int)rdr["SubUnitId"], Name = rdr["SubUnitName"].ToString(), Factor = (decimal)rdr["Factor"] });
                     if (!units.Any(p => p.Id == (int)rdr["MainUnitId"] && p.Name == rdr["MainUnitName"].ToString()))
-                        units.Add(new Unit { Id = (int)rdr["MainUnitId"], Name = rdr["MainUnitName"].ToString() });
+                        units.Add(new Unit { Id = (int)rdr["MainUnitId"], Name = rdr["MainUnitName"].ToString(), Factor = (decimal)rdr["Factor"] });
                 }
             }
 
