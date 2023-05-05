@@ -148,10 +148,12 @@ namespace DeltaProject
                 }
                 else
                 {
-                    ResetPage();
                     lblFinishMsg.Visible = true;
                     lblFinishMsg.Text = "تم الحفظ بنجاح";
                     lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                    btnSave.Enabled = false;
+                    btnSave.BackColor = System.Drawing.Color.FromName("#aaa");
+                    ImageButtonBackToAddProducts.Enabled = false;
                 }
             }
         }

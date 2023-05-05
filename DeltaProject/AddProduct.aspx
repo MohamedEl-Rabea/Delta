@@ -472,11 +472,9 @@
             <asp:Button ID="btnSave" runat="server" Text="حفظ" CssClass="BtnNext" OnClick="btnSave_Click"
                 UseSubmitBehavior="false"
                 OnClientClick="this.disabled='true';this.value='Please wait....';" ValidationGroup="SaveGroup" />
+            <div class="MsgDiv">
+                <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
+            </div>
         </footer>
     </asp:Panel>
-    <footer class="AddSupplierFooter">
-        <div class="MsgDiv">
-            <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
-        </div>
-    </footer>
 </asp:Content>
