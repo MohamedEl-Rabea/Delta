@@ -140,8 +140,7 @@ namespace DeltaProject
             else
             {
                 lblFinishMsg.Text = "";
-                string m = "";
-                if (!invoice.AddInvoice(out m))
+                if (!invoice.AddInvoice(out var m))
                 {
                     lblFinishMsg.Text = m;
                     lblFinishMsg.ForeColor = System.Drawing.Color.Red;
@@ -289,23 +288,6 @@ namespace DeltaProject
             GridViewProductsList.DataSource = Products;
             GridViewProductsList.DataBind();
             lblTotalCost.Text = Convert.ToDecimal(Products.Sum(c => (c.Quantity * c.PurchasePrice))).ToString("0.##");
-        }
-
-        private void ResetPage()
-        {
-            PanelAddSupplier.Visible = true;
-            ddlSuppliers.SelectedIndex = 0;
-            txtPurchaseDate.Text = string.Empty;
-
-            PanelAddProducts.Visible = false;
-            PanelClassificationMotors.Visible = false;
-            PanelClassificationPumps.Visible = false;
-            ResetProductPanel();
-
-            PanelProductsList.Visible = false;
-            ViewState["Products"] = null;
-            ViewState["ProductUnits"] = null;
-            FillUnitsDropDownList();
         }
     }
 }
