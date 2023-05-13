@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Business_Logic
 {
@@ -13,6 +14,8 @@ namespace Business_Logic
         public string S_name { get; set; }
         public string Address { get; set; }
         public string Account_Number { get; set; }
+        public List<Supplier_Phone> Phones { get; set; }
+        public List<Supplier_Fax> Faxes { get; set; }
 
         public Supplier Get_Supplier_info(out double TotalDebts)
         {
@@ -114,6 +117,8 @@ namespace Business_Logic
             return b;
         }
 
+        #region New
+
         public static List<Supplier> GetSuppliers()
         {
             List<Supplier> suppliers = new List<Supplier>();
@@ -131,5 +136,47 @@ namespace Business_Logic
             return suppliers;
         }
 
+        public Supplier GetSupplierData(int? id, string phoneNumber)
+        {
+            Supplier supplier = new Supplier { Phones = new List<Supplier_Phone>(), Faxes = new List<Supplier_Fax>() };
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            SqlCommand cmd = new SqlCommand("GetSupplierData", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (id != 0)
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+            if (!string.IsNullOrEmpty(phoneNumber))
+                cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = phoneNumber;
+
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.Read())
+            {
+                supplier.Id = Convert.ToInt32(rdr["Id"]);
+                supplier.Name = rdr["Name"].ToString();
+                supplier.Address = rdr["Address"].ToString();
+                supplier.Account_Number = rdr["AccountNumber"].ToString();
+                if (!string.IsNullOrEmpty(rdr["Phone"].ToString()))
+                    supplier.Phones.Add(new Supplier_Phone { Phone = rdr["Phone"].ToString() });
+                if (!string.IsNullOrEmpty(rdr["Fax"].ToString()))
+                    supplier.Faxes.Add(new Supplier_Fax { Fax = rdr["Fax"].ToString() });
+            }
+
+            while (rdr.Read())
+            {
+                if (supplier.Phones.All(p => p.Phone != rdr["Phone"].ToString()) && !string.IsNullOrEmpty(rdr["Phone"].ToString()))
+                    supplier.Phones.Add(new Supplier_Phone { Phone = rdr["Phone"].ToString() });
+                if (supplier.Faxes.All(p => p.Fax != rdr["Fax"].ToString()) && !string.IsNullOrEmpty(rdr["Fax"].ToString()))
+                    supplier.Faxes.Add(new Supplier_Fax { Fax = rdr["Fax"].ToString() });
+            }
+            rdr.Close();
+            con.Close();
+            return supplier;
+        }
+
+
+
+        #endregion
     }
 }

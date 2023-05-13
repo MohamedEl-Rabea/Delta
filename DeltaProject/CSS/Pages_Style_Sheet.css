@@ -496,7 +496,7 @@
 .AlternatRowStyle {
     background-color: #bdc3c7;
     height: 25px;
-    font: 500 11px arial;
+    font: 500 14px arial;
 }
 
 .Footer_Row, .FooterIncomeReport {
@@ -973,4 +973,8 @@
 
 .w200 {
     width: 200px;
+}
+
+.select2NoBorder .select2-container--default .select2-selection--single {
+    border: none;
 }

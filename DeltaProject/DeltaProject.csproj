@@ -177,9 +177,10 @@
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
     <Content Include="SearchForLoaderProcess.aspx" />
-    <Content Include="SearchForMaintenances.aspx" />
+    <Content Include="SearchForMaintenance.aspx" />
     <Content Include="SearchForNotDeliveredMaintenance.aspx" />
     <Content Include="SearchForMaintenanceWithRemaining.aspx" />
+    <Content Include="SearchForSupplier.aspx" />
     <Content Include="Search_For_Bills.aspx" />
     <Content Include="Search_For_Client.aspx" />
     <Content Include="Search_For_ClientCheque.aspx" />
@@ -188,6 +189,7 @@
     <Content Include="Services\GetProductsNames.asmx" />
     <Content Include="Services\GetNamesService.asmx" />
     <Content Include="Special_Prices_List.aspx" />
+    <Content Include="Supplier_Statement.aspx" />
     <Content Include="Suppliers_report.aspx" />
     <Content Include="Suppliers_Search.aspx" />
     <Content Include="Supplier_Products.aspx" />
@@ -348,9 +350,11 @@
     <Compile Include="Business_Logic\Partner.cs" />
     <Compile Include="Business_Logic\Product.cs" />
     <Compile Include="Business_Logic\Classification.cs" />
+    <Compile Include="Business_Logic\Statement.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />
     <Compile Include="Business_Logic\SupplierInvoice.cs" />
+    <Compile Include="Business_Logic\SupplierStatement.cs" />
     <Compile Include="Business_Logic\Suppliers_Products.cs" />
     <Compile Include="Business_Logic\Supplier_Fax.cs" />
     <Compile Include="Business_Logic\Supplier_Payments_Documents.cs" />
@@ -599,12 +603,12 @@
     <Compile Include="SearchForLoaderProcess.aspx.designer.cs">
       <DependentUpon>SearchForLoaderProcess.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SearchForMaintenances.aspx.cs">
-      <DependentUpon>SearchForMaintenances.aspx</DependentUpon>
+    <Compile Include="SearchForMaintenance.aspx.cs">
+      <DependentUpon>SearchForMaintenance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SearchForMaintenances.aspx.designer.cs">
-      <DependentUpon>SearchForMaintenances.aspx</DependentUpon>
+    <Compile Include="SearchForMaintenance.aspx.designer.cs">
+      <DependentUpon>SearchForMaintenance.aspx</DependentUpon>
     </Compile>
     <Compile Include="SearchForNotDeliveredMaintenance.aspx.cs">
       <DependentUpon>SearchForNotDeliveredMaintenance.aspx</DependentUpon>
@@ -619,6 +623,13 @@
     </Compile>
     <Compile Include="SearchForMaintenanceWithRemaining.aspx.designer.cs">
       <DependentUpon>SearchForMaintenanceWithRemaining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForSupplier.aspx.cs">
+      <DependentUpon>SearchForSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForSupplier.aspx.designer.cs">
+      <DependentUpon>SearchForSupplier.aspx</DependentUpon>
     </Compile>
     <Compile Include="Search_For_Bills.aspx.cs">
       <DependentUpon>Search_For_Bills.aspx</DependentUpon>
@@ -670,6 +681,13 @@
     </Compile>
     <Compile Include="Special_Prices_List.aspx.designer.cs">
       <DependentUpon>Special_Prices_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier_Statement.aspx.cs">
+      <DependentUpon>Supplier_Statement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Supplier_Statement.aspx.designer.cs">
+      <DependentUpon>Supplier_Statement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Suppliers_report.aspx.cs">
       <DependentUpon>Suppliers_report.aspx</DependentUpon>
