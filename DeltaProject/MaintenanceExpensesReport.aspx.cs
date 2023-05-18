@@ -95,11 +95,6 @@ namespace DeltaProject
         private void BindWithdrawsGridView(List<MaintenanceWithdraw> withdrawsList)
         {
             Page.ClientScript.RegisterStartupScript(GetType(), "text", $"AddPartnersGridViews({JsonConvert.SerializeObject(withdrawsList)})", true);
-
-            //withdrawsList = withdrawsList.OrderByDescending(p => p.PartnerId).ToList();
-            //GridViewWithdraws.DataSource = withdrawsList;
-            //GridViewWithdraws.Columns[2].FooterText = withdrawsList.Sum(p => p.Amount).ToString("0.##");
-            //GridViewWithdraws.DataBind();
         }
 
         private void SetSummary(List<Maintenance> maintenanceList, List<MaintenanceExpense> expensesList, List<MaintenanceWithdraw> withdrawList)

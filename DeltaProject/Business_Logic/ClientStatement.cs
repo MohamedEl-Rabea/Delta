@@ -7,14 +7,8 @@ using System.Linq;
 
 namespace Business_Logic
 {
-    public class ClientStatement
+    public class ClientStatement : Statement
     {
-        public DateTime? TransactionDate { get; set; }
-        public double Debit { get; set; }
-        public double Credit { get; set; }
-        public double Balance { get; set; }
-        public string Statement { get; set; }
-
         public static List<ClientStatement> GetAllStatement(string clientName, DateTime? startDate)
         {
             var invoicesStatement = GetInvoicesStatement(clientName, startDate);
@@ -37,7 +31,7 @@ namespace Business_Logic
                         Debit = accClientStatement.Debit + currentClientStatement.Debit,
                         Credit = accClientStatement.Credit + currentClientStatement.Credit,
                         Balance = accClientStatement.Balance + currentClientStatement.Balance,
-                        Statement = accClientStatement.Statement
+                        Description = accClientStatement.Description
                     }));
             }
 
@@ -78,7 +72,7 @@ namespace Business_Logic
                 clientStatement.Debit = Convert.ToDouble(rdr["Debit"]);
                 clientStatement.Credit = Convert.ToDouble(rdr["Credit"]);
                 clientStatement.Balance = Convert.ToDouble(rdr["Balance"]);
-                clientStatement.Statement = rdr["Statement"].ToString();
+                clientStatement.Description = rdr["Statement"].ToString();
                 clientStatementList.Add(clientStatement);
             }
             rdr.Close();
@@ -106,7 +100,7 @@ namespace Business_Logic
                 clientMaintenanceStatement.Debit = Convert.ToDouble(rdr["Debit"]);
                 clientMaintenanceStatement.Credit = Convert.ToDouble(rdr["Credit"]);
                 clientMaintenanceStatement.Balance = Convert.ToDouble(rdr["Balance"]);
-                clientMaintenanceStatement.Statement = rdr["Statement"].ToString();
+                clientMaintenanceStatement.Description = rdr["Statement"].ToString();
                 clientMaintenanceStatements.Add(clientMaintenanceStatement);
             }
             rdr.Close();
@@ -134,7 +128,7 @@ namespace Business_Logic
                 clientMaintenanceStatement.Debit = Convert.ToDouble(rdr["Debit"]);
                 clientMaintenanceStatement.Credit = Convert.ToDouble(rdr["Credit"]);
                 clientMaintenanceStatement.Balance = Convert.ToDouble(rdr["Balance"]);
-                clientMaintenanceStatement.Statement = rdr["Statement"].ToString();
+                clientMaintenanceStatement.Description = rdr["Statement"].ToString();
                 clientMaintenanceStatements.Add(clientMaintenanceStatement);
             }
             rdr.Close();

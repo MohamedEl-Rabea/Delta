@@ -141,6 +141,7 @@
     <Content Include="Images\home.png" />
     <Content Include="Images\Up.png" />
     <Content Include="Income_Report.aspx" />
+    <Content Include="InvoiceDetails.aspx" />
     <Content Include="LoaderExpensesReport.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MaintenanceExpensesReport.aspx" />
@@ -454,6 +455,13 @@
     </Compile>
     <Compile Include="Income_Report.aspx.designer.cs">
       <DependentUpon>Income_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceDetails.aspx.cs">
+      <DependentUpon>InvoiceDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvoiceDetails.aspx.designer.cs">
+      <DependentUpon>InvoiceDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoaderExpensesReport.aspx.cs">
       <DependentUpon>LoaderExpensesReport.aspx</DependentUpon>

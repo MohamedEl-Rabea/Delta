@@ -152,7 +152,7 @@
                                     <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Suppliers_Search.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعلام (جديد)" NavigateUrl="~/SearchForSupplier.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعلام واردات" NavigateUrl="~/Supplier_Products.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="كشف حساب" NavigateUrl="~/SupplierStatement.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="كشف حساب" NavigateUrl="~/Supplier_Statement.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="العمــــــــــــــــــلاء">
                                     <asp:TreeNode Text="اضافة شيكات" NavigateUrl="~/Add_ClientCheque.aspx"></asp:TreeNode>

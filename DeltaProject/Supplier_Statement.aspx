@@ -1,26 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="Client_Statement.aspx.cs" Inherits="DeltaProject.Client_Statement" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Supplier_Statement.aspx.cs" Inherits="DeltaProject.Supplier_Statement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
         $(function () {
-            $('#<%= txtClientName.ClientID%>').autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "Services/GetNamesService.asmx/Get_Clients_Names",
-                        data: "{ 'Client_Name': '" + request.term + "' }",
-                        type: "POST",
-                        dataType: "json",
-                        contentType: "application/json;charset=utf-8",
-                        success: function (result) {
-                            response(result.d);
-                        },
-                        error: function (result) {
-                            alert('Problem');
-                        }
-                    });
-                }
-            });
+            $('#<%= ddlSuppliers.ClientID%>').select2();
         });
+
         $(function dtTimePicker() {
             var options = $.extend(
                 {},
@@ -55,42 +39,69 @@
             WinPrint.focus();
             WinPrint.print();
         }
+
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>كشف حساب عميل</p>
+        <p>كشف حساب مورد</p>
     </header>
-    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2" 
+    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
                          OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
-        <asp:ListItem Value="All" Selected="True">الكل</asp:ListItem>
-        <asp:ListItem Value="Invoices">الفواتير</asp:ListItem>
-        <asp:ListItem Value="Maintenance">الصيانات</asp:ListItem>
-        <asp:ListItem Value="Loaders">الونش</asp:ListItem>
+        <asp:ListItem Value="SupplierName" Selected="True">اسم المورد</asp:ListItem>
+        <asp:ListItem Value="PhoneNumber">رقم التليفون</asp:ListItem>
     </asp:RadioButtonList>
     <section class="Search_Section">
         <table class="Search_table">
             <tr>
                 <td class="Image_td">
                     <asp:ImageButton ID="ImageButtonSearch" runat="server" ImageUrl="~/Images/common_search_lookup.png"
-                        Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_Click" />
+                                     Width="24" Height="24" CssClass="Search_Button" CausesValidation="false" OnClick="ImageButtonSearch_Click" />
                 </td>
-                <td class="Search_td">
-                    <asp:TextBox ID="txtClientName" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox_md"
-                        placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                <td class="Search_td select2NoBorder">
+                    <asp:DropDownList ID="ddlSuppliers" runat="server" CssClass="Search_TextBox_md"
+                                      Style="height: auto"
+                                      DataTextField="Name"
+                                      DataValueField="Id"
+                                      AutoPostBack="True">
+                    </asp:DropDownList>
+                    <asp:TextBox ID="txtPhoneNumber" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox_md"
+                                 placeholder="رقم التليفون للبحث . . . . ."></asp:TextBox>
                 </td>
                 <td class="Search_td">
                     <asp:TextBox runat="server" ID="txtStartDate" CssClass="Search_TextBox_md left_border" PlaceHolder="تاريخ بداية الاستعلام . . . . ." AutoCompleteType="Disabled"></asp:TextBox>
                 </td>
             </tr>
+            <tr>
+                <td></td>
+                <td style="text-align: center">
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                                ControlToValidate="ddlSuppliers" Display="Dynamic" SetFocusOnError="true"
+                                                ToolTip="اسم المورد متطلب اساسى">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                    </asp:RequiredFieldValidator>
+                    <asp:CustomValidator ID="CustomValidator1" runat="server"
+                                         ToolTip="يجب كتابة الرقم بشكل صحيح"
+                                         ControlToValidate="txtPhoneNumber"
+                                         Display="Dynamic"
+                                         SetFocusOnError="true"
+                                         ClientValidationFunction="IsValidNumber">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                    </asp:CustomValidator>
+                </td>
+                <td></td>
+            </tr>
         </table>
     </section>
     <asp:Panel ID="PanelErrorMessage" runat="server" CssClass="ErrorMessagePanal" Visible="false">
         <article class="Errorarticle">
-            <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد فواتير مسجله لهذا العميل"></asp:Label>
+            <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="لا توجد فواتير مسجله لهذا المورد"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelStatement" Visible="false">
+    <asp:Panel runat="server" ID="PanelStatementList" Visible="false">
         <header class="Sec_footer" style="text-align: left; margin-top: 25px">
             <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/printer.png" Width="28" Height="28" OnClientClick="PrintDivContent('divToPrint');" ToolTip="اطبع التقرير" />
             <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Images/pdf.png" Width="28" Height="28" OnClick="ImageButton2_Click" OnClientClick="storeContentToExportPdf('divToPrint');" ToolTip="استخراج PDF" />
@@ -124,54 +135,67 @@
                 </section>
             </header>
             <%--Report PreSection--%>
-            <header class="Prices_Offer_SubHeaderBill">
-                <div>
-                    <p>كشف حساب</p>
-                </div>
-            </header>
-            <section class="ReportDeclarationSection">
-                <section>
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:Label ID="Label1" runat="server" Text="تاريخ البداية : " CssClass="lblInfo"></asp:Label>
-                            </td>
-                            <td style="width: 125px">
-                                <asp:Label ID="lblStartDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="Label3" runat="server" Text="اسم العميل : " CssClass="lblInfo"></asp:Label>
-                            </td>
-                            <td style="width: 125px">
-                                <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="اسم العميل"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="Label2" runat="server" Text="صافى الحساب : " CssClass="lblInfo"></asp:Label>
-                            </td>
-                            <td style="width: 125px">
-                                <asp:Label ID="lblBalance" runat="server" CssClass="lblInfo2" Text="صافى الحساب"></asp:Label>
-                            </td>
-                        </tr>
-                    </table>
+            <asp:Panel runat="server" ID="PanelStatement" Visible="False">
+                <header class="Prices_Offer_SubHeaderBill">
+                    <div>
+                        <p>كشف حساب</p>
+                    </div>
+                </header>
+                <section class="ReportDeclarationSection">
+                    <section>
+                        <table>
+                            <tr>
+                                <td>
+                                    <asp:Label ID="Label1" runat="server" Text="تاريخ البداية : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 125px">
+                                    <asp:Label ID="lblStartDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="Label3" runat="server" Text="اسم المورد : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 125px">
+                                    <asp:Label ID="lblSupplierName" runat="server" CssClass="lblInfo2" Text="اسم المورد"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="Label2" runat="server" Text="صافى الحساب : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 125px">
+                                    <asp:Label ID="lblBalance" runat="server" CssClass="lblInfo2" Text="صافى الحساب"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    <br />
+                    <asp:GridView runat="server" ID="GridViewStatement" CssClass="GridViewBill"
+                        AutoGenerateColumns="False" 
+                        EmptyDataText="لا توجد معاملات مادية" 
+                        ShowFooter="true"
+                        DataKeyNames="InvoiceId"
+                        OnRowDataBound="GridViewStatement_RowDataBound"
+                        OnRowCommand="GridViewStatement_OnRowCommand">
+                        <Columns>
+                            <asp:BoundField DataField="InvoiceId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                            <asp:BoundField DataField="TransactionDate" HeaderText="تاريخ الحركة" DataFormatString="{0:dd/MM/yyyy}" />
+                            <asp:BoundField DataField="Debit" HeaderText="مدين" />
+                            <asp:BoundField DataField="Credit" HeaderText="دائن" />
+                            <asp:BoundField DataField="Balance" HeaderText="رصيد" />
+                            <asp:BoundField DataField="Description" HeaderText="البيان" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkDetails" runat="server" CssClass="lnkbtnSelect" OnClientClick="SetTarget();"
+                                                    CausesValidation="false" CommandName="Details">التفاصيل</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        <HeaderStyle CssClass="HeaderStyleBill" />
+                        <RowStyle CssClass="RowStyleList" />
+                        <AlternatingRowStyle CssClass="AlternateRowStyleList" />
+                        <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                        <FooterStyle CssClass="FooterStyleBill" />
+                    </asp:GridView>
                 </section>
-                <br />
-                <asp:GridView runat="server" ID="GridViewStatement" CssClass="GridViewBill"
-                    AutoGenerateColumns="False" EmptyDataText="لا توجد معاملات مادية" ShowFooter="true"
-                    OnRowDataBound="GridViewStatement_RowDataBound">
-                    <Columns>
-                        <asp:BoundField DataField="TransactionDate" HeaderText="تاريخ الحركة" DataFormatString="{0:dd/MM/yyyy}" />
-                        <asp:BoundField DataField="Debit" HeaderText="مدين" />
-                        <asp:BoundField DataField="Credit" HeaderText="دائن" />
-                        <asp:BoundField DataField="Balance" HeaderText="رصيد" />
-                        <asp:BoundField DataField="Description" HeaderText="البيان" />
-                    </Columns>
-                    <HeaderStyle CssClass="HeaderStyleBill" />
-                    <RowStyle CssClass="RowStyleList" />
-                    <AlternatingRowStyle CssClass="AlternateRowStyleList" />
-                    <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
-                    <FooterStyle CssClass="FooterStyleBill" />
-                </asp:GridView>
-            </section>
+            </asp:Panel>
             <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center; height: auto">
                 <table class="Offer_Header_table">
                     <tr>

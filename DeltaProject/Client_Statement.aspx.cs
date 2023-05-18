@@ -1,6 +1,7 @@
 ﻿using Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,7 +28,9 @@ namespace DeltaProject
                 PanelStatement.Visible = true;
                 PanelErrorMessage.Visible = false;
                 string clientName = txtClientName.Text;
-                DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text) ? null : (DateTime?)Convert.ToDateTime(txtStartDate.Text);
+                DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text)
+                    ? (DateTime?)null
+                    : DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 var statmentList = new List<ClientStatement>();
 
                 if (RadioButtonListCategories.SelectedIndex == 0) //All
