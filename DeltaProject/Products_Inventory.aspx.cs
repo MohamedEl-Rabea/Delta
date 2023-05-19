@@ -1,91 +1,109 @@
-﻿using System;
+﻿using DeltaProject.Business_Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business_Logic;
 
 namespace DeltaProject
 {
     public partial class Products_Inventory : System.Web.UI.Page
     {
+        private List<NewProduct> Products
+        {
+            get => ViewState["Products"] == null
+                ? new List<NewProduct>()
+                : (List<NewProduct>)ViewState["Products"];
+            set => ViewState["Products"] = value;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                GridViewProducts.DataSource = Product.Get_Product_Inventory();
-                GridViewProducts.DataBind();
-
-                GridViewMotors.DataSource = Product.Get_Product_InventoryMotors();
-                GridViewMotors.DataBind();
-
-                GridViewTol.DataSource = Product.Get_Product_InventoryTol();
-                GridViewTol.DataBind();
+                ViewState["Products"] = NewProduct.GetProducts();
+                BindGridViews();
             }
         }
 
         protected void BtnAdjustment_Click(object sender, EventArgs e)
         {
-            ShowConfirm();
+            decimal quantityBefore;
+            string quantityAfter;
+            List<ProductSettlement> productsSettlement = new List<ProductSettlement>();
+            foreach (GridViewRow row in GridViewProducts.Rows)
+            {
+                quantityBefore = Convert.ToDecimal(row.Cells[3].Text);
+                quantityAfter = ((TextBox)row.FindControl("txtQuantity")).Text;
+
+                if (!string.IsNullOrEmpty(quantityAfter) && quantityBefore != Convert.ToDecimal(quantityAfter))
+                {
+                    ProductSettlement productSettlement = new ProductSettlement
+                    {
+                        ProductId = Convert.ToInt32(row.Cells[0].Text),
+                        QuantityBefore = Convert.ToDecimal(quantityBefore),
+                        QuantityAfter = Convert.ToDecimal(quantityAfter)
+                    };
+                    productsSettlement.Add(productSettlement);
+                }
+            }
+
+            foreach (GridViewRow row in GridViewMotors.Rows)
+            {
+                quantityBefore = Convert.ToDecimal(row.Cells[5].Text);
+                quantityAfter = ((TextBox)row.FindControl("txtQuantity")).Text;
+
+                if (!string.IsNullOrEmpty(quantityAfter) && quantityBefore != Convert.ToDecimal(quantityAfter))
+                {
+                    ProductSettlement productSettlement = new ProductSettlement
+                    {
+                        ProductId = Convert.ToInt32(row.Cells[0].Text),
+                        QuantityBefore = Convert.ToDecimal(quantityBefore),
+                        QuantityAfter = Convert.ToDecimal(quantityAfter)
+                    };
+                    productsSettlement.Add(productSettlement);
+                }
+            }
+
+            foreach (GridViewRow row in GridViewTol.Rows)
+            {
+                quantityBefore = Convert.ToDecimal(row.Cells[6].Text);
+                quantityAfter = ((TextBox)row.FindControl("txtQuantity")).Text;
+
+                if (!string.IsNullOrEmpty(quantityAfter) && quantityBefore != Convert.ToDecimal(quantityAfter))
+                {
+                    ProductSettlement productSettlement = new ProductSettlement
+                    {
+                        ProductId = Convert.ToInt32(row.Cells[0].Text),
+                        QuantityBefore = Convert.ToDecimal(quantityBefore),
+                        QuantityAfter = Convert.ToDecimal(quantityAfter)
+                    };
+                    productsSettlement.Add(productSettlement);
+                }
+            }
+
+            if (productsSettlement.Any())
+            {
+                ProductSettlement productSettlement = new ProductSettlement();
+
+                string msg = "";
+                if (productSettlement.AddSettlement(out msg, productsSettlement))
+                {
+                    ViewState["Products"] = Products.Where(p => !productsSettlement.Select(c => c.ProductId).Contains(p.Id)).ToList();
+                    BindGridViews();
+                }
+            }
         }
 
-        private void ShowConfirm()
+        private void BindGridViews()
         {
-            GridViewProducts.Columns[4].ControlStyle.CssClass = "";
-            GridViewProducts.Columns[4].ItemStyle.CssClass = "";
-            GridViewProducts.Columns[4].HeaderStyle.CssClass = "";
+            GridViewProducts.DataSource = Products.Where(p => p.ClassificationName == "منتجات عادية");
+            GridViewProducts.DataBind();
 
-            GridViewMotors.Columns[6].ControlStyle.CssClass = "";
-            GridViewMotors.Columns[6].ItemStyle.CssClass = "";
-            GridViewMotors.Columns[6].HeaderStyle.CssClass = "";
+            GridViewMotors.DataSource = Products.Where(p => p.ClassificationName == "مواتير");
+            GridViewMotors.DataBind();
 
-            GridViewTol.Columns[7].ControlStyle.CssClass = "";
-            GridViewTol.Columns[7].ItemStyle.CssClass = "";
-            GridViewTol.Columns[7].HeaderStyle.CssClass = "";
-        }
-
-        protected void ImageButtonConfirmEdit_Click(object sender, ImageClickEventArgs e)
-        {
-            int row_index = ((GridViewRow)((ImageButton)sender).NamingContainer).RowIndex;
-            GridView Products = (GridView)((GridViewRow)((ImageButton)sender).NamingContainer).NamingContainer;
-            Product product = new Product();
-            product.P_name = Products.Rows[row_index].Cells[0].Text;
-            TextBox txtAmount = (TextBox)Products.Rows[row_index].FindControl("txtAmount");
-            product.Amount = txtAmount.Text != "" ? Convert.ToDecimal(txtAmount.Text) : -1;
-            if (Products.ID == GridViewProducts.ID)
-            {
-                product.Purchase_Price = Convert.ToDouble(Products.Rows[row_index].Cells[1].Text);
-                ((GridViewRow)((ImageButton)sender).NamingContainer).Visible = false;
-                if (product.Amount != -1) // this product need to adjusted
-                {
-                    product.Products_Adjustment();
-                }
-            }
-            else if (Products.ID == GridViewMotors.ID)
-            {
-                product.Mark = Products.Rows[row_index].Cells[1].Text;
-                product.Inch = Convert.ToDouble(Products.Rows[row_index].Cells[2].Text);
-                product.Purchase_Price = Convert.ToDouble(Products.Rows[row_index].Cells[3].Text);
-                ((GridViewRow)((ImageButton)sender).NamingContainer).Visible = false;
-                if (product.Amount != -1) // this product need to adjusted
-                {
-                    product.Products_Adjustment();
-                }
-            }
-            else
-            {
-                product.Mark = Products.Rows[row_index].Cells[1].Text;
-                product.Inch = Convert.ToDouble(Products.Rows[row_index].Cells[2].Text);
-                product.Style = Products.Rows[row_index].Cells[3].Text;
-                product.Purchase_Price = Convert.ToDouble(Products.Rows[row_index].Cells[4].Text);
-                ((GridViewRow)((ImageButton)sender).NamingContainer).Visible = false;
-                if (product.Amount != -1) // this product need to adjusted
-                {
-                    product.Products_Adjustment();
-                }
-            }
-            ShowConfirm();
+            GridViewTol.DataSource = Products.Where(p => p.ClassificationName == "طلمبيات");
+            GridViewTol.DataBind();
         }
     }
 }

@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeltaProject {
-    
-    
-    public partial class Products_Inventory {
-        
+namespace DeltaProject
+{
+
+
+    public partial class Products_Inventory
+    {
+
         /// <summary>
         /// ImageButton1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
-        
+
         /// <summary>
         /// BtnAdjustment control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnAdjustment;
-        
+
         /// <summary>
         /// GridViewProducts control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewProducts;
-        
+
         /// <summary>
         /// GridViewMotors control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DeltaProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewMotors;
-        
+
         /// <summary>
         /// GridViewTol control.
         /// </summary>
