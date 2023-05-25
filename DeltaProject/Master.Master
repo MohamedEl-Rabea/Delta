@@ -141,6 +141,7 @@
                                     <asp:TreeNode Text="استعـــــــــــلام" NavigateUrl="~/Search_For_Product.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="جرد البضائــع" NavigateUrl="~/Products_Inventory.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مرتجــــــــــــع" NavigateUrl="~/Supplier_Returned_Products.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مرتجع (جديد)" NavigateUrl="~/ReturnSupplierProduct.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تجميع منتـــج" NavigateUrl="~/Collect_Product.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="المورديــــــــــــــن">

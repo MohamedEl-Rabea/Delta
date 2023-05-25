@@ -46,8 +46,8 @@
                 <Columns>
                     <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="Name" HeaderText="الاسم" />
-                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" />
-                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" />
+                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
                     <asp:BoundField DataField="UnitName" HeaderText="الوحده" />
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -84,8 +84,8 @@
                     <asp:BoundField DataField="Name" HeaderText="الاسم" />
                     <asp:BoundField DataField="Mark" HeaderText="الماركه" />
                     <asp:BoundField DataField="Inch" HeaderText="البوصه" />
-                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" />
-                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" />
+                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
                     <asp:BoundField DataField="UnitName" HeaderText="الوحده" />
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -123,8 +123,8 @@
                     <asp:BoundField DataField="Mark" HeaderText="الماركه" />
                     <asp:BoundField DataField="Inch" HeaderText="البوصه" />
                     <asp:BoundField DataField="Style" HeaderText="الطراز" />
-                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" />
-                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" />
+                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
                     <asp:BoundField DataField="UnitName" HeaderText="الوحده" />
                     <asp:TemplateField>
                         <ItemTemplate>

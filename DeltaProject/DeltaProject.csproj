@@ -158,6 +158,7 @@
     <Content Include="Products_Inventory.aspx" />
     <Content Include="Public_Prices_List.aspx" />
     <Content Include="RegisterLoaderProcess.aspx" />
+    <Content Include="ReturnSupplierProduct.aspx" />
     <Content Include="Return_Products.aspx" />
     <Content Include="Sales_Report.aspx" />
     <Content Include="Sale_Products.aspx" />
@@ -583,6 +584,13 @@
     </Compile>
     <Compile Include="RegisterLoaderProcess.aspx.designer.cs">
       <DependentUpon>RegisterLoaderProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnSupplierProduct.aspx.cs">
+      <DependentUpon>ReturnSupplierProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReturnSupplierProduct.aspx.designer.cs">
+      <DependentUpon>ReturnSupplierProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Return_Products.aspx.cs">
       <DependentUpon>Return_Products.aspx</DependentUpon>

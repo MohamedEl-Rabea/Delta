@@ -131,7 +131,7 @@
                         <asp:TextBox runat="server" ID="txtPaymentDate" ClientIDMode="AutoID" CssClass="EditTxt dateInput" PlaceHolder="تاريخ الدفع" Style="height: 22px;" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
                             ControlToValidate="txtPaymentDate" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="المبلغ المدفوع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
+                            ToolTip="تاريخ الدفع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
                         </asp:RequiredFieldValidator>
                     </ItemTemplate>
