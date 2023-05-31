@@ -353,6 +353,7 @@
     <Compile Include="Business_Logic\Product.cs" />
     <Compile Include="Business_Logic\Classification.cs" />
     <Compile Include="Business_Logic\ProductSettlement.cs" />
+    <Compile Include="Business_Logic\ReturnedProduct.cs" />
     <Compile Include="Business_Logic\Statement.cs" />
     <Compile Include="Business_Logic\Supplier.cs" />
     <Compile Include="Business_Logic\SupplierCheque.cs" />

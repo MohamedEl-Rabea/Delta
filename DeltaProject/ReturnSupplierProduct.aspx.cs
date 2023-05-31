@@ -41,7 +41,7 @@ namespace DeltaProject
             PanelProducts.Visible = false;
 
             var supplierId = Convert.ToInt32(ddlSuppliers.SelectedValue);
-            var productId = Convert.ToInt32(txtProductId.Text);
+            var productId = string.IsNullOrEmpty(txtProductName.Text) ? 0 : Convert.ToInt32(txtProductId.Text);
             if (supplierId == 0 && productId == 0)
             {
                 lblMsg.Text = "اختر مورد او منتج";

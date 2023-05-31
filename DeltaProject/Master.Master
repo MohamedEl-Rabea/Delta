@@ -133,14 +133,14 @@
                                         <asp:TreeNode Text="تعديل" ToolTip="تعديل وحدة قياس" NavigateUrl="~/EditUnit.aspx"></asp:TreeNode>
                                         <asp:TreeNode Text="استعلام" ToolTip="عرض وحدات القياس" NavigateUrl="~/Units.aspx"></asp:TreeNode>
                                     </asp:TreeNode> 
-                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
+                                    <%--<asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>--%>
                                     <asp:TreeNode Text="اضافة منتجات (جديد)" NavigateUrl="~/AddProduct.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تحديث كميـات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانـــات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مسح منتجــات" NavigateUrl="~/Delete_Products.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعـــــــــــلام" NavigateUrl="~/Search_For_Product.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="جرد البضائــع" NavigateUrl="~/Products_Inventory.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="مرتجــــــــــــع" NavigateUrl="~/Supplier_Returned_Products.aspx"></asp:TreeNode>
+                                    <%--<asp:TreeNode Text="مرتجــــــــــــع" NavigateUrl="~/Supplier_Returned_Products.aspx"></asp:TreeNode>--%>
                                     <asp:TreeNode Text="مرتجع (جديد)" NavigateUrl="~/ReturnSupplierProduct.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تجميع منتـــج" NavigateUrl="~/Collect_Product.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
@@ -150,7 +150,7 @@
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Supplier_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="سداد جديــــد" NavigateUrl="~/New_Supplier_Interaction.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Supplier.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Suppliers_Search.aspx"></asp:TreeNode>
+                                    <%--<asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Suppliers_Search.aspx"></asp:TreeNode>--%>
                                     <asp:TreeNode Text="استعلام (جديد)" NavigateUrl="~/SearchForSupplier.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعلام واردات" NavigateUrl="~/Supplier_Products.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="كشف حساب" NavigateUrl="~/Supplier_Statement.aspx"></asp:TreeNode>

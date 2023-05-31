@@ -17,6 +17,7 @@ namespace DeltaProject.Business_Logic
         public decimal? PaidAmount { get; set; }
         public List<NewProduct> Products { get; set; } = new List<NewProduct>();
         public List<InvoicePayment> Payments { get; set; } = new List<InvoicePayment>();
+        public List<ReturnedProduct> Returns { get; set; } = new List<ReturnedProduct>();
 
         public bool AddInvoice(out string m)
         {
@@ -78,13 +79,14 @@ namespace DeltaProject.Business_Logic
             rdr.NextResult();
             while (rdr.Read())
             {
-                InvoicePayment payment = new InvoicePayment
+                ReturnedProduct product = new ReturnedProduct
                 {
-                    PaymentDate = Convert.ToDateTime(rdr["PaymentDate"]),
-                    PaidAmount = Convert.ToDecimal(rdr["PaidAmount"]),
-                    Notes = rdr["Notes"].ToString()
+                    Name = rdr["ProductName"].ToString(),
+                    Quantity = Convert.ToDecimal(rdr["Quantity"]),
+                    UnitName = rdr["UnitName"].ToString(),
+                    Date = Convert.ToDateTime(rdr["Date"])
                 };
-                supplierInvoice.Payments.Add(payment);
+                supplierInvoice.Returns.Add(product);
             }
 
             con.Close();

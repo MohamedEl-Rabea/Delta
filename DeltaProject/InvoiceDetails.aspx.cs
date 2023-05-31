@@ -33,8 +33,8 @@ namespace DeltaProject
                 GridViewProducts.DataSource = invoiceDetails.Products;
                 GridViewProducts.DataBind();
 
-                GridViewPayments.DataSource = invoiceDetails.Payments;
-                GridViewPayments.DataBind();
+                GridViewReturns.DataSource = invoiceDetails.Returns;
+                GridViewReturns.DataBind();
             }
         }
 

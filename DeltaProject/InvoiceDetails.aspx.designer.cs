@@ -177,12 +177,12 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.GridView GridViewProducts;
 
         /// <summary>
-        /// GridViewPayments control.
+        /// GridViewReturns control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewPayments;
+        protected global::System.Web.UI.WebControls.GridView GridViewReturns;
     }
 }

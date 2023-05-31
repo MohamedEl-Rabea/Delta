@@ -142,14 +142,15 @@
                     <br />
                     <section>
                         <div>
-                            <p>جدول عمليات الدفع</p>
+                            <p>جدول المرتجعات</p>
                         </div>
-                        <asp:GridView runat="server" ID="GridViewPayments" CssClass="GridViewBill"
+                        <asp:GridView runat="server" ID="GridViewReturns" CssClass="GridViewBill"
                                       AutoGenerateColumns="False" EmptyDataText="لا توجد عمليات" ShowFooter="true">
                             <Columns>
-                                <asp:BoundField DataField="PaymentDate" HeaderText="التاريخ" SortExpression="PaymentDate" DataFormatString="{0:dd/MM/yyyy}" />
-                                <asp:BoundField DataField="PaidAmount" HeaderText="القيمة" SortExpression="PaidAmount" DataFormatString="{0:0.##}" />
-                                <asp:BoundField DataField="Notes" HeaderText="ملاحظات" SortExpression="Notes" />
+                                <asp:BoundField DataField="Name" HeaderText="اسم المنتج" SortExpression="Name" />
+                                <asp:BoundField DataField="Quantity" HeaderText="الكميه" SortExpression="Quantity" DataFormatString="{0:0.##}"/>
+                                <asp:BoundField DataField="UnitName" HeaderText="الوحدة" SortExpression="UnitName" />
+                                <asp:BoundField DataField="Date" HeaderText="التاريخ" SortExpression="PaymentDate" DataFormatString="{0:dd/MM/yyyy}" />
                             </Columns>
                             <HeaderStyle CssClass="HeaderStyleBill" />
                             <RowStyle CssClass="RowStyleList" />
