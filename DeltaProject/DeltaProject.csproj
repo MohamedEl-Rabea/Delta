@@ -152,6 +152,7 @@
     <Content Include="New_Supplier_Interaction.aspx" />
     <Content Include="NotAuthorized.aspx" />
     <Content Include="PayLoaderProcess.aspx" />
+    <Content Include="AddSupplierPayment.aspx" />
     <Content Include="Pay_Bill.aspx" />
     <Content Include="Pay_Client_Debts.aspx" />
     <Content Include="Public\Permission_Page.aspx" />
@@ -338,7 +339,7 @@
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
-    <Compile Include="Business_Logic\InvoicePayment.cs" />
+    <Compile Include="Business_Logic\SupplierPayment.cs" />
     <Compile Include="Business_Logic\Loader.cs" />
     <Compile Include="Business_Logic\LoaderExpense.cs" />
     <Compile Include="Business_Logic\LoaderProcess.cs" />
@@ -542,6 +543,13 @@
     </Compile>
     <Compile Include="PayLoaderProcess.aspx.designer.cs">
       <DependentUpon>PayLoaderProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddSupplierPayment.aspx.cs">
+      <DependentUpon>AddSupplierPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddSupplierPayment.aspx.designer.cs">
+      <DependentUpon>AddSupplierPayment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pay_Bill.aspx.cs">
       <DependentUpon>Pay_Bill.aspx</DependentUpon>

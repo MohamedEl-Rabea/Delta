@@ -24,11 +24,8 @@ namespace DeltaProject
                 var supplierInvoice = new SupplierInvoice { Id = Convert.ToInt32(invoiceId) };
                 var invoiceDetails = supplierInvoice.GetInvoiceDetails();
                 var cost = invoiceDetails.Products.Sum(c => c.PurchasePrice * c.Quantity);
-                var paid = invoiceDetails.Payments.Sum(c => c.PaidAmount);
 
                 lblInvoiceCost.Text = cost.ToString("0.##");
-                lblInvoicePaid.Text = paid.ToString("0.##");
-                lblInvoiceRemaining.Text = (cost - paid).ToString("0.##");
 
                 GridViewProducts.DataSource = invoiceDetails.Products;
                 GridViewProducts.DataBind();

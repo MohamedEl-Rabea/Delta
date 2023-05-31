@@ -81,34 +81,20 @@
                                 <td style="width: 125px">
                                     <asp:Label ID="lblInvoiceDate" runat="server" CssClass="lblInfo2" Text="------"></asp:Label>
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <asp:Label ID="Label10" runat="server" Text="اسم المورد : " CssClass="lblInfo"></asp:Label>
                                 </td>
                                 <td style="width: 125px">
                                     <asp:Label ID="lblInvoiceSupplierName" runat="server" CssClass="lblInfo2" Text="------"></asp:Label>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <asp:Label ID="Label8" runat="server" Text="اجمالى الفاتورة : " CssClass="lblInfo"></asp:Label>
                                 </td>
                                 <td style="width: 125px">
                                     <asp:Label ID="lblInvoiceCost" runat="server" CssClass="lblInfo2" Text="------" 
                                                DataFormatString="{0:0.##}" ForeColor="Green"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="Label5" runat="server" Text="المدفوع : " CssClass="lblInfo"></asp:Label>
-                                </td>
-                                <td style="width: 125px">
-                                    <asp:Label ID="lblInvoicePaid" runat="server" CssClass="lblInfo2" Text="------" 
-                                               DataFormatString="{0:0.##}" ForeColor="Green"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:Label ID="Label9" runat="server" Text="المتبقى : " CssClass="lblInfo"></asp:Label>
-                                </td>
-                                <td style="width: 125px">
-                                    <asp:Label ID="lblInvoiceRemaining" runat="server" CssClass="lblInfo2" Text="------" 
-                                               DataFormatString="{0:0.##}" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
                         </table>

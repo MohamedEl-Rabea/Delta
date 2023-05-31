@@ -16,7 +16,6 @@ namespace DeltaProject.Business_Logic
         public DateTime Date { get; set; }
         public decimal? PaidAmount { get; set; }
         public List<NewProduct> Products { get; set; } = new List<NewProduct>();
-        public List<InvoicePayment> Payments { get; set; } = new List<InvoicePayment>();
         public List<ReturnedProduct> Returns { get; set; } = new List<ReturnedProduct>();
 
         public bool AddInvoice(out string m)
@@ -89,6 +88,7 @@ namespace DeltaProject.Business_Logic
                 supplierInvoice.Returns.Add(product);
             }
 
+            rdr.Close();
             con.Close();
 
             return supplierInvoice;

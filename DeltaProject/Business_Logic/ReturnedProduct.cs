@@ -2,6 +2,7 @@
 
 namespace DeltaProject.Business_Logic
 {
+    [Serializable]
     public class ReturnedProduct
     {
         public int Id { get; set; }

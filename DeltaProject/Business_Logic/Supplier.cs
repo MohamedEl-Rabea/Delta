@@ -14,6 +14,8 @@ namespace Business_Logic
         public string S_name { get; set; }
         public string Address { get; set; }
         public string Account_Number { get; set; }
+        public double RemainingBalance { get; set; }
+
         public List<Supplier_Phone> Phones { get; set; }
         public List<Supplier_Fax> Faxes { get; set; }
 
@@ -122,8 +124,8 @@ namespace Business_Logic
         public static List<Supplier> GetSuppliers()
         {
             List<Supplier> suppliers = new List<Supplier>();
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(CS))
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("SELECT Id, Name FROM Supplier", con);
                 con.Open();
@@ -139,8 +141,8 @@ namespace Business_Logic
         public Supplier GetSupplierData(int? id, string phoneNumber)
         {
             Supplier supplier = new Supplier { Phones = new List<Supplier_Phone>(), Faxes = new List<Supplier_Fax>() };
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand("GetSupplierData", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -175,8 +177,38 @@ namespace Business_Logic
             return supplier;
         }
 
+        public static (double?, string) GetRemainingBalance(int id, string phoneNumber)
+        {
+            double? remainingBalance = null;
+            string supplierName = "";
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand("GetSupplierRemainingBalance", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (id != 0)
+                cmd.Parameters.Add("@supplierId", SqlDbType.Int).Value = id;
+            if (!string.IsNullOrEmpty(phoneNumber))
+                cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = phoneNumber;
+
+            con.Open();
+            var rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                remainingBalance = string.IsNullOrEmpty(rdr["RemainingBalance"].ToString()) ? (double?)null : Convert.ToDouble(rdr["RemainingBalance"]);
+            }
+            rdr.NextResult();
+            while (rdr.Read())
+            {
+                supplierName = rdr["SupplierName"].ToString();
+            }
+            rdr.Close();
+            con.Close();
+            return (remainingBalance, supplierName);
+        }
 
 
         #endregion
+
     }
 }

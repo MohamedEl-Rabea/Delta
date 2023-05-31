@@ -148,7 +148,8 @@
                                     <asp:TreeNode Text="اضافة مورد" NavigateUrl="~/Add_Supplier.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="اضافة شيكات" NavigateUrl="~/Add_SupplierCheque.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Supplier_Info.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="سداد جديــــد" NavigateUrl="~/New_Supplier_Interaction.aspx"></asp:TreeNode>
+                                    <%--<asp:TreeNode Text="سداد جديــــد" NavigateUrl="~/New_Supplier_Interaction.aspx"></asp:TreeNode>--%>
+                                    <asp:TreeNode Text="سداد (جديد)" NavigateUrl="~/AddSupplierPayment.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Supplier.aspx"></asp:TreeNode>
                                     <%--<asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Suppliers_Search.aspx"></asp:TreeNode>--%>
                                     <asp:TreeNode Text="استعلام (جديد)" NavigateUrl="~/SearchForSupplier.aspx"></asp:TreeNode>
