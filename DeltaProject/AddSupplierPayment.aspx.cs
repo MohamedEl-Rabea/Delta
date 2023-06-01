@@ -60,8 +60,9 @@ namespace DeltaProject
                 return;
             }
 
-            lblSupplierName.Text = result.Item2;
-            lblRemainingAmount.Text = result.Item1.Value.ToString("0.##");
+            lblSupplierId.Value = result.Item2.ToString();
+            lblSupplierName.Text = result.Item3;
+            lnkStatement.Text = result.Item1.Value.ToString("0.##");
             PanelSupplierData.Visible = true;
             PanelPayment.Visible = result.Item1 > 0;
         }
@@ -89,11 +90,16 @@ namespace DeltaProject
             {
                 txtPaidAmount.Text = "";
                 txtNotes.Text = "";
-                lblRemainingAmount.Text = remainingBalance.Value.ToString("0.##");
+                lnkStatement.Text = remainingBalance.Value.ToString("0.##");
                 PanelPayment.Visible = remainingBalance > 0;
                 lblSaveMsg.Text = $"تم دفع مبلغ ({supplierPayment.PaidAmount}) للمورد ({lblSupplierName.Text}) بنجاح";
                 lblSaveMsg.ForeColor = System.Drawing.Color.Green;
             }
+        }
+
+        protected void lnkStatement_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("~/Supplier_Statement.aspx?supplierId={0}", lblSupplierId.Value));
         }
     }
 }

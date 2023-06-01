@@ -18,6 +18,10 @@
             $('#<%= txtPaymentDate.ClientID%>').datepicker(options);
             $('#<%= txtPaymentDate.ClientID%>').datepicker("setDate", new Date());
         });
+
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
@@ -69,13 +73,15 @@
                     <p class="RHSP">اسم المـــورد :</p>
                 </td>
                 <td style="text-align: right;width: 40%">
+                    <asp:HiddenField ID="lblSupplierId" runat="server" />
                     <asp:Label ID="lblSupplierName" runat="server" CssClass="lblInfo"></asp:Label>
                 </td>
                 <td class="RHSTD" style="width: 10%">
-                    <p class="RHSP">اجمالى الحساب :</p>
+                    <p class="RHSP">صافى الحساب :</p>
                 </td>
                 <td style="text-align: right;width: 40%">
-                    <asp:Label ID="lblRemainingAmount" runat="server" CssClass="lblInfo"></asp:Label>
+                    <asp:LinkButton ID="lnkStatement" runat="server" CssClass="lnkbtnSelect" OnClientClick="SetTarget();"
+                                    CausesValidation="false" OnClick="lnkStatement_OnClick" Text=""></asp:LinkButton>
                 </td>
             </tr>
         </table>

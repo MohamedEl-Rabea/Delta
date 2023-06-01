@@ -177,9 +177,10 @@ namespace Business_Logic
             return supplier;
         }
 
-        public static (double?, string) GetRemainingBalance(int id, string phoneNumber)
+        public static (double?, int?, string) GetRemainingBalance(int id, string phoneNumber)
         {
             double? remainingBalance = null;
+            int? supplierId = null;
             string supplierName = "";
             string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(cs);
@@ -200,11 +201,12 @@ namespace Business_Logic
             rdr.NextResult();
             while (rdr.Read())
             {
+                supplierId = Convert.ToInt32(rdr["SupplierId"]);
                 supplierName = rdr["SupplierName"].ToString();
             }
             rdr.Close();
             con.Close();
-            return (remainingBalance, supplierName);
+            return (remainingBalance, supplierId, supplierName);
         }
 
 

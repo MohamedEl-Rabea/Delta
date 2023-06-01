@@ -18,7 +18,15 @@ namespace DeltaProject
                 ddlSuppliers.DataSource = Supplier.GetSuppliers();
                 ddlSuppliers.DataBind();
                 ddlSuppliers.Items.Insert(0, new ListItem("إختر مورد", ""));
-                ddlSuppliers.SelectedIndex = 0;
+                var supplierId = Request.QueryString["supplierId"];
+
+                if (string.IsNullOrEmpty(supplierId))
+                    ddlSuppliers.SelectedIndex = 0;
+                else
+                {
+                    ddlSuppliers.SelectedValue = supplierId;
+                    ImageButtonSearch_Click(sender, null);
+                }
             }
         }
 
