@@ -61,6 +61,7 @@ namespace DeltaProject.Business_Logic
             {
                 NewProduct product = new NewProduct
                 {
+                    Id = Convert.ToInt32(rdr["Id"]),
                     Name = rdr["ProductName"].ToString(),
                     ClassificationName = rdr["ClassificationName"].ToString(),
                     Mark = rdr["Mark"].ToString(),
@@ -80,6 +81,7 @@ namespace DeltaProject.Business_Logic
             {
                 ReturnedProduct product = new ReturnedProduct
                 {
+                    Id = Convert.ToInt32(rdr["Id"]),
                     Name = rdr["ProductName"].ToString(),
                     Quantity = Convert.ToDecimal(rdr["Quantity"]),
                     UnitName = rdr["UnitName"].ToString(),
@@ -191,7 +193,6 @@ namespace DeltaProject.Business_Logic
             table.Columns.Add("Inch", typeof(decimal));
             table.Columns.Add("Style", typeof(string));
             table.Columns.Add("Quantity", typeof(decimal));
-            table.Columns.Add("Factor", typeof(decimal));
             table.Columns.Add("UnitId", typeof(int));
             table.Columns.Add("PurchasePrice", typeof(decimal));
             table.Columns.Add("SellPrice", typeof(decimal));
@@ -201,7 +202,7 @@ namespace DeltaProject.Business_Logic
             {
                 foreach (var item in Products)
                     table.Rows.Add(item.Id, item.Name, item.ClassificationId, item.Mark, item.Inch, item.Style,
-                        item.Quantity, item.Factor, item.UnitId, item.PurchasePrice, item.SellPrice, item.Description);
+                        item.Quantity, item.UnitId, item.PurchasePrice, item.SellPrice, item.Description);
             }
 
             return table;

@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class AddSupplierPayment : System.Web.UI.Page
+    public partial class AddSupplierPayment : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

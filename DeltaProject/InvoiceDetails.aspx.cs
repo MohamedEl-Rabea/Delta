@@ -23,7 +23,9 @@ namespace DeltaProject
 
                 var supplierInvoice = new SupplierInvoice { Id = Convert.ToInt32(invoiceId) };
                 var invoiceDetails = supplierInvoice.GetInvoiceDetails();
-                var cost = invoiceDetails.Products.Sum(c => c.PurchasePrice * c.Quantity);
+
+                var cost = invoiceDetails.Products.Sum(c =>
+                    c.PurchasePrice * (c.Quantity - invoiceDetails.Returns.Where(r => r.Id == c.Id).Sum(r => r.Quantity)));
 
                 lblInvoiceCost.Text = cost.ToString("0.##");
 

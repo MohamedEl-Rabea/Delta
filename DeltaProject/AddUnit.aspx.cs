@@ -34,28 +34,15 @@ namespace DeltaProject
                 SubUnitName = ddlUnits.SelectedItem.Text
             };
 
-            if (ViewState["UnitFactorsList"] != null && ((List<UnitFactor>)ViewState["UnitFactorsList"]).Contains(unitFactor))
-            {
-                lblFinishMsg.Visible = true;
-                lblFinishMsg.Text = "! هذا التحويل مسجل فى القائمة";
-                lblFinishMsg.ForeColor = System.Drawing.Color.Red;
-            }
-            else
-            {
-                unitFactor.Factor = Convert.ToDecimal(txtFactor.Text);
+            unitFactor.Factor = Convert.ToDecimal(txtFactor.Text);
 
-                if (ViewState["UnitFactorsList"] == null)
-                {
-                    List<UnitFactor> unitFactors = new List<UnitFactor>();
-                    unitFactors.Add(unitFactor);
-                    ViewState["UnitFactorsList"] = unitFactors;
-                }
-                else
-                {
-                    ((List<UnitFactor>)ViewState["UnitFactorsList"]).Add(unitFactor);
-                }
-                BindList();
-            }
+            List<UnitFactor> unitFactors = new List<UnitFactor> { unitFactor };
+            ViewState["UnitFactorsList"] = unitFactors;
+
+            BindList();
+
+            btnAddSubUnitFactor.Enabled = false;
+            btnAddSubUnitFactor.BackColor = System.Drawing.Color.FromName("#aaa");
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -140,6 +127,9 @@ namespace DeltaProject
                 int index = ((List<UnitFactor>)ViewState["UnitFactorsList"]).FindIndex(p => p.SubUnitName == subUnitName);
                 ((List<UnitFactor>)ViewState["UnitFactorsList"]).RemoveAt(index);
                 BindList();
+
+                btnAddSubUnitFactor.Enabled = true;
+                btnAddSubUnitFactor.BackColor = System.Drawing.Color.FromName("#1abc9c");
             }
         }
     }

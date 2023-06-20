@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class Supplier_Statement : System.Web.UI.Page
+    public partial class Supplier_Statement : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -93,8 +93,8 @@ namespace DeltaProject
             {
                 var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
 
-                Response.Redirect(string.Format("~/InvoiceDetails.aspx?invoiceId={0}&invoiceDate={1}&supplierName={1}",
-                    gridRow.Cells[0].Text, gridRow.Cells[1].Text, lblSupplierName.Text));
+                Response.Redirect(
+                    $"~/InvoiceDetails.aspx?invoiceId={gridRow.Cells[0].Text}&invoiceDate={gridRow.Cells[1].Text}&supplierName={lblSupplierName.Text}");
             }
         }
 

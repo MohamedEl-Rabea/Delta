@@ -49,7 +49,6 @@ namespace DeltaProject
             ddlSubUnits.DataBind();
             ddlSubUnits.Items.Insert(0, new ListItem("إختر وحدة قياس", ""));
             ddlSubUnits.SelectedIndex = 0;
-
         }
 
         protected void gridViewUnitFactors_OnRowDataBound(object sender, GridViewRowEventArgs e)
@@ -57,9 +56,18 @@ namespace DeltaProject
             var isDataRow = e.Row.RowType == DataControlRowType.DataRow;
             if (isDataRow && gridViewUnitFactors.DataKeys[e.Row.RowIndex]?.Value is DBNull)
                 return;
+
             var isNew = isDataRow && Convert.ToInt32(gridViewUnitFactors.DataKeys[e.Row.RowIndex]?.Value) == 0;
             if (isNew)
                 ((ImageButton)e.Row.FindControl("btnDelete")).Visible = true;
+
+            if (e.Row.RowType == DataControlRowType.Footer && UnitFactors.Any())
+            {
+                ((DropDownList)e.Row.FindControl("ddlSubUnits")).Visible = false;
+                ((TextBox)e.Row.FindControl("txtFactor")).Visible = false;
+                ((ImageButton)e.Row.FindControl("btnAdd")).Visible = false;
+                btnSave.Visible = false;
+            }
         }
 
         protected void gridViewUnitFactors_OnRowCommand(object sender, GridViewCommandEventArgs e)

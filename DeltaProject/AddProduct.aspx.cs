@@ -216,7 +216,7 @@ namespace DeltaProject
 
         private void FillUnitsDropDownList()
         {
-            var units = !string.IsNullOrEmpty(txtProductName.Text) ? Unit.GetProductUnits(txtProductName.Text) : new List<Unit>();
+            var units = !string.IsNullOrEmpty(txtProductId.Text) ? Unit.GetProductUnits(Convert.ToInt32(txtProductId.Text)) : new List<Unit>();
             ViewState["ProductUnits"] = units.Any() ? units : null;
             ddlUnits.DataSource = units.Any() ? units : Units;
             ddlUnits.DataBind();
@@ -265,6 +265,7 @@ namespace DeltaProject
 
         private void ResetProductPanel()
         {
+            txtProductId.Text = "";
             txtProductName.Text = "";
             ddlClassifications.SelectedIndex = 0;
             ddlClassifications.Enabled = true;

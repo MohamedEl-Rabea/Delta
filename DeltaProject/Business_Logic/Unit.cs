@@ -33,7 +33,7 @@ namespace DeltaProject.Business_Logic
             return units;
         }
 
-        public static List<Unit> GetProductUnits(string productName)
+        public static List<Unit> GetProductUnits(int id)
         {
             List<Unit> units = new List<Unit>();
 
@@ -42,15 +42,12 @@ namespace DeltaProject.Business_Logic
             {
                 SqlCommand cmd = new SqlCommand("GetAvailableUnitsForProduct", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@productName", SqlDbType.NVarChar).Value = productName;
+                cmd.Parameters.Add("@productId", SqlDbType.Int).Value = id;
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    if (!units.Any(p => p.Id == (int)rdr["SubUnitId"] && p.Name == rdr["SubUnitName"].ToString()))
-                        units.Add(new Unit { Id = (int)rdr["SubUnitId"], Name = rdr["SubUnitName"].ToString(), Factor = (decimal)rdr["Factor"] });
-                    if (!units.Any(p => p.Id == (int)rdr["MainUnitId"] && p.Name == rdr["MainUnitName"].ToString()))
-                        units.Add(new Unit { Id = (int)rdr["MainUnitId"], Name = rdr["MainUnitName"].ToString(), Factor = (decimal)rdr["Factor"] });
+                    units.Add(new Unit { Id = (int)rdr["UnitId"], Name = rdr["Name"].ToString() });
                 }
             }
 
