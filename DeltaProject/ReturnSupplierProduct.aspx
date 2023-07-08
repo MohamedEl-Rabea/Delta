@@ -87,7 +87,7 @@
                 <asp:BoundField DataField="Date" HeaderText="تاريخ الفاتوره"  DataFormatString="{0:dd/MM/yyyy}" />
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButtonSelect" runat="server" CommandName="Select" Font-Underline="false">اختر . . .</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButtonSelect" runat="server" CommandName="Select" Font-Underline="false">اختر</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

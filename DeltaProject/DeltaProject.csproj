@@ -161,6 +161,7 @@
     <Content Include="RegisterLoaderProcess.aspx" />
     <Content Include="ReturnSupplierProduct.aspx" />
     <Content Include="Return_Products.aspx" />
+    <Content Include="SaleProducts.aspx" />
     <Content Include="Sales_Report.aspx" />
     <Content Include="Sale_Products.aspx" />
     <Content Include="Script\jquery-1.10.2.js" />
@@ -328,6 +329,10 @@
       <DependentUpon>All_Clients_Report.aspx</DependentUpon>
     </Compile>
     <Compile Include="Business_Logic\Bill.cs" />
+    <Compile Include="Business_Logic\BillDiscount.cs" />
+    <Compile Include="Business_Logic\BillItem.cs" />
+    <Compile Include="Business_Logic\BillPayment.cs" />
+    <Compile Include="Business_Logic\BillService.cs" />
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
     <Compile Include="Business_Logic\Attribute.cs" />
@@ -339,6 +344,7 @@
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
+    <Compile Include="Business_Logic\SaleBill.cs" />
     <Compile Include="Business_Logic\SupplierPayment.cs" />
     <Compile Include="Business_Logic\Loader.cs" />
     <Compile Include="Business_Logic\LoaderExpense.cs" />
@@ -607,6 +613,13 @@
     </Compile>
     <Compile Include="Return_Products.aspx.designer.cs">
       <DependentUpon>Return_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SaleProducts.aspx.cs">
+      <DependentUpon>SaleProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SaleProducts.aspx.designer.cs">
+      <DependentUpon>SaleProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sales_Report.aspx.cs">
       <DependentUpon>Sales_Report.aspx</DependentUpon>

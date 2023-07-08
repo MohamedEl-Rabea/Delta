@@ -24,13 +24,19 @@ namespace DeltaProject.Business_Logic
         public double? Inch { get; set; }
         public string Style { get; set; }
 
-        public static List<NewProduct> GetProducts()
+        public decimal SpecifiedPrice { get; set; }
+        public decimal SoldQuantity { get; set; }
+        public decimal Discount { get; set; }
+
+        public static List<NewProduct> GetProducts(int? id = null)
         {
             List<NewProduct> products = new List<NewProduct>();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("GetProducts", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            if (id.HasValue)
+                cmd.Parameters.Add("@productId", SqlDbType.Int).Value = id;
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -47,6 +53,7 @@ namespace DeltaProject.Business_Logic
                         : Convert.ToDouble(rdr["Inch"]),
                     Style = rdr["Style"].ToString(),
                     PurchasePrice = Convert.ToDecimal(rdr["PurchasePrice"]),
+                    SellPrice = Convert.ToDecimal(rdr["SellPrice"]),
                     Quantity = Convert.ToDecimal(rdr["Quantity"]),
                     UnitId = Convert.ToInt32(rdr["UnitId"]),
                     UnitName = rdr["UnitName"].ToString()

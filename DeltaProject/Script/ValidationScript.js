@@ -36,3 +36,16 @@ function IsValidPaidAmount(source, args) {
         args.IsValid = true;
     }
 }
+
+function IsValidQuantity(source, args) {
+    var quantity = parseFloat(args.Value);
+    var element = $(source).closest('tr').find('.remainingQuantity');
+    var tagName = $(element).prop('tagName');
+    var remainingQuantity = parseFloat(tagName === "INPUT" ? element.val() : element.text());
+    var isValid = remainingQuantity >= quantity;
+    if (isNaN(args.Value) || !isValid) {
+        args.IsValid = false;
+    } else {
+        args.IsValid = true;
+    }
+}
