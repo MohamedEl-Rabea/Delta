@@ -243,13 +243,11 @@ namespace DeltaProject
                     lblAddress.Text = string.IsNullOrEmpty(txtAddress.Text) ? "---" : txtAddress.Text;
                     lblBillCost.Text = lblTotalCost.Text;
                     lblPaid_Value.Text = txtPaid_Amount.Text;
-                    lblDiscountValue.Text = BillItems.Sum(c => c.Discount).ToString("0.##");
                     lblAdditionalCostValue.Text = string.IsNullOrEmpty(txtAdditionalCost.Text) ? "0" : txtAdditionalCost.Text;
                     lblAdditionalcostNotes.Text = txtAdditionalcostNotes.Text;
-
+                    lblPreAdditionalcostNotes.Visible = !string.IsNullOrEmpty(lblAdditionalcostNotes.Text);
                     lblRest.Text = (Convert.ToDecimal(lblBillCost.Text) +
                                     (bill.AdditionalCost ?? 0) -
-                                    Convert.ToDecimal(lblDiscountValue.Text) -
                                     Convert.ToDecimal(lblPaid_Value.Text))
                     .ToString("0.##");
 
@@ -265,7 +263,7 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                double cost = Convert.ToDouble(e.Row.Cells[1].Text) * Convert.ToDouble(e.Row.Cells[2].Text) - Convert.ToDouble(e.Row.Cells[3].Text);
+                double cost = Convert.ToDouble(e.Row.Cells[2].Text) * Convert.ToDouble(e.Row.Cells[3].Text) - Convert.ToDouble(e.Row.Cells[4].Text);
                 ((Label)e.Row.FindControl("lblCost")).Text = cost.ToString("0.##");
                 _totalCost += cost;
             }
@@ -274,7 +272,7 @@ namespace DeltaProject
                 e.Row.Cells.Clear();
                 TableCell cell = new TableCell();
                 cell.ColumnSpan = 5;
-                cell.Text = "اجمـــــالى  : ";
+                cell.Text = "اجمـــــالى  : .............................................................................................................. ";
                 e.Row.Cells.Add(cell);
                 TableCell cell2 = new TableCell();
                 cell2.ColumnSpan = 1;

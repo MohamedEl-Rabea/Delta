@@ -257,7 +257,7 @@
                         <asp:BoundField DataField="Quantity" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly remainingQuantity"/>
                         <asp:TemplateField HeaderStyle-CssClass="NoDisplay">
                             <EditItemTemplate>
-                                <asp:Label runat="server" ID="lblIsService" Text='<%# Bind("IsService") %>' CssClass="NoDispaly"></asp:Label>
+                                <asp:Label runat="server" ID="lblIsService" Text='<%# Bind("IsService") %>' CssClass="NoDispaly isService"></asp:Label>
                             </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="الكميه المطلوبة">
@@ -278,6 +278,14 @@
                                     SetFocusOnError="true"
                                     ForeColor="Red"
                                     ClientValidationFunction="IsValidNumber" ValidationGroup="<%# Container.DataItemIndex %>">
+                                    <img src="Images/Error.png" width="15" height="15"/>
+                                </asp:CustomValidator>
+                                <asp:CustomValidator ID="CustomValidator22" runat="server"
+                                                     ToolTip="يجب الا تزيد الكميه المطلوبه عن الكميه المتبقيه"
+                                                     ControlToValidate="txtQuantity"
+                                                     Display="Dynamic"
+                                                     SetFocusOnError="true"
+                                                     ClientValidationFunction="IsValidQuantity" ValidationGroup="<%# Container.DataItemIndex %>">
                                     <img src="Images/Error.png" width="15" height="15"/>
                                 </asp:CustomValidator>
                             </EditItemTemplate>
@@ -618,10 +626,10 @@
                                 <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
                             </td>
                             <td>
-                                <asp:Label ID="lblDiscount" runat="server" CssClass="lblInfo" Text="الخصم : "></asp:Label>
+                                <asp:Label ID="lblAddtionalCost" runat="server" CssClass="lblInfo" Text="تكلفة اضافيه : "></asp:Label>
                             </td>
                             <td style="width: 120px">
-                                <asp:Label ID="lblDiscountValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                                <asp:Label ID="lblAdditionalCostValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label4" runat="server" CssClass="lblInfo" Text="المدفوع : "></asp:Label>
@@ -643,12 +651,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblAddtionalCost" runat="server" CssClass="lblInfo" Text="تكلفة اضافيه : "></asp:Label>
+                                <asp:Label ID="lblPreAdditionalcostNotes" runat="server" CssClass="lblInfo" Text="ملاحظات التكلفه الاضافيه : "></asp:Label>
                             </td>
-                            <td style="width: 120px">
-                                <asp:Label ID="lblAdditionalCostValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                            </td>
-                            <td colspan="6">
+                            <td colspan="5">
                                 <asp:Label ID="lblAdditionalcostNotes" runat="server" CssClass="lblInfo2" Text=" ملاحظات التكلفه الاضافيه"></asp:Label>
                             </td>
                         </tr>
@@ -659,10 +664,10 @@
                     OnRowDataBound="GridViewBillList_RowDataBound" ShowFooter="true">
                     <Columns>
                         <asp:BoundField DataField="Name" HeaderText="اسم المنتج" SortExpression="Name" />
+                        <asp:BoundField DataField="UnitName" HeaderText="الوحدة" SortExpression="UnitName" />
                         <asp:BoundField DataField="SoldQuantity" HeaderText="الكميه" SortExpression="SoldQuantity" DataFormatString="{0:0.##}" />
                         <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر البيع" SortExpression="SpecifiedPrice" DataFormatString="{0:0.##}" />
                         <asp:BoundField DataField="Discount" HeaderText="الخصم" SortExpression="Discount" DataFormatString="{0:0.##}" />
-                        <asp:BoundField DataField="UnitName" HeaderText="الوحدة" SortExpression="UnitName" />
                         <asp:TemplateField HeaderText="سعر الجمله">
                             <ItemTemplate>
                                 <asp:Label runat="server" ID="lblCost"></asp:Label>

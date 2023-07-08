@@ -492,22 +492,22 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblBillCost;
 
         /// <summary>
-        /// lblDiscount control.
+        /// lblAddtionalCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDiscount;
+        protected global::System.Web.UI.WebControls.Label lblAddtionalCost;
 
         /// <summary>
-        /// lblDiscountValue control.
+        /// lblAdditionalCostValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDiscountValue;
+        protected global::System.Web.UI.WebControls.Label lblAdditionalCostValue;
 
         /// <summary>
         /// Label4 control.
@@ -546,22 +546,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblRest;
 
         /// <summary>
-        /// lblAddtionalCost control.
+        /// lblPreAdditionalcostNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddtionalCost;
-
-        /// <summary>
-        /// lblAdditionalCostValue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAdditionalCostValue;
+        protected global::System.Web.UI.WebControls.Label lblPreAdditionalcostNotes;
 
         /// <summary>
         /// lblAdditionalcostNotes control.
