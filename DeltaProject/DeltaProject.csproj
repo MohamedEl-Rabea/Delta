@@ -332,7 +332,6 @@
     <Compile Include="Business_Logic\BillDiscount.cs" />
     <Compile Include="Business_Logic\BillItem.cs" />
     <Compile Include="Business_Logic\BillPayment.cs" />
-    <Compile Include="Business_Logic\BillService.cs" />
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
     <Compile Include="Business_Logic\Attribute.cs" />
