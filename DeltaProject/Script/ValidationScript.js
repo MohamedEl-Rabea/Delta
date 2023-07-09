@@ -43,7 +43,22 @@ function IsValidQuantity(source, args) {
     var isService = $(source).closest('tr').find('.isService').text();
     var tagName = $(element).prop('tagName');
     var remainingQuantity = parseFloat(tagName === "INPUT" ? element.val() : element.text());
-    var isValid = isService === "True" || (!isService && remainingQuantity >= quantity);
+    var isValid = isService === "True" || (!(isService === "True") && remainingQuantity >= quantity);
+    if (isNaN(args.Value) || !isValid) {
+        args.IsValid = false;
+    } else {
+        args.IsValid = true;
+    }
+}
+
+
+function IsValidDiscount(source, args) {
+    var discount = parseFloat(args.Value);
+    var quantityElement = $(source).closest('tr').find('.quantity');
+    var priceElement = $(source).closest('tr').find('.price');
+    var quantity = parseFloat($(quantityElement).prop('tagName') === "INPUT" ? quantityElement.val() : quantityElement.text());
+    var price = parseFloat($(priceElement).prop('tagName') === "INPUT" ? priceElement.val() : priceElement.text());
+    var isValid = quantity * price >= discount;
     if (isNaN(args.Value) || !isValid) {
         args.IsValid = false;
     } else {

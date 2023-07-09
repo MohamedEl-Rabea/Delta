@@ -13,6 +13,7 @@ namespace DeltaProject.Business_Logic
         public decimal SpecifiedPrice { get; set; }
         public decimal Quantity { get; set; }
         public decimal SoldQuantity { get; set; }
+        public decimal ReturnedQuantity { get; set; } = 0;
         public decimal Discount { get; set; }
         public string UnitName { get; set; }
         public bool IsService { get; set; }

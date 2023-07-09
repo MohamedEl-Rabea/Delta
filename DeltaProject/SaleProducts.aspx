@@ -115,7 +115,7 @@
 
                     <asp:TemplateField HeaderText="الكميه المطلوبة">
                         <ItemTemplate>
-                            <asp:TextBox ID="txtAmount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="الكميه"></asp:TextBox>
+                            <asp:TextBox ID="txtAmount" CssClass="EditTxt quantity" runat="server" AutoCompleteType="Disabled" placeholder="الكميه"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
                                                         ControlToValidate="txtAmount" Display="Dynamic" SetFocusOnError="true"
                                                         ToolTip="الكميه المطلوبة متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
@@ -143,10 +143,10 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="السعر">
                         <ItemTemplate>
-                            <asp:TextBox ID="txtPrice" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="السعر"></asp:TextBox>
+                            <asp:TextBox ID="txtPrice" CssClass="EditTxt price" runat="server" AutoCompleteType="Disabled" placeholder="السعر"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
                                                         ControlToValidate="txtPrice" Display="Dynamic" SetFocusOnError="true"
-                                                        ToolTip="االسعر متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
+                                                        ToolTip="السعر متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
                             </asp:RequiredFieldValidator>
                             <asp:CustomValidator ID="CustomValidator10" runat="server"
@@ -163,14 +163,22 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="الخصم">
                         <ItemTemplate>
-                            <asp:TextBox ID="txtDiscount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="الخصم"></asp:TextBox>
+                            <asp:TextBox ID="txtDiscount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="الخصم" ></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator11" runat="server"
-                                                 ToolTip="يجب كتابة txtDiscount بشكل صحيح"
+                                                 ToolTip="يجب كتابة الخصم بشكل صحيح"
                                                  ControlToValidate="txtPrice"
                                                  Display="Dynamic"
                                                  SetFocusOnError="true"
-                                                 ForeColor="Red"
                                                  ClientValidationFunction="IsValidNumber"
+                                                 ValidationGroup="<%# Container.DataItemIndex %>">
+                                <img src="Images/Error.png" width="15" height="15"/>
+                            </asp:CustomValidator>
+                            <asp:CustomValidator ID="CustomValidator21" runat="server"
+                                                 ToolTip="يجب الا يزيد الخصم عن اجمالى سعر المنتج"
+                                                 ControlToValidate="txtDiscount"
+                                                 Display="Dynamic"
+                                                 SetFocusOnError="true"
+                                                 ClientValidationFunction="IsValidDiscount" 
                                                  ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
                             </asp:CustomValidator>
@@ -265,7 +273,7 @@
                                 <asp:Label runat="server" ID="lblQuantity" Text='<%# Bind("SoldQuantity") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtQuantity" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" Text='<%# Bind("SoldQuantity") %>' placeholder="الكميه"></asp:TextBox>
+                                <asp:TextBox ID="txtQuantity" CssClass="EditTxt quantity" runat="server" AutoCompleteType="Disabled" Text='<%# Bind("SoldQuantity") %>' placeholder="الكميه"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"
                                                             ControlToValidate="txtQuantity" Display="Dynamic" SetFocusOnError="true"
                                                             ToolTip="الكميه المطلوبة متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
@@ -295,7 +303,7 @@
                                 <asp:Label runat="server" ID="lblPrice" Text='<%# Bind("SpecifiedPrice") %>'></asp:Label>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:TextBox ID="txtPrice" CssClass="EditTxt" runat="server" Text='<%# Bind("SpecifiedPrice") %>'
+                                <asp:TextBox ID="txtPrice" CssClass="EditTxt price" runat="server" Text='<%# Bind("SpecifiedPrice") %>'
                                     AutoCompleteType="Disabled" placeholder="السعر"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
                                                             ControlToValidate="txtPrice" Display="Dynamic" SetFocusOnError="true"
@@ -320,7 +328,7 @@
                             <EditItemTemplate>
                                 <asp:Label runat="server" ID="lblEditDiscount" Text='<%# Bind("Discount") %>'></asp:Label>
                                 <asp:TextBox ID="txtDiscount" CssClass="EditTxt" runat="server" Text='<%# Bind("Discount") %>'
-                                             AutoCompleteType="Disabled" placeholder="الخصم" Enabled='<%# Eval("IsService") %>'></asp:TextBox>
+                                             AutoCompleteType="Disabled" placeholder="الخصم"></asp:TextBox>
                                 <asp:CustomValidator ID="CustomValidator13" runat="server"
                                                      ToolTip="يجب كتابة الخصم بشكل صحيح"
                                                      ControlToValidate="txtPrice"
@@ -329,6 +337,16 @@
                                                      ForeColor="Red"
                                                      ClientValidationFunction="IsValidNumber" ValidationGroup="<%# Container.DataItemIndex %>">
                                     <img src="Images/Error.png" width="15" height="15"/>
+                                    <asp:CustomValidator ID="CustomValidator20" runat="server"
+                                                         ToolTip="يجب الا يزيد الخصم عن اجمالى سعر المنتج"
+                                                         ControlToValidate="txtDiscount"
+                                                         Display="Dynamic"
+                                                         SetFocusOnError="true"
+                                                         ForeColor="Red"
+                                                         ClientValidationFunction="IsValidDiscount" 
+                                                         ValidationGroup="<%# Container.DataItemIndex %>">
+                                        <img src="Images/Error.png" width="15" height="15"/>
+                                    </asp:CustomValidator>
                                 </asp:CustomValidator>
                             </EditItemTemplate>
                         </asp:TemplateField>
@@ -666,6 +684,7 @@
                         <asp:BoundField DataField="Name" HeaderText="اسم المنتج" SortExpression="Name" />
                         <asp:BoundField DataField="UnitName" HeaderText="الوحدة" SortExpression="UnitName" />
                         <asp:BoundField DataField="SoldQuantity" HeaderText="الكميه" SortExpression="SoldQuantity" DataFormatString="{0:0.##}" />
+                        <asp:BoundField DataField="ReturnedQuantity" HeaderText="المرتجع" SortExpression="ReturnedQuantity" DataFormatString="{0:0.##}" />
                         <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر البيع" SortExpression="SpecifiedPrice" DataFormatString="{0:0.##}" />
                         <asp:BoundField DataField="Discount" HeaderText="الخصم" SortExpression="Discount" DataFormatString="{0:0.##}" />
                         <asp:TemplateField HeaderText="سعر الجمله">

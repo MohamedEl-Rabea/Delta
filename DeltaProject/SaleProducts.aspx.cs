@@ -263,7 +263,8 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                double cost = Convert.ToDouble(e.Row.Cells[2].Text) * Convert.ToDouble(e.Row.Cells[3].Text) - Convert.ToDouble(e.Row.Cells[4].Text);
+                double cost = (Convert.ToDouble(e.Row.Cells[2].Text) - Convert.ToDouble(e.Row.Cells[3].Text))
+                    * Convert.ToDouble(e.Row.Cells[4].Text) - Convert.ToDouble(e.Row.Cells[5].Text);
                 ((Label)e.Row.FindControl("lblCost")).Text = cost.ToString("0.##");
                 _totalCost += cost;
             }
@@ -271,7 +272,7 @@ namespace DeltaProject
             {
                 e.Row.Cells.Clear();
                 TableCell cell = new TableCell();
-                cell.ColumnSpan = 5;
+                cell.ColumnSpan = 6;
                 cell.Text = "اجمـــــالى  : .............................................................................................................. ";
                 e.Row.Cells.Add(cell);
                 TableCell cell2 = new TableCell();
