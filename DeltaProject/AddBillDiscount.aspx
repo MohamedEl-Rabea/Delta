@@ -210,8 +210,8 @@
                     <asp:BoundField DataField="SoldQuantity" HeaderText="الكميه" />
                     <asp:BoundField DataField="ReturnedQuantity" HeaderText="المرتجع" />
                     <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر الوحده" />
+                    <asp:BoundField DataField="Discount" HeaderText="الخصم السابق" />
                     <asp:BoundField DataField="TotalCost" HeaderText="الاجمالى" />
-                    <asp:BoundField DataField="Discount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="IsService" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:TemplateField HeaderText="الخصم">
                         <ItemTemplate>

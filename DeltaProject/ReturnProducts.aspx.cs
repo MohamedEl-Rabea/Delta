@@ -43,6 +43,11 @@ namespace DeltaProject
         {
             PanelBills.Visible = false;
             PanelBillDetails.Visible = false;
+            PanelRest.Visible = false;
+            lblFinishMsg.Text = "";
+            txtYear.Text = "";
+            txtMonth.Text = "";
+            txtDay.Text = "";
             if (txtClientName.Visible)
             {
                 if (string.IsNullOrEmpty(txtClientName.Text))
