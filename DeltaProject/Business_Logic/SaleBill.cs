@@ -142,11 +142,13 @@ namespace DeltaProject.Business_Logic
                     ProductId = Convert.ToInt32(rdr["ProductId"]),
                     Name = rdr["Name"].ToString(),
                     UnitName = rdr["UnitName"].ToString(),
-                    Quantity = Convert.ToDecimal(rdr["Quantity"]) - Convert.ToDecimal(rdr["ReturnedQuantity"]),
+                    SoldQuantity = Convert.ToDecimal(rdr["Quantity"]),
+                    ReturnedQuantity = Convert.ToDecimal(rdr["ReturnedQuantity"]),
                     SpecifiedPrice = Convert.ToDecimal(rdr["Price"]),
                     Discount = Convert.ToDecimal(rdr["Discount"]),
                     IsService = Convert.ToBoolean(rdr["IsService"])
                 };
+                billItem.Quantity = billItem.SoldQuantity - billItem.ReturnedQuantity;
                 Items.Add(billItem);
             }
             rdr.Close();
@@ -165,6 +167,32 @@ namespace DeltaProject.Business_Logic
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
                 cmd.Parameters.Add("@items", SqlDbType.Structured).Value = ReturnsToDataTable();
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
+        }
+
+        public bool AddDiscounts(out string m)
+        {
+            bool b = true;
+            m = "";
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("AddBillDiscounts", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@items", SqlDbType.Structured).Value = DiscountsToDataTable();
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -237,6 +265,28 @@ namespace DeltaProject.Business_Logic
             {
                 foreach (var item in products)
                     table.Rows.Add(item.Id, item.Date, item.ProductId, 0, 0, 0, 0, item.ReturnedQuantity);
+            }
+
+            return table;
+        }
+
+        private DataTable DiscountsToDataTable()
+        {
+            var table = new DataTable();
+            table.Columns.Add("Id", typeof(int));
+            table.Columns.Add("Date", typeof(DateTime));
+            table.Columns.Add("ProductId", typeof(int));
+            table.Columns.Add("PurchasePrice", typeof(decimal));
+            table.Columns.Add("SpecifiedPrice", typeof(decimal));
+            table.Columns.Add("SellPrice", typeof(decimal));
+            table.Columns.Add("Discount", typeof(decimal));
+            table.Columns.Add("Quantity", typeof(decimal));
+
+            var products = Items.Where(c => !c.IsService).ToList();
+            if (products.Any())
+            {
+                foreach (var item in products)
+                    table.Rows.Add(item.Id, item.Date, item.ProductId, 0, 0, 0, item.Discount, 0);
             }
 
             return table;

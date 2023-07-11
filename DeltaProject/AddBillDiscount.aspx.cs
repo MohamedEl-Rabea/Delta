@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class ReturnProducts : System.Web.UI.Page
+    public partial class AddBillDiscount : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -100,18 +100,18 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var isService = Convert.ToBoolean(e.Row.Cells[7].Text);
-                var quantity = Convert.ToDecimal(e.Row.Cells[4].Text);
-                var label = (Label)e.Row.FindControl("lblReturnedQuantity");
-                var text = (TextBox)e.Row.FindControl("txtReturnedQuantity");
-                label.Visible = isService || quantity <= 0;
-                text.Visible = !isService && quantity > 0;
+                var isService = Convert.ToBoolean(e.Row.Cells[9].Text);
+                var totalCost = Convert.ToDecimal(((TextBox)e.Row.FindControl("txtTotalCost")).Text);
+                var label = (Label)e.Row.FindControl("lblDiscount");
+                var text = (TextBox)e.Row.FindControl("txtDiscount");
+                label.Visible = isService || totalCost <= 0;
+                text.Visible = !isService && totalCost > 0;
             }
         }
 
         protected void btnFinish_Click(object sender, EventArgs e)
         {
-            DateTime returnDate = new DateTime(Convert.ToInt32(txtYear.Text), Convert.ToInt32(txtMonth.Text), Convert.ToInt32(txtDay.Text),
+            DateTime date = new DateTime(Convert.ToInt32(txtYear.Text), Convert.ToInt32(txtMonth.Text), Convert.ToInt32(txtDay.Text),
                  DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
             SaleBill bill = new SaleBill { Id = Convert.ToInt32(lblBillId.Text) };
@@ -120,16 +120,16 @@ namespace DeltaProject
 
             foreach (GridViewRow row in GridViewBillItems.Rows)
             {
-                var returnedQuantity = ((TextBox)row.FindControl("txtReturnedQuantity")).Text;
-                if (!string.IsNullOrEmpty(returnedQuantity))
+                var discount = ((TextBox)row.FindControl("txtDiscount")).Text;
+                if (!string.IsNullOrEmpty(discount))
                 {
                     BillItem item = new BillItem
                     {
                         Id = Convert.ToInt32(row.Cells[0].Text),
-                        Date = returnDate,
+                        Date = date,
                         ProductId = Convert.ToInt32(row.Cells[1].Text),
-                        SpecifiedPrice = Convert.ToDecimal(row.Cells[5].Text),
-                        ReturnedQuantity = Convert.ToDecimal(returnedQuantity)
+                        SpecifiedPrice = Convert.ToDecimal(row.Cells[6].Text),
+                        Discount = Convert.ToDecimal(discount)
                     };
                     bill.Items.Add(item);
                 }
@@ -137,7 +137,7 @@ namespace DeltaProject
 
             if (bill.Items.Any())
             {
-                if (!bill.ReturnItems(out string m))
+                if (!bill.AddDiscounts(out string m))
                 {
                     lblFinishMsg.Text = m;
                     lblFinishMsg.ForeColor = System.Drawing.Color.Red;
@@ -146,41 +146,17 @@ namespace DeltaProject
                 }
                 else
                 {
-                    var restOfMoney = Convert.ToDecimal(lblRest.Text) -
-                                      bill.Items.Sum(p => p.ReturnedQuantity * p.SpecifiedPrice);
-
-                    if (restOfMoney < 0) // RestOfMoney greater than bill cost
-                    {
-                        ViewState["RestOfMoney"] = restOfMoney;
-                        PanelRest.Visible = true;
-                        btnFinish.Enabled = true;
-                        btnFinish.BackColor = System.Drawing.Color.FromName("#1abc9c");
-                        lblRestOfMoney.Text = (-restOfMoney).ToString("0.##") + " جنيها";
-                    }
-                    else
-                    {
-                        lblFinishMsg.Text = "تم بنجاح";
-                        lblFinishMsg.ForeColor = System.Drawing.Color.Green;
-                    }
+                    lblFinishMsg.Text = "تم بنجاح";
+                    lblFinishMsg.ForeColor = System.Drawing.Color.Green;
                 }
             }
             else
             {
-                lblFinishMsg.Text = "يجب اضافه مرتجع على الاقل";
+                lblFinishMsg.Text = "يجب اضافه خصم على الاقل";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Red;
                 btnFinish.Enabled = true;
                 btnFinish.BackColor = System.Drawing.Color.FromName("#1abc9c");
             }
-        }
-
-        protected void btnPay_Click(object sender, EventArgs e)
-        {
-            Response.Redirect($"~/PaySaleBill.aspx?billId={lblBillId.Text}");
-        }
-
-        protected void lnkAddItems_Click(object sender, EventArgs e)
-        {
-            Response.Redirect($"~/AddBillItems.aspx?billId={lblBillId.Text}");
         }
     }
 }

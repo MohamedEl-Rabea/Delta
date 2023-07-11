@@ -11,7 +11,7 @@ namespace DeltaProject
 {
 
 
-    public partial class ReturnProducts
+    public partial class AddBillDiscount
     {
 
         /// <summary>
@@ -418,50 +418,5 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFinishMsg;
-
-        /// <summary>
-        /// PanelRest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelRest;
-
-        /// <summary>
-        /// lblRestOfMoney control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRestOfMoney;
-
-        /// <summary>
-        /// btnPay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPay;
-
-        /// <summary>
-        /// lblConfirm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblConfirm;
-
-        /// <summary>
-        /// lnkAddItems control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAddItems;
     }
 }

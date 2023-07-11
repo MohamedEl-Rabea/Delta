@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="ReturnProducts.aspx.cs" Inherits="DeltaProject.ReturnProducts" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AddBillDiscount.aspx.cs" Inherits="DeltaProject.AddBillDiscount" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src="Script/ServiseHandler.js"></script>
     <script type="text/javascript">
@@ -26,7 +27,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <asp:Panel runat="server" ID="PanelSearchClient">
         <header class="Header">
-            <p>مرتجع فواتير</p>
+            <p>إضافة خصم على فاتورة</p>
         </header>
         <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories"
             OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
@@ -43,22 +44,22 @@
                     </td>
                     <td class="Search_td">
                         <asp:TextBox ID="txtClientName" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox"
-                                     placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                            placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                         <asp:TextBox ID="txtPhoneNumber" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
-                                     placeholder="رقم التليفون للبحث . . . . ."></asp:TextBox>
+                            placeholder="رقم التليفون للبحث . . . . ."></asp:TextBox>
                         <asp:TextBox ID="txtBillId" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
-                        placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
+                            placeholder="رقم الفاتورة للبحث . . . . ."></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td style="text-align: center">
                         <asp:CustomValidator ID="CustomValidator2" runat="server"
-                                             ToolTip="يجب كتابة الرقم بشكل صحيح"
-                                             ControlToValidate="txtPhoneNumber"
-                                             Display="Dynamic"
-                                             SetFocusOnError="true"
-                                             ClientValidationFunction="IsValidNumber">
+                            ToolTip="يجب كتابة الرقم بشكل صحيح"
+                            ControlToValidate="txtPhoneNumber"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ClientValidationFunction="IsValidNumber">
                             <img src="Images/Error.png" width="24" height="24"/>
                         </asp:CustomValidator>
                         <asp:CompareValidator ID="CompareValidator1" runat="server"
@@ -85,7 +86,7 @@
             CssClass="Gridview_Style2" EmptyDataText="لا توجد فواتير لهذا العميل"
             DataSourceID="ObjectDataSourceBills" AllowPaging="True">
             <Columns>
-                <asp:BoundField DataField="Date" HeaderText="تاريخ الفاتورة" SortExpression="Date" DataFormatString="{0:dd/MM/yyyy}"/>
+                <asp:BoundField DataField="Date" HeaderText="تاريخ الفاتورة" SortExpression="Date" DataFormatString="{0:dd/MM/yyyy}" />
                 <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" />
                 <asp:TemplateField HeaderText="رقم الفاتورة" SortExpression="Id">
                     <ItemTemplate>
@@ -200,38 +201,41 @@
                 </div>
             </header>
             <asp:GridView runat="server" ID="GridViewBillItems" CssClass="GridViewBill" AutoGenerateColumns="False" EmptyDataText="لا توجد منتجات"
-                          OnRowDataBound="GridViewBillItems_OnRowDataBound">
+                OnRowDataBound="GridViewBillItems_OnRowDataBound">
                 <Columns>
-                    <asp:BoundField DataField="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly"/>
-                    <asp:BoundField DataField="ProductId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly"/>
+                    <asp:BoundField DataField="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="ProductId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="Name" HeaderText="اسم المنتج" />
                     <asp:BoundField DataField="UnitName" HeaderText="الوحدة" />
-                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" ItemStyle-CssClass="remainingQuantity"/>
+                    <asp:BoundField DataField="SoldQuantity" HeaderText="الكميه" />
+                    <asp:BoundField DataField="ReturnedQuantity" HeaderText="المرتجع" />
                     <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر الوحده" />
-                    <asp:BoundField DataField="Discount" HeaderText="الخصم" />
-                    <asp:BoundField DataField="IsService" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly"/>
-                    <asp:TemplateField HeaderText="المرتجع">
+                    <asp:BoundField DataField="TotalCost" HeaderText="الاجمالى" />
+                    <asp:BoundField DataField="Discount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="IsService" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:TemplateField HeaderText="الخصم">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblReturnedQuantity" Text='0' CssClass="NoDispaly"></asp:Label>
-                            <asp:TextBox ID="txtReturnedQuantity" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="المرتجع"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtTotalCost" CssClass="NoDispaly"  Text='<%# Bind("TotalCost") %>'></asp:TextBox>
+                            <asp:Label runat="server" ID="lblDiscount" CssClass="NoDispaly" Text='0'></asp:Label>
+                            <asp:TextBox ID="txtDiscount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="الخصم"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator9" runat="server"
-                                ToolTip="يجب كتابة المرتجع بشكل صحيح"
-                                ControlToValidate="txtReturnedQuantity"
+                                ToolTip="يجب كتابة الخصم بشكل صحيح"
+                                ControlToValidate="txtDiscount"
                                 Display="Dynamic"
                                 SetFocusOnError="true"
-                                ForeColor="Red"
                                 ClientValidationFunction="IsValidNumber"
                                 ValidationGroup="finishGroup">
                                 <img src="Images/Error.png" width="15" height="15"/>
                             </asp:CustomValidator>
-                            <asp:CustomValidator ID="CustomValidator1" runat="server"
-                                                 ToolTip="يجب الا يزيدالمرتجع عن الكميه"
-                                                 ControlToValidate="txtReturnedQuantity"
-                                                 Display="Dynamic"
-                                                 SetFocusOnError="true"
-                                                 ClientValidationFunction="IsValidQuantity" ValidationGroup="finishGroup">
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="txtDiscount"
+                                Operator="LessThanEqual" ControlToCompare="txtTotalCost"
+                                Display="Dynamic"
+                                SetFocusOnError="true"
+                                ErrorMessage="CompareValidator"
+                                ToolTip="يجب الا يزيد الخصم عن اجمالى سعر المنتج"
+                                ValidationGroup="finishGroup">
                                 <img src="Images/Error.png" width="15" height="15"/>
-                            </asp:CustomValidator>
+                            </asp:CompareValidator>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -247,7 +251,7 @@
             <table class="AddProductsTable">
                 <tr>
                     <td class="RHSTD">
-                        <p class="RHSP">تاريخ المرتجع :</p>
+                        <p class="RHSP">تاريخ الخصم :</p>
                     </td>
                     <td>
                         <asp:TextBox runat="server" ID="txtDay" ClientIDMode="Static" CssClass="DateTxts" PlaceHolder="يوم" AutoCompleteType="Disabled"></asp:TextBox>
@@ -270,7 +274,7 @@
                     </td>
                     <td style="text-align: center">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorDay" runat="server" ControlToValidate="txtDay" Display="Dynamic" SetFocusOnError="true"
-                            ErrorMessage="يجب اضافة يوم المرتجع" ToolTip="يجب اضافة يوم المرتجع" ValidationGroup="finishGroup">
+                            ErrorMessage="يجب اضافة يوم الخصم" ToolTip="يجب اضافة يوم الخصم" ValidationGroup="finishGroup">
                     <img src="Images/Error.png" width="24" height="24"/>
                         </asp:RequiredFieldValidator>
                         <asp:RangeValidator ID="RangeValidatorDay" runat="server" ErrorMessage="RangeValidator" Display="Dynamic"
@@ -280,7 +284,7 @@
                     </td>
                     <td style="text-align: center">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorMonth" runat="server" ControlToValidate="txtMonth" Display="Dynamic" SetFocusOnError="true"
-                            ErrorMessage="يجب اضافة شهر المرتجع" ToolTip="يجب اضافة شهر المرتجع" ValidationGroup="finishGroup">
+                            ErrorMessage="يجب اضافة شهر الخصم" ToolTip="يجب اضافة شهر الخصم" ValidationGroup="finishGroup">
                     <img src="Images/Error.png" width="24" height="24"/>
                         </asp:RequiredFieldValidator>
                         <asp:RangeValidator ID="RangeValidatorMonth" runat="server" ErrorMessage="RangeValidator" Display="Dynamic"
@@ -290,11 +294,11 @@
                     </td>
                     <td style="text-align: center">
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorYear" runat="server" ControlToValidate="txtYear" Display="Dynamic" SetFocusOnError="true"
-                            ErrorMessage="يجب اضافة سنة المرتجع" ToolTip="يجب اضافة سنة المرتجع" ValidationGroup="finishGroup">
+                            ErrorMessage="يجب اضافة سنة الخصم" ToolTip="يجب اضافة سنة الخصم" ValidationGroup="finishGroup">
                     <img src="Images/Error.png" width="24" height="24"/>
                         </asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="CustomValidator1" runat="server"
-                            ToolTip="يجب اضافة سنة المرتجع بشكل صحيح"
+                            ToolTip="يجب اضافة سنة الخصم بشكل صحيح"
                             ControlToValidate="txtYear"
                             Display="Dynamic"
                             SetFocusOnError="true"
@@ -313,32 +317,6 @@
                     <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
                 </div>
             </footer>
-            <asp:Panel runat="server" ID="PanelRest" Visible="false">
-                <footer class="AddSupplierFooter">
-                    <div style="direction: rtl">
-                        <table class="AddProductsTable" style="text-align: right">
-                            <tr>
-                                <td>
-                                    <b>المتبقى من قيمة المدفوع لفاتورة = </b>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblRestOfMoney" runat="server"></asp:Label>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <asp:Button ID="btnPay" runat="server" Text="دفع" CssClass="BtnNext"
-                        UseSubmitBehavior="false"
-                        OnClientClick="this.disabled='true';this.value='Please wait....';" OnClick="btnPay_Click" />
-                    <div class="MsgDiv">
-                        <asp:Label ID="lblConfirm" runat="server" CssClass="MessageLabel"></asp:Label>
-                    </div>
-                </footer>
-            </asp:Panel>
-            <div class="MsgDiv" style="text-align: right">
-                <asp:LinkButton ID="lnkAddItems" runat="server" ValidationGroup="AddProducts" CssClass="UnStyled" OnClick="lnkAddItems_Click">
-                    اذا كنت تريد اضافة منتجات جديده للفاتورة اضغط <span class="Link">هنا</span></asp:LinkButton>
-            </div>
         </section>
     </asp:Panel>
 </asp:Content>
