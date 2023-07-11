@@ -206,7 +206,7 @@ namespace DeltaProject
                 ClientName = txtClient_Name.Text,
                 Date = billDate,
                 AdditionalCost = txtAdditionalCost.Text == "" ? 0 : Convert.ToDecimal(txtAdditionalCost.Text),
-                CostNotes = txtAdditionalcostNotes.Text,
+                AdditionalCostNotes = txtAdditionalcostNotes.Text,
                 Notes = TxtDesc.Text,
                 Client = new Client
                 {

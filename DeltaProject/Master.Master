@@ -103,7 +103,9 @@
                                     <asp:MenuItem Text="البيــــــــــــــع">
                                         <%--<asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>--%>
                                         <asp:MenuItem Text="بيع عادى (جديد)" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/SaleProducts.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>
+                                        <%--<asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>--%>
+                                        <asp:MenuItem Text="مرتجع (جديد)" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/ReturnProducts.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة خصم" ToolTip="إضافة خصم على منتجات من فاتورة موجوده" NavigateUrl="~/AddBillDiscount.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/Add_Items_To_Invoice.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="طلبيات">
                                             <asp:MenuItem Text="إضافة" ToolTip="إضافة طلبية" NavigateUrl="~/AddOrder.aspx"></asp:MenuItem>

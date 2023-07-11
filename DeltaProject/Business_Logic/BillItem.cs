@@ -8,6 +8,7 @@ namespace DeltaProject.Business_Logic
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string Name { get; set; }
+        public DateTime Date { get; set; }
         public decimal PurchasePrice { get; set; }
         public decimal SellPrice { get; set; }
         public decimal SpecifiedPrice { get; set; }

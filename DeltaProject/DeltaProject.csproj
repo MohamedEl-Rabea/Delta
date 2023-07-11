@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
+    <Content Include="AddBillDiscount.aspx" />
     <Content Include="AddLoaderExpense.aspx" />
     <Content Include="AddMaintenanceExpense.aspx" />
     <Content Include="AddMaintenanceWithdraw.aspx" />
@@ -159,6 +160,7 @@
     <Content Include="Products_Inventory.aspx" />
     <Content Include="Public_Prices_List.aspx" />
     <Content Include="RegisterLoaderProcess.aspx" />
+    <Content Include="ReturnProducts.aspx" />
     <Content Include="ReturnSupplierProduct.aspx" />
     <Content Include="Return_Products.aspx" />
     <Content Include="SaleProducts.aspx" />
@@ -215,6 +217,13 @@
     </Compile>
     <Compile Include="Accounts_Settings.aspx.designer.cs">
       <DependentUpon>Accounts_Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddBillDiscount.aspx.cs">
+      <DependentUpon>AddBillDiscount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddBillDiscount.aspx.designer.cs">
+      <DependentUpon>AddBillDiscount.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddLoaderExpense.aspx.cs">
       <DependentUpon>AddLoaderExpense.aspx</DependentUpon>
@@ -598,6 +607,13 @@
     </Compile>
     <Compile Include="RegisterLoaderProcess.aspx.designer.cs">
       <DependentUpon>RegisterLoaderProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnProducts.aspx.cs">
+      <DependentUpon>ReturnProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReturnProducts.aspx.designer.cs">
+      <DependentUpon>ReturnProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReturnSupplierProduct.aspx.cs">
       <DependentUpon>ReturnSupplierProduct.aspx</DependentUpon>

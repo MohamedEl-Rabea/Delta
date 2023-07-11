@@ -113,8 +113,8 @@ namespace Business_Logic
         public List<Maintenance> GetAllMaintenance(string statusName)
         {
             List<Maintenance> maintenanceList = new List<Maintenance>();
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand("SearchForMaintenance", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@title", SqlDbType.NVarChar).Value = Title;

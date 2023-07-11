@@ -1,13 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="SaleProducts.aspx.cs" Inherits="DeltaProject.SaleProducts" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
-    <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script type="text/javascript" src="Script/ServiseHandler.js"></script>
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
-    <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <script type="text/javascript" src="Script/jquery-2.1.4.js"></script>
-    <script src="Script/jquery-1.10.2.js"></script>
-    <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#<%= txtProductName.ClientID%>').autocomplete({
