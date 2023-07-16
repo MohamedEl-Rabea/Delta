@@ -1,5 +1,6 @@
 ﻿using DeltaProject.Business_Logic;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -47,6 +48,8 @@ namespace DeltaProject
             txtYear.Text = "";
             txtMonth.Text = "";
             txtDay.Text = "";
+            btnFinish.Enabled = true;
+            btnFinish.BackColor = Color.FromName("#1abc9c");
             if (txtClientName.Visible)
             {
                 if (string.IsNullOrEmpty(txtClientName.Text))
@@ -56,6 +59,7 @@ namespace DeltaProject
             }
             else if (txtPhoneNumber.Visible)
             {
+                txtClientName.Text = "";
                 if (string.IsNullOrEmpty(txtPhoneNumber.Text))
                 {
                     PanelErrorMessage.Visible = true;
@@ -63,6 +67,7 @@ namespace DeltaProject
             }
             else // search with Bill ID
             {
+                txtClientName.Text = "";
                 if (string.IsNullOrEmpty(txtBillId.Text))
                 {
                     PanelErrorMessage.Visible = true;
@@ -82,17 +87,19 @@ namespace DeltaProject
                 SaleBill bill = new SaleBill { Id = billId };
                 bill.GetBillData();
                 lblBillId.Text = billId.ToString();
-                lblBillDate.Text = bill.Date.ToShortDateString();
+                lblBillDate.Text = bill.Date.ToString("dd/MM/yyyy");
                 lblClientName.Text = bill.ClientName;
                 var totalCost = bill.Items.Sum(i => i.TotalCost);
                 lblBillCost.Text = totalCost.ToString("0.##");
                 lblPaidValue.Text = bill.PaidAmount?.ToString("0.##");
                 lblAddtionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
                 lblAdditionalcostNotes.Text = bill.AdditionalCostNotes;
-                lblBillCost.Text = totalCost >= 0
-                    ? totalCost.ToString("0.##")
-                    : (-totalCost).ToString("0.##") + " " + "فرق تكلفه للعميل";
-                lblRest.Text = Convert.ToDecimal(totalCost + bill.AdditionalCost - bill.PaidAmount).ToString("0.##");
+                var rest = Convert.ToDecimal(totalCost + bill.AdditionalCost - bill.PaidAmount);
+                lblRemainingCost.Text = rest.ToString("0.##");
+                lblRest.Text = rest >= 0
+                    ? rest.ToString("0.##")
+                    : (-rest).ToString("0.##") + " " + "فرق تكلفه للعميل";
+                lblRest.ForeColor = rest >= 0 ? Color.FromName("#2c3e50") : Color.Red;
                 GridViewBillItems.DataSource = bill.Items;
                 GridViewBillItems.DataBind();
                 PanelBillDetails.Visible = true;
@@ -118,9 +125,9 @@ namespace DeltaProject
             DateTime date = new DateTime(Convert.ToInt32(txtYear.Text), Convert.ToInt32(txtMonth.Text), Convert.ToInt32(txtDay.Text),
                  DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
-            SaleBill bill = new SaleBill { Id = Convert.ToInt32(lblBillId.Text) };
+            SaleBill bill = new SaleBill { Id = Convert.ToInt32(lblBillId.Text), Date = date };
             btnFinish.Enabled = false;
-            btnFinish.BackColor = System.Drawing.Color.FromName("#aaa");
+            btnFinish.BackColor = Color.FromName("#aaa");
 
             foreach (GridViewRow row in GridViewBillItems.Rows)
             {
@@ -130,8 +137,8 @@ namespace DeltaProject
                     BillItem item = new BillItem
                     {
                         Id = Convert.ToInt32(row.Cells[0].Text),
-                        Date = date,
                         ProductId = Convert.ToInt32(row.Cells[1].Text),
+                        Name = row.Cells[2].Text,
                         SpecifiedPrice = Convert.ToDecimal(row.Cells[6].Text),
                         Discount = Convert.ToDecimal(discount)
                     };
@@ -144,23 +151,39 @@ namespace DeltaProject
                 if (!bill.AddDiscounts(out string m))
                 {
                     lblFinishMsg.Text = m;
-                    lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+                    lblFinishMsg.ForeColor = Color.Red;
                     btnFinish.Enabled = true;
-                    btnFinish.BackColor = System.Drawing.Color.FromName("#1abc9c");
+                    btnFinish.BackColor = Color.FromName("#1abc9c");
                 }
                 else
                 {
-                    lblFinishMsg.Text = "تم بنجاح";
-                    lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                    var restOfMoney = Convert.ToDecimal(lblRemainingCost.Text) -
+                                      bill.Items.Sum(p => p.Discount);
+
+                    if (restOfMoney < 0) // RestOfMoney greater than bill cost
+                    {
+                        PanelRest.Visible = true;
+                        lblRestOfMoney.Text = (-restOfMoney).ToString("0.##") + " جنيها";
+                    }
+                    else
+                    {
+                        lblFinishMsg.Text = "تم بنجاح";
+                        lblFinishMsg.ForeColor = Color.Green;
+                    }
                 }
             }
             else
             {
                 lblFinishMsg.Text = "يجب اضافه خصم على الاقل";
-                lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+                lblFinishMsg.ForeColor = Color.Red;
                 btnFinish.Enabled = true;
-                btnFinish.BackColor = System.Drawing.Color.FromName("#1abc9c");
+                btnFinish.BackColor = Color.FromName("#1abc9c");
             }
+        }
+
+        protected void lnkPay_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"~/PaySaleBill.aspx?billId={lblBillId.Text}");
         }
     }
 }

@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .Header {
     margin: 25px auto;
     text-align: center;
@@ -704,6 +708,12 @@
     color: blue;
     text-decoration: underline;
     font: bold 12px arial;
+}
+
+.LinkL {
+    color: blue;
+    text-decoration: underline;
+    font: bold 16px arial;
 }
 
 .UnStyled {

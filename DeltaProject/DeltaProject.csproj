@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="Accounts_Settings.aspx" />
     <Content Include="AddBillDiscount.aspx" />
+    <Content Include="AddBillItems.aspx" />
     <Content Include="AddLoaderExpense.aspx" />
     <Content Include="AddMaintenanceExpense.aspx" />
     <Content Include="AddMaintenanceWithdraw.aspx" />
@@ -154,6 +155,7 @@
     <Content Include="NotAuthorized.aspx" />
     <Content Include="PayLoaderProcess.aspx" />
     <Content Include="AddSupplierPayment.aspx" />
+    <Content Include="PaySaleBill.aspx" />
     <Content Include="Pay_Bill.aspx" />
     <Content Include="Pay_Client_Debts.aspx" />
     <Content Include="Public\Permission_Page.aspx" />
@@ -224,6 +226,13 @@
     </Compile>
     <Compile Include="AddBillDiscount.aspx.designer.cs">
       <DependentUpon>AddBillDiscount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddBillItems.aspx.cs">
+      <DependentUpon>AddBillItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddBillItems.aspx.designer.cs">
+      <DependentUpon>AddBillItems.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddLoaderExpense.aspx.cs">
       <DependentUpon>AddLoaderExpense.aspx</DependentUpon>
@@ -564,6 +573,13 @@
     </Compile>
     <Compile Include="AddSupplierPayment.aspx.designer.cs">
       <DependentUpon>AddSupplierPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaySaleBill.aspx.cs">
+      <DependentUpon>PaySaleBill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaySaleBill.aspx.designer.cs">
+      <DependentUpon>PaySaleBill.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pay_Bill.aspx.cs">
       <DependentUpon>Pay_Bill.aspx</DependentUpon>

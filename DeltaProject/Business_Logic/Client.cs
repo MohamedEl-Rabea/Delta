@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 namespace Business_Logic
 {
 
+    [Serializable]
     public class Client
     {
         public string C_name { get; set; }

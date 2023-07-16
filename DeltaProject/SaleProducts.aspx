@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="SaleProducts.aspx.cs" Inherits="DeltaProject.SaleProducts" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .GridViewBillItems .HeaderStyleBill, .GridViewBillItems .RowStyleList, .GridViewBillItems .AlternateRowStyleList{
+            font-size: 16px;
+        }
+    </style>
     <script type="text/javascript" src="Script/ServiseHandler.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -26,22 +31,27 @@
                 }
             });
         });
-        $(function () {
+
+        $(function() {
             $('#<%= txtClient_Name.ClientID%>').autocomplete({
-                source: function (request, response) {
+                source: function(request, response) {
                     $.ajax({
-                        url: "Services/GetNamesService.asmx/Get_Clients_Names",
+                        url: "Services/GetNamesService.asmx/Get_Clients_Basic_Data",
                         data: "{ 'Client_Name': '" + request.term + "' }",
                         type: "POST",
                         dataType: "json",
                         contentType: "application/json;charset=utf-8",
-                        success: function (result) {
-                            response(result.d);
+                        success: function(result) {
+                            response(result.d.map(r => ({ label: r.Item1, value: r.Item1, phone: r.Item2 })));
                         },
-                        error: function (result) {
+                        error: function(result) {
                             alert('Problem');
                         }
                     });
+                },
+                select: function(event, ui) {
+                    $('#<%= txtPhoneNumber.ClientID%>').val(ui.item.phone.toString());
+                    $('#<%= txtPhoneNumber.ClientID%>').change();
                 }
             });
         });
@@ -529,6 +539,30 @@
             </tr>
             <tr>
                 <td class="RHSTD">
+                    <p class="RHSP">رقم التليفون :</p>
+                </td>
+                <td style="text-align: right">
+                    <asp:TextBox runat="server" ID="txtPhoneNumber" CssClass="txts2" PlaceHolder="رقم التليفون" AutoCompleteType="Disabled"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="RHSTD">
+                    <br />
+                    <br />
+                </td>
+                <td style="text-align: center">
+                    <asp:CustomValidator ID="CustomValidator5" runat="server"
+                                         ToolTip="يجب كتابة الرقم بشكل صحيح"
+                                         ControlToValidate="txtPhoneNumber"
+                                         Display="Dynamic"
+                                         SetFocusOnError="true"
+                                         ClientValidationFunction="IsValidNumber">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                    </asp:CustomValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="RHSTD">
                     <p class="RHSP">عنوان العميل :</p>
                 </td>
                 <td style="text-align: right">
@@ -672,7 +706,7 @@
                     </table>
                 </section>
                 <br />
-                <asp:GridView runat="server" ID="GridViewBillList" CssClass="GridViewBill" AutoGenerateColumns="False" EmptyDataText="لا توجد منتجات"
+                <asp:GridView runat="server" ID="GridViewBillList" CssClass="GridViewBill GridViewBillItems" AutoGenerateColumns="False" EmptyDataText="لا توجد منتجات"
                     OnRowDataBound="GridViewBillList_RowDataBound" ShowFooter="true">
                     <Columns>
                         <asp:BoundField DataField="Name" HeaderText="اسم المنتج" SortExpression="Name" />

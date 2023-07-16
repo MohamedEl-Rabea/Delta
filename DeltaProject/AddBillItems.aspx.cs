@@ -1,15 +1,22 @@
-﻿using Business_Logic;
-using DeltaProject.Business_Logic;
+﻿using DeltaProject.Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class SaleProducts : Page
+    public partial class AddBillItems : Page
     {
+        private SaleBill Bill
+        {
+            get => ViewState["Bill"] == null
+                ? new SaleBill() : (SaleBill)ViewState["Bill"];
+            set => ViewState["Bill"] = value;
+        }
+
         private List<BillItem> BillItems
         {
             get => ViewState["ItemsList"] == null
@@ -24,6 +31,79 @@ namespace DeltaProject
         }
 
         protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtClientName.Text = "";
+            txtPhoneNumber.Text = "";
+            txtBillId.Text = "";
+            PanelBills.Visible = false;
+            if (RadioButtonListCategories.SelectedValue == "ClientName")
+            {
+                txtClientName.Visible = true;
+                txtPhoneNumber.Visible = false;
+                txtBillId.Visible = false;
+            }
+            else if (RadioButtonListCategories.SelectedValue == "PhoneNumber")
+            {
+                txtClientName.Visible = false;
+                txtPhoneNumber.Visible = true;
+                txtBillId.Visible = false;
+            }
+            else
+            {
+                txtClientName.Visible = false;
+                txtPhoneNumber.Visible = false;
+                txtBillId.Visible = true;
+            }
+        }
+
+        protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
+        {
+            PanelBills.Visible = false;
+            PanelAddItems.Visible = false;
+            lblFinishMsg.Text = "";
+            if (txtClientName.Visible)
+            {
+                if (string.IsNullOrEmpty(txtClientName.Text))
+                {
+                    PanelErrorMessage.Visible = true;
+                }
+            }
+            else if (txtPhoneNumber.Visible)
+            {
+                txtClientName.Text = "";
+                if (string.IsNullOrEmpty(txtPhoneNumber.Text))
+                {
+                    PanelErrorMessage.Visible = true;
+                }
+            }
+            else // search with Bill ID
+            {
+                txtClientName.Text = "";
+                if (string.IsNullOrEmpty(txtBillId.Text))
+                {
+                    PanelErrorMessage.Visible = true;
+                }
+            }
+
+            PanelErrorMessage.Visible = false;
+            PanelBills.Visible = true;
+        }
+
+        protected void GridViewBills_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectBill")
+            {
+                SaleBill bill = new SaleBill { Id = Convert.ToInt32(((LinkButton)e.CommandSource).Text) };
+                bill.GetBillData();
+                ViewState["Bill"] = bill;
+                PanelSearchClient.Visible = false;
+                PanelErrorMessage.Visible = false;
+                PanelBills.Visible = false;
+                PanelAddItems.Visible = true;
+            }
+        }
+
+        protected void RadioButtonListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelInitailResult.Visible = false;
             GridViewProducts.Visible = true;
@@ -46,23 +126,39 @@ namespace DeltaProject
             }
         }
 
-        protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
+        protected void ImageButtonSearchItems_Click(object sender, ImageClickEventArgs e)
         {
             BindProductsGrid();
             PanelInitailResult.Visible = true;
         }
 
+        protected void GridViewProducts_OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var label = (Label)e.Row.FindControl("lblPrice");
+                var text = (TextBox)e.Row.FindControl("txtPrice");
+                var item = Bill.Items.FirstOrDefault(i => i.ProductId == Convert.ToInt32(e.Row.Cells[0].Text));
+                label.Text = item != null ? item.SpecifiedPrice.ToString("0.##") : "0";
+                text.Text = item?.SpecifiedPrice.ToString("0.##");
+                label.Visible = item != null;
+                text.Visible = item == null;
+            }
+        }
+
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             int rowIndex = ((GridViewRow)((Button)sender).NamingContainer).RowIndex;
-            string price = (((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtPrice")).Text);
+            string price = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtPrice")).Text;
             string quantity = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtAmount")).Text;
             string discount = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtDiscount")).Text;
-
+            var productId = Convert.ToInt32(GridViewProducts.Rows[rowIndex].Cells[0].Text);
+            var existItem = Bill.Items.FirstOrDefault(i => i.ProductId == productId);
             btnFinish.Enabled = true;
             BillItem item = new BillItem
             {
-                ProductId = Convert.ToInt32(GridViewProducts.Rows[rowIndex].Cells[0].Text),
+                Id = existItem?.Id ?? default,
+                ProductId = productId,
                 Name = GridViewProducts.Rows[rowIndex].Cells[1].Text,
                 PurchasePrice = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[2].Text),
                 SellPrice = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[3].Text),
@@ -79,7 +175,7 @@ namespace DeltaProject
             }
             else
             {
-                item.SpecifiedPrice = Convert.ToDecimal(price);
+                item.SpecifiedPrice = string.IsNullOrEmpty(price) ? 0 : Convert.ToDecimal(price);
                 item.SoldQuantity = Convert.ToDecimal(quantity);
                 item.Discount = string.IsNullOrEmpty(discount) ? 0 : Convert.ToDecimal(discount);
                 if (ViewState["ItemsList"] == null)
@@ -132,7 +228,7 @@ namespace DeltaProject
 
         protected void btnFinish_Click(object sender, EventArgs e)
         {
-            PanelSearch.Visible = false;
+            PanelAddItems.Visible = false;
             PanelProductList.Visible = true;
             BindList();
         }
@@ -141,11 +237,18 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow && GridViewItemsList.EditIndex == e.Row.RowIndex)
             {
-                var label = (Label)e.Row.FindControl("lblEditDiscount");
-                var text = (TextBox)e.Row.FindControl("txtDiscount");
+                var labelDiscount = (Label)e.Row.FindControl("lblEditDiscount");
+                var textDiscount = (TextBox)e.Row.FindControl("txtDiscount");
                 bool isService = Convert.ToBoolean(((Label)e.Row.FindControl("lblIsService")).Text);
-                label.Visible = isService;
-                text.Visible = !isService;
+                labelDiscount.Visible = isService;
+                textDiscount.Visible = !isService;
+
+                int productId = Convert.ToInt32(((Label)e.Row.FindControl("lblProductId")).Text);
+                var labelPrice = (Label)e.Row.FindControl("lblPrice");
+                var textPrice = (TextBox)e.Row.FindControl("txtPrice");
+                var item = Bill.Items.FirstOrDefault(i => i.ProductId == productId);
+                labelPrice.Visible = item != null;
+                textPrice.Visible = item == null;
             }
         }
 
@@ -173,7 +276,8 @@ namespace DeltaProject
         {
             int rowIndex = ((GridViewRow)((ImageButton)sender).NamingContainer).RowIndex;
             BillItems[rowIndex].SoldQuantity = Convert.ToDecimal(((TextBox)GridViewItemsList.Rows[rowIndex].FindControl("txtQuantity")).Text);
-            BillItems[rowIndex].SpecifiedPrice = Convert.ToDecimal(((TextBox)GridViewItemsList.Rows[rowIndex].FindControl("txtPrice")).Text);
+            var price = ((TextBox)GridViewItemsList.Rows[rowIndex].FindControl("txtPrice")).Text;
+            BillItems[rowIndex].SpecifiedPrice = !string.IsNullOrEmpty(price) ? Convert.ToDecimal(price) : 0;
             var discount = ((TextBox)GridViewItemsList.Rows[rowIndex].FindControl("txtDiscount")).Text;
             BillItems[rowIndex].Discount = !string.IsNullOrEmpty(discount) ? Convert.ToDecimal(discount) : 0;
             GridViewItemsList.EditIndex = -1;
@@ -182,115 +286,42 @@ namespace DeltaProject
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
-            lblConfirmMsg.Text = "";
-
-            if (!BillItems.Any())
-            {
-                lblConfirmMsg.Text = "يجب اضافه منتج او خدمه واحده على الاقل";
-            }
-            else
-            {
-                PanelProductList.Visible = false;
-                PanelClientInfo.Visible = true;
-            }
-        }
-
-        protected void btnBill_Click(object sender, EventArgs e)
-        {
-            var billDate = new DateTime(Convert.ToInt32(txtYear.Text), Convert.ToInt32(txtMonth.Text),
-                Convert.ToInt32(txtDay.Text), DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            btnConfirm.Enabled = false;
+            btnConfirm.BackColor = Color.FromName("#aaa");
 
             SaleBill bill = new SaleBill
             {
+                Id = Bill.Id,
                 UserId = Convert.ToInt32(Session["userId"]),
-                ClientName = txtClient_Name.Text,
-                PhoneNumber = txtPhoneNumber.Text,
-                Date = billDate,
-                AdditionalCost = txtAdditionalCost.Text == "" ? 0 : Convert.ToDecimal(txtAdditionalCost.Text),
-                AdditionalCostNotes = txtAdditionalcostNotes.Text,
-                Notes = TxtDesc.Text,
-                Client = new Client
-                {
-                    C_name = txtClient_Name.Text,
-                    Address = txtAddress.Text
-                },
-                Items = BillItems,
-                PaidAmount = Convert.ToDecimal(txtPaid_Amount.Text)
+                Date = DateTime.Now,
+                Items = BillItems
             };
 
 
             if (!BillItems.Any())
             {
-                lblFinishMsg.Text = "لا توجد منتجات او خدمات !";
-                lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+                lblConfirmMsg.Text = "لا توجد منتجات او خدمات !";
+                lblConfirmMsg.ForeColor = Color.Red;
             }
             else
             {
-                lblFinishMsg.Text = "";
-                lblFinishMsg.Visible = true;
-                if (!bill.AddBill(out var m))
+                lblConfirmMsg.Text = "";
+                lblConfirmMsg.Visible = true;
+                if (!bill.AddBillItems(out var m))
                 {
-                    lblFinishMsg.Text = m;
-                    lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+                    btnConfirm.Enabled = false;
+                    btnConfirm.BackColor = Color.FromName("#1abc9c");
+                    lblConfirmMsg.Text = m;
+                    lblConfirmMsg.ForeColor = Color.Red;
                 }
                 else
                 {
-                    lblFinishMsg.Text = "تم الحفظ بنجاح";
-                    lblFinishMsg.ForeColor = System.Drawing.Color.Green;
-
-                    lblBillDate.Text = bill.Date.ToString("dd/MM/yyyy");
-                    lblBill_ID.Text = bill.Id.ToString();
-                    lblClientName.Text = txtClient_Name.Text;
-                    lblAddress.Text = string.IsNullOrEmpty(txtAddress.Text) ? "---" : txtAddress.Text;
-                    lblBillCost.Text = lblTotalCost.Text;
-                    lblPaid_Value.Text = txtPaid_Amount.Text;
-                    lblAdditionalCostValue.Text = string.IsNullOrEmpty(txtAdditionalCost.Text) ? "0" : txtAdditionalCost.Text;
-                    lblAdditionalcostNotes.Text = txtAdditionalcostNotes.Text;
-                    lblPreAdditionalcostNotes.Visible = !string.IsNullOrEmpty(lblAdditionalcostNotes.Text);
-                    lblRest.Text = (Convert.ToDecimal(lblBillCost.Text) +
-                                    (bill.AdditionalCost ?? 0) -
-                                    Convert.ToDecimal(lblPaid_Value.Text))
-                    .ToString("0.##");
-
-                    PanelClientInfo.Visible = false;
-                    PanelBill.Visible = true;
-                    BindBillGridView();
+                    lblConfirmMsg.Text = "تم الحفظ بنجاح";
+                    lblConfirmMsg.ForeColor = Color.Green;
                 }
             }
         }
 
-        double _totalCost = 0;
-        protected void GridViewBillList_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                double cost = (Convert.ToDouble(e.Row.Cells[2].Text) - Convert.ToDouble(e.Row.Cells[3].Text))
-                    * Convert.ToDouble(e.Row.Cells[4].Text) - Convert.ToDouble(e.Row.Cells[5].Text);
-                ((Label)e.Row.FindControl("lblCost")).Text = cost.ToString("0.##");
-                _totalCost += cost;
-            }
-            else if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                e.Row.Cells.Clear();
-                TableCell cell = new TableCell();
-                cell.ColumnSpan = 6;
-                cell.Text = "اجمـــــالى  : .............................................................................................................. ";
-                e.Row.Cells.Add(cell);
-                TableCell cell2 = new TableCell();
-                cell2.ColumnSpan = 1;
-                cell2.Text = _totalCost.ToString("0.##");
-                e.Row.Cells.Add(cell2);
-            }
-        }
-
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            if (GridViewBillList.Rows.Count > 0)
-            {
-                _totalCost = 0;
-                BindBillGridView();
-            }
-        }
 
 
         private void BindProductsGrid()
@@ -307,14 +338,7 @@ namespace DeltaProject
 
             lblTotalCost.Text =
                 BillItems.Sum(p => p.SoldQuantity * p.SpecifiedPrice - p.Discount)
-                .ToString("0.##");
+                    .ToString("0.##");
         }
-
-        private void BindBillGridView()
-        {
-            GridViewBillList.DataSource = BillItems;
-            GridViewBillList.DataBind();
-        }
-
     }
 }

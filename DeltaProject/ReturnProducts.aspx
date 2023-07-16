@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="ReturnProducts.aspx.cs" Inherits="DeltaProject.ReturnProducts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .GridViewBillItems .HeaderStyleBill, .GridViewBillItems .RowStyleList, .GridViewBillItems .AlternateRowStyleList{
+            font-size: 16px;
+        }
+    </style>
     <script type="text/javascript" src="Script/ServiseHandler.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -80,7 +85,7 @@
             <asp:Label ID="LabelErrMsg" runat="server" CssClass="LblErrorMsg2" Text="هذا العميل/الرقم غير مسجل لدينا ... اما هناك خطأ فى الاسم/الرقم او لو يدرج اى اسم/رقم"></asp:Label>
         </article>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelBills" Visible="false">
+    <asp:Panel runat="server" ID="PanelBills" CssClass="PreReport_SectionTab" Visible="false">
         <asp:GridView ID="GridViewBills" runat="server" AutoGenerateColumns="False" OnRowCommand="GridViewBills_RowCommand"
             CssClass="Gridview_Style2" EmptyDataText="لا توجد فواتير لهذا العميل"
             DataSourceID="ObjectDataSourceBills" AllowPaging="True">
@@ -118,6 +123,7 @@
                     <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات العرض</p>
                 </div>
             </header>
+            <asp:TextBox runat="server" ID="lblRemainingCost" CssClass="NoDispaly"  Text='0'></asp:TextBox>
             <table class="AddProductsTable">
                 <tr>
                     <td>
@@ -199,16 +205,16 @@
                     <p style="font: bold 13px arial; margin: 0; padding: 0">محتويات الفاتورة</p>
                 </div>
             </header>
-            <asp:GridView runat="server" ID="GridViewBillItems" CssClass="GridViewBill" AutoGenerateColumns="False" EmptyDataText="لا توجد منتجات"
+            <asp:GridView runat="server" ID="GridViewBillItems" CssClass="GridViewBill GridViewBillItems" AutoGenerateColumns="False" EmptyDataText="لا توجد منتجات"
                           OnRowDataBound="GridViewBillItems_OnRowDataBound">
                 <Columns>
                     <asp:BoundField DataField="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly"/>
                     <asp:BoundField DataField="ProductId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly"/>
                     <asp:BoundField DataField="Name" HeaderText="اسم المنتج" />
                     <asp:BoundField DataField="UnitName" HeaderText="الوحدة" />
-                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" ItemStyle-CssClass="remainingQuantity"/>
-                    <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر الوحده" />
-                    <asp:BoundField DataField="Discount" HeaderText="الخصم" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" ItemStyle-CssClass="remainingQuantity" DataFormatString="{0:0.##}"/>
+                    <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر الوحده" DataFormatString="{0:0.##}"/>
+                    <asp:BoundField DataField="Discount" HeaderText="الخصم"  DataFormatString="{0:0.##}"/>
                     <asp:BoundField DataField="IsService" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly"/>
                     <asp:TemplateField HeaderText="المرتجع">
                         <ItemTemplate>
@@ -315,30 +321,17 @@
             </footer>
             <asp:Panel runat="server" ID="PanelRest" Visible="false">
                 <footer class="AddSupplierFooter">
-                    <div style="direction: rtl">
-                        <table class="AddProductsTable" style="text-align: right">
-                            <tr>
-                                <td>
-                                    <b>المتبقى من قيمة المدفوع لفاتورة = </b>
-                                </td>
-                                <td>
-                                    <asp:Label ID="lblRestOfMoney" runat="server"></asp:Label>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <asp:Button ID="btnPay" runat="server" Text="دفع" CssClass="BtnNext"
-                        UseSubmitBehavior="false"
-                        OnClientClick="this.disabled='true';this.value='Please wait....';" OnClick="btnPay_Click" />
-                    <div class="MsgDiv">
-                        <asp:Label ID="lblConfirm" runat="server" CssClass="MessageLabel"></asp:Label>
+                    <div class="MsgDiv" style="text-align: right">
+                        <span>
+                            <b>المتبقى من قيمة الفاتورة للعميل: </b>
+                             <asp:Label ID="lblRestOfMoney" runat="server"></asp:Label>
+                            <b>للسداد اضغط</b>
+                        </span>
+                        <asp:LinkButton ID="lnkPay" runat="server" CssClass="LinkL" OnClick="lnkPay_Click">
+                            هنا</asp:LinkButton>
                     </div>
                 </footer>
             </asp:Panel>
-            <div class="MsgDiv" style="text-align: right">
-                <asp:LinkButton ID="lnkAddItems" runat="server" ValidationGroup="AddProducts" CssClass="UnStyled" OnClick="lnkAddItems_Click">
-                    اذا كنت تريد اضافة منتجات جديده للفاتورة اضغط <span class="Link">هنا</span></asp:LinkButton>
-            </div>
         </section>
     </asp:Panel>
 </asp:Content>

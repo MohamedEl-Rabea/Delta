@@ -11,7 +11,7 @@ namespace DeltaProject
 {
 
 
-    public partial class AddBillDiscount
+    public partial class PaySaleBill
     {
 
         /// <summary>
@@ -123,15 +123,6 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.GridView GridViewBills;
 
         /// <summary>
-        /// ObjectDataSourceBills control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceBills;
-
-        /// <summary>
         /// PanelBillDetails control.
         /// </summary>
         /// <remarks>
@@ -139,15 +130,6 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelBillDetails;
-
-        /// <summary>
-        /// lblRemainingCost control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox lblRemainingCost;
 
         /// <summary>
         /// Label1 control.
@@ -321,6 +303,51 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.GridView GridViewBillItems;
 
         /// <summary>
+        /// txtRemainingCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRemainingCost;
+
+        /// <summary>
+        /// txtPaidAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPaidAmount;
+
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+
+        /// <summary>
+        /// CustomValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator3;
+
+        /// <summary>
+        /// CompareValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator2;
+
+        /// <summary>
         /// txtDay control.
         /// </summary>
         /// <remarks>
@@ -411,6 +438,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
 
         /// <summary>
+        /// txtNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNotes;
+
+        /// <summary>
         /// btnFinish control.
         /// </summary>
         /// <remarks>
@@ -429,30 +465,12 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblFinishMsg;
 
         /// <summary>
-        /// PanelRest control.
+        /// lblErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelRest;
-
-        /// <summary>
-        /// lblRestOfMoney control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRestOfMoney;
-
-        /// <summary>
-        /// lnkPay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkPay;
+        protected global::System.Web.UI.WebControls.Label lblErrorMsg;
     }
 }

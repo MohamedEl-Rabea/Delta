@@ -141,6 +141,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Panel PanelBillDetails;
 
         /// <summary>
+        /// lblRemainingCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox lblRemainingCost;
+
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -438,30 +447,12 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblRestOfMoney;
 
         /// <summary>
-        /// btnPay control.
+        /// lnkPay control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPay;
-
-        /// <summary>
-        /// lblConfirm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblConfirm;
-
-        /// <summary>
-        /// lnkAddItems control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAddItems;
+        protected global::System.Web.UI.WebControls.LinkButton lnkPay;
     }
 }

@@ -93,8 +93,13 @@
                                         </asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="الفواتيــــــر" Value="m2">
-                                        <asp:MenuItem Text="دفع فاتـــورة" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/Pay_Bill.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="استعـــــــلام" NavigateUrl="~/Search_For_Bills.aspx" ToolTip="الاستعلام عن فاتورة سام العميل او الشركه"></asp:MenuItem>
+                                        <asp:MenuItem Text="مرتجع (جديد)" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/ReturnProducts.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة خصم" ToolTip="إضافة خصم على منتجات من فاتورة موجوده" NavigateUrl="~/AddBillDiscount.aspx"></asp:MenuItem>
+                                        <%--<asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/Add_Items_To_Invoice.aspx"></asp:MenuItem>--%>
+                                        <asp:MenuItem Text="اضافه (جديد)" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/AddBillItems.aspx"></asp:MenuItem>
+                                        <%--<asp:MenuItem Text="دفع فاتـــورة" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/Pay_Bill.aspx"></asp:MenuItem>--%>
+                                        <asp:MenuItem Text="دفع فاتورة (جديد)" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/PaySaleBill.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="استعـــــــلام" NavigateUrl="~/Search_For_Bills.aspx" ToolTip="الاستعلام عن فاتورة اسم العميل او الشركه"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="شيكات" Value="Cheques">
                                         <asp:MenuItem Text="العملاء" Value="ClientCheques" ToolTip="بحث في شيكات العملاء" NavigateUrl="~/Search_For_ClientCheque.aspx"></asp:MenuItem>
@@ -104,9 +109,6 @@
                                         <%--<asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>--%>
                                         <asp:MenuItem Text="بيع عادى (جديد)" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/SaleProducts.aspx"></asp:MenuItem>
                                         <%--<asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>--%>
-                                        <asp:MenuItem Text="مرتجع (جديد)" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/ReturnProducts.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="إضافة خصم" ToolTip="إضافة خصم على منتجات من فاتورة موجوده" NavigateUrl="~/AddBillDiscount.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/Add_Items_To_Invoice.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="طلبيات">
                                             <asp:MenuItem Text="إضافة" ToolTip="إضافة طلبية" NavigateUrl="~/AddOrder.aspx"></asp:MenuItem>
                                         </asp:MenuItem></asp:MenuItem>

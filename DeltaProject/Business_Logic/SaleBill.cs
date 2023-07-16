@@ -20,7 +20,8 @@ namespace DeltaProject.Business_Logic
         public decimal? Discount { get; set; }
         public decimal? AdditionalCost { get; set; }
         public decimal? PaidAmount { get; set; }
-        public decimal? TotalCost { get; set; }
+        public decimal? TotalCost => Items.Sum(i => i.TotalCost);
+        public decimal? RemainingCost => Items.Sum(i => i.TotalCost) + AdditionalCost - PaidAmount;
         public string AdditionalCostNotes { get; set; }
         public string Notes { get; set; }
         public Client Client { get; set; }
@@ -34,13 +35,14 @@ namespace DeltaProject.Business_Logic
             SqlConnection con = new SqlConnection(cs);
             try
             {
-                SqlCommand cmd = new SqlCommand("AddSaleBill", con);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("AddSaleBill", con) { CommandType = CommandType.StoredProcedure };
                 cmd.Parameters.Add("@userId", SqlDbType.Int).Value = UserId;
                 cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
                 cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
                 if (!string.IsNullOrEmpty(Client.Address))
                     cmd.Parameters.Add("@address", SqlDbType.NVarChar).Value = Client.Address;
+                if (!string.IsNullOrEmpty(PhoneNumber))
+                    cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
                 if (AdditionalCost.HasValue)
                     cmd.Parameters.Add("@additionalCost", SqlDbType.Decimal).Value = AdditionalCost;
                 if (PaidAmount.HasValue)
@@ -49,8 +51,7 @@ namespace DeltaProject.Business_Logic
                 cmd.Parameters.Add("@costNotes", SqlDbType.NVarChar).Value = AdditionalCostNotes;
                 cmd.Parameters.Add("@notes", SqlDbType.NVarChar).Value = Notes;
 
-                cmd.Parameters.Add("@items", SqlDbType.Structured).Value = ProductsToDataTable();
-                cmd.Parameters.Add("@services", SqlDbType.Structured).Value = ServicesToDataTable();
+                cmd.Parameters.Add("@items", SqlDbType.Structured).Value = ItemsToDataTable();
 
                 cmd.Parameters.Add("@billId", SqlDbType.Int);
                 cmd.Parameters["@billId"].Direction = ParameterDirection.Output;
@@ -97,6 +98,63 @@ namespace DeltaProject.Business_Logic
             rdr.Close();
             con.Close();
             return bills;
+        }
+
+        public static List<SaleBill> GetUnpaidBills(string clientName, string phoneNumber, int? billId)
+        {
+            List<SaleBill> bills = new List<SaleBill>();
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand("GetUnpaidBills", con) { CommandType = CommandType.StoredProcedure };
+            if (!string.IsNullOrEmpty(clientName))
+                cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = clientName;
+            if (!string.IsNullOrEmpty(phoneNumber))
+                cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = phoneNumber;
+            if (billId.HasValue)
+                cmd.Parameters.Add("@billId", SqlDbType.Int).Value = billId;
+
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                SaleBill bill = new SaleBill
+                {
+                    Id = Convert.ToInt32(rdr["Id"]),
+                    ClientName = rdr["ClientName"].ToString(),
+                    Date = Convert.ToDateTime(rdr["Date"]),
+                    Address = rdr["Address"].ToString(),
+                    AdditionalCost = Convert.ToDecimal(rdr["AdditionalCost"]),
+                    PaidAmount = Convert.ToDecimal(rdr["PaidAmount"]),
+                    AdditionalCostNotes = rdr["AdditionalCostNotes"].ToString()
+                };
+                bills.Add(bill);
+            }
+
+            rdr.NextResult();
+
+            while (rdr.Read())
+            {
+                BillItem billItem = new BillItem
+                {
+                    Id = Convert.ToInt32(rdr["Id"]),
+                    BillId = Convert.ToInt32(rdr["BillId"]),
+                    ProductId = Convert.ToInt32(rdr["ProductId"]),
+                    Name = rdr["Name"].ToString(),
+                    UnitName = rdr["UnitName"].ToString(),
+                    SoldQuantity = Convert.ToDecimal(rdr["Quantity"]),
+                    ReturnedQuantity = Convert.ToDecimal(rdr["ReturnedQuantity"]),
+                    SpecifiedPrice = Convert.ToDecimal(rdr["Price"]),
+                    Discount = Convert.ToDecimal(rdr["Discount"]),
+                    IsService = Convert.ToBoolean(rdr["IsService"])
+                };
+                billItem.Quantity = billItem.SoldQuantity - billItem.ReturnedQuantity;
+                SaleBill bill = bills.FirstOrDefault(c => c.Id == billItem.BillId);
+                if (billItem.Quantity > 0)
+                    bill?.Items.Add(billItem);
+            }
+            rdr.Close();
+            con.Close();
+            return bills.Where(p => p.RemainingCost != 0).ToList();
         }
 
         public static int GetBillsCount(string clientName, string phoneNumber, int? billId)
@@ -149,10 +207,38 @@ namespace DeltaProject.Business_Logic
                     IsService = Convert.ToBoolean(rdr["IsService"])
                 };
                 billItem.Quantity = billItem.SoldQuantity - billItem.ReturnedQuantity;
-                Items.Add(billItem);
+                if (billItem.Quantity > 0)
+                    Items.Add(billItem);
             }
             rdr.Close();
             con.Close();
+        }
+
+        public bool AddBillItems(out string m)
+        {
+            bool b = true;
+            m = "";
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("AddBillItems", con) { CommandType = CommandType.StoredProcedure };
+                cmd.Parameters.Add("@billId", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@userId", SqlDbType.Int).Value = UserId;
+                cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
+                cmd.Parameters.Add("@items", SqlDbType.Structured).Value = ItemsToDataTable();
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
         }
 
         public bool ReturnItems(out string m)
@@ -163,9 +249,9 @@ namespace DeltaProject.Business_Logic
             SqlConnection con = new SqlConnection(cs);
             try
             {
-                SqlCommand cmd = new SqlCommand("ReturnBillItems", con);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("ReturnBillItems", con) { CommandType = CommandType.StoredProcedure };
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
                 cmd.Parameters.Add("@items", SqlDbType.Structured).Value = ReturnsToDataTable();
 
                 con.Open();
@@ -189,9 +275,9 @@ namespace DeltaProject.Business_Logic
             SqlConnection con = new SqlConnection(cs);
             try
             {
-                SqlCommand cmd = new SqlCommand("AddBillDiscounts", con);
-                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("AddBillDiscounts", con) { CommandType = CommandType.StoredProcedure };
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
                 cmd.Parameters.Add("@items", SqlDbType.Structured).Value = DiscountsToDataTable();
 
                 con.Open();
@@ -207,42 +293,51 @@ namespace DeltaProject.Business_Logic
             return b;
         }
 
-        private DataTable ProductsToDataTable()
+        public bool Pay(out string m)
+        {
+            bool b = true;
+            m = "";
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("AddBillPayment", con) { CommandType = CommandType.StoredProcedure };
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
+                cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
+                cmd.Parameters.Add("@notes", SqlDbType.NVarChar).Value = Notes;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
+        }
+
+        private DataTable ItemsToDataTable()
         {
             var table = new DataTable();
             table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("ProductId", typeof(int));
+            table.Columns.Add("Name", typeof(string));
             table.Columns.Add("PurchasePrice", typeof(decimal));
             table.Columns.Add("SpecifiedPrice", typeof(decimal));
             table.Columns.Add("SellPrice", typeof(decimal));
             table.Columns.Add("Discount", typeof(decimal));
             table.Columns.Add("Quantity", typeof(decimal));
+            table.Columns.Add("IsService", typeof(bool));
 
-            var products = Items.Where(c => !c.IsService).ToList();
-            if (products.Any())
+            if (Items.Any())
             {
-                foreach (var item in products)
-                    table.Rows.Add(0, Date, item.ProductId, item.PurchasePrice, item.SpecifiedPrice, item.SellPrice, item.Discount, item.SoldQuantity);
-            }
-
-            return table;
-        }
-
-        private DataTable ServicesToDataTable()
-        {
-            var table = new DataTable();
-            table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Date", typeof(DateTime));
-            table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("SellPrice", typeof(decimal));
-            table.Columns.Add("Quantity", typeof(decimal));
-
-            var services = Items.Where(c => c.IsService).ToList();
-            if (services.Any())
-            {
-                foreach (var item in services)
-                    table.Rows.Add(0, Date, item.Name, item.SpecifiedPrice, item.SoldQuantity);
+                foreach (var item in Items)
+                    table.Rows.Add(item.Id, item.ProductId, item.Name, item.PurchasePrice, item.SpecifiedPrice,
+                        item.SellPrice, item.Discount, item.SoldQuantity, item.IsService);
             }
 
             return table;
@@ -252,19 +347,20 @@ namespace DeltaProject.Business_Logic
         {
             var table = new DataTable();
             table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("ProductId", typeof(int));
+            table.Columns.Add("Name", typeof(string));
             table.Columns.Add("PurchasePrice", typeof(decimal));
             table.Columns.Add("SpecifiedPrice", typeof(decimal));
             table.Columns.Add("SellPrice", typeof(decimal));
             table.Columns.Add("Discount", typeof(decimal));
             table.Columns.Add("Quantity", typeof(decimal));
+            table.Columns.Add("IsService", typeof(bool));
 
             var products = Items.Where(c => !c.IsService).ToList();
             if (products.Any())
             {
                 foreach (var item in products)
-                    table.Rows.Add(item.Id, item.Date, item.ProductId, 0, 0, 0, 0, item.ReturnedQuantity);
+                    table.Rows.Add(item.Id, item.ProductId, item.Name, 0, 0, 0, 0, item.ReturnedQuantity, false);
             }
 
             return table;
@@ -274,19 +370,20 @@ namespace DeltaProject.Business_Logic
         {
             var table = new DataTable();
             table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("ProductId", typeof(int));
+            table.Columns.Add("Name", typeof(string));
             table.Columns.Add("PurchasePrice", typeof(decimal));
             table.Columns.Add("SpecifiedPrice", typeof(decimal));
             table.Columns.Add("SellPrice", typeof(decimal));
             table.Columns.Add("Discount", typeof(decimal));
             table.Columns.Add("Quantity", typeof(decimal));
+            table.Columns.Add("IsService", typeof(bool));
 
             var products = Items.Where(c => !c.IsService).ToList();
             if (products.Any())
             {
                 foreach (var item in products)
-                    table.Rows.Add(item.Id, item.Date, item.ProductId, 0, 0, 0, item.Discount, 0);
+                    table.Rows.Add(item.Id, item.ProductId, item.Name, 0, 0, 0, item.Discount, 0, false);
             }
 
             return table;
