@@ -139,6 +139,7 @@ namespace DeltaProject
             SaleBill bill = new SaleBill
             {
                 Id = id,
+                UserId = Convert.ToInt32(Session["userId"]),
                 Date = date,
                 PaidAmount = remainingCost < 0 ? -paidAmount : paidAmount,
                 Notes = txtNotes.Text
@@ -175,6 +176,7 @@ namespace DeltaProject
             lblBillId.Text = billId.ToString();
             lblBillDate.Text = bill?.Date.ToString("dd/MM/yyyy");
             lblClientName.Text = bill?.ClientName;
+            lblAddress.Text = bill?.Address;
             lblBillCost.Text = bill?.TotalCost?.ToString("0.##");
             lblPaidValue.Text = bill?.PaidAmount?.ToString("0.##");
             lblAddtionalCostValue.Text = bill?.AdditionalCost?.ToString("0.##");

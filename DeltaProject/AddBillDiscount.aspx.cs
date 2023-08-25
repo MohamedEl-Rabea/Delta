@@ -89,10 +89,11 @@ namespace DeltaProject
                 lblBillId.Text = billId.ToString();
                 lblBillDate.Text = bill.Date.ToString("dd/MM/yyyy");
                 lblClientName.Text = bill.ClientName;
+                lblAddress.Text = bill.Address;
                 var totalCost = bill.Items.Sum(i => i.TotalCost);
                 lblBillCost.Text = totalCost.ToString("0.##");
                 lblPaidValue.Text = bill.PaidAmount?.ToString("0.##");
-                lblAddtionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
+                lblAdditionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
                 lblAdditionalcostNotes.Text = bill.AdditionalCostNotes;
                 var rest = Convert.ToDecimal(totalCost + bill.AdditionalCost - bill.PaidAmount);
                 lblRemainingCost.Text = rest.ToString("0.##");
@@ -125,7 +126,12 @@ namespace DeltaProject
             DateTime date = new DateTime(Convert.ToInt32(txtYear.Text), Convert.ToInt32(txtMonth.Text), Convert.ToInt32(txtDay.Text),
                  DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
-            SaleBill bill = new SaleBill { Id = Convert.ToInt32(lblBillId.Text), Date = date };
+            SaleBill bill = new SaleBill
+            {
+                Id = Convert.ToInt32(lblBillId.Text),
+                UserId = Convert.ToInt32(Session["userId"]),
+                Date = date
+            };
             btnFinish.Enabled = false;
             btnFinish.BackColor = Color.FromName("#aaa");
 
@@ -140,6 +146,7 @@ namespace DeltaProject
                         ProductId = Convert.ToInt32(row.Cells[1].Text),
                         Name = row.Cells[2].Text,
                         SpecifiedPrice = Convert.ToDecimal(row.Cells[6].Text),
+                        Quantity = Convert.ToDecimal(row.Cells[4].Text) - Convert.ToDecimal(row.Cells[5].Text),
                         Discount = Convert.ToDecimal(discount)
                     };
                     bill.Items.Add(item);

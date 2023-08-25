@@ -249,13 +249,13 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.Label lblAddtionalCost;
 
         /// <summary>
-        /// lblAddtionalCostValue control.
+        /// lblAdditionalCostValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddtionalCostValue;
+        protected global::System.Web.UI.WebControls.Label lblAdditionalCostValue;
 
         /// <summary>
         /// Label8 control.

@@ -61,7 +61,7 @@ namespace DeltaProject
             if (isNew)
                 ((ImageButton)e.Row.FindControl("btnDelete")).Visible = true;
 
-            if (e.Row.RowType == DataControlRowType.Footer && UnitFactors.Any())
+            if (e.Row.RowType == DataControlRowType.Footer && UnitFactors.Union(NewUnitFactors).Any())
             {
                 ((DropDownList)e.Row.FindControl("ddlSubUnits")).Visible = false;
                 ((TextBox)e.Row.FindControl("txtFactor")).Visible = false;
@@ -88,13 +88,13 @@ namespace DeltaProject
                 {
                     lblFinishMsg.Visible = true;
                     lblFinishMsg.Text = "! هذا التحويل مسجل فى القائمة";
-                    lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+                    lblFinishMsg.ForeColor = Color.Red;
                 }
                 else
                 {
                     lblFinishMsg.Visible = false;
                     lblFinishMsg.Text = "";
-                    lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                    lblFinishMsg.ForeColor = Color.Green;
                     AddNewUnitFactor(unitFactor);
                     BindUnitFactorsGridView();
                 }

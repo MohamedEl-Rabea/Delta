@@ -13,11 +13,13 @@ namespace DeltaProject.Business_Logic
         public decimal SellPrice { get; set; }
         public decimal SpecifiedPrice { get; set; }
         public decimal Quantity { get; set; }
+        public decimal ProductQuantity { get; set; }
         public decimal SoldQuantity { get; set; }
         public decimal ReturnedQuantity { get; set; }
         public decimal Discount { get; set; }
         public decimal TotalCost => Quantity * SpecifiedPrice - Discount;
         public string UnitName { get; set; }
         public bool IsService { get; set; }
+        public string Notes { get; set; }
     }
 }

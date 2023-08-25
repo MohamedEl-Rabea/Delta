@@ -175,7 +175,7 @@
                         OnRowDataBound="GridViewStatement_RowDataBound"
                         OnRowCommand="GridViewStatement_OnRowCommand">
                         <Columns>
-                            <asp:BoundField DataField="InvoiceId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                            <asp:BoundField DataField="InvoiceId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" FooterStyle-CssClass="NoDispaly" />
                             <asp:BoundField DataField="TransactionDate" HeaderText="تاريخ الحركة" DataFormatString="{0:dd/MM/yyyy}" />
                             <asp:BoundField DataField="Debit" HeaderText="مدين" />
                             <asp:BoundField DataField="Credit" HeaderText="دائن" />

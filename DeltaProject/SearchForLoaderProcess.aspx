@@ -46,6 +46,21 @@
                 }
             });
         });
+
+        function PrintDivContent(divId) {
+            debugger;
+            var printContent = document.getElementById(divId).cloneNode(true);
+            $(printContent).find('.skipPrinting').remove();
+            var winPrint = window.open('', '', 'height=auto,width=auto,resizable=1,scrollbars=1,toolbar=1,sta­tus=0');
+            winPrint.document.write('<html><head><title></title>');
+            winPrint.document.write('<link rel="stylesheet" href="CSS/Pages_Style_Sheet.css" type="text/css" />');
+            winPrint.document.write('</head><body >');
+            winPrint.document.write(printContent.innerHTML);
+            winPrint.document.write('</body></html>');
+            winPrint.document.close();
+            winPrint.focus();
+            winPrint.print();
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
@@ -108,41 +123,65 @@
             </asp:GridView>
         </asp:Panel>
     </asp:Panel>
-    <asp:Panel runat="server" ID="PanelLoaderDetails" Visible="false">
-        <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
-            <header style="text-align: left">
-                <asp:ImageButton ID="ImageButtonBackLoader" runat="server" ImageUrl="~/Images/back.png" Width="24" Height="24"
-                                 ToolTip="رجوع" OnClick="btnBack_OnClick" CausesValidation="false" />
-            </header>
-            <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 20px;">
-                <div style="border: 1px solid black">
-                    <p style="font: bold 14px arial; margin: 0; padding: 0">تفاصيل عملية الونش</p>
-                </div>
-            </header>
-            <table class="AddProductsTable maintenanceDetails" style="width:98%">
-                <tr>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">اسم الونش :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblLoaderName" Text=''/></td>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">رقم الاذن :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblPermissionNumber" Text=''/></td>
-                </tr>
-                <tr>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">اسم العميل :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblClientName" Text=''/></td>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">التاريخ :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblDate" Text=''/></td>
-                </tr>
-                <tr>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">التكلفة :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblCost" Text=''/></td>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">المتبقى :</p></td>
-                    <td class="RHSTD" style="width: 35%"><asp:Label runat="server" ID="lblRemainingAmount" Text=''/></td>
-                </tr>
-                <tr>
-                    <td class="RHSTD" style="width: 15%"><p class="RHSP">الوصف :</p></td>
-                    <td colspan="3" class="RHSTD" style="width: 35%"><asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text=''/></td>
-                </tr>
-            </table>
-        </section>
-    </asp:Panel>
+    <div id="divToPrint">
+        <asp:Panel runat="server" ID="PanelLoaderDetails" Visible="false">
+            <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
+                <header style="text-align: left">
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/printer.png" Width="24" Height="24" OnClientClick="PrintDivContent('divToPrint');" ToolTip="اطبع التقرير" />
+                    <asp:ImageButton ID="ImageButtonBackLoader" runat="server" ImageUrl="~/Images/back.png" Width="24" Height="24"
+                        ToolTip="رجوع" OnClick="btnBack_OnClick" CausesValidation="false" />
+                </header>
+                <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 20px;">
+                    <div style="border: 1px solid black">
+                        <p style="font: bold 14px arial; margin: 0; padding: 0">تفاصيل عملية الونش</p>
+                    </div>
+                </header>
+                <table class="AddProductsTable maintenanceDetails" style="width: 98%">
+                    <tr>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">اسم الونش :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblLoaderName" Text='' /></td>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">رقم الاذن :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblPermissionNumber" Text='' /></td>
+                    </tr>
+                    <tr>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">اسم العميل :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblClientName" Text='' /></td>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">التاريخ :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblDate" Text='' /></td>
+                    </tr>
+                    <tr>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">التكلفة :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblCost" Text='' /></td>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">المتبقى :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblRemainingAmount" Text='' /></td>
+                    </tr>
+                    <tr>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">الوصف :</p>
+                        </td>
+                        <td colspan="3" class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text='' /></td>
+                    </tr>
+                </table>
+            </section>
+        </asp:Panel>
+    </div>
 </asp:Content>

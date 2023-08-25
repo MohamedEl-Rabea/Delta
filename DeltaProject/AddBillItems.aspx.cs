@@ -105,22 +105,21 @@ namespace DeltaProject
 
         protected void RadioButtonListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PanelInitailResult.Visible = false;
-            GridViewProducts.Visible = true;
-            PanelAddFreeItem.Visible = false;
+            PanelInitailResult.Visible = true;
             lblFinishMsg.Text = "";
-            if (RadioButtonListCategories.SelectedValue == "Products")
+            if (RadioButtonListItems.SelectedValue == "Products")
             {
-                txtProductName.Enabled = true;
                 txtProductName.Visible = true;
+                txtProductName.Enabled = true;
                 ImageButtonSearch.Enabled = true;
+                GridViewProducts.Visible = true;
+                PanelAddFreeItem.Visible = false;
             }
             else
             {
                 txtProductName.Visible = true;
                 txtProductName.Enabled = false;
                 ImageButtonSearch.Enabled = false;
-                PanelInitailResult.Visible = true;
                 GridViewProducts.Visible = false;
                 PanelAddFreeItem.Visible = true;
             }
@@ -149,9 +148,12 @@ namespace DeltaProject
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             int rowIndex = ((GridViewRow)((Button)sender).NamingContainer).RowIndex;
-            string price = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtPrice")).Text;
-            string quantity = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtAmount")).Text;
-            string discount = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtDiscount")).Text;
+            var priceElement = (TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtPrice");
+            var quantityElement = (TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtAmount");
+            var discountElement = (TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtDiscount");
+            string price = priceElement.Text;
+            string quantity = quantityElement.Text;
+            string discount = discountElement.Text;
             var productId = Convert.ToInt32(GridViewProducts.Rows[rowIndex].Cells[0].Text);
             var existItem = Bill.Items.FirstOrDefault(i => i.ProductId == productId);
             btnFinish.Enabled = true;
@@ -162,7 +164,8 @@ namespace DeltaProject
                 Name = GridViewProducts.Rows[rowIndex].Cells[1].Text,
                 PurchasePrice = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[2].Text),
                 SellPrice = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[3].Text),
-                Quantity = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[4].Text),
+                ProductQuantity = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[4].Text),
+                Quantity = existItem?.Quantity ?? 0,
                 UnitName = GridViewProducts.Rows[rowIndex].Cells[5].Text,
                 IsService = false
             };
@@ -190,7 +193,7 @@ namespace DeltaProject
                 }
                 PanelFinish.Visible = true;
                 lblFinishMsg.Text = "تم اضافة - " + item.Name + " - الى القائمة";
-                lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                lblFinishMsg.ForeColor = Color.Green;
             }
         }
 
@@ -220,6 +223,9 @@ namespace DeltaProject
                     BillItems.Add(item);
                 }
 
+                txtFreeItemName.Text = "";
+                txtFreeItemAmount.Text = "";
+                txtFreeItemPrice.Text = "";
                 PanelFinish.Visible = true;
                 lblFinishMsg.Text = "تم اضافة - " + item.Name + " - الى القائمة";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
@@ -339,6 +345,11 @@ namespace DeltaProject
             lblTotalCost.Text =
                 BillItems.Sum(p => p.SoldQuantity * p.SpecifiedPrice - p.Discount)
                     .ToString("0.##");
+
+            lblBillDate.Text = Bill.Date.ToString("dd/MM/yyy");
+            lblBillId.Text = Bill.Id.ToString();
+            lblClientName.Text = Bill.ClientName;
+            lblAddress.Text = Bill.Address;
         }
     }
 }

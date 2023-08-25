@@ -55,6 +55,18 @@
             WinPrint.focus();
             WinPrint.print();
         }
+
+        $(document).ready(function () {
+            $('.textWithDots').on('click', function () {
+                var classList = this.classList;
+                if (classList.contains('textWithDotsCollapse')) {
+                    this.classList.remove('textWithDotsCollapse');
+                }
+                else {
+                    this.classList.add('textWithDotsCollapse');
+                }
+            });
+        });
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
@@ -163,7 +175,7 @@
                         <asp:BoundField DataField="Debit" HeaderText="مدين" />
                         <asp:BoundField DataField="Credit" HeaderText="دائن" />
                         <asp:BoundField DataField="Balance" HeaderText="رصيد" />
-                        <asp:BoundField DataField="Description" HeaderText="البيان" />
+                        <asp:BoundField DataField="Description" HeaderText="البيان" HeaderStyle-Width="50%" ItemStyle-CssClass="textWithDotsCollapse textWithDots" />
                     </Columns>
                     <HeaderStyle CssClass="HeaderStyleBill" />
                     <RowStyle CssClass="RowStyleList" />

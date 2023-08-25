@@ -90,7 +90,7 @@
                              AutoPostBack="true">
             <asp:ListItem Value="Products" Selected="True">منتجات مستودع</asp:ListItem>
             <asp:ListItem Value="Services">خدمات</asp:ListItem>
-        </asp:RadioButtonList> 
+        </asp:RadioButtonList>
         <section class="Search_Section">
             <table class="Search_table">
                 <tr>
@@ -223,7 +223,55 @@
                             <asp:TextBox runat="server" ID="txtFreeItemPrice" CssClass="EditTxtFreeItemPrice" PlaceHolder="السعر" AutoCompleteType="Disabled"></asp:TextBox>
                         </td>
                         <td class="RHSTD">
-                            <asp:Button ID="btnAddFreeItem" runat="server" Text="اضافه" CssClass="BtnaddInGrid" OnClick="btnAddFreeItem_Click" />
+                            <asp:Button ID="btnAddFreeItem" runat="server" Text="اضافه" CssClass="BtnaddInGrid" OnClick="btnAddFreeItem_Click" ValidationGroup="addFreeItemGroup"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="RHSTD"></td>
+                        <td style="text-align: center">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                                                        ControlToValidate="txtFreeItemName" Display="Dynamic" SetFocusOnError="true"
+                                                        ToolTip="الكميه متطلب اساسى" ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:RequiredFieldValidator>
+                        </td>
+                        <td class="RHSTD"></td>
+                        <td style="text-align: center">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
+                                                        ControlToValidate="txtFreeItemAmount" Display="Dynamic" SetFocusOnError="true"
+                                                        ToolTip="الكميه متطلب اساسى" ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator4" runat="server"
+                                                 ToolTip="يجب كتابة الكميه بشكل صحيح"
+                                                 ControlToValidate="txtFreeItemAmount"
+                                                 Display="Dynamic"
+                                                 SetFocusOnError="true"
+                                                 ForeColor="Red"
+                                                 ClientValidationFunction="IsValidNumber"
+                                                 ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:CustomValidator>
+                        </td>
+                        <td class="RHSTD"></td>
+                        <td style="text-align: center">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+                                                        ControlToValidate="txtFreeItemPrice" Display="Dynamic" SetFocusOnError="true"
+                                                        ToolTip="السعر متطلب اساسى" ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator10" runat="server"
+                                                 ToolTip="يجب كتابة السعر بشكل صحيح"
+                                                 ControlToValidate="txtFreeItemPrice"
+                                                 Display="Dynamic"
+                                                 SetFocusOnError="true"
+                                                 ForeColor="Red"
+                                                 ClientValidationFunction="IsValidNumber"
+                                                 ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:CustomValidator>
+                        </td>
+                        <td class="RHSTD">
                         </td>
                     </tr>
                 </table>

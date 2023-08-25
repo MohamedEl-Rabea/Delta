@@ -276,7 +276,55 @@
                             <asp:TextBox runat="server" ID="txtFreeItemPrice" CssClass="EditTxtFreeItemPrice" PlaceHolder="السعر" AutoCompleteType="Disabled"></asp:TextBox>
                         </td>
                         <td class="RHSTD">
-                            <asp:Button ID="btnAddFreeItem" runat="server" Text="اضافه" CssClass="BtnaddInGrid" OnClick="btnAddFreeItem_Click" />
+                            <asp:Button ID="btnAddFreeItem" runat="server" Text="اضافه" CssClass="BtnaddInGrid" OnClick="btnAddFreeItem_Click" ValidationGroup="addFreeItemGroup"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="RHSTD"></td>
+                        <td style="text-align: center">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                                                        ControlToValidate="txtFreeItemName" Display="Dynamic" SetFocusOnError="true"
+                                                        ToolTip="الكميه متطلب اساسى" ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:RequiredFieldValidator>
+                        </td>
+                        <td class="RHSTD"></td>
+                        <td style="text-align: center">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
+                                                        ControlToValidate="txtFreeItemAmount" Display="Dynamic" SetFocusOnError="true"
+                                                        ToolTip="الكميه متطلب اساسى" ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator4" runat="server"
+                                                 ToolTip="يجب كتابة الكميه بشكل صحيح"
+                                                 ControlToValidate="txtFreeItemAmount"
+                                                 Display="Dynamic"
+                                                 SetFocusOnError="true"
+                                                 ForeColor="Red"
+                                                 ClientValidationFunction="IsValidNumber"
+                                                 ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:CustomValidator>
+                        </td>
+                        <td class="RHSTD"></td>
+                        <td style="text-align: center">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+                                                        ControlToValidate="txtFreeItemPrice" Display="Dynamic" SetFocusOnError="true"
+                                                        ToolTip="السعر متطلب اساسى" ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="CustomValidator10" runat="server"
+                                                 ToolTip="يجب كتابة السعر بشكل صحيح"
+                                                 ControlToValidate="txtFreeItemPrice"
+                                                 Display="Dynamic"
+                                                 SetFocusOnError="true"
+                                                 ForeColor="Red"
+                                                 ClientValidationFunction="IsValidNumber"
+                                                 ValidationGroup="addFreeItemGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:CustomValidator>
+                        </td>
+                        <td class="RHSTD">
                         </td>
                     </tr>
                 </table>
@@ -293,6 +341,42 @@
         </asp:Panel>
     </asp:Panel>
     <asp:Panel runat="server" ID="PanelProductList" Visible="false">
+        <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
+            <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 10px;">
+                <div style="border: 1px solid black">
+                    <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات الفاتورة الاساسية</p>
+                </div>
+            </header>
+            <table class="AddProductsTable">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 125px">
+                        <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label5" runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label6" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label8" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <br/>
         <section>
             <header class="ListHeader">
                 <p>قائمة المنتجات</p>
@@ -319,7 +403,7 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="ProductId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                         <asp:BoundField DataField="Name" HeaderText="الاسم" ReadOnly="true" />
-                        <asp:BoundField DataField="Quantity" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly remainingQuantity" />
+                        <asp:BoundField DataField="ProductQuantity" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly remainingQuantity" />
                         <asp:TemplateField HeaderStyle-CssClass="NoDisplay">
                             <EditItemTemplate>
                                 <asp:Label runat="server" ID="lblIsService" Text='<%# Bind("IsService") %>' CssClass="NoDispaly isService"></asp:Label>

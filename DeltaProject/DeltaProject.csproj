@@ -102,12 +102,14 @@
     <Content Include="CSS\LoginStyleSheet.css" />
     <Content Include="CSS\Master_style_sheet.css" />
     <Content Include="CSS\Pages_Style_Sheet.css" />
+    <Content Include="CSS\Without_Print_Style_Sheet.css" />
     <Content Include="CSS\select2.css" />
     <Content Include="CSS\select2.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="Delete_Client.aspx" />
     <Content Include="Delete_Products.aspx" />
     <Content Include="Delete_Supplier.aspx" />
+    <Content Include="EditSaleBill.aspx" />
     <Content Include="EditUnit.aspx" />
     <Content Include="Expenses.aspx" />
     <Content Include="Images\AddNew.png" />
@@ -184,6 +186,7 @@
     <Content Include="Script\select2.min.js" />
     <Content Include="Script\ServiseHandler.js" />
     <Content Include="Script\ValidationScript.js" />
+    <Content Include="SearchForBills.aspx" />
     <Content Include="SearchForLoaderProcess.aspx" />
     <Content Include="SearchForMaintenance.aspx" />
     <Content Include="SearchForNotDeliveredMaintenance.aspx" />
@@ -349,6 +352,7 @@
     <Compile Include="Business_Logic\Bill.cs" />
     <Compile Include="Business_Logic\BillDiscount.cs" />
     <Compile Include="Business_Logic\BillItem.cs" />
+    <Compile Include="Business_Logic\BillItemHistory.cs" />
     <Compile Include="Business_Logic\BillPayment.cs" />
     <Compile Include="Business_Logic\Bill_Content.cs" />
     <Compile Include="Business_Logic\Bill_Payments.cs" />
@@ -461,6 +465,13 @@
     </Compile>
     <Compile Include="Delete_Supplier.aspx.designer.cs">
       <DependentUpon>Delete_Supplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditSaleBill.aspx.cs">
+      <DependentUpon>EditSaleBill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditSaleBill.aspx.designer.cs">
+      <DependentUpon>EditSaleBill.aspx</DependentUpon>
     </Compile>
     <Compile Include="EditUnit.aspx.cs">
       <DependentUpon>EditUnit.aspx</DependentUpon>
@@ -665,6 +676,13 @@
     </Compile>
     <Compile Include="Sale_Products.aspx.designer.cs">
       <DependentUpon>Sale_Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForBills.aspx.cs">
+      <DependentUpon>SearchForBills.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForBills.aspx.designer.cs">
+      <DependentUpon>SearchForBills.aspx</DependentUpon>
     </Compile>
     <Compile Include="SearchForLoaderProcess.aspx.cs">
       <DependentUpon>SearchForLoaderProcess.aspx</DependentUpon>

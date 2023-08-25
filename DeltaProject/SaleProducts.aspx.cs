@@ -55,9 +55,12 @@ namespace DeltaProject
         protected void btnAdd_Click(object sender, EventArgs e)
         {
             int rowIndex = ((GridViewRow)((Button)sender).NamingContainer).RowIndex;
-            string price = (((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtPrice")).Text);
-            string quantity = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtAmount")).Text;
-            string discount = ((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtDiscount")).Text;
+            var priceElement = (TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtPrice");
+            var quantityElement = (TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtAmount");
+            var discountElement = (TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtDiscount");
+            string price = priceElement.Text;
+            string quantity = quantityElement.Text;
+            string discount = discountElement.Text;
 
             btnFinish.Enabled = true;
             BillItem item = new BillItem
@@ -124,6 +127,9 @@ namespace DeltaProject
                     BillItems.Add(item);
                 }
 
+                txtFreeItemName.Text = "";
+                txtFreeItemAmount.Text = "";
+                txtFreeItemPrice.Text = "";
                 PanelFinish.Visible = true;
                 lblFinishMsg.Text = "تم اضافة - " + item.Name + " - الى القائمة";
                 lblFinishMsg.ForeColor = System.Drawing.Color.Green;
@@ -315,6 +321,5 @@ namespace DeltaProject
             GridViewBillList.DataSource = BillItems;
             GridViewBillList.DataBind();
         }
-
     }
 }
