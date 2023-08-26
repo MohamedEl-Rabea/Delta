@@ -148,19 +148,19 @@
                             <td>
                                 <asp:Label ID="Label1" runat="server" Text="تاريخ البداية : " CssClass="lblInfo"></asp:Label>
                             </td>
-                            <td style="width: 125px">
+                            <td style="padding-left: 20px">
                                 <asp:Label ID="lblStartDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label3" runat="server" Text="اسم العميل : " CssClass="lblInfo"></asp:Label>
                             </td>
-                            <td style="width: 125px">
+                            <td style="padding-left: 20px">
                                 <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="اسم العميل"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label2" runat="server" Text="صافى الحساب : " CssClass="lblInfo"></asp:Label>
                             </td>
-                            <td style="width: 125px">
+                            <td style="padding-left: 20px">
                                 <asp:Label ID="lblBalance" runat="server" CssClass="lblInfo2" Text="صافى الحساب"></asp:Label>
                             </td>
                         </tr>
