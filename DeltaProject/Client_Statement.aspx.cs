@@ -28,9 +28,9 @@ namespace DeltaProject
                 PanelStatement.Visible = true;
                 PanelErrorMessage.Visible = false;
                 string clientName = txtClientName.Text;
-                DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text)
-                    ? (DateTime?)null
-                    : DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text) 
+                    ? null 
+                    : (DateTime?)DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 var statmentList = new List<ClientStatement>();
 
                 if (RadioButtonListCategories.SelectedIndex == 0) //All
