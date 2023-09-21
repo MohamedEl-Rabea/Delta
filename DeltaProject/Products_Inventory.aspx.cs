@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class Products_Inventory : System.Web.UI.Page
+    public partial class Products_Inventory : Page
     {
         private List<NewProduct> Products
         {
@@ -96,13 +97,13 @@ namespace DeltaProject
 
         private void BindGridViews()
         {
-            GridViewProducts.DataSource = Products.Where(p => p.ClassificationName == "منتجات عادية");
+            GridViewProducts.DataSource = Products.Where(p => p.ClassificationId == 1);
             GridViewProducts.DataBind();
 
-            GridViewMotors.DataSource = Products.Where(p => p.ClassificationName == "مواتير");
+            GridViewMotors.DataSource = Products.Where(p => p.ClassificationId == 2);
             GridViewMotors.DataBind();
 
-            GridViewTol.DataSource = Products.Where(p => p.ClassificationName == "طلمبيات");
+            GridViewTol.DataSource = Products.Where(p => p.ClassificationId == 3);
             GridViewTol.DataBind();
         }
     }

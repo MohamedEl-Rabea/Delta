@@ -56,7 +56,8 @@ namespace DeltaProject.Business_Logic
                     SellPrice = Convert.ToDecimal(rdr["SellPrice"]),
                     Quantity = Convert.ToDecimal(rdr["Quantity"]),
                     UnitId = Convert.ToInt32(rdr["UnitId"]),
-                    UnitName = rdr["UnitName"].ToString()
+                    UnitName = rdr["UnitName"].ToString(),
+                    Description = rdr["Description"].ToString()
                 };
                 products.Add(product);
             }

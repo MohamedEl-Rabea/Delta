@@ -182,15 +182,15 @@ namespace Business_Logic
             return b;
         }
 
-        public static List<Suppliers_Products> Get_Specific_Product_Suppliers(string P_name, double Purchase_Price)
+        public static List<Suppliers_Products> Get_Specific_Product_Suppliers(int productId, decimal Purchase_Price)
         {
             List<Suppliers_Products> Suppliers = new List<Suppliers_Products>();
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("Get_Specific_Product_Suppliers", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@P_name", SqlDbType.NVarChar).Value = P_name;
-            cmd.Parameters.Add("@Purchase_Price", SqlDbType.Money).Value = Purchase_Price;
+            cmd.Parameters.Add("@productId", SqlDbType.Int).Value = productId;
+            cmd.Parameters.Add("@purchasePrice", SqlDbType.Money).Value = Purchase_Price;
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -199,7 +199,7 @@ namespace Business_Logic
                 supplier.Supplier_Name = rdr["Supplier_Name"].ToString();
                 supplier.Purchase_Date = Convert.ToDateTime(rdr["Purchase_Date"]);
                 supplier.Price = Convert.ToDouble(rdr["Price"]);
-                supplier.Amount = Convert.ToInt32(rdr["amount"]);
+                supplier.Amount = Convert.ToInt32(rdr["Amount"]);
                 Suppliers.Add(supplier);
             }
             rdr.Close();
@@ -221,11 +221,11 @@ namespace Business_Logic
             {
                 Suppliers_Products product = new Suppliers_Products();
                 product.Purchase_Date = Convert.ToDateTime(rdr["Purchase_Date"]);
-                if (rdr["Mark"].ToString() != "Not found" && rdr["Style"].ToString() == "Not found")
+                if (!string.IsNullOrEmpty(rdr["Mark"].ToString()) && string.IsNullOrEmpty(rdr["Style"].ToString()))
                 {
                     product.Product_Name = rdr["P_Name"].ToString() + "- ماركة " + rdr["Mark"].ToString() + "- " + Convert.ToDouble(rdr["Inch"].ToString()) + " بوصه";
                 }
-                else if (rdr["Style"].ToString() != "Not found")
+                else if (!string.IsNullOrEmpty(rdr["Style"].ToString()))
                 {
                     product.Product_Name = rdr["P_Name"].ToString() + "- ماركة " + rdr["Mark"].ToString() + "- " + Convert.ToDouble(rdr["Inch"].ToString()) + " بوصه"
                         + "- طراز" + rdr["Style"].ToString();

@@ -191,6 +191,7 @@
     <Content Include="SearchForMaintenance.aspx" />
     <Content Include="SearchForNotDeliveredMaintenance.aspx" />
     <Content Include="SearchForMaintenanceWithRemaining.aspx" />
+    <Content Include="SearchForProduct.aspx" />
     <Content Include="SearchForSupplier.aspx" />
     <Content Include="Search_For_Bills.aspx" />
     <Content Include="Search_For_Client.aspx" />
@@ -711,6 +712,13 @@
     </Compile>
     <Compile Include="SearchForMaintenanceWithRemaining.aspx.designer.cs">
       <DependentUpon>SearchForMaintenanceWithRemaining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForProduct.aspx.cs">
+      <DependentUpon>SearchForProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SearchForProduct.aspx.designer.cs">
+      <DependentUpon>SearchForProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="SearchForSupplier.aspx.cs">
       <DependentUpon>SearchForSupplier.aspx</DependentUpon>

@@ -48,6 +48,7 @@ namespace DeltaProject
         protected void btnSave_Click(object sender, EventArgs e)
         {
             btnSave.Enabled = false;
+            btnAddSubUnitFactor.Enabled = true;
 
             Unit unit = new Unit
             {

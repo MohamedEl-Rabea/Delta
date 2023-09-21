@@ -39,6 +39,7 @@ namespace DeltaProject
             ViewState["NewUnitFactorsList"] = null;
             lblFinishMsg.Text = "";
             lblFinishMsg.Visible = false;
+            btnSave.Visible = true;
             BindUnitFactorsGridView();
         }
 
@@ -66,7 +67,8 @@ namespace DeltaProject
                 ((DropDownList)e.Row.FindControl("ddlSubUnits")).Visible = false;
                 ((TextBox)e.Row.FindControl("txtFactor")).Visible = false;
                 ((ImageButton)e.Row.FindControl("btnAdd")).Visible = false;
-                btnSave.Visible = false;
+                if(NewUnitFactors.Any()) btnSave.Visible = true;
+                else btnSave.Visible = false;
             }
         }
 

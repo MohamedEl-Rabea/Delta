@@ -41,6 +41,7 @@ namespace DeltaProject
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
             PanelSupplierData.Visible = false;
+            PanelPayment.Visible = false;
             PanelErrorMessage.Visible = false;
 
             int id = Convert.ToInt32(ddlSuppliers.SelectedValue);
@@ -60,6 +61,7 @@ namespace DeltaProject
                 return;
             }
 
+            PanelPayment.Visible = true;
             lblSupplierId.Value = result.Item2.ToString();
             lblSupplierName.Text = result.Item3;
             lnkStatement.Text = result.Item1.Value.ToString("0.##");

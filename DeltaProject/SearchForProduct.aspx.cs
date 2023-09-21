@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Business_Logic;
+using DeltaProject.Business_Logic;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Business_Logic;
 
 namespace DeltaProject
 {
-    public partial class Search_For_Product : System.Web.UI.Page
+    public partial class SearchForProduct : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,39 +22,8 @@ namespace DeltaProject
 
         private void BindProductsGrid()
         {
-            string P_name;
-            if (TextBoxSearch.Visible)
-            {
-                P_name = TextBoxSearch.Text;
-                GridViewProducts.Columns[1].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[1].HeaderStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[2].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[2].HeaderStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[3].ItemStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[3].HeaderStyle.CssClass = "NoDispaly";
-
-            }
-            else if (TextBoxTol.Visible)
-            {
-                P_name = TextBoxTol.Text;
-                GridViewProducts.Columns[1].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[1].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[2].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[2].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[3].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[3].HeaderStyle.CssClass = "";
-            }
-            else
-            {
-                P_name = TextBoxMotors.Text;
-                GridViewProducts.Columns[1].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[1].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[2].ItemStyle.CssClass = "";
-                GridViewProducts.Columns[2].HeaderStyle.CssClass = "";
-                GridViewProducts.Columns[3].HeaderStyle.CssClass = "NoDispaly";
-                GridViewProducts.Columns[3].ItemStyle.CssClass = "NoDispaly";
-            }
-            GridViewProducts.DataSource = Product.GetProducts(P_name);
+            int? productId = string.IsNullOrEmpty(txtProductId.Text) ? (int?)null : Convert.ToInt32(txtProductId.Text);
+            GridViewProducts.DataSource = NewProduct.GetProducts(productId);
             GridViewProducts.DataBind();
         }
 
@@ -67,40 +34,28 @@ namespace DeltaProject
             PanelProductDetails.Visible = false;
             PanelInitailResult.Visible = false;
             // Get the Selected product info
-            int row_index = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
-            Product product = new Product();
-            product.P_name = GridViewProducts.Rows[row_index].Cells[0].Text;
-            product.Mark = GridViewProducts.Rows[row_index].Cells[1].Text;
-            product.Inch = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[2].Text);
-            product.Style = GridViewProducts.Rows[row_index].Cells[3].Text;
-            product.Purchase_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[4].Text);
-            product = product.Get_Product_info();
-            lblP_name.Text = product.P_name;
+            int rowIndex = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
+            NewProduct product = new NewProduct();
+            product.Id = Convert.ToInt32(GridViewProducts.Rows[rowIndex].Cells[0].Text);
+            product.Name = GridViewProducts.Rows[rowIndex].Cells[1].Text;
+            product.Mark = GridViewProducts.Rows[rowIndex].Cells[2].Text;
+            if (string.IsNullOrEmpty(GridViewProducts.Rows[rowIndex].Cells[3].Text))
+                product.Inch = Convert.ToDouble(GridViewProducts.Rows[rowIndex].Cells[3].Text);
+            product.Style = GridViewProducts.Rows[rowIndex].Cells[4].Text;
+            product.Quantity = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[5].Text);
+            product.PurchasePrice = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[7].Text);
+            product.SellPrice = Convert.ToDecimal(GridViewProducts.Rows[rowIndex].Cells[8].Text);
+            product.Description = GridViewProducts.Rows[rowIndex].Cells[9].Text;
+            lblP_name.Text = product.Name;
             lblMark.Text = product.Mark;
             lblStyle.Text = product.Style;
             lblInch.Text = product.Inch.ToString();
-            lblPurchase_Price.Text = product.Purchase_Price.ToString();
-            lblRegSellPrice.Text = product.Regulare_Price.ToString();
-            lblSpecialSellPrice.Text = product.Special_Price.ToString();
-            lblAmount.Text = product.Amount.ToString();
+            lblPurchase_Price.Text = product.PurchasePrice.ToString();
+            lblSellPrice.Text = product.SellPrice.ToString();
+            lblAmount.Text = product.Quantity.ToString();
             TxtDesc.Text = product.Description;
-            if (RadioButtonListCategories.SelectedValue == "Tol")
-            {
-                PanelTol.Visible = true;
-                PanelMotors.Visible = true;
-            }
-            else if (RadioButtonListCategories.SelectedValue == "Motors")
-            {
-                PanelTol.Visible = false;
-                PanelMotors.Visible = true;
-            }
-            else
-            {
-                PanelTol.Visible = false;
-                PanelMotors.Visible = false;
-            }
             //get the product suppliers with the product key (name- price- mark- style- inch)
-            //GridViewSuppliers.DataSource = Suppliers_Products.Get_Specific_Product_Suppliers(product.P_name, product.Purchase_Price);
+            GridViewSuppliers.DataSource = Suppliers_Products.Get_Specific_Product_Suppliers(product.Id, product.PurchasePrice);
             GridViewSuppliers.DataBind();
         }
 
@@ -178,8 +133,8 @@ namespace DeltaProject
 
         protected void GridViewSuppliers_RowCommand(object sender, GridViewCommandEventArgs e)
         {   // Select Supplier info
-            int row_index = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
-            string supplier_name = GridViewSuppliers.Rows[row_index].Cells[0].Text;
+            int rowIndex = ((GridViewRow)((LinkButton)e.CommandSource).NamingContainer).RowIndex;
+            string supplier_name = GridViewSuppliers.Rows[rowIndex].Cells[0].Text;
             Supplier supplier = new Supplier();
             supplier.S_name = supplier_name;
             double debts;
@@ -191,31 +146,9 @@ namespace DeltaProject
             GridViewPhones.DataBind();
             GridViewFaxs.DataSource = Supplier_Fax.Get_Supplier_Faxs(supplier_name);
             GridViewFaxs.DataBind();
-            GridViewSuppliers.SelectedIndex = row_index;
+            GridViewSuppliers.SelectedIndex = rowIndex;
             PanelSupplierInfo.Visible = true;
             SetFocus(GridViewFaxs);
-        }
-
-        protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (RadioButtonListCategories.SelectedValue == "Normal")
-            {
-                TextBoxSearch.Visible = true;
-                TextBoxMotors.Visible = false;
-                TextBoxTol.Visible = false;
-            }
-            else if (RadioButtonListCategories.SelectedValue == "Tol")
-            {
-                TextBoxTol.Visible = true;
-                TextBoxSearch.Visible = false;
-                TextBoxMotors.Visible = false;
-            }
-            else
-            {
-                TextBoxMotors.Visible = true;
-                TextBoxSearch.Visible = false;
-                TextBoxTol.Visible = false;
-            }
         }
     }
 }
