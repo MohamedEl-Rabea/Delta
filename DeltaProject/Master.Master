@@ -141,11 +141,9 @@
                                     <asp:TreeNode Text="تحديث كميات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مسح منتجــات" NavigateUrl="~/Delete_Products.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="استعـــــــــــلام" NavigateUrl="~/Search_For_Product.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعلام" NavigateUrl="~/SearchForProduct.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="جرد البضائع" NavigateUrl="~/Products_Inventory.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مرتجع" NavigateUrl="~/ReturnSupplierProduct.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="تجميع منتج" NavigateUrl="~/Collect_Product.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="المورديــــــــــــــن">
                                     <asp:TreeNode Text="اضافة مورد" NavigateUrl="~/Add_Supplier.aspx"></asp:TreeNode>
