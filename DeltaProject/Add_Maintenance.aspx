@@ -186,7 +186,30 @@
                         </asp:RequiredFieldValidator>
                     </td>
                 </tr>
-                
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">التكلفة</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtCost" CssClass="txts3" PlaceHolder="التكلفة"></asp:TextBox>
+                    </td>
+                    <td class="RHSTD">
+                        <p class="RHSP">السعر</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtPrice" CssClass="txts3" PlaceHolder="السعر"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                </tr>
                 <tr>
                     <td style="vertical-align: top">
                         <p class="RHSP">الوصـــــــف :</p>
