@@ -69,7 +69,7 @@ namespace DeltaProject
         private void BindMaintenanceGridView(List<Maintenance> maintenanceList)
         {
             GridViewMaintenance.DataSource = maintenanceList;
-            GridViewMaintenance.Columns[3].FooterText = maintenanceList.Sum(p => p.Cost).ToString("0.##");
+            GridViewMaintenance.Columns[3].FooterText = maintenanceList.Sum(p => p.Cost.Value).ToString("0.##");
             GridViewMaintenance.Columns[4].FooterText = maintenanceList.Sum(p => p.PaidAmount).ToString("0.##");
             GridViewMaintenance.Columns[5].FooterText = maintenanceList.Sum(p => p.RemainingAmount).ToString("0.##");
             GridViewMaintenance.DataBind();
@@ -79,7 +79,7 @@ namespace DeltaProject
         {
             PanelPastMaintenance.Visible = pastMaintenanceList.Any();
             GridPastViewMaintenance.DataSource = pastMaintenanceList;
-            GridPastViewMaintenance.Columns[3].FooterText = pastMaintenanceList.Sum(p => p.Cost).ToString("0.##");
+            GridPastViewMaintenance.Columns[3].FooterText = pastMaintenanceList.Sum(p => p.Cost.Value).ToString("0.##");
             GridPastViewMaintenance.Columns[4].FooterText = pastMaintenanceList.Sum(p => p.PaidAmount).ToString("0.##");
             GridPastViewMaintenance.Columns[5].FooterText = pastMaintenanceList.Sum(p => p.RemainingAmount).ToString("0.##");
             GridPastViewMaintenance.DataBind();
@@ -100,7 +100,7 @@ namespace DeltaProject
         private void SetSummary(List<Maintenance> maintenanceList, List<MaintenanceExpense> expensesList, List<MaintenanceWithdraw> withdrawList)
         {
             var profit = maintenanceList.Sum(p => p.PaidAmount) -
-                         maintenanceList.Sum(p => p.Cost) -
+                         maintenanceList.Sum(p => p.Cost.Value) -
                          expensesList.Sum(p => p.Amount);
             var debit = maintenanceList.Sum(p => p.RemainingAmount);
             var withdraws = withdrawList.Sum(p => p.Amount);

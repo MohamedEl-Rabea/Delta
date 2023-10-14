@@ -34,6 +34,8 @@ namespace DeltaProject
             maintenance.ExpectedDeliveryDate = new DateTime(expectedDeliveryDate.Year, expectedDeliveryDate.Month, expectedDeliveryDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenance.Description = txtDescription.Text;
+            maintenance.Cost = txtCost.Text == "" ? (decimal?)null : Convert.ToDecimal(txtCost.Text);
+            maintenance.Price = txtPrice.Text == "" ? (decimal?)null : Convert.ToDecimal(txtPrice.Text);
 
             string m = "";
             if (!maintenance.AddMaintenance(out m))
@@ -52,6 +54,8 @@ namespace DeltaProject
                 OrderDate.Text = string.Empty;
                 ExpectedDeliveryDate.Text = string.Empty;
                 txtDescription.Text = string.Empty;
+                txtCost.Text = string.Empty;
+                txtPrice.Text = string.Empty;
             }
         }
     }

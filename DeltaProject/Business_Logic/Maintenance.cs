@@ -17,8 +17,8 @@ namespace Business_Logic
         public string WorkshopName { get; set; }
         public DateTime OrderDate { get; set; }
         public string StatusName { get; set; }
-        public decimal Cost { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Cost { get; set; }
+        public decimal? Price { get; set; }
         public decimal RemainingAmount { get; set; }
         public string Description { get; set; }
         public DateTime ExpectedDeliveryDate { get; set; }
@@ -44,6 +44,10 @@ namespace Business_Logic
                 cmd.Parameters.Add("@OrderDate", SqlDbType.DateTime).Value = OrderDate;
                 cmd.Parameters.Add("@ExpectedDeliveryDate", SqlDbType.DateTime).Value = ExpectedDeliveryDate;
                 cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Description;
+                if (Price.HasValue)
+                    cmd.Parameters.Add("@price", SqlDbType.Money).Value = Price;
+                if (Cost.HasValue)
+                    cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -136,7 +140,7 @@ namespace Business_Logic
                 maintenance.Cost = string.IsNullOrEmpty(rdr["Cost"].ToString()) ? 0 : Convert.ToDecimal(rdr["Cost"]);
                 maintenance.Price = string.IsNullOrEmpty(rdr["Price"].ToString()) ? 0 : Convert.ToDecimal(rdr["Price"]);
                 maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ?
-                    maintenance.Price : Convert.ToDecimal(rdr["RemainingAmount"]);
+                    maintenance.Price.Value : Convert.ToDecimal(rdr["RemainingAmount"]);
                 maintenance.WorkshopName = rdr["WorkshopName"].ToString();
                 maintenance.StatusName = rdr["StatusName"].ToString();
                 maintenance.Description = rdr["Description"].ToString();
