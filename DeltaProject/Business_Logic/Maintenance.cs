@@ -25,7 +25,7 @@ namespace Business_Logic
         public DateTime DeliveryDate { get; set; }
         public DateTime ExpiryWarrantyDate { get; set; }
         public string ExpiryWarrantyDateText { get; set; }
-        public decimal PaidAmount { get; set; }
+        public decimal? PaidAmount { get; set; }
 
         public bool AddMaintenance(out string m)
         {
@@ -48,6 +48,8 @@ namespace Business_Logic
                     cmd.Parameters.Add("@price", SqlDbType.Money).Value = Price;
                 if (Cost.HasValue)
                     cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
+                if (PaidAmount.HasValue)
+                    cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
