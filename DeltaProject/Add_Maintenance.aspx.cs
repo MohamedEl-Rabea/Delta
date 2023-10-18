@@ -21,6 +21,18 @@ namespace DeltaProject
 
         protected void BtnSave_Click(object sender, EventArgs e)
         {
+            var price = txtPrice.Text == "" ? (decimal?)null : Convert.ToDecimal(txtPrice.Text);
+            var paidAmount = txtPaidAmount.Text == "" ? (decimal?)null : Convert.ToDecimal(txtPaidAmount.Text);
+
+            if(paidAmount.HasValue && !price.HasValue || 
+               paidAmount.HasValue && price.HasValue && paidAmount.Value > price.Value)
+            {
+                priceValiation.Visible = true;
+                txtPaidAmount.Focus();
+                return;
+            }
+
+            priceValiation.Visible = false;
             ViewState["C_Name"] = txtClientName.Text;
             Maintenance maintenance = new Maintenance();
             maintenance.PhoneNumber = txtPhoneNumber.Text;
@@ -35,7 +47,8 @@ namespace DeltaProject
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             maintenance.Description = txtDescription.Text;
             maintenance.Cost = txtCost.Text == "" ? (decimal?)null : Convert.ToDecimal(txtCost.Text);
-            maintenance.Price = txtPrice.Text == "" ? (decimal?)null : Convert.ToDecimal(txtPrice.Text);
+            maintenance.Price = price;
+            maintenance.PaidAmount = paidAmount;
 
             string m = "";
             if (!maintenance.AddMaintenance(out m))
@@ -56,6 +69,7 @@ namespace DeltaProject
                 txtDescription.Text = string.Empty;
                 txtCost.Text = string.Empty;
                 txtPrice.Text = string.Empty;
+                txtPaidAmount.Text = string.Empty;
             }
         }
     }

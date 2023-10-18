@@ -159,6 +159,24 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.TextBox txtPrice;
 
         /// <summary>
+        /// txtPaidAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPaidAmount;
+
+        /// <summary>
+        /// priceValiation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl priceValiation;
+
+        /// <summary>
         /// txtDescription control.
         /// </summary>
         /// <remarks>

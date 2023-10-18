@@ -200,14 +200,33 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="RHSTD" colspan="4">
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">المدفوع</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtPaidAmount" CssClass="txts3" PlaceHolder="المدفوع"></asp:TextBox>
+                    </td>
+                    <td colspan="2">
+                     
+                    </td>
+                </tr>
+                <tr>
                     <td class="RHSTD">
                         <br />
                         <br />
                     </td>
-                    <td class="RHSTD">
-                        <br />
-                        <br />
+                    <td class="ValodationTD">
+                        <div runat="server" id="priceValiation" visible="false">
+                            <img src="Images/Error.png" width="24" height="24" title ="لا يجب ان تزيد القيمة المدفوعة عن سعر الصيانة."/>
+                        </div>
                     </td>
+                    <td colspan="2"></td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top">
