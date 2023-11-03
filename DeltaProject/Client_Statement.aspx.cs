@@ -52,7 +52,7 @@ namespace DeltaProject
                 }
                 lblClientName.Text = clientName;
                 lblStartDate.Text = startDate.HasValue ? startDate.Value.ToShortDateString() : "شامل";
-                lblBalance.Text = statmentList.LastOrDefault() != null ? statmentList.Last().Balance.ToString() : "0";
+                lblBalance.Text = statmentList.LastOrDefault() != null ? statmentList.Last().Balance.ToString("0.##") : "0";
                 GridViewStatement.DataSource = statmentList;
                 GridViewStatement.DataBind();
             }

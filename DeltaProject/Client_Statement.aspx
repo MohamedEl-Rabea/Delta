@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="Client_Statement.aspx.cs" Inherits="DeltaProject.Client_Statement" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
     <script type="text/javascript">
         $(function () {
             $('#<%= txtClientName.ClientID%>').autocomplete({
@@ -56,6 +55,18 @@
             WinPrint.focus();
             WinPrint.print();
         }
+
+        $(document).ready(function () {
+            $('.textWithDots').on('click', function () {
+                var classList = this.classList;
+                if (classList.contains('textWithDotsCollapse')) {
+                    this.classList.remove('textWithDotsCollapse');
+                }
+                else {
+                    this.classList.add('textWithDotsCollapse');
+                }
+            });
+        });
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
@@ -137,19 +148,19 @@
                             <td>
                                 <asp:Label ID="Label1" runat="server" Text="تاريخ البداية : " CssClass="lblInfo"></asp:Label>
                             </td>
-                            <td style="width: 125px">
+                            <td style="padding-left: 20px">
                                 <asp:Label ID="lblStartDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label3" runat="server" Text="اسم العميل : " CssClass="lblInfo"></asp:Label>
                             </td>
-                            <td style="width: 125px">
+                            <td style="padding-left: 20px">
                                 <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="اسم العميل"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label2" runat="server" Text="صافى الحساب : " CssClass="lblInfo"></asp:Label>
                             </td>
-                            <td style="width: 125px">
+                            <td style="padding-left: 20px">
                                 <asp:Label ID="lblBalance" runat="server" CssClass="lblInfo2" Text="صافى الحساب"></asp:Label>
                             </td>
                         </tr>
@@ -164,7 +175,7 @@
                         <asp:BoundField DataField="Debit" HeaderText="مدين" />
                         <asp:BoundField DataField="Credit" HeaderText="دائن" />
                         <asp:BoundField DataField="Balance" HeaderText="رصيد" />
-                        <asp:BoundField DataField="Statement" HeaderText="البيان" />
+                        <asp:BoundField DataField="Description" HeaderText="البيان" HeaderStyle-Width="50%" ItemStyle-CssClass="textWithDotsCollapse textWithDots" />
                     </Columns>
                     <HeaderStyle CssClass="HeaderStyleBill" />
                     <RowStyle CssClass="RowStyleList" />

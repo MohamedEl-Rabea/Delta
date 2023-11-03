@@ -33,15 +33,6 @@
                 <p>تقرير جرد بضائع</p>
             </div>
         </header>
-        <section class="ReportDeclarationSection" style="min-height: 50px;">
-            <table class="ReportHeaderTable">
-                <tr>
-                    <td>
-                        <p>تقرير بجميع البضائع المسجله لدى النظام والمتواجده لدى مخازن ومعارض الشركه</p>
-                    </td>
-                </tr>
-            </table>
-        </section>
         <%-- Infotrmation sections --%>
         <section style="width: 100%; text-align: right; direction: rtl">
             <header class="PreSection">
@@ -53,27 +44,23 @@
         <section class="PreReport_Section">
             <asp:GridView ID="GridViewProducts" runat="server" AutoGenerateColumns="false" CssClass="Gridview_StyleReport" EmptyDataText="لا توجد منتجات">
                 <Columns>
-                    <asp:BoundField DataField="P_Name" HeaderText="الاسم" />
-                    <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" />
-                    <asp:BoundField DataField="Amount" HeaderText="الكميه" />
+                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="Name" HeaderText="الاسم" />
+                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="UnitName" HeaderText="الوحده" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:TextBox ID="txtAmount" AutoCompleteType="Disabled" CssClass="EditTxt" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtQuantity" AutoCompleteType="Disabled" CssClass="EditTxt" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator8" runat="server"
                                 ToolTip="يجب كتابة الكميه بشكل صحيح"
-                                ControlToValidate="txtAmount"
+                                ControlToValidate="txtQuantity"
                                 Display="Dynamic"
                                 SetFocusOnError="true"
                                 ForeColor="Red"
                                 ClientValidationFunction="IsValidNumber"
                                 Text="*">
                             </asp:CustomValidator>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField ControlStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ItemStyle-CssClass="NoDispaly">
-                        <ItemTemplate>
-                            <asp:ImageButton ID="ImageButtonConfirmEdit" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
-                                ToolTip="تاكيد التعديل" OnClick="ImageButtonConfirmEdit_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -93,29 +80,25 @@
         <section class="PreReport_Section">
             <asp:GridView ID="GridViewMotors" runat="server" AutoGenerateColumns="false" CssClass="Gridview_StyleReport" EmptyDataText="لا توجد منتجات">
                 <Columns>
-                    <asp:BoundField DataField="P_Name" HeaderText="الاسم" />
+                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="Name" HeaderText="الاسم" />
                     <asp:BoundField DataField="Mark" HeaderText="الماركه" />
                     <asp:BoundField DataField="Inch" HeaderText="البوصه" />
-                    <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" />
-                    <asp:BoundField DataField="Amount" HeaderText="الكميه" />
+                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="UnitName" HeaderText="الوحده" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:TextBox ID="txtAmount" AutoCompleteType="Disabled" CssClass="EditTxt" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtQuantity" AutoCompleteType="Disabled" CssClass="EditTxt" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator8" runat="server"
                                 ToolTip="يجب كتابة الكميه بشكل صحيح"
-                                ControlToValidate="txtAmount"
+                                ControlToValidate="txtQuantity"
                                 Display="Dynamic"
                                 SetFocusOnError="true"
                                 ForeColor="Red"
                                 ClientValidationFunction="IsValidNumber"
                                 Text="*">
                             </asp:CustomValidator>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField ControlStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ItemStyle-CssClass="NoDispaly">
-                        <ItemTemplate>
-                            <asp:ImageButton ID="ImageButtonConfirmEdit" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
-                                ToolTip="تاكيد التعديل" OnClick="ImageButtonConfirmEdit_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -135,30 +118,26 @@
         <section class="PreReport_Section">
             <asp:GridView ID="GridViewTol" runat="server" AutoGenerateColumns="false" CssClass="Gridview_StyleReport" EmptyDataText="لا توجد منتجات">
                 <Columns>
-                    <asp:BoundField DataField="P_Name" HeaderText="الاسم" />
+                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="Name" HeaderText="الاسم" />
                     <asp:BoundField DataField="Mark" HeaderText="الماركه" />
                     <asp:BoundField DataField="Inch" HeaderText="البوصه" />
                     <asp:BoundField DataField="Style" HeaderText="الطراز" />
-                    <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" />
-                    <asp:BoundField DataField="Amount" HeaderText="الكميه" />
+                    <asp:BoundField DataField="PurchasePrice" HeaderText="سعر الشراء" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Quantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="UnitName" HeaderText="الوحده" />
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:TextBox ID="txtAmount" AutoCompleteType="Disabled" CssClass="EditTxt" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtQuantity" AutoCompleteType="Disabled" CssClass="EditTxt" runat="server"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator8" runat="server"
                                 ToolTip="يجب كتابة الكميه بشكل صحيح"
-                                ControlToValidate="txtAmount"
+                                ControlToValidate="txtQuantity"
                                 Display="Dynamic"
                                 SetFocusOnError="true"
                                 ForeColor="Red"
                                 ClientValidationFunction="IsValidNumber"
                                 Text="*">
                             </asp:CustomValidator>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField ControlStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ItemStyle-CssClass="NoDispaly">
-                        <ItemTemplate>
-                            <asp:ImageButton ID="ImageButtonConfirmEdit" runat="server" ImageUrl="~/Images/Ok.png" Width="16" Height="16"
-                                ToolTip="تاكيد التعديل" OnClick="ImageButtonConfirmEdit_Click" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -169,7 +148,6 @@
             </asp:GridView>
         </section>
         <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center">
-            
         </footer>
     </div>
 </asp:Content>

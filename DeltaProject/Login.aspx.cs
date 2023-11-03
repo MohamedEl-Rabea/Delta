@@ -65,6 +65,7 @@ namespace DeltaProject
 
             if (rdr.Read())
             {
+                Session["userId"] = Convert.ToString(rdr["ID"]);
                 Session["isAuthenticated"] = !string.IsNullOrEmpty(Convert.ToString(rdr["ID"]));
                 Session["UserPermissions"] = Convert.ToString(rdr["UserPermissions"]);
             }

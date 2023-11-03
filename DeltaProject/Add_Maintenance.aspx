@@ -6,7 +6,6 @@
             width: auto !important;
         }
     </style>
-    <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#<%= txtClientName.ClientID%>').autocomplete({

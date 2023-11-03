@@ -100,7 +100,7 @@ namespace DeltaProject
                 PanelMotors.Visible = false;
             }
             //get the product suppliers with the product key (name- price- mark- style- inch)
-            GridViewSuppliers.DataSource = Suppliers_Products.Get_Specific_Product_Suppliers(product.P_name, product.Purchase_Price);
+            //GridViewSuppliers.DataSource = Suppliers_Products.Get_Specific_Product_Suppliers(product.P_name, product.Purchase_Price);
             GridViewSuppliers.DataBind();
         }
 

@@ -123,7 +123,7 @@ namespace DeltaProject
                     product.Style = GridViewProducts.Rows[row_index].Cells[3].Text;
                 }
                
-                    product.Specified_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[4].Text);
+                product.Specified_Price = Convert.ToDouble(GridViewProducts.Rows[row_index].Cells[4].Text);
                 
                 if (ViewState["ProductsList"] != null && ((List<Product>)ViewState["ProductsList"]).Contains(product))
                 {

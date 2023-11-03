@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .Header {
     margin: 25px auto;
     text-align: center;
@@ -64,15 +68,18 @@
     font-size: 15px;
     font-weight: 700;
     color: #2c3e50;
+    white-space: nowrap;
 }
 
 .RHSPSmall {
     font-size: 12px;
     font-weight: 800;
+    white-space: nowrap;
 }
 
 .RHSPModified {
     font-size: 12px;
+    white-space: nowrap;
 }
 
 .txts, .txts2, .DateTxts, .DateTxts_MID, .txtsModified, .TxtMultiline, .Smalltxts, .MidTexts, .Smalltxts2, .txts3, .txtAuto {
@@ -493,7 +500,7 @@
 .AlternatRowStyle {
     background-color: #bdc3c7;
     height: 25px;
-    font: 500 11px arial;
+    font: 500 14px arial;
 }
 
 .Footer_Row, .FooterIncomeReport {
@@ -701,6 +708,12 @@
     color: blue;
     text-decoration: underline;
     font: bold 12px arial;
+}
+
+.LinkL {
+    color: blue;
+    text-decoration: underline;
+    font: bold 16px arial;
 }
 
 .UnStyled {
@@ -947,18 +960,6 @@
     margin: 5px;
 }
 
-.textWithDotsCollapse {
-    overflow: hidden !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1 !important;
-    -webkit-box-orient: vertical !important;
-}
-
-.textWithDots {
-    white-space: break-spaces !important;
-    cursor: pointer;
-}
-
 .nowrap td {
     white-space: nowrap;
     padding: 1px 5px;
@@ -966,4 +967,12 @@
 
 .maintenanceDetails tr {
     height: 45px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.select2NoBorder .select2-container--default .select2-selection--single {
+    border: none;
 }
