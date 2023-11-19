@@ -112,78 +112,90 @@
                     <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات العرض</p>
                 </div>
             </header>
-            <table class="AddProductsTable">
-                <tr>
-                    <td>
-                        <asp:Label ID="Label1" runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 125px">
-                        <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label2" runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label3" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label4" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="الاجمالى : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="lblAddtionalCost" runat="server" CssClass="lblInfo" Text="تكلفة اضافيه : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblAddtionalCostValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label8" runat="server" CssClass="lblInfo" Text="المدفوع : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblPaidValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label9" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
-                    </td>
-                    <td style="width: 120px">
-                        <asp:Label ID="lblRest" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblPreAdditionalcostNotes" runat="server" CssClass="lblInfo" Text="ملاحظات التكلفه الاضافيه : "></asp:Label>
-                    </td>
-                    <td colspan="5">
-                        <asp:Label ID="lblAdditionalcostNotes" runat="server" CssClass="lblInfo2" Text=" ملاحظات التكلفه الاضافيه"></asp:Label>
-                    </td>
-                </tr>
-            </table>
+            <table class="AddProductsTable ReportHeader">
+                        <tr>
+                            <td>
+                                <asp:Label runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2" Text="رقم العرض"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="Label1" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="اسم العميل"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="Label2" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2" Text="عنوان العميل"></asp:Label>
+                            </td>
+                             <td>
+                                <asp:Label ID="Label6" runat="server" Text="رقم التليفون : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblPhoneNumber" runat="server" CssClass="lblInfo2" Text="رقم التليفون"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="Label3" runat="server" CssClass="lblInfo" Text="الاجمالى : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="lblAddtionalCost" runat="server" CssClass="lblInfo" Text="تكلفة اضافيه : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblAdditionalCostValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="Label4" runat="server" CssClass="lblInfo" Text="المدفوع : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblPaidValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                           <td>
+                                <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="اجمالى الخصم : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblGeneralDiscount" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                             <td>
+                                <asp:Label ID="Label7" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblRest" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblPreAdditionalcostNotes" runat="server" CssClass="lblInfo" Text="ملاحظات التكلفه الاضافيه : "></asp:Label>
+                            </td>
+                            <td colspan="5">
+                                <asp:Label ID="lblAdditionalcostNotes" runat="server" CssClass="lblInfo2" Text=" ملاحظات التكلفه الاضافيه"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
         </section>
         <br />
         <br />

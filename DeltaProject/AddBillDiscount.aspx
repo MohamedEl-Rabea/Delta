@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .GridViewBillItems .HeaderStyleBill, .GridViewBillItems .RowStyleList, .GridViewBillItems .AlternateRowStyleList{
+        .GridViewBillItems .HeaderStyleBill, .GridViewBillItems .RowStyleList, .GridViewBillItems .AlternateRowStyleList {
             font-size: 16px;
         }
     </style>
@@ -124,32 +124,38 @@
                     <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات العرض</p>
                 </div>
             </header>
-            <asp:TextBox runat="server" ID="lblRemainingCost" CssClass="NoDispaly"  Text='0'></asp:TextBox>
-            <table class="AddProductsTable">
+            <asp:TextBox runat="server" ID="lblRemainingCost" CssClass="NoDispaly lblRemainingCost" Text='0'></asp:TextBox>
+            <table class="AddProductsTable ReportHeader">
                 <tr>
                     <td>
-                        <asp:Label ID="Label1" runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
-                    </td>
-                    <td style="width: 125px">
-                        <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:Label ID="Label2" runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
+                        <asp:Label runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
                     </td>
                     <td style="width: 120px">
-                        <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2"></asp:Label>
+                        <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
                     </td>
                     <td>
-                        <asp:Label ID="Label3" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
+                        <asp:Label runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
                     </td>
                     <td style="width: 120px">
-                        <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2"></asp:Label>
+                        <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2" Text="رقم العرض"></asp:Label>
                     </td>
                     <td>
-                        <asp:Label ID="Label4" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
                     </td>
                     <td style="width: 120px">
-                        <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2"></asp:Label>
+                        <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="اسم العميل"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2" Text="عنوان العميل"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label6" runat="server" Text="رقم التليفون : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblPhoneNumber" runat="server" CssClass="lblInfo2" Text="رقم التليفون"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -159,7 +165,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="الاجمالى : "></asp:Label>
+                        <asp:Label ID="Label3" runat="server" CssClass="lblInfo" Text="الاجمالى : "></asp:Label>
                     </td>
                     <td style="width: 120px">
                         <asp:Label ID="lblBillCost" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
@@ -171,13 +177,19 @@
                         <asp:Label ID="lblAdditionalCostValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
                     </td>
                     <td>
-                        <asp:Label ID="Label8" runat="server" CssClass="lblInfo" Text="المدفوع : "></asp:Label>
+                        <asp:Label ID="Label4" runat="server" CssClass="lblInfo" Text="المدفوع : "></asp:Label>
                     </td>
                     <td style="width: 120px">
                         <asp:Label ID="lblPaidValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
                     </td>
                     <td>
-                        <asp:Label ID="Label9" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
+                        <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="اجمالى الخصم : "></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblGeneralDiscount" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label7" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
                     </td>
                     <td style="width: 120px">
                         <asp:Label ID="lblRest" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
@@ -213,17 +225,17 @@
                     <asp:BoundField DataField="ProductId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:BoundField DataField="Name" HeaderText="اسم المنتج" />
                     <asp:BoundField DataField="UnitName" HeaderText="الوحدة" />
-                    <asp:BoundField DataField="SoldQuantity" HeaderText="الكميه"  DataFormatString="{0:0.##}"/>
-                    <asp:BoundField DataField="ReturnedQuantity" HeaderText="المرتجع"  DataFormatString="{0:0.##}"/>
-                    <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر الوحده"  DataFormatString="{0:0.##}"/>
-                    <asp:BoundField DataField="Discount" HeaderText="الخصم الحالى"  DataFormatString="{0:0.##}"/>
-                    <asp:BoundField DataField="TotalCost" HeaderText="الاجمالى"  DataFormatString="{0:0.##}"/>
+                    <asp:BoundField DataField="SoldQuantity" HeaderText="الكميه" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="ReturnedQuantity" HeaderText="المرتجع" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="SpecifiedPrice" HeaderText="سعر الوحده" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="Discount" HeaderText="الخصم الحالى" DataFormatString="{0:0.##}" />
+                    <asp:BoundField DataField="TotalCost" HeaderText="الاجمالى" DataFormatString="{0:0.##}" />
                     <asp:BoundField DataField="IsService" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
                     <asp:TemplateField HeaderText="الخصم">
                         <ItemTemplate>
-                            <asp:TextBox runat="server" ID="txtTotalCost" CssClass="NoDispaly"  Text='<%# Bind("TotalCost") %>'></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtTotalCost" CssClass="NoDispaly" Text='<%# Bind("TotalCost") %>'></asp:TextBox>
                             <asp:Label runat="server" ID="lblDiscount" CssClass="NoDispaly" Text='0'></asp:Label>
-                            <asp:TextBox ID="txtDiscount" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" placeholder="الخصم"></asp:TextBox>
+                            <asp:TextBox ID="txtDiscount" CssClass="EditTxt discount" runat="server" AutoCompleteType="Disabled" placeholder="الخصم"></asp:TextBox>
                             <asp:CustomValidator ID="CustomValidator9" runat="server"
                                 ToolTip="يجب كتابة الخصم بشكل صحيح"
                                 ControlToValidate="txtDiscount"
@@ -315,6 +327,47 @@
                     </td>
 
                 </tr>
+                 <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">خصم عام :</p>
+                    </td>
+                    <td style="text-align: right; padding-left: 5px;" colspan="4">
+                        <asp:TextBox runat="server" ID="txtGeneralDiscount" CssClass="txts2"
+                            PlaceHolder="خصم عام على الفاتورة" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD"><br /><br /></td>
+                    <td style="text-align: center" colspan="3">
+                        <asp:CustomValidator ID="CustomValidator13" runat="server"
+                            ToolTip="يجب كتابة الخصم بشكل صحيح"
+                            ControlToValidate="txtGeneralDiscount"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ForeColor="Red"
+                            ClientValidationFunction="IsValidNumber" ValidationGroup="finishGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CustomValidator>
+                         <asp:CustomValidator ID="CustomValidator3" runat="server"
+                            ToolTip="يجب الا يزيد الخصم عن اجمالى الفاتوره"
+                            ControlToValidate="txtGeneralDiscount"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ForeColor="Red"
+                            ClientValidationFunction="IsValidGeneralDiscount" ValidationGroup="finishGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CustomValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD" style="vertical-align: top">
+                        <p class="RHSP">ملاحظات الخصم العام :</p>
+                    </td>
+                    <td class="td_txts" colspan="4">
+                        <asp:TextBox ID="txtGeneralDiscountNotes" runat="server" CssClass="TxtMultiline" AutoCompleteType="Disabled"
+                            TextMode="MultiLine" placeholder="اضافة اى ملاحظات تتعلق بالخصم العام"></asp:TextBox>
+                    </td>
+                </tr>
             </table>
             <footer class="AddSupplierFooter">
                 <asp:Button ID="btnFinish" runat="server" Text="انهاء" CssClass="BtnNext"
@@ -327,8 +380,7 @@
             <asp:Panel runat="server" ID="PanelRest" Visible="false">
                 <footer class="AddSupplierFooter">
                     <div class="MsgDiv" style="text-align: right">
-                        <span>
-                            المتبقى من قيمة الفاتورة للعميل: 
+                        <span>المتبقى من قيمة الفاتورة للعميل: 
                             <asp:Label ID="lblRestOfMoney" CssClass="bold" runat="server"></asp:Label>
                             للسداد اضغط
                         </span>

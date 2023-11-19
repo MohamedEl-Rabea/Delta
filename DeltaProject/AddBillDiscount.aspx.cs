@@ -89,13 +89,14 @@ namespace DeltaProject
                 lblBillId.Text = billId.ToString();
                 lblBillDate.Text = bill.Date.ToString("dd/MM/yyyy");
                 lblClientName.Text = bill.ClientName;
+                lblPhoneNumber.Text = bill.PhoneNumber;
                 lblAddress.Text = bill.Address;
                 var totalCost = bill.Items.Sum(i => i.TotalCost);
                 lblBillCost.Text = totalCost.ToString("0.##");
                 lblPaidValue.Text = bill.PaidAmount?.ToString("0.##");
                 lblAdditionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
                 lblAdditionalcostNotes.Text = bill.AdditionalCostNotes;
-                var rest = Convert.ToDecimal(totalCost + bill.AdditionalCost - bill.PaidAmount);
+                var rest = bill.RemainingCost.Value;
                 lblRemainingCost.Text = rest.ToString("0.##");
                 lblRest.Text = rest >= 0
                     ? rest.ToString("0.##")
@@ -152,6 +153,9 @@ namespace DeltaProject
                     bill.Items.Add(item);
                 }
             }
+
+            bill.GeneralDiscount = Convert.ToDecimal(txtGeneralDiscount.Text);
+            bill.Notes = txtGeneralDiscountNotes.Text;
 
             if (bill.Items.Any())
             {

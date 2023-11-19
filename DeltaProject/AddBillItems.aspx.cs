@@ -350,6 +350,7 @@ namespace DeltaProject
             lblBillId.Text = Bill.Id.ToString();
             lblClientName.Text = Bill.ClientName;
             lblAddress.Text = Bill.Address;
+            lblPhoneNumber.Text = Bill.PhoneNumber;
         }
     }
 }

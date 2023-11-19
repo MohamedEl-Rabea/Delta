@@ -347,7 +347,7 @@
                     <p style="font: bold 13px arial; margin: 0; padding: 0">بيانات الفاتورة الاساسية</p>
                 </div>
             </header>
-            <table class="AddProductsTable">
+            <table class="AddProductsTable ReportHeader">
                 <tr>
                     <td>
                         <asp:Label ID="Label3" runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
@@ -372,6 +372,12 @@
                     </td>
                     <td style="width: 120px">
                         <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label1" runat="server" Text="رقم التليفون : " CssClass="lblInfo"></asp:Label>
+                    </td>
+                    <td style="width: 120px">
+                        <asp:Label ID="lblPhoneNumber" runat="server" CssClass="lblInfo2"></asp:Label>
                     </td>
                 </tr>
             </table>

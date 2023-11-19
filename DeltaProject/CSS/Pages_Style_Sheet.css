@@ -976,3 +976,7 @@
 .select2NoBorder .select2-container--default .select2-selection--single {
     border: none;
 }
+
+.ReportHeader td{
+    white-space: nowrap;
+}

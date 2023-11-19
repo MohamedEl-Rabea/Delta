@@ -177,9 +177,11 @@ namespace DeltaProject
             lblBillDate.Text = bill?.Date.ToString("dd/MM/yyyy");
             lblClientName.Text = bill?.ClientName;
             lblAddress.Text = bill?.Address;
+            lblPhoneNumber.Text = bill?.PhoneNumber;
             lblBillCost.Text = bill?.TotalCost?.ToString("0.##");
             lblPaidValue.Text = bill?.PaidAmount?.ToString("0.##");
-            lblAddtionalCostValue.Text = bill?.AdditionalCost?.ToString("0.##");
+            lblGeneralDiscount.Text = bill?.GeneralDiscount?.ToString("0.##");
+            lblAdditionalCostValue.Text = bill?.AdditionalCost?.ToString("0.##");
             lblAdditionalcostNotes.Text = bill?.AdditionalCostNotes;
             lblRest.Text = bill?.RemainingCost >= 0
                 ? bill.RemainingCost?.ToString("0.##")

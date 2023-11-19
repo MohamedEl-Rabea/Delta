@@ -208,12 +208,14 @@ namespace DeltaProject
             lblBillDate.Text = bill.Date.ToString("dd/MM/yyyy");
             lblClientName.Text = bill.ClientName;
             lblAddress.Text = bill.Address;
+            lblPhoneNumber.Text = bill.PhoneNumber;
             var totalCost = bill.Items.Sum(i => i.TotalCost);
             lblBillCost.Text = totalCost.ToString("0.##");
             lblPaidValue.Text = bill.PaidAmount?.ToString("0.##");
-            lblAddtionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
+            lblGeneralDiscount.Text = bill?.GeneralDiscount?.ToString("0.##");
+            lblAdditionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
             lblAdditionalcostNotes.Text = bill.AdditionalCostNotes;
-            var rest = Convert.ToDecimal(totalCost + bill.AdditionalCost - bill.PaidAmount);
+            var rest = Convert.ToDecimal(totalCost + bill.AdditionalCost - bill.GeneralDiscount - bill.PaidAmount);
             lblRest.Text = rest >= 0
                 ? rest.ToString("0.##")
                 : (-rest).ToString("0.##") + " " + "فرق تكلفه للعميل";

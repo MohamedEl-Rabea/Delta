@@ -5,6 +5,7 @@
         .GridViewBillItems .HeaderStyleBill, .GridViewBillItems .RowStyleList, .GridViewBillItems .AlternateRowStyleList {
             font-size: 16px;
         }
+
         .nowrap {
             white-space: nowrap;
         }
@@ -39,8 +40,10 @@
                 display: block;
             }
 
-        .dropdown-content a:hover {background-color: #ddd;}
-/*
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+        /*
         .dropdown:hover .dropdown-content {display: block;}*/
     </style>
     <script type="text/javascript" src="Script/ServiseHandler.js"></script>
@@ -273,31 +276,37 @@
             </header>
             <section class="ReportDeclarationSection">
                 <section>
-                    <table>
+                    <table class="ReportHeader">
                         <tr>
                             <td>
                                 <asp:Label runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 120px">
-                                <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2" Text="---"></asp:Label>
+                                <asp:Label ID="lblBillDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label runat="server" Text="رقم العرض : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 120px">
-                                <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2" Text="---"></asp:Label>
+                                <asp:Label ID="lblBillId" runat="server" CssClass="lblInfo2" Text="رقم العرض"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label1" runat="server" Text="العميل : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 120px">
-                                <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="---"></asp:Label>
+                                <asp:Label ID="lblClientName" runat="server" CssClass="lblInfo2" Text="اسم العميل"></asp:Label>
                             </td>
                             <td>
                                 <asp:Label ID="Label2" runat="server" Text="العنوان : " CssClass="lblInfo"></asp:Label>
                             </td>
                             <td style="width: 120px">
-                                <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2" Text="---"></asp:Label>
+                                <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2" Text="عنوان العميل"></asp:Label>
+                            </td>
+                             <td>
+                                <asp:Label ID="Label6" runat="server" Text="رقم التليفون : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblPhoneNumber" runat="server" CssClass="lblInfo2" Text="رقم التليفون"></asp:Label>
                             </td>
                         </tr>
                         <tr>
@@ -324,7 +333,13 @@
                             <td style="width: 120px">
                                 <asp:Label ID="lblPaidValue" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
                             </td>
-                            <td>
+                           <td>
+                                <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="اجمالى الخصم : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblGeneralDiscount" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                             <td>
                                 <asp:Label ID="Label7" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
                             </td>
                             <td style="width: 120px">
@@ -341,7 +356,7 @@
                                 <asp:Label ID="lblPreAdditionalcostNotes" runat="server" CssClass="lblInfo" Text="ملاحظات التكلفه الاضافيه : "></asp:Label>
                             </td>
                             <td colspan="5">
-                                <asp:Label ID="lblAdditionalcostNotes" runat="server" CssClass="lblInfo2" Text=" ---"></asp:Label>
+                                <asp:Label ID="lblAdditionalcostNotes" runat="server" CssClass="lblInfo2" Text=" ملاحظات التكلفه الاضافيه"></asp:Label>
                             </td>
                         </tr>
                     </table>
@@ -378,10 +393,10 @@
                     <asp:Panel ID="PanelHistory" runat="server" CssClass="PreReport_SectionTab">
                         <asp:GridView runat="server" ID="GridViewHistory" CssClass="GridViewBill GridViewBillItems" AutoGenerateColumns="False" EmptyDataText="لا يوجد عمليات">
                             <Columns>
-                                <asp:BoundField DataField="OperationType" HeaderText="نوع العملية" ItemStyle-CssClass="nowrap" HeaderStyle-CssClass="nowrap"/>
-                                <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-CssClass="nowrap"/>
+                                <asp:BoundField DataField="OperationType" HeaderText="نوع العملية" ItemStyle-CssClass="nowrap" HeaderStyle-CssClass="nowrap" />
+                                <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-CssClass="nowrap" />
                                 <asp:BoundField DataField="Description" HeaderText="الوصف" />
-                                <asp:BoundField DataField="UserName" HeaderText="بواسطة" ItemStyle-CssClass="skipPrintCol nowrap" HeaderStyle-CssClass="skipPrintCol"/>
+                                <asp:BoundField DataField="UserName" HeaderText="بواسطة" ItemStyle-CssClass="skipPrintCol nowrap" HeaderStyle-CssClass="skipPrintCol" />
                             </Columns>
                             <HeaderStyle CssClass="HeaderStyleBill" />
                             <RowStyle CssClass="RowStyleList" />

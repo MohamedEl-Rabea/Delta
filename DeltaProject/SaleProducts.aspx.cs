@@ -213,6 +213,7 @@ namespace DeltaProject
                 PhoneNumber = txtPhoneNumber.Text,
                 Date = billDate,
                 AdditionalCost = txtAdditionalCost.Text == "" ? 0 : Convert.ToDecimal(txtAdditionalCost.Text),
+                GeneralDiscount = txtGeneralDiscount.Text == "" ? 0 : Convert.ToDecimal(txtGeneralDiscount.Text),
                 AdditionalCostNotes = txtAdditionalcostNotes.Text,
                 Notes = TxtDesc.Text,
                 Client = new Client
@@ -248,13 +249,16 @@ namespace DeltaProject
                     lblBill_ID.Text = bill.Id.ToString();
                     lblClientName.Text = txtClient_Name.Text;
                     lblAddress.Text = string.IsNullOrEmpty(txtAddress.Text) ? "---" : txtAddress.Text;
+                    lblPhoneNumber.Text = string.IsNullOrEmpty(txtPhoneNumber.Text) ? "---" : txtPhoneNumber.Text;
                     lblBillCost.Text = lblTotalCost.Text;
                     lblPaid_Value.Text = txtPaid_Amount.Text;
+                    lblGeneralDiscount.Text = string.IsNullOrEmpty(txtGeneralDiscount.Text) ? "0" : txtGeneralDiscount.Text;
                     lblAdditionalCostValue.Text = string.IsNullOrEmpty(txtAdditionalCost.Text) ? "0" : txtAdditionalCost.Text;
                     lblAdditionalcostNotes.Text = txtAdditionalcostNotes.Text;
                     lblPreAdditionalcostNotes.Visible = !string.IsNullOrEmpty(lblAdditionalcostNotes.Text);
                     lblRest.Text = (Convert.ToDecimal(lblBillCost.Text) +
                                     (bill.AdditionalCost ?? 0) -
+                                    (bill.GeneralDiscount ?? 0) -
                                     Convert.ToDecimal(lblPaid_Value.Text))
                     .ToString("0.##");
 
@@ -298,6 +302,20 @@ namespace DeltaProject
             }
         }
 
+        protected void txtPaid_Amount_TextChanged(object sender, EventArgs e)
+        {
+            UpdateTotalCost(Convert.ToDecimal(txtPaid_Amount.Text), 0);
+        }
+
+        protected void txtAdditionalCost_TextChanged(object sender, EventArgs e)
+        {
+            UpdateTotalCost(0, Convert.ToDecimal(txtAdditionalCost.Text));
+        }
+
+        private void UpdateTotalCost(decimal paidAmount, decimal additionalCost)
+        {
+            txtTotalCost.Text = (BillItems.Sum(p => p.SoldQuantity * p.SpecifiedPrice - p.Discount) - paidAmount + additionalCost).ToString("0.##");
+        }
 
         private void BindProductsGrid()
         {
@@ -311,9 +329,9 @@ namespace DeltaProject
             GridViewItemsList.DataSource = BillItems;
             GridViewItemsList.DataBind();
 
-            lblTotalCost.Text =
-                BillItems.Sum(p => p.SoldQuantity * p.SpecifiedPrice - p.Discount)
-                .ToString("0.##");
+            var totalCost = BillItems.Sum(p => p.SoldQuantity * p.SpecifiedPrice - p.Discount).ToString("0.##");
+            lblTotalCost.Text = totalCost;
+            txtTotalCost.Text = totalCost;
         }
 
         private void BindBillGridView()

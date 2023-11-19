@@ -383,13 +383,14 @@
                                              AutoCompleteType="Disabled" placeholder="الخصم"></asp:TextBox>
                                 <asp:CustomValidator ID="CustomValidator13" runat="server"
                                                      ToolTip="يجب كتابة الخصم بشكل صحيح"
-                                                     ControlToValidate="txtPrice"
+                                                     ControlToValidate="txtDiscount"
                                                      Display="Dynamic"
                                                      SetFocusOnError="true"
                                                      ForeColor="Red"
                                                      ClientValidationFunction="IsValidNumber" ValidationGroup="<%# Container.DataItemIndex %>">
                                     <img src="Images/Error.png" width="15" height="15"/>
-                                    <asp:CustomValidator ID="CustomValidator20" runat="server"
+                                </asp:CustomValidator>
+                                <asp:CustomValidator ID="CustomValidator20" runat="server"
                                                          ToolTip="يجب الا يزيد الخصم عن اجمالى سعر المنتج"
                                                          ControlToValidate="txtDiscount"
                                                          Display="Dynamic"
@@ -398,8 +399,7 @@
                                                          ClientValidationFunction="IsValidDiscount" 
                                                          ValidationGroup="<%# Container.DataItemIndex %>">
                                         <img src="Images/Error.png" width="15" height="15"/>
-                                    </asp:CustomValidator>
-                                </asp:CustomValidator>
+                                 </asp:CustomValidator>
                             </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -419,12 +419,21 @@
                         </td>
                         <td style="width: 120px">
                             <asp:Label ID="lblTotalCost" runat="server" CssClass="Infolbl" Text="0"></asp:Label>
-                        </td>
+                            <asp:TextBox runat="server" ID="txtTotalCost" CssClass="NoDispaly"  Text=""></asp:TextBox>
+                         </td>
                         <td>
                             <p class="RHSP">المدفوع :</p>
                         </td>
                         <td>
-                            <asp:TextBox runat="server" ID="txtPaid_Amount" CssClass="Smalltxts" PlaceHolder="المدفوع" AutoCompleteType="Disabled"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtPaid_Amount" CssClass="Smalltxts" PlaceHolder="المدفوع" AutoCompleteType="Disabled" 
+                               AutoPostBack="true" OnTextChanged="txtPaid_Amount_TextChanged"></asp:TextBox>
+                        </td>
+                        <td class="RHSTD">
+                            <p class="RHSP">خصم عام :</p>
+                        </td>
+                        <td style="text-align: right; padding-left: 5px;">
+                            <asp:TextBox runat="server" ID="txtGeneralDiscount" CssClass="Smalltxts"
+                                PlaceHolder="خصم عام على الفاتورة" AutoCompleteType="Disabled"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -455,14 +464,39 @@
                                 <img src="Images/Error.png" width="24" height="24"/>
                             </asp:RequiredFieldValidator>
                         </td>
+                        <td class="RHSTD">
+                            <br />
+                            <br />
+                        </td>
+                        <td style="text-align: center">
+                            <asp:CustomValidator ID="CustomValidator13" runat="server"
+                                ToolTip="يجب كتابة الخصم بشكل صحيح"
+                                ControlToValidate="txtGeneralDiscount"
+                                Display="Dynamic"
+                                SetFocusOnError="true"
+                                ForeColor="Red"
+                                ClientValidationFunction="IsValidNumber" ValidationGroup="FinishGroup">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                            </asp:CustomValidator>
+                            <asp:CompareValidator ID="CompareValidator20" runat="server" ControlToValidate="txtGeneralDiscount"
+                                Operator="LessThanEqual" ControlToCompare="txtTotalCost"
+                                Display="Dynamic"
+                                SetFocusOnError="true"
+                                ErrorMessage="CompareValidator"
+                                Type="Double"
+                                ToolTip="يجب الا يزيد الخصم العام عن اجمالى سعر الفاتوره"
+                                ValidationGroup="finishGroup">
+                                <img src="Images/Error.png" width="15" height="15"/>
+                            </asp:CompareValidator>
+                        </td>
                     </tr>
                     <tr>
                         <td class="RHSTD">
                             <p class="RHSP">تكلفه اضافيه :</p>
                         </td>
                         <td style="text-align: right; padding-left: 5px;">
-                            <asp:TextBox runat="server" ID="txtAdditionalCost" CssClass="Smalltxts"
-                                PlaceHolder="تكلفه اضافيه على الفاتورة" AutoCompleteType="Disabled"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtAdditionalCost" CssClass="Smalltxts" OnTextChanging="txtAdditionalCost_TextChanged"
+                               AutoPostBack="true" PlaceHolder="تكلفه اضافيه على الفاتورة" AutoCompleteType="Disabled"></asp:TextBox>
                         </td>
                         <td class="auto-style2">
                             <p class="RHSP">ملاحظات التكلفه :</p>
@@ -680,7 +714,7 @@
             </header>
             <section class="ReportDeclarationSection">
                 <section>
-                    <table>
+                    <table class="ReportHeader">
                         <tr>
                             <td>
                                 <asp:Label runat="server" Text="تاريخ العرض : " CssClass="lblInfo"></asp:Label>
@@ -705,6 +739,12 @@
                             </td>
                             <td style="width: 120px">
                                 <asp:Label ID="lblAddress" runat="server" CssClass="lblInfo2" Text="عنوان العميل"></asp:Label>
+                            </td>
+                             <td>
+                                <asp:Label ID="Label6" runat="server" Text="رقم التليفون : " CssClass="lblInfo"></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblPhoneNumber" runat="server" CssClass="lblInfo2" Text="رقم التليفون"></asp:Label>
                             </td>
                         </tr>
                         <tr>
@@ -731,7 +771,13 @@
                             <td style="width: 120px">
                                 <asp:Label ID="lblPaid_Value" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
                             </td>
-                            <td>
+                           <td>
+                                <asp:Label ID="Label5" runat="server" CssClass="lblInfo" Text="اجمالى الخصم : "></asp:Label>
+                            </td>
+                            <td style="width: 120px">
+                                <asp:Label ID="lblGeneralDiscount" runat="server" CssClass="lblInfo2" Text="0.00"></asp:Label>
+                            </td>
+                             <td>
                                 <asp:Label ID="Label7" runat="server" CssClass="lblInfo" Text="المتبقى : "></asp:Label>
                             </td>
                             <td style="width: 120px">

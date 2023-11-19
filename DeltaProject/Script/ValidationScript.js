@@ -65,3 +65,21 @@ function IsValidDiscount(source, args) {
         args.IsValid = true;
     }
 }
+
+
+function IsValidGeneralDiscount(source, args) {
+    var generalDiscount = parseFloat(args.Value);
+    var remainingCost = $('.lblRemainingCost').val();
+    let sum = 0;
+    var discountElements = $('.discount');
+    for (let i = 0; i < discountElements.length; i++) {
+        sum += parseFloat(discountElements[i].value);
+    }
+
+    var isValid = remainingCost - sum >= generalDiscount;
+    if (isNaN(args.Value) || !isValid) {
+        args.IsValid = false;
+    } else {
+        args.IsValid = true;
+    }
+}
