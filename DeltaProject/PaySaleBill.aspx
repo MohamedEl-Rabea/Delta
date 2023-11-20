@@ -257,16 +257,6 @@
                             ClientValidationFunction="IsValidNumber">
                             <img src="Images/Error.png" width="24" height="24"/>
                         </asp:CustomValidator>
-                        <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="txtPaidAmount"
-                            Operator="LessThanEqual" ControlToCompare="txtRemainingCost"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ErrorMessage="CompareValidator"
-                            Type="Double"
-                            ToolTip="يجب الا تزيد القيمة المدفوعة عن المبلغ المتبقى"
-                            ValidationGroup="finishGroup">
-                            <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CompareValidator>
                     </td>
                 </tr>
                 <tr>
