@@ -73,7 +73,7 @@ function IsValidGeneralDiscount(source, args) {
     let sum = 0;
     var discountElements = $('.discount');
     for (let i = 0; i < discountElements.length; i++) {
-        sum += parseFloat(discountElements[i].value);
+        sum += parseFloat(discountElements[i].value ? discountElements[i].value : '0');
     }
 
     var isValid = remainingCost - sum >= generalDiscount;

@@ -157,7 +157,7 @@ namespace DeltaProject
             bill.GeneralDiscount = Convert.ToDecimal(txtGeneralDiscount.Text);
             bill.Notes = txtGeneralDiscountNotes.Text;
 
-            if (bill.Items.Any())
+            if (bill.Items.Any() || !string.IsNullOrEmpty(txtGeneralDiscount.Text))
             {
                 if (!bill.AddDiscounts(out string m))
                 {
@@ -185,7 +185,7 @@ namespace DeltaProject
             }
             else
             {
-                lblFinishMsg.Text = "يجب اضافه خصم على الاقل";
+                lblFinishMsg.Text = "لا يوجد خصومات !";
                 lblFinishMsg.ForeColor = Color.Red;
                 btnFinish.Enabled = true;
                 btnFinish.BackColor = Color.FromName("#1abc9c");
