@@ -94,6 +94,7 @@ namespace DeltaProject
                 var totalCost = bill.Items.Sum(i => i.TotalCost);
                 lblBillCost.Text = totalCost.ToString("0.##");
                 lblPaidValue.Text = bill.PaidAmount?.ToString("0.##");
+                lblGeneralDiscount.Text = bill.GeneralDiscount?.ToString("0.##");
                 lblAdditionalCostValue.Text = bill.AdditionalCost?.ToString("0.##");
                 lblAdditionalcostNotes.Text = bill.AdditionalCostNotes;
                 var rest = bill.RemainingCost.Value;

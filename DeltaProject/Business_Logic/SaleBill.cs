@@ -261,7 +261,7 @@ namespace DeltaProject.Business_Logic
                     cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
                 if (AdditionalCost.HasValue)
                     cmd.Parameters.Add("@additionalCost", SqlDbType.Decimal).Value = AdditionalCost;
-                if (GeneralDiscount.HasValue)
+                if (GeneralDiscount.HasValue && GeneralDiscount.Value > 0)
                     cmd.Parameters.Add("@generalDiscount", SqlDbType.Decimal).Value = GeneralDiscount;
                 if (PaidAmount.HasValue && PaidAmount > 0)
                     cmd.Parameters.Add("@paidAmount", SqlDbType.Decimal).Value = PaidAmount;
@@ -380,7 +380,8 @@ namespace DeltaProject.Business_Logic
                 SqlCommand cmd = new SqlCommand("AddBillDiscounts", con) { CommandType = CommandType.StoredProcedure };
                 cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
                 cmd.Parameters.Add("@userId", SqlDbType.Int).Value = UserId;
-                cmd.Parameters.Add("@generalDiscount", SqlDbType.Decimal).Value = GeneralDiscount;
+                if (GeneralDiscount.HasValue && GeneralDiscount.Value > 0)
+                    cmd.Parameters.Add("@generalDiscount", SqlDbType.Decimal).Value = GeneralDiscount;
                 cmd.Parameters.Add("@generalDiscountNotes", SqlDbType.NVarChar).Value = Notes;
                 cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
                 cmd.Parameters.Add("@items", SqlDbType.Structured).Value = DiscountsToDataTable();
