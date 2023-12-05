@@ -23,7 +23,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content_Section" runat="server">
     <header class="Header">
-        <p>اضافة مصروف صيانة</p>
+        <p>اضافة سحب صيانة</p>
     </header>
     <asp:Panel runat="server" ID="PanelAddMaintenanceWithdraw">
         <section>

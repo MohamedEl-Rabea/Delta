@@ -1,5 +1,7 @@
 ﻿using Business_Logic;
+using DeltaProject.Business_Logic;
 using System;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,8 +18,9 @@ namespace DeltaProject
         {
             PanelAllMaintenance.Visible = false;
             PanelErrorMessage.Visible = false;
-            txtClientName.Text = "";
-            txtPhoneNumber.Text = "";
+            txtClientName.Text = string.Empty;
+            txtPhoneNumber.Text = string.Empty;
+            lblFinishMsg.Text = string.Empty;
             if (RadioButtonListCategories.SelectedIndex == 0)
             {
                 txtClientName.Visible = true;
@@ -35,6 +38,8 @@ namespace DeltaProject
             PanelAllMaintenance.Visible = false;
             PanelErrorMessage.Visible = false;
             PanelMaintenanceDetails.Visible = false;
+            PanelEditMaintenance.Visible = false;
+            lblFinishMsg.Text = string.Empty;
 
             Maintenance maintenance = new Maintenance();
             if (txtClientName.Visible)
@@ -64,6 +69,7 @@ namespace DeltaProject
             if (e.CommandName == "Select")
             {
                 var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
+                lblId.Text = gridRow.Cells[0].Text;
                 lblTitle.Text = gridRow.Cells[1].Text;
                 lblWorkshop.Text = gridRow.Cells[2].Text;
                 lblOrderDate.Text = gridRow.Cells[3].Text;
@@ -75,6 +81,36 @@ namespace DeltaProject
                 lblDescription.Text = gridRow.Cells[9].Text;
                 PanelAllMaintenance.Visible = false;
                 PanelMaintenanceDetails.Visible = true;
+                PanelEditMaintenance.Visible = false;
+            }
+            else if(e.CommandName == "EditMaintenance")
+            {
+                var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
+                var paymentCount = Convert.ToInt32(gridRow.Cells[11].Text);
+                txtId.Text = gridRow.Cells[0].Text;
+                txtTitle.Text = gridRow.Cells[1].Text;
+                txtEditClientName.Text = string.IsNullOrEmpty(txtClientName.Text) ? gridRow.Cells[12].Text : txtClientName.Text;
+                txtEditPhoneNumber.Text = string.IsNullOrEmpty(txtPhoneNumber.Text) ? gridRow.Cells[13].Text : txtPhoneNumber.Text;
+                OrderDate.Text = gridRow.Cells[3].Text;
+                txtCost.Text = gridRow.Cells[6].Text;
+                txtPrice.Text = gridRow.Cells[7].Text;
+                txtPaidAmount.Text = (Convert.ToDecimal(gridRow.Cells[7].Text) - Convert.ToDecimal(gridRow.Cells[8].Text)).ToString();
+                txtDescription.Text = gridRow.Cells[9].Text;
+                ExpectedDeliveryDate.Text = gridRow.Cells[10].Text;
+                if(paymentCount > 1)
+                {
+                    txtPaidAmount.Enabled = false;
+                }
+
+                var workshops = Workshop.GetWorkshops();
+                ddlWorkshops.DataSource = workshops;
+                ddlWorkshops.DataBind();
+                ddlWorkshops.Items.Insert(0, new ListItem("إختر ورشة", ""));
+                ddlWorkshops.SelectedValue = gridRow.Cells[14].Text;
+
+                PanelAllMaintenance.Visible = false;
+                PanelMaintenanceDetails.Visible = false;
+                PanelEditMaintenance.Visible = true;
             }
         }
 
@@ -135,6 +171,48 @@ namespace DeltaProject
         {
             GridViewMaintenance.DataSource = ViewState["Maintenance"];
             GridViewMaintenance.DataBind();
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            var maintenance = new Maintenance
+            {
+                Id = Convert.ToInt32(txtId.Text),
+                Title = txtTitle.Text,
+                ClientName = txtEditClientName.Text,
+                PhoneNumber = txtEditPhoneNumber.Text,
+                OrderDate = Convert.ToDateTime(OrderDate.Text),
+                Cost = Convert.ToDecimal(txtCost.Text),
+                Price = Convert.ToDecimal(txtPrice.Text),
+                PaidAmount = txtPaidAmount.Enabled == false ? (decimal?)null : Convert.ToDecimal(txtPaidAmount.Text),
+                Description = txtDescription.Text,
+                ExpectedDeliveryDate = Convert.ToDateTime(ExpectedDeliveryDate.Text),
+                WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue)
+            };
+
+            if (!maintenance.EditMaintenance(out string m))
+            {
+                lblFinishMsg.Text = "هناك مشكلة في الحفظ برجاء اعادة المحاولة";
+                lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                lblFinishMsg.Text = $"تم حفظ التعديل على صيانة ({maintenance.Title}) للعميل ({maintenance.ClientName}) بنجاح";
+                lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                txtTitle.Text = string.Empty;
+                txtEditClientName.Text = string.Empty;
+                txtEditPhoneNumber.Text = string.Empty;
+                OrderDate.Text = string.Empty;
+                txtCost.Text = string.Empty;
+                txtPrice.Text = string.Empty;
+                txtPaidAmount.Text = string.Empty;
+                txtDescription.Text = string.Empty;
+                ExpectedDeliveryDate.Text = string.Empty;
+                ddlWorkshops.SelectedIndex = 0;
+                PanelAllMaintenance.Visible = false;
+                PanelMaintenanceDetails.Visible = false;
+                PanelEditMaintenance.Visible = false;
+            }
         }
     }
 }

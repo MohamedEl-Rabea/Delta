@@ -122,7 +122,7 @@
                 AllowPaging="True"
                 OnPageIndexChanging="GridViewMaintenance_OnPageIndexChanging">
                 <Columns>
-                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="Id" HeaderText="الرقم" SortExpression="Id" />
                     <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
                     <asp:BoundField DataField="WorkshopName" HeaderText="الورشة" SortExpression="WorkshopName" />
                     <asp:BoundField DataField="OrderDate" HeaderText="تاريخ الصيانة" SortExpression="OrderDate" DataFormatString="{0:dd/MM/yyyy}" />
@@ -132,6 +132,16 @@
                     <asp:BoundField DataField="Price" SortExpression="Price" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" DataFormatString="{0:0.##}" />
                     <asp:BoundField DataField="RemainingAmount" SortExpression="RemainingAmount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" DataFormatString="{0:0.##}" />
                     <asp:BoundField DataField="Description" SortExpression="Description" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="ExpectedDeliveryDate" SortExpression="ExpectedDeliveryDate" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="PaymentCount" SortExpression="PaymentCount" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="ClientName" SortExpression="ClientName" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="PhoneNumber" SortExpression="PhoneNumber" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="WorkshopId" SortExpression="WorkshopId" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:TemplateField SortExpression="Id">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LnkEditMaintenance" runat="server" CssClass="lnkbtnSelect" CausesValidation="false" CommandName="EditMaintenance">تعديل</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField SortExpression="Id">
                         <ItemTemplate>
                             <asp:LinkButton ID="LnkSelect" runat="server" CssClass="lnkbtnSelect" CausesValidation="false" CommandName="Select">اختر</asp:LinkButton>
@@ -160,54 +170,276 @@
                 <table class="AddProductsTable maintenanceDetails" style="width: 98%">
                     <tr>
                         <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">رقم الصيانة :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblId" Text='' />
+                        </td>
+                        <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">اسم الصيانة :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblTitle" Text='' /></td>
+                            <asp:Label runat="server" ID="lblTitle" Text='' />
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">الورشة :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblWorkshop" Text='' /></td>
+                            <asp:Label runat="server" ID="lblWorkshop" Text='' />
+                        </td>
+                        <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">الحالة :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblStatus" Text='' />
+                        </td>
                     </tr>
                     <tr>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">تاريخ الصيانة :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblOrderDate" Text='' /></td>
+                            <asp:Label runat="server" ID="lblOrderDate" Text='' />
+                        </td>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">انتهاء الضمان :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblExpiryWarrantyDate" Text='' /></td>
+                            <asp:Label runat="server" ID="lblExpiryWarrantyDate" Text='' />
+                        </td>
                     </tr>
                     <tr>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">الحالة :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblStatus" Text='' /></td>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">السعر :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblPrice" Text='' /></td>
-                    </tr>
-                    <tr>
+                            <asp:Label runat="server" ID="lblPrice" Text='' />
+                        </td>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">المتبقى :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblRemainingAmount" Text='' /></td>
+                            <asp:Label runat="server" ID="lblRemainingAmount" Text='' />
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">الوصف :</p>
                         </td>
-                        <td class="RHSTD" style="width: 35%">
+                        <td class="RHSTD" colspan="3" style="width: 35%">
                             <asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text='' /></td>
                     </tr>
                 </table>
             </section>
         </asp:Panel>
+    </div>
+    <asp:Panel runat="server" ID="PanelEditMaintenance" Visible="false">
+        <section>
+            <table class="AddProductsTable">
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">اسم الصيانه :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtId" CssClass="txts3" Visible="false" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtTitle" CssClass="txts3" PlaceHolder="اسم الصيانه" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+
+                    <td class="RHSTD">
+                        <p class="RHSP">اسم الورشة :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:DropDownList ID="ddlWorkshops" runat="server" CssClass="txts3"
+                            Style="width: 100%; height: auto"
+                            DataTextField="Name"
+                            DataValueField="Id">
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                            ControlToValidate="txtTitle" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="اسم الصيانه متطلب اساسى">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+                            ControlToValidate="ddlWorkshops" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="اسم الورشة متطلب اساسى">
+                            <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">اسم العميل :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtEditClientName" CssClass="txts3" PlaceHolder="اسم العميل" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+                    <td class="RHSTD">
+                        <p class="RHSP" style="white-space: nowrap">رقم التليفون :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtEditPhoneNumber" CssClass="txts3" PlaceHolder="رقم التليفون" AutoCompleteType="Disabled"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                            ControlToValidate="txtEditClientName" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="اسم العميل متطلب اساسى">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                            ControlToValidate="txtEditPhoneNumber" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="رقم التليفون متطلب اساسى">
+                            <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="CustomValidator2" runat="server"
+                            ToolTip="يجب كتابة الرقم بشكل صحيح"
+                            ControlToValidate="txtEditPhoneNumber"
+                            Display="Dynamic"
+                            SetFocusOnError="true"
+                            ClientValidationFunction="IsValidNumber">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CustomValidator>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">ت. الصيانة :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="OrderDate" CssClass="txts3" PlaceHolder="تاريخ الصيانة"></asp:TextBox>
+                    </td>
+                    <td class="RHSTD">
+                        <p class="RHSP">ت. التسليم :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="ExpectedDeliveryDate" CssClass="txts3" PlaceHolder="تاريخ التسليم المتوقع"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+                            ControlToValidate="OrderDate" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="تاريخ الصيانة متطلب اساسى">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                            ControlToValidate="ExpectedDeliveryDate" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="تاريخ التسليم المتوقع متطلب اساسى">
+                                <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">التكلفة :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtCost" CssClass="txts3" PlaceHolder="التكلفة"></asp:TextBox>
+                    </td>
+                    <td class="RHSTD">
+                        <p class="RHSP">السعر :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtPrice" CssClass="txts3" PlaceHolder="السعر"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD" colspan="4">
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <p class="RHSP">المدفوع :</p>
+                    </td>
+                    <td style="text-align: right">
+                        <asp:TextBox runat="server" ID="txtPaidAmount" CssClass="txts3" PlaceHolder="المدفوع"></asp:TextBox>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD">
+                        <div runat="server" id="priceValiation" visible="false">
+                            <img src="Images/Error.png" width="24" height="24" title="لا يجب ان تزيد القيمة المدفوعة عن سعر الصيانة." />
+                        </div>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top">
+                        <p class="RHSP">الوصـــــــف :</p>
+                    </td>
+                    <td colspan="3">
+                        <asp:TextBox ID="txtDescription" runat="server" CssClass="TxtMultiline" AutoCompleteType="Disabled" Width="98%"
+                            TextMode="MultiLine" Style="resize: vertical;" placeholder="اضف وصفا للصيانه ....."></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="RHSTD">
+                        <br />
+                        <br />
+                    </td>
+                    <td class="ValodationTD" colspan="3">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
+                            ControlToValidate="txtDescription" Display="Dynamic" SetFocusOnError="true"
+                            ToolTip="الوصف متطلب اساسى">
+                            <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <footer class="AddMaintenanceFooter">
+            <div class="MsgDiv" style="text-align: center">
+                <asp:Button ID="btnSave" runat="server" Text="حفظ" CssClass="BtnNext" OnClick="btnSave_Click" />
+            </div>
+        </footer>
+    </asp:Panel>
+    <div class="MsgDiv">
+        <asp:Label ID="lblFinishMsg" runat="server" CssClass="MessageLabel"></asp:Label>
     </div>
 </asp:Content>

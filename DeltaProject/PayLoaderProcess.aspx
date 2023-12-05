@@ -81,7 +81,7 @@
                 AllowPaging="True"
                 OnPageIndexChanging="GridViewMaintenance_OnPageIndexChanging">
                 <Columns>
-                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="Id" HeaderText="الرقم" SortExpression="Id" />
                     <asp:BoundField DataField="LoaderName" HeaderText="اسم الونش" SortExpression="LoaderName" />
                     <asp:BoundField DataField="PermissionNumber" HeaderText="رقم الاذن" SortExpression="PermissionNumber" />
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" />

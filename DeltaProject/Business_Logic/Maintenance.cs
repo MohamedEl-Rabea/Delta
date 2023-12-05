@@ -26,6 +26,8 @@ namespace Business_Logic
         public DateTime ExpiryWarrantyDate { get; set; }
         public string ExpiryWarrantyDateText { get; set; }
         public decimal? PaidAmount { get; set; }
+        public int PaymentCount { get; set; }
+
 
         public bool AddMaintenance(out string m)
         {
@@ -48,6 +50,41 @@ namespace Business_Logic
                     cmd.Parameters.Add("@price", SqlDbType.Money).Value = Price;
                 if (Cost.HasValue)
                     cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
+                if (PaidAmount.HasValue)
+                    cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
+        }
+
+        public bool EditMaintenance(out string m)
+        {
+            bool b = true;
+            m = "";
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("EditMaintenance", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@title", SqlDbType.NVarChar).Value = Title;
+                cmd.Parameters.Add("@workshopId", SqlDbType.Int).Value = WorkshopId;
+                cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
+                cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
+                cmd.Parameters.Add("@orderDate", SqlDbType.DateTime).Value = OrderDate;
+                cmd.Parameters.Add("@expectedDeliveryDate", SqlDbType.DateTime).Value = ExpectedDeliveryDate;
+                cmd.Parameters.Add("@description", SqlDbType.NVarChar).Value = Description;
+                cmd.Parameters.Add("@price", SqlDbType.Money).Value = Price;
+                cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
                 if (PaidAmount.HasValue)
                     cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
                 con.Open();
@@ -135,17 +172,21 @@ namespace Business_Logic
                 Maintenance maintenance = new Maintenance();
                 maintenance.Id = Convert.ToInt32(rdr["Id"]);
                 maintenance.ClientName = rdr["ClientName"].ToString();
+                maintenance.PhoneNumber = rdr["PhoneNumber"].ToString();
                 maintenance.Title = rdr["Title"].ToString();
                 maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
+                maintenance.ExpectedDeliveryDate = Convert.ToDateTime(rdr["ExpectedDeliveryDate"]);
                 maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
                 maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
                 maintenance.Cost = string.IsNullOrEmpty(rdr["Cost"].ToString()) ? 0 : Convert.ToDecimal(rdr["Cost"]);
                 maintenance.Price = string.IsNullOrEmpty(rdr["Price"].ToString()) ? 0 : Convert.ToDecimal(rdr["Price"]);
                 maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ?
                     maintenance.Price.Value : Convert.ToDecimal(rdr["RemainingAmount"]);
+                maintenance.WorkshopId = Convert.ToInt32(rdr["WorkshopId"].ToString());
                 maintenance.WorkshopName = rdr["WorkshopName"].ToString();
                 maintenance.StatusName = rdr["StatusName"].ToString();
                 maintenance.Description = rdr["Description"].ToString();
+                maintenance.PaymentCount = Convert.ToInt32(rdr["PaymentCount"].ToString());
                 maintenanceList.Add(maintenance);
             }
             rdr.Close();

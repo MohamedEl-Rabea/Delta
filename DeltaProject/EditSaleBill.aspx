@@ -98,13 +98,6 @@
                         <asp:LinkButton ID="linkBillId" runat="server" Text='<%# Bind("Id") %>' ToolTip="الانتقال الى كامل بيانات الفاتورة" CommandName="SelectBill"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField >
-                    <ItemTemplate>
-                        <asp:ImageButton ID="btnDeleteBill" runat="server" ImageUrl="~/Images/Delete.png" Width="16" Height="16"
-                                         CausesValidation="false" CommandName="DeleteBill" AlternateText='<%# Bind("Id") %>'
-                                         OnClientClick="return confirm('سيتم مسح هذه الفاتورة . . . هل تريد المتابعه ؟');" />
-                    </ItemTemplate>
-                </asp:TemplateField>
             </Columns>
             <RowStyle CssClass="Row_Style" />
             <PagerStyle CssClass="PagerStyle" HorizontalAlign="Center" />

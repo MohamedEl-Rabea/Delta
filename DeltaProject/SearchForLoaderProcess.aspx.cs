@@ -46,6 +46,7 @@ namespace DeltaProject
             if (e.CommandName == "Details")
             {
                 var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
+                lblId.Text = gridRow.Cells[0].Text;
                 lblLoaderName.Text = gridRow.Cells[1].Text;
                 lblPermissionNumber.Text = gridRow.Cells[2].Text;
                 lblClientName.Text = gridRow.Cells[3].Text;

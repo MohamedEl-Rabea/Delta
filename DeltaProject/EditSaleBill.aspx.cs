@@ -88,22 +88,22 @@ namespace DeltaProject
                 billId = Convert.ToInt32(((LinkButton)e.CommandSource).Text);
                 SelectBill(billId);
             }
-            else if (e.CommandName == "DeleteBill")
-            {
-                billId = Convert.ToInt32(((ImageButton)e.CommandSource).AlternateText);
-                SaleBill bill = new SaleBill { Id = billId };
-                if (!bill.DeleteBill(out string m))
-                {
-                    lblMsg.Text = m;
-                    lblMsg.ForeColor = Color.Red;
-                }
-                else
-                {
-                    lblMsg.Text = "تم بنجاح";
-                    lblMsg.ForeColor = Color.Green;
-                    GridViewBills.DataBind();
-                }
-            }
+            //else if (e.CommandName == "DeleteBill")
+            //{
+            //    billId = Convert.ToInt32(((ImageButton)e.CommandSource).AlternateText);
+            //    SaleBill bill = new SaleBill { Id = billId };
+            //    if (!bill.DeleteBill(out string m))
+            //    {
+            //        lblMsg.Text = m;
+            //        lblMsg.ForeColor = Color.Red;
+            //    }
+            //    else
+            //    {
+            //        lblMsg.Text = "تم بنجاح";
+            //        lblMsg.ForeColor = Color.Green;
+            //        GridViewBills.DataBind();
+            //    }
+            //}
         }
 
         protected void GridViewBillItems_OnRowCommand(object sender, GridViewCommandEventArgs e)

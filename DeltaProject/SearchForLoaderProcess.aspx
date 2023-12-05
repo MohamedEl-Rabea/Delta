@@ -103,7 +103,7 @@
                 AllowPaging="True"
                 OnPageIndexChanging="GridViewProcess_OnPageIndexChanging">
                 <Columns>
-                    <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                    <asp:BoundField DataField="Id" HeaderText="الرقم" SortExpression="Id" />
                     <asp:BoundField DataField="LoaderName" HeaderText="اسم الونش" SortExpression="LoaderName" />
                     <asp:BoundField DataField="PermissionNumber" HeaderText="رقم الاذن" SortExpression="PermissionNumber" />
                     <asp:BoundField DataField="ClientName" HeaderText="اسم العميل" SortExpression="ClientName" />
@@ -137,31 +137,35 @@
                     </div>
                 </header>
                 <table class="AddProductsTable maintenanceDetails" style="width: 98%">
-                    <tr>
-                        <td class="RHSTD" style="width: 15%">
+                   <tr>
+                       <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">رقم العملية :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblId" Text='' />
+                        </td>
+                       <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">اسم الونش :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblLoaderName" Text='' /></td>
+                            <asp:Label runat="server" ID="lblLoaderName" Text='' />
+                        </td>
+                   </tr>
+                    <tr>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">رقم الاذن :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblPermissionNumber" Text='' /></td>
-                    </tr>
-                    <tr>
+                            <asp:Label runat="server" ID="lblPermissionNumber" Text='' />
+                        </td>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">اسم العميل :</p>
                         </td>
                         <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblClientName" Text='' /></td>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">التاريخ :</p>
+                            <asp:Label runat="server" ID="lblClientName" Text='' />
                         </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblDate" Text='' /></td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">التكلفة :</p>
                         </td>
@@ -174,11 +178,18 @@
                             <asp:Label runat="server" ID="lblRemainingAmount" Text='' /></td>
                     </tr>
                     <tr>
+                       <td class="RHSTD" style="width: 15%">
+                            <p class="RHSP">التاريخ :</p>
+                        </td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" ID="lblDate" Text='' />
+                        </td>
                         <td class="RHSTD" style="width: 15%">
                             <p class="RHSP">الوصف :</p>
                         </td>
-                        <td colspan="3" class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text='' /></td>
+                        <td class="RHSTD" style="width: 35%">
+                            <asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text='' />
+                        </td>
                     </tr>
                 </table>
             </section>

@@ -113,7 +113,7 @@
                     <Columns>
                         <asp:BoundField DataField="C_name" HeaderText="العميل" FooterText="اجمـــــــالى" />
                         <asp:BoundField DataField="Address" HeaderText="العنوان" />
-                        <asp:BoundField DataField="DebtValue" HeaderText="العنوان" />
+                        <asp:BoundField DataField="DebtValue" HeaderText="الحساب" />
                         <asp:TemplateField SortExpression="Bill_ID">
                             <ItemTemplate>
                                 <asp:LinkButton ID="lnkBtnSchedule" runat="server" Text='جدوله'

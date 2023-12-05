@@ -90,7 +90,7 @@
             AllowPaging="True"
             OnPageIndexChanging="GridViewMaintenance_OnPageIndexChanging">
             <Columns>
-                <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:BoundField DataField="Id" HeaderText="الرقم" SortExpression="Id" />
                 <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
                 <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
                 <asp:BoundField DataField="Price" HeaderText="السعر" SortExpression="Price" DataFormatString="{0:0.##}" />
@@ -115,14 +115,6 @@
                         <asp:CustomValidator ID="CustomValidator6" runat="server" SetFocusOnError="true" Display="Dynamic"
                             ControlToValidate="txtPaidAmount" ClientValidationFunction="IsValidNumber" ToolTip="يجب الا تقل القيمة عن 1" ValidationGroup="<%# Container.DataItemIndex %>">
                             <img src="Images/Error.png" width="15" height="15"/>
-                        </asp:CustomValidator>
-                        <asp:CustomValidator ID="CustomValidator1" runat="server"
-                            ToolTip="يجب الا تزيد القيمه المدفوعه عن المتبقيه"
-                            ControlToValidate="txtPaidAmount"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ClientValidationFunction="IsValidPaidAmount" ValidationGroup="<%# Container.DataItemIndex %>">
-                                <img src="Images/Error.png" width="15" height="15"/>
                         </asp:CustomValidator>
                     </ItemTemplate>
                 </asp:TemplateField>
