@@ -3,7 +3,7 @@
 namespace DeltaProject.Business_Logic
 {
     [Serializable]
-    public class MaintenanceEditHistory
+    public class EditHistory
     {
         public DateTime Date { get; set; }
         public string Description { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace DeltaProject.Business_Logic
 {
@@ -16,10 +17,13 @@ namespace DeltaProject.Business_Logic
         public string ClientName { get; set; }
         public string PhoneNumber { get; set; }
         public decimal Cost { get; set; }
-        public decimal PaidAmount { get; set; }
+        public decimal? PaidAmount { get; set; }
         public decimal RemainingAmount { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
+        public int PaymentCount { get; set; }
+        public int UserId { get; set; }
+        public List<EditHistory> History { get; set; } = new List<EditHistory>();
 
         public bool RegisterLoaderProcess(out string m)
         {
@@ -52,6 +56,41 @@ namespace DeltaProject.Business_Logic
             return b;
         }
 
+        public bool EditLoaderProcess(out string m)
+        {
+            bool b = true;
+            m = "";
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("EditLoaderProcess", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@loaderId", SqlDbType.Int).Value = LoaderId;
+                cmd.Parameters.Add("@permissionNumber", SqlDbType.NVarChar).Value = PermissionNumber;
+                cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
+                cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
+                cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
+                cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = Date;
+                cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = Description;
+                if (PaidAmount.HasValue)
+                    cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
+                cmd.Parameters.Add("@userId", SqlDbType.Int).Value = UserId;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
+        }
+
         public List<LoaderProcess> GetLoaderProcessWithFilter(DateTime? startDate, DateTime? endDate, bool isToPay = false)
         {
             List<LoaderProcess> loaderProcesses = new List<LoaderProcess>();
@@ -70,13 +109,16 @@ namespace DeltaProject.Business_Logic
             {
                 LoaderProcess loaderProcess = new LoaderProcess();
                 loaderProcess.Id = Convert.ToInt32(rdr["Id"]);
+                loaderProcess.LoaderId = Convert.ToInt32(rdr["LoaderId"].ToString());
                 loaderProcess.LoaderName = rdr["LoaderName"].ToString();
                 loaderProcess.PermissionNumber = rdr["PermissionNumber"].ToString();
                 loaderProcess.ClientName = rdr["ClientName"].ToString();
+                loaderProcess.PhoneNumber = rdr["PhoneNumber"].ToString();
                 loaderProcess.Cost = Convert.ToDecimal(rdr["Cost"]);
                 loaderProcess.RemainingAmount = Convert.ToDecimal(rdr["RemainingAmount"]);
                 loaderProcess.Date = Convert.ToDateTime(rdr["Date"]);
                 loaderProcess.Description = rdr["Description"].ToString();
+                loaderProcess.PaymentCount = Convert.ToInt32(rdr["PaymentCount"].ToString());
                 loaderProcesses.Add(loaderProcess);
             }
             rdr.Close();
@@ -139,6 +181,28 @@ namespace DeltaProject.Business_Logic
             rdr.Close();
             con.Close();
             return loaderProcesses;
+        }
+        
+        public void GetEditHistory()
+        {
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand("GetLoaderProcessEditHistory", con) { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add("@loaderProcessId", SqlDbType.Int).Value = Id;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                EditHistory record = new EditHistory
+                {
+                    Date = Convert.ToDateTime(rdr["Date"]),
+                    Description = rdr["Description"].ToString(),
+                    UserName = rdr["UserName"].ToString()
+                };
+                History.Add(record);
+            }
+            rdr.Close();
+            con.Close();
         }
     }
 }

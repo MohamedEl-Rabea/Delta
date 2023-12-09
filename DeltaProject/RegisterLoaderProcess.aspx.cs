@@ -10,8 +10,7 @@ namespace DeltaProject
         {
             if (!IsPostBack)
             {
-                Loader loader = new Loader();
-                ddlLoaders.DataSource = loader.GetLoaders();
+                ddlLoaders.DataSource = Loader.GetLoaders();
                 ddlLoaders.DataBind();
                 ddlLoaders.Items.Insert(0, new ListItem("إختر ونش", ""));
                 ddlLoaders.SelectedIndex = 0;

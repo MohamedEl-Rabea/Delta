@@ -30,7 +30,7 @@ namespace Business_Logic
         public decimal? PaidAmount { get; set; }
         public int PaymentCount { get; set; }
         public int UserId { get; set; }
-        public List<MaintenanceEditHistory> History { get; set; } = new List<MaintenanceEditHistory>();
+        public List<EditHistory> History { get; set; } = new List<EditHistory>();
 
 
         public bool AddMaintenance(out string m)
@@ -276,7 +276,7 @@ namespace Business_Logic
             SqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
             {
-                MaintenanceEditHistory record = new MaintenanceEditHistory
+                EditHistory record = new EditHistory
                 {
                     Date = Convert.ToDateTime(rdr["Date"]),
                     Description = rdr["Description"].ToString(),

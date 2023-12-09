@@ -1,4 +1,5 @@
-﻿using DeltaProject.Business_Logic;
+﻿using Business_Logic;
+using DeltaProject.Business_Logic;
 using System;
 using System.Globalization;
 using System.Web.UI;
@@ -6,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace DeltaProject
 {
-    public partial class SearchForLoaderProcess : System.Web.UI.Page
+    public partial class SearchForLoaderProcess : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,7 +18,9 @@ namespace DeltaProject
         {
             PanelAllProcesses.Visible = false;
             PanelLoaderDetails.Visible = false;
+            PanelEditLoaderProcess.Visible = false;
             PanelErrorMessage.Visible = false;
+            lblFinishMsg.Text = string.Empty;
 
             LoaderProcess loaderProcess = new LoaderProcess
             { ClientName = string.IsNullOrEmpty(txtClientName.Text) ? null : txtClientName.Text };
@@ -46,7 +49,8 @@ namespace DeltaProject
             if (e.CommandName == "Details")
             {
                 var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
-                lblId.Text = gridRow.Cells[0].Text;
+                var id = gridRow.Cells[0].Text;
+                lblId.Text = id;
                 lblLoaderName.Text = gridRow.Cells[1].Text;
                 lblPermissionNumber.Text = gridRow.Cells[2].Text;
                 lblClientName.Text = gridRow.Cells[3].Text;
@@ -56,6 +60,42 @@ namespace DeltaProject
                 lblDescription.Text = gridRow.Cells[7].Text;
                 PanelAllProcesses.Visible = false;
                 PanelLoaderDetails.Visible = true;
+
+                LoaderProcess loaderProcess = new LoaderProcess { Id = Convert.ToInt32(id) };
+                loaderProcess.GetEditHistory();
+                GridViewHistory.DataSource = loaderProcess.History;
+                GridViewHistory.DataBind();
+
+                PanelAllProcesses.Visible = false;
+                PanelLoaderDetails.Visible = true;
+                PanelEditLoaderProcess.Visible = false;
+            }
+            else if (e.CommandName == "EditLoader")
+            {
+                var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
+                var paymentCount = Convert.ToInt32(gridRow.Cells[9].Text);
+                txtId.Text = gridRow.Cells[0].Text;
+                txtPermissionNumber.Text = gridRow.Cells[2].Text;
+                txtEditClientName.Text = string.IsNullOrEmpty(txtClientName.Text) ? gridRow.Cells[3].Text : txtClientName.Text;
+                txtEditPhoneNumber.Text = gridRow.Cells[8].Text;
+                txtCost.Text = gridRow.Cells[5].Text;
+                txtPaid.Text = (Convert.ToDecimal(gridRow.Cells[5].Text) - Convert.ToDecimal(gridRow.Cells[6].Text)).ToString();
+                date.Text = gridRow.Cells[4].Text;
+                txtDescription.Text = gridRow.Cells[7].Text;
+                if (paymentCount > 1)
+                {
+                    txtPaid.Enabled = false;
+                }
+
+                var loaders = Loader.GetLoaders();
+                ddlLoaders.DataSource = loaders;
+                ddlLoaders.DataBind();
+                ddlLoaders.Items.Insert(0, new ListItem("إختر ونش", ""));
+                ddlLoaders.SelectedValue = gridRow.Cells[10].Text;
+
+                PanelAllProcesses.Visible = false;
+                PanelLoaderDetails.Visible = false;
+                PanelEditLoaderProcess.Visible = true;
             }
         }
 
@@ -74,6 +114,45 @@ namespace DeltaProject
         protected void btnBack_OnClick(object sender, ImageClickEventArgs e)
         {
             ImageButtonSearch_Click(sender, null);
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            var loaderProcess = new LoaderProcess
+            {
+                Id = Convert.ToInt32(txtId.Text),
+                LoaderId = Convert.ToInt32(ddlLoaders.SelectedValue),
+                PermissionNumber = txtPermissionNumber.Text,
+                ClientName = txtEditClientName.Text,
+                PhoneNumber = txtEditPhoneNumber.Text,
+                Cost = Convert.ToDecimal(txtCost.Text),
+                Date = Convert.ToDateTime(date.Text),
+                Description = txtDescription.Text,
+                PaidAmount = txtPaid.Enabled == false ? (decimal?)null : Convert.ToDecimal(txtPaid.Text),
+                UserId = Convert.ToInt32(Session["userId"])
+            };
+
+            if (!loaderProcess.EditLoaderProcess(out string m))
+            {
+                lblFinishMsg.Text = "هناك مشكلة في الحفظ برجاء اعادة المحاولة";
+                lblFinishMsg.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                lblFinishMsg.Text = $"تم حفظ العملية ({loaderProcess.PermissionNumber}) بالونش ({ddlLoaders.SelectedItem.Text}) للعميل ({loaderProcess.ClientName}) بنجاح";
+                lblFinishMsg.ForeColor = System.Drawing.Color.Green;
+                ddlLoaders.SelectedIndex = 0;
+                txtPermissionNumber.Text = string.Empty;
+                txtEditClientName.Text = string.Empty;
+                txtEditPhoneNumber.Text = string.Empty;
+                txtCost.Text = string.Empty;
+                txtPaid.Text = string.Empty;
+                date.Text = string.Empty;
+                txtDescription.Text = string.Empty;
+                PanelAllProcesses.Visible = false;
+                PanelLoaderDetails.Visible = false;
+                PanelEditLoaderProcess.Visible = false;
+            }
         }
     }
 }

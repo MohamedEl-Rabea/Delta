@@ -366,7 +366,7 @@
     <Compile Include="Business_Logic\ClientStatement.cs" />
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
-    <Compile Include="Business_Logic\MaintenanceEditHistory.cs" />
+    <Compile Include="Business_Logic\EditHistory.cs" />
     <Compile Include="Business_Logic\SaleBill.cs" />
     <Compile Include="Business_Logic\SupplierPayment.cs" />
     <Compile Include="Business_Logic\Loader.cs" />
