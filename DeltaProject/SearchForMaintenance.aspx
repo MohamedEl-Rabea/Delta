@@ -233,6 +233,27 @@
                     </tr>
                 </table>
             </section>
+            <section class="skipPrinting">
+                    <br />
+                    <header class="PreSectionTab">
+                        <div>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="TabLnks" Enabled="false">سجل التعديلات</asp:LinkButton>
+                        </div>
+                    </header>
+                    <asp:Panel ID="PanelHistory" runat="server" CssClass="PreReport_SectionTab">
+                        <asp:GridView runat="server" ID="GridViewHistory" CssClass="GridViewBill GridViewBillItems" AutoGenerateColumns="False" EmptyDataText="لا توجد تعديلات">
+                            <Columns>
+                                <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-CssClass="nowrap" />
+                                <asp:BoundField DataField="Description" HeaderText="الوصف" HeaderStyle-Width="70%" ItemStyle-CssClass="textWithDotsCollapse textWithDots" />
+                                <asp:BoundField DataField="UserName" HeaderText="بواسطة" ItemStyle-CssClass="skipPrintCol nowrap" HeaderStyle-CssClass="skipPrintCol" />
+                            </Columns>
+                            <HeaderStyle CssClass="HeaderStyleBill" />
+                            <RowStyle CssClass="RowStyleList" />
+                            <AlternatingRowStyle CssClass="AlternateRowStyleList" />
+                            <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                        </asp:GridView>
+                    </asp:Panel>
+                </section>
         </asp:Panel>
     </div>
     <asp:Panel runat="server" ID="PanelEditMaintenance" Visible="false">

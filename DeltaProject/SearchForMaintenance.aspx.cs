@@ -69,7 +69,8 @@ namespace DeltaProject
             if (e.CommandName == "Select")
             {
                 var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
-                lblId.Text = gridRow.Cells[0].Text;
+                var id = gridRow.Cells[0].Text;
+                lblId.Text = id;
                 lblTitle.Text = gridRow.Cells[1].Text;
                 lblWorkshop.Text = gridRow.Cells[2].Text;
                 lblOrderDate.Text = gridRow.Cells[3].Text;
@@ -79,6 +80,12 @@ namespace DeltaProject
                 lblPrice.Text = gridRow.Cells[7].Text;
                 lblRemainingAmount.Text = gridRow.Cells[8].Text;
                 lblDescription.Text = gridRow.Cells[9].Text;
+
+                Maintenance maintenance = new Maintenance { Id = Convert.ToInt32(id)};
+                maintenance.GetEditHistory();
+                GridViewHistory.DataSource = maintenance.History;
+                GridViewHistory.DataBind();
+
                 PanelAllMaintenance.Visible = false;
                 PanelMaintenanceDetails.Visible = true;
                 PanelEditMaintenance.Visible = false;
@@ -187,7 +194,8 @@ namespace DeltaProject
                 PaidAmount = txtPaidAmount.Enabled == false ? (decimal?)null : Convert.ToDecimal(txtPaidAmount.Text),
                 Description = txtDescription.Text,
                 ExpectedDeliveryDate = Convert.ToDateTime(ExpectedDeliveryDate.Text),
-                WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue)
+                WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue),
+                UserId = Convert.ToInt32(Session["userId"])
             };
 
             if (!maintenance.EditMaintenance(out string m))

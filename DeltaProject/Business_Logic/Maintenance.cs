@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DeltaProject.Business_Logic;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Business_Logic
 {
@@ -27,6 +29,8 @@ namespace Business_Logic
         public string ExpiryWarrantyDateText { get; set; }
         public decimal? PaidAmount { get; set; }
         public int PaymentCount { get; set; }
+        public int UserId { get; set; }
+        public List<MaintenanceEditHistory> History { get; set; } = new List<MaintenanceEditHistory>();
 
 
         public bool AddMaintenance(out string m)
@@ -87,6 +91,8 @@ namespace Business_Logic
                 cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
                 if (PaidAmount.HasValue)
                     cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
+                cmd.Parameters.Add("@userId", SqlDbType.Int).Value = UserId;
+
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -258,6 +264,28 @@ namespace Business_Logic
             rdr.Close();
             con.Close();
             return maintenanceList;
+        }
+        
+        public void GetEditHistory()
+        {
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand("GetMaintenanceEditHistory", con) { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add("@maintenanceId", SqlDbType.Int).Value = Id;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                MaintenanceEditHistory record = new MaintenanceEditHistory
+                {
+                    Date = Convert.ToDateTime(rdr["Date"]),
+                    Description = rdr["Description"].ToString(),
+                    UserName = rdr["UserName"].ToString()
+                };
+                History.Add(record);
+            }
+            rdr.Close();
+            con.Close();
         }
     }
 }
