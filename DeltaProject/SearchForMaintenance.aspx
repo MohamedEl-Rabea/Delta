@@ -36,6 +36,7 @@
 
         function PrintDivContent(divId) {
             debugger;
+            debugger;
             var printContent = document.getElementById(divId).cloneNode(true);
             $(printContent).find('.skipPrinting').remove();
             var winPrint = window.open('', '', 'height=auto,width=auto,resizable=1,scrollbars=1,toolbar=1,sta­tus=0');
@@ -73,7 +74,8 @@
                     <asp:TextBox ID="txtPhoneNumber" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
                         placeholder="رقم التليفون للبحث . . . . ."></asp:TextBox>
                     <asp:TextBox ID="txtMaintenanceId" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
-                            placeholder="رقم الصيانة للبحث . . . . ."></asp:TextBox>  </td>
+                        placeholder="رقم الصيانة للبحث . . . . ."></asp:TextBox>
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -87,14 +89,14 @@
                         <img src="Images/Error.png" width="24" height="24"/>
                     </asp:CustomValidator>
                     <asp:CompareValidator ID="CompareValidator1" runat="server"
-                            ControlToValidate="txtMaintenanceId"
-                            Display="Dynamic"
-                            Operator="DataTypeCheck"
-                            Type="Integer"
-                            SetFocusOnError="true"
-                            ToolTip="يجب كتابة رقم الصيانة بشكل صحيح">
+                        ControlToValidate="txtMaintenanceId"
+                        Display="Dynamic"
+                        Operator="DataTypeCheck"
+                        Type="Integer"
+                        SetFocusOnError="true"
+                        ToolTip="يجب كتابة رقم الصيانة بشكل صحيح">
                         <img src="Images/Error.png" width="24" height="24"/>
-                        </asp:CompareValidator>
+                    </asp:CompareValidator>
                 </td>
             </tr>
         </table>
@@ -165,106 +167,167 @@
             </asp:GridView>
         </asp:Panel>
     </asp:Panel>
-    <div id="divToPrint">
+    <div>
         <asp:Panel runat="server" ID="PanelMaintenanceDetails" Visible="false">
-            <section class="ContactsSection" style="border-radius: 8px; width: 99%; text-align: right; direction: rtl; padding: 10px;">
-                <header style="text-align: left" class="skipPrinting">
+            <header class="Sec_footer" style="text-align: left; margin-top: 25px">
+                <div class="dropdown">
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/printer.png" Width="24" Height="24" OnClientClick="PrintDivContent('divToPrint');" ToolTip="اطبع التقرير" />
-                    <asp:ImageButton ID="ImageButtonBackMaintenance" runat="server" ImageUrl="~/Images/back.png" Width="24" Height="24"
-                        ToolTip="رجوع" OnClick="btnBack_OnClick" CausesValidation="false" />
+                </div>
+            </header>
+            <div id="divToPrint" class="Prices_Offer_DivBill" style="min-height:750px">
+                <%--Report Headre--%>
+                <header class="Bill_header">
                 </header>
-                <header class="Prices_Offer_SubHeaderBill" style="margin-bottom: 20px;">
-                    <div style="border: 1px solid black">
-                        <p style="font: bold 14px arial; margin: 0; padding: 0">تفاصيل الصيانه</p>
+                <header class="Prices_Offer_HeaderBill" style="border-bottom: none;">
+                    <table class="Offer_Header_table">
+                        <tr>
+                            <td style="vertical-align: top; width: 270px;">
+                                <p style="font: bold 28px Arial; color: black; margin: 0; padding: 0">مؤسسة صحارى</p>
+                                <p style="font: bold 20px Arial; color: black; line-height: 25px; margin: 0; padding: 0">للتوريد و التركيب</p>
+                                <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">جميع مهامات الجهد المنخفض والمتوسط - مستلزمات الآبار - أنظمة الطاقه الشمسية</p>
+
+                            </td>
+                            <td>
+                                <div class="Logo_divBill">
+                                    <img src="Images/Logo.jpg" width="90" height="90" class="LogoImage" />
+                                </div>
+                            </td>
+                            <td style="vertical-align: middle; width: 250px;">
+                                <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">ادارة م / ممدوح عبدالحميد</p>
+                                <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">&nbsp;&nbsp;&nbsp;م / محمد ممدوح</p>
+                                <p style="font: bold 16px Arial; color: black; line-height: 25px; margin: 0; padding: 0">&nbsp;&nbsp;م / على ممدوح</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <section class="ContactsSection">
+                    </section>
+                </header>
+                <%--Report PreSection--%>
+                <header class="Prices_Offer_SubHeaderBill">
+                    <div>
+                        <p>عملية صيانة</p>
                     </div>
                 </header>
-                <table class="AddProductsTable maintenanceDetails" style="width: 98%">
-                    <tr>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">رقم الصيانة :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblId" Text='' />
-                        </td>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">اسم الصيانة :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblTitle" Text='' />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">الورشة :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblWorkshop" Text='' />
-                        </td>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">الحالة :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblStatus" Text='' />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">تاريخ الصيانة :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblOrderDate" Text='' />
-                        </td>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">انتهاء الضمان :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblExpiryWarrantyDate" Text='' />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">السعر :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblPrice" Text='' />
-                        </td>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">المتبقى :</p>
-                        </td>
-                        <td class="RHSTD" style="width: 35%">
-                            <asp:Label runat="server" ID="lblRemainingAmount" Text='' />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="RHSTD" style="width: 15%">
-                            <p class="RHSP">الوصف :</p>
-                        </td>
-                        <td class="RHSTD" colspan="3" style="width: 35%">
-                            <asp:Label runat="server" CssClass="textWithDotsCollapse textWithDots" ID="lblDescription" Text='' /></td>
-                    </tr>
-                </table>
-            </section>
-            <section class="skipPrinting">
+                <section class="ReportDeclarationSection" style="min-height:550px">
+                    <section>
+                        <table class="ReportHeader" style="width:100%">
+                            <tr>
+                                <td style="width: 40px">
+                                    <asp:Label runat="server" Text="تاريخ الصيانة : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblOrderDate" runat="server" CssClass="lblInfo2" Text="01/01/0001"></asp:Label>
+                                </td>
+                                <td style="width: 40px">
+                                    <asp:Label runat="server" Text="رقم الصيانة : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblId" runat="server" CssClass="lblInfo2" Text="رقم الصيانة"></asp:Label>
+                                </td>
+                                <td style="width: 40px">
+                                    <asp:Label ID="Label1" runat="server" Text="اسم الصيانة : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblTitle" runat="server" CssClass="lblInfo2" Text="اسم الصيانة"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40px">
+                                    <asp:Label ID="Label2" runat="server" Text="الورشة : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblWorkshop" runat="server" CssClass="lblInfo2" Text="الورشة"></asp:Label>
+                                </td>
+                                <td style="width: 40px">
+                                    <asp:Label ID="Label6" runat="server" Text="الحالة : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblStatus" runat="server" CssClass="lblInfo2" Text="الحالة"></asp:Label>
+                                </td>
+                               <td style="width: 40px">
+                                    <asp:Label ID="Label11" runat="server" Text="انتهاء الضمان : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblExpiryWarrantyDate" runat="server" CssClass="lblInfo2" Text="انتهاء الضمان"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40px">
+                                    <asp:Label ID="Label8" runat="server" Text="السعر : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblPrice" runat="server" CssClass="lblInfo2" Text="السعر"></asp:Label>
+                                </td>
+                                <td style="width: 40px">
+                                    <asp:Label ID="Label10" runat="server" Text="المتبقى : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblRemainingAmount" runat="server" CssClass="lblInfo2" Text="المتبقى"></asp:Label>
+                                </td>
+                                <td style="width: 40px">
+                                    <asp:Label ID="Label12" runat="server" Text="الوصف : " CssClass="lblInfo"></asp:Label>
+                                </td>
+                                <td style="width: 120px">
+                                    <asp:Label ID="lblDescription" runat="server" CssClass="lblInfo2 textWithDotsCollapse textWithDots" Text="الوصف"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
                     <br />
-                    <header class="PreSectionTab">
-                        <div>
-                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="TabLnks" Enabled="false">سجل التعديلات</asp:LinkButton>
-                        </div>
-                    </header>
-                    <asp:Panel ID="PanelHistory" runat="server" CssClass="PreReport_SectionTab">
-                        <asp:GridView runat="server" ID="GridViewHistory" CssClass="GridViewBill GridViewBillItems" AutoGenerateColumns="False" EmptyDataText="لا توجد تعديلات">
-                            <Columns>
-                                <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-CssClass="nowrap" />
-                                <asp:BoundField DataField="Description" HeaderText="الوصف" HeaderStyle-Width="70%" ItemStyle-CssClass="textWithDotsCollapse textWithDots" />
-                                <asp:BoundField DataField="UserName" HeaderText="بواسطة" ItemStyle-CssClass="skipPrintCol nowrap" HeaderStyle-CssClass="skipPrintCol" />
-                            </Columns>
-                            <HeaderStyle CssClass="HeaderStyleBill" />
-                            <RowStyle CssClass="RowStyleList" />
-                            <AlternatingRowStyle CssClass="AlternateRowStyleList" />
-                            <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
-                        </asp:GridView>
-                    </asp:Panel>
+                    <section class="skipPrinting">
+                        <br />
+                        <header class="PreSectionTab">
+                            <div>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CssClass="TabLnks" Enabled="false">سجل التعديلات</asp:LinkButton>
+                            </div>
+                        </header>
+                        <asp:Panel ID="PanelHistory" runat="server" CssClass="PreReport_SectionTab">
+                            <asp:GridView runat="server" ID="GridViewHistory" CssClass="GridViewBill GridViewBillItems" AutoGenerateColumns="False" EmptyDataText="لا توجد تعديلات">
+                                <Columns>
+                                    <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-CssClass="nowrap" />
+                                    <asp:BoundField DataField="Description" HeaderText="الوصف" HeaderStyle-Width="70%" ItemStyle-CssClass="textWithDotsCollapse textWithDots" />
+                                    <asp:BoundField DataField="UserName" HeaderText="بواسطة" ItemStyle-CssClass="skipPrintCol nowrap" HeaderStyle-CssClass="skipPrintCol" />
+                                </Columns>
+                                <HeaderStyle CssClass="HeaderStyleBill" />
+                                <RowStyle CssClass="RowStyleList" />
+                                <AlternatingRowStyle CssClass="AlternateRowStyleList" />
+                                <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                            </asp:GridView>
+                        </asp:Panel>
+                    </section>
                 </section>
+                <footer class="Prices_Offer_Footer" style="margin-bottom: 25px; text-align: center; height: auto">
+                    <table class="Offer_Header_table">
+                        <tr>
+                            <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">المقر الرئيسى</p>
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: المنيا - بنى مزار - طريق القاهرة اسيوط الغربى بحرى كمين بنى مزار 500م</p>
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px;">للاتصال: 01000901815 - 01206778015</p>
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px; margin-right: 25px;"></p>
+                            </td>
+                            <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">مقر ملوى</p>
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: المنيا - ملوى - طريق القاهرة اسيوط الغربى بحرى كمين ملوى 500م</p>
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px;">للاتصال: 01027793162 - 01110211419</p>
+                            </td>
+                            <td style="width: 30%; text-align: right; vertical-align: top; padding-right: 10px;">
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px; text-decoration: underline">مقر الواحات</p>
+                                <p style="font: bold 14px Arial; color: white; line-height: 25px;">العنوان: غرب غرب المنيا - طريق الواحات</p>
+                            </td>
+                        </tr>
+                    </table>
+                </footer>
+            </div>
         </asp:Panel>
     </div>
     <asp:Panel runat="server" ID="PanelEditMaintenance" Visible="false">
