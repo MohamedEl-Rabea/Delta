@@ -10,7 +10,7 @@ namespace DeltaProject.Business_Logic
     [Serializable]
     public class LoaderProcess
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int LoaderId { get; set; }
         public string LoaderName { get; set; }
         public string PermissionNumber { get; set; }
@@ -98,6 +98,7 @@ namespace DeltaProject.Business_Logic
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("SearchForLoaderProcessess", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
             cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
             cmd.Parameters.Add("@startDate", SqlDbType.DateTime).Value = startDate;
             cmd.Parameters.Add("@endDate", SqlDbType.DateTime).Value = endDate;

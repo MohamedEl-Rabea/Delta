@@ -54,10 +54,11 @@
     <header class="Header">
         <p>استعلام عن الصيانات</p>
     </header>
-    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories2"
+    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories"
         OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
         <asp:ListItem Value="ClientName" Selected="True">اسم العميل</asp:ListItem>
         <asp:ListItem Value="PhoneNumber">رقم التليفون</asp:ListItem>
+        <asp:ListItem Value="MaintenanceId">رقم الصيانة</asp:ListItem>
     </asp:RadioButtonList>
     <section class="Search_Section">
         <table class="Search_table">
@@ -71,7 +72,8 @@
                         placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
                     <asp:TextBox ID="txtPhoneNumber" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
                         placeholder="رقم التليفون للبحث . . . . ."></asp:TextBox>
-                </td>
+                    <asp:TextBox ID="txtMaintenanceId" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox"
+                            placeholder="رقم الصيانة للبحث . . . . ."></asp:TextBox>  </td>
             </tr>
             <tr>
                 <td></td>
@@ -84,6 +86,15 @@
                         ClientValidationFunction="IsValidNumber">
                         <img src="Images/Error.png" width="24" height="24"/>
                     </asp:CustomValidator>
+                    <asp:CompareValidator ID="CompareValidator1" runat="server"
+                            ControlToValidate="txtMaintenanceId"
+                            Display="Dynamic"
+                            Operator="DataTypeCheck"
+                            Type="Integer"
+                            SetFocusOnError="true"
+                            ToolTip="يجب كتابة رقم الصيانة بشكل صحيح">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CompareValidator>
                 </td>
             </tr>
         </table>

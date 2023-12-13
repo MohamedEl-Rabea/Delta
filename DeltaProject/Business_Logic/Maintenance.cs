@@ -11,7 +11,7 @@ namespace Business_Logic
     [Serializable]
     public class Maintenance
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Title { get; set; }
         public string ClientName { get; set; }
         public string PhoneNumber { get; set; }
@@ -166,6 +166,8 @@ namespace Business_Logic
             SqlConnection con = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand("SearchForMaintenance", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            if (Id.HasValue)
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
             cmd.Parameters.Add("@title", SqlDbType.NVarChar).Value = Title;
             cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
             cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;

@@ -15,6 +15,15 @@ namespace DeltaProject
     {
 
         /// <summary>
+        /// RadioButtonListCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonListCategories;
+
+        /// <summary>
         /// ImageButtonSearch control.
         /// </summary>
         /// <remarks>
@@ -33,6 +42,15 @@ namespace DeltaProject
         protected global::System.Web.UI.WebControls.TextBox txtClientName;
 
         /// <summary>
+        /// txtLoaderProcessId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoaderProcessId;
+
+        /// <summary>
         /// txtStartDate control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace DeltaProject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndDate;
+
+        /// <summary>
+        /// CompareValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
 
         /// <summary>
         /// PanelErrorMessage control.

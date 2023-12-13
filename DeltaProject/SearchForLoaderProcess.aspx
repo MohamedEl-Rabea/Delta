@@ -67,6 +67,11 @@
     <header class="Header">
         <p>إستعلام عن عمليات الونش</p>
     </header>
+    <asp:RadioButtonList ID="RadioButtonListCategories" runat="server" RepeatDirection="Horizontal" CssClass="RBLCategories"
+        OnSelectedIndexChanged="RadioButtonListCategories_SelectedIndexChanged" AutoPostBack="true">
+        <asp:ListItem Value="ClientName" Selected="True">اسم العميل</asp:ListItem>
+        <asp:ListItem Value="LoaderProcessId">رقم عملية الونش</asp:ListItem>
+    </asp:RadioButtonList>
     <section class="Search_Section">
         <table class="Search_table">
             <tr>
@@ -77,6 +82,8 @@
                 <td class="Search_td" colspan="2">
                     <asp:TextBox ID="txtClientName" runat="server" AutoCompleteType="Disabled" CssClass="Search_TextBox_md"
                                  placeholder="اسم العميل للبحث . . . . ."></asp:TextBox>
+                    <asp:TextBox ID="txtLoaderProcessId" runat="server" AutoCompleteType="Disabled" Visible="false" CssClass="Search_TextBox_md"
+                            placeholder="رقم عملية الونش للبحث . . . . ."></asp:TextBox> 
                 </td>
                 <td class="Search_td">
                     <asp:TextBox runat="server" ID="txtStartDate" CssClass="Search_TextBox_md left_border" PlaceHolder="تاريخ بداية الاستعلام . . . . ." AutoCompleteType="Disabled"></asp:TextBox>
@@ -84,6 +91,21 @@
                 <td class="Search_td">
                     <asp:TextBox runat="server" ID="txtEndDate" CssClass="Search_TextBox_md left_border" PlaceHolder="تاريخ نهاية الاستعلام . . . . ." AutoCompleteType="Disabled"></asp:TextBox>
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                     <asp:CompareValidator ID="CompareValidator1" runat="server"
+                            ControlToValidate="txtLoaderProcessId"
+                            Display="Dynamic"
+                            Operator="DataTypeCheck"
+                            Type="Integer"
+                            SetFocusOnError="true"
+                            ToolTip="يجب كتابة رقم عملية الونش بشكل صحيح">
+                        <img src="Images/Error.png" width="24" height="24"/>
+                        </asp:CompareValidator>
+                </td>
+                <td colspan="2"></td>
             </tr>
         </table>
     </section>

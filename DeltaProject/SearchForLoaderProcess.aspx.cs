@@ -14,6 +14,25 @@ namespace DeltaProject
 
         }
 
+        protected void RadioButtonListCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PanelAllProcesses.Visible = false;
+            PanelErrorMessage.Visible = false;
+            txtClientName.Text = string.Empty;
+            txtLoaderProcessId.Text = string.Empty;
+            lblFinishMsg.Text = string.Empty;
+            if (RadioButtonListCategories.SelectedValue == "ClientName")
+            {
+                txtClientName.Visible = true;
+                txtLoaderProcessId.Visible = false;
+            }
+            else
+            {
+                txtClientName.Visible = false;
+                txtLoaderProcessId.Visible = true;
+            }
+        }
+
         protected void ImageButtonSearch_Click(object sender, ImageClickEventArgs e)
         {
             PanelAllProcesses.Visible = false;
@@ -23,7 +42,10 @@ namespace DeltaProject
             lblFinishMsg.Text = string.Empty;
 
             LoaderProcess loaderProcess = new LoaderProcess
-            { ClientName = string.IsNullOrEmpty(txtClientName.Text) ? null : txtClientName.Text };
+            {
+                Id = string.IsNullOrEmpty(txtLoaderProcessId.Text) ? (int?)null : Convert.ToInt32(txtLoaderProcessId.Text),
+                ClientName = string.IsNullOrEmpty(txtClientName.Text) ? null : txtClientName.Text,
+            };
             DateTime? startDate = string.IsNullOrEmpty(txtStartDate.Text)
                 ? null
                 : (DateTime?)DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -31,13 +53,14 @@ namespace DeltaProject
                 ? null
                 : (DateTime?)DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            if (string.IsNullOrEmpty(txtClientName.Text) && string.IsNullOrEmpty(txtStartDate.Text) &&
-                string.IsNullOrEmpty(txtEndDate.Text))
+            if (string.IsNullOrEmpty(txtClientName.Text) && string.IsNullOrEmpty(txtLoaderProcessId.Text) && 
+                string.IsNullOrEmpty(txtStartDate.Text) && string.IsNullOrEmpty(txtEndDate.Text))
             {
                 PanelErrorMessage.Visible = true;
             }
             else
             {
+
                 ViewState["Processes"] = loaderProcess.GetLoaderProcessWithFilter(startDate, endDate);
                 BindLoaderProcessGrid();
                 PanelAllProcesses.Visible = true;

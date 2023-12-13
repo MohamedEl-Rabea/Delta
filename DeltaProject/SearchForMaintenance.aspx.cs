@@ -20,16 +20,25 @@ namespace DeltaProject
             PanelErrorMessage.Visible = false;
             txtClientName.Text = string.Empty;
             txtPhoneNumber.Text = string.Empty;
+            txtMaintenanceId.Text = string.Empty;
             lblFinishMsg.Text = string.Empty;
-            if (RadioButtonListCategories.SelectedIndex == 0)
+            if (RadioButtonListCategories.SelectedValue == "ClientName")
             {
                 txtClientName.Visible = true;
                 txtPhoneNumber.Visible = false;
+                txtMaintenanceId.Visible = false;
+            }
+            else if (RadioButtonListCategories.SelectedValue == "PhoneNumber")
+            {
+                txtClientName.Visible = false;
+                txtPhoneNumber.Visible = true;
+                txtMaintenanceId.Visible = false;
             }
             else
             {
                 txtClientName.Visible = false;
-                txtPhoneNumber.Visible = true;
+                txtPhoneNumber.Visible = false;
+                txtMaintenanceId.Visible = true;
             }
         }
 
@@ -42,22 +51,34 @@ namespace DeltaProject
             lblFinishMsg.Text = string.Empty;
 
             Maintenance maintenance = new Maintenance();
-            if (txtClientName.Visible)
+            if (RadioButtonListCategories.SelectedValue == "ClientName")
             {
-                maintenance.ClientName = txtClientName.Text;
                 if (string.IsNullOrEmpty(txtClientName.Text))
                     PanelErrorMessage.Visible = true;
                 else
+                {
+                    maintenance.ClientName = txtClientName.Text;
                     PanelAllMaintenance.Visible = true;
+                }
             }
-            else
+            else if (RadioButtonListCategories.SelectedValue == "PhoneNumber")
             {
-                maintenance.PhoneNumber = txtPhoneNumber.Text;
                 if (string.IsNullOrEmpty(txtPhoneNumber.Text))
                     PanelErrorMessage.Visible = true;
                 else
                 {
+                    maintenance.PhoneNumber = txtPhoneNumber.Text;
                     PanelAllMaintenance.Visible = true;
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(txtMaintenanceId.Text))
+                    PanelErrorMessage.Visible = true;
+                else
+                {
+                    maintenance.Id = Convert.ToInt32(txtMaintenanceId.Text);
+                    PanelAllMaintenance.Visible = true; 
                 }
             }
 
@@ -131,6 +152,7 @@ namespace DeltaProject
             Maintenance maintenance = new Maintenance();
             maintenance.ClientName = txtClientName.Text;
             maintenance.PhoneNumber = txtPhoneNumber.Text;
+            maintenance.Id = string.IsNullOrEmpty(txtMaintenanceId.Text) ? (int?)null : Convert.ToInt32(txtMaintenanceId.Text);
 
             ViewState["Maintenance"] = maintenance.GetAllMaintenance(null);
             BindMaintenanceGrid();
@@ -145,6 +167,7 @@ namespace DeltaProject
             Maintenance maintenance = new Maintenance();
             maintenance.ClientName = txtClientName.Text;
             maintenance.PhoneNumber = txtPhoneNumber.Text;
+            maintenance.Id = string.IsNullOrEmpty(txtMaintenanceId.Text) ? (int?)null : Convert.ToInt32(txtMaintenanceId.Text);
 
             ViewState["Maintenance"] = maintenance.GetAllMaintenance("Delivered");
             BindMaintenanceGrid();
@@ -159,6 +182,7 @@ namespace DeltaProject
             Maintenance maintenance = new Maintenance();
             maintenance.ClientName = txtClientName.Text;
             maintenance.PhoneNumber = txtPhoneNumber.Text;
+            maintenance.Id = string.IsNullOrEmpty(txtMaintenanceId.Text) ? (int?)null : Convert.ToInt32(txtMaintenanceId.Text);
 
             ViewState["Maintenance"] = maintenance.GetAllMaintenance("DeliveredWithRemaining");
             BindMaintenanceGrid();
