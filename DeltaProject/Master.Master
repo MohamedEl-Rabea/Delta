@@ -5,16 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>ElRabea MIS</title>
+    <link href="CSS/select2.css" rel="stylesheet" />
     <link href="Images/Logo.png" rel="icon" />
     <link href="CSS/Master_style_sheet.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
     <link href="CSS/jquery-ui-smoothness.css" rel="stylesheet" />
     <link href="CSS/Pages_Style_Sheet.css" rel="stylesheet" />
+    <link href="CSS/Without_Print_Style_Sheet.css" rel="stylesheet" />
     <script src="Script/jquery-1.10.2.js"></script>
     <script src="Script/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script src="Script/jquery-ui.min.js"></script>
     <script src="Script/jquery-ui-i18n.min.js"></script>
+    <script src="Script/select2.js"></script>
+    <script src="Script/select2.full.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -26,7 +30,7 @@
                     <table class="Logo_Table" style="float: left">
                         <tr>
                             <td>
-                                <%--                                <img width="44" height="44" src="Images/Logo.jpg" />--%>
+                                <%--<img width="44" height="44" src="Images/Logo.jpg" />--%>
                             </td>
                         </tr>
                     </table>
@@ -73,7 +77,7 @@
                                         <asp:MenuItem Text="تسعير" ToolTip="تسعير صيانة" NavigateUrl="~/MaintenancePricing.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="تسليم" ToolTip="تسليم صيانة" NavigateUrl="~/SearchForNotDeliveredMaintenance.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="دفع" ToolTip="دفع صيانة" NavigateUrl="~/SearchForMaintenanceWithRemaining.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="إستعلام" ToolTip="استعلام عن الصيانات" NavigateUrl="~/SearchForMaintenances.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إستعلام" ToolTip="استعلام عن الصيانات" NavigateUrl="~/SearchForMaintenance.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إضافة مصروف" ToolTip="إضافة مصروف" NavigateUrl="~/AddMaintenanceExpense.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="إضافة سحب" ToolTip="إضافة سحب" NavigateUrl="~/AddMaintenanceWithdraw.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="تقرير الأرباح" ToolTip="تقرير الأرباح" NavigateUrl="~/MaintenanceExpensesReport.aspx"></asp:MenuItem>
@@ -90,20 +94,23 @@
                                         </asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="الفواتيــــــر" Value="m2">
-                                        <asp:MenuItem Text="دفع فاتـــورة" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/Pay_Bill.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="استعـــــــلام" NavigateUrl="~/Search_For_Bills.aspx" ToolTip="الاستعلام عن فاتورة سام العميل او الشركه"></asp:MenuItem>
+                                        <asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية استرجاع منتجات من فاتورة موجوده" NavigateUrl="~/ReturnProducts.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="إضافة خصم" ToolTip="إضافة خصم على منتجات من فاتورة موجوده" NavigateUrl="~/AddBillDiscount.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/AddBillItems.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="تعديل" ToolTip="تنفيذ عملية تعديل على فاتورة موجوده" NavigateUrl="~/EditSaleBill.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="دفع فاتورة" ToolTip="دفع فاتورة معلقه" NavigateUrl="~/PaySaleBill.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="استعلام" ToolTip="الاستعلام عن فاتورة اسم العميل او الشركه" NavigateUrl="~/SearchForBills.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="شيكات" Value="Cheques">
                                         <asp:MenuItem Text="العملاء" Value="ClientCheques" ToolTip="بحث في شيكات العملاء" NavigateUrl="~/Search_For_ClientCheque.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="الموردين" Value="SupplierCheques" ToolTip="بحث في شيكات الموردين" NavigateUrl="~/Search_For_SupplierCheque.aspx"></asp:MenuItem>
                                     </asp:MenuItem>
                                     <asp:MenuItem Text="البيــــــــــــــع">
-                                        <asp:MenuItem Text="بيع عــــــــادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/Sale_Products.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="مرتجع" ToolTip="تنفيذ عملية ارتجاع منتجات من فاتورة موجوده" NavigateUrl="~/Return_Products.aspx"></asp:MenuItem>
-                                        <asp:MenuItem Text="اضافه" ToolTip="تنفيذ عملية اضافه منتجات على فاتورة موجوده" NavigateUrl="~/Add_Items_To_Invoice.aspx"></asp:MenuItem>
+                                        <asp:MenuItem Text="بيع عادى" ToolTip="تنفيذ عملية بيع عادية" NavigateUrl="~/SaleProducts.aspx"></asp:MenuItem>
                                         <asp:MenuItem Text="طلبيات">
                                             <asp:MenuItem Text="إضافة" ToolTip="إضافة طلبية" NavigateUrl="~/AddOrder.aspx"></asp:MenuItem>
-                                        </asp:MenuItem></asp:MenuItem>
+                                        </asp:MenuItem>
+                                    </asp:MenuItem>
                                 </Items>
                             </asp:Menu>
                         </div>
@@ -125,38 +132,43 @@
                             </LevelStyles>
                             <Nodes>
                                 <asp:TreeNode Text="المخــــــــــــــــازن">
-                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProducts.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="تحديث كميـات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="تعديل بيانـــات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="وحدات القياس" Expanded="false">
+                                        <asp:TreeNode Text="إضافة" ToolTip="إضافة وحدة قياس" NavigateUrl="~/AddUnit.aspx"></asp:TreeNode>
+                                        <asp:TreeNode Text="تعديل" ToolTip="تعديل وحدة قياس" NavigateUrl="~/EditUnit.aspx"></asp:TreeNode>
+                                        <asp:TreeNode Text="استعلام" ToolTip="عرض وحدات القياس" NavigateUrl="~/Units.aspx"></asp:TreeNode>
+                                    </asp:TreeNode>
+                                    <asp:TreeNode Text="اضافة منتجات" NavigateUrl="~/AddProduct.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تحديث كميات" NavigateUrl="~/Update_Products_Amounts.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Product_Info.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="مسح منتجــات" NavigateUrl="~/Delete_Products.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="استعـــــــــــلام" NavigateUrl="~/Search_For_Product.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="جرد البضائــع" NavigateUrl="~/Products_Inventory.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="مرتجــــــــــــع" NavigateUrl="~/Supplier_Returned_Products.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="تجميع منتـــج" NavigateUrl="~/Collect_Product.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعلام" NavigateUrl="~/SearchForProduct.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="جرد البضائع" NavigateUrl="~/Products_Inventory.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مرتجع" NavigateUrl="~/ReturnSupplierProduct.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="المورديــــــــــــــن">
                                     <asp:TreeNode Text="اضافة مورد" NavigateUrl="~/Add_Supplier.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="اضافة شيكات" NavigateUrl="~/Add_SupplierCheque.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Supplier_Info.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="سداد جديــــد" NavigateUrl="~/New_Supplier_Interaction.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Supplier.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Suppliers_Search.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="سداد" NavigateUrl="~/AddSupplierPayment.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مسح" NavigateUrl="~/Delete_Supplier.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعلام" NavigateUrl="~/SearchForSupplier.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="استعلام واردات" NavigateUrl="~/Supplier_Products.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="كشف حساب" NavigateUrl="~/Supplier_Statement.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="العمــــــــــــــــــلاء">
                                     <asp:TreeNode Text="اضافة شيكات" NavigateUrl="~/Add_ClientCheque.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تعديل بيانات" NavigateUrl="~/Update_Client_Info.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="مســــــــــــح" NavigateUrl="~/Delete_Client.aspx"></asp:TreeNode>
-                                    <asp:TreeNode Text="استعــــــــلام" NavigateUrl="~/Search_For_Client.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="مسح" NavigateUrl="~/Delete_Client.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="استعلام" NavigateUrl="~/Search_For_Client.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="الماليـــــــــــــــــــه">
-                                    <asp:TreeNode Text="صـــــــــرف" NavigateUrl="~/Expenses.aspx"></asp:TreeNode>
+                                    <asp:TreeNode Text="صرف" NavigateUrl="~/Expenses.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="اضافة دخل" NavigateUrl="~/Add_Income.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تقرير الدخل" NavigateUrl="~/Income_Report.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="تقاريــــــــــــــــــــر">
                                     <asp:TreeNode Text="تقارير تخزينيه" Expanded="false">
-                                        <asp:TreeNode Text="احتياجـــــات" ToolTip="عرض احتياجات المخزن من منتجات" NavigateUrl="~/Needs_Report.aspx"></asp:TreeNode>
+                                        <asp:TreeNode Text="احتياجات" ToolTip="عرض احتياجات المخزن من منتجات" NavigateUrl="~/Needs_Report.aspx"></asp:TreeNode>
                                     </asp:TreeNode>
                                     <asp:TreeNode Text="تقارير مبيعات" ToolTip="عرض تقارير المبيعات والاحصائيات المتعلقه خلال فترة معينه" NavigateUrl="~/Sales_Report.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تقارير موردين" ToolTip="عرض تقرير عن كامل موردى الشركه وبياناتهم المتعلقه" NavigateUrl="~/Suppliers_report.aspx"></asp:TreeNode>

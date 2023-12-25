@@ -90,7 +90,7 @@
             AllowPaging="True"
             OnPageIndexChanging="GridViewMaintenance_OnPageIndexChanging">
             <Columns>
-                <asp:BoundField DataField="Id" SortExpression="Id" ItemStyle-CssClass="NoDispaly" HeaderStyle-CssClass="NoDispaly" ControlStyle-CssClass="NoDispaly" />
+                <asp:BoundField DataField="Id" HeaderText="الرقم" SortExpression="Id" />
                 <asp:BoundField DataField="Title" HeaderText="اسم الصيانة" SortExpression="Title" />
                 <asp:BoundField DataField="WorkshopName" HeaderText="اسم الورشة" SortExpression="WorkshopName" />
                 <asp:BoundField DataField="Price" HeaderText="السعر" SortExpression="Price" DataFormatString="{0:0.##}" />
@@ -116,14 +116,6 @@
                             ControlToValidate="txtPaidAmount" ClientValidationFunction="IsValidNumber" ToolTip="يجب الا تقل القيمة عن 1" ValidationGroup="<%# Container.DataItemIndex %>">
                             <img src="Images/Error.png" width="15" height="15"/>
                         </asp:CustomValidator>
-                        <asp:CustomValidator ID="CustomValidator1" runat="server"
-                            ToolTip="يجب الا تزيد القيمه المدفوعه عن المتبقيه"
-                            ControlToValidate="txtPaidAmount"
-                            Display="Dynamic"
-                            SetFocusOnError="true"
-                            ClientValidationFunction="IsValidPaidAmount" ValidationGroup="<%# Container.DataItemIndex %>">
-                                <img src="Images/Error.png" width="15" height="15"/>
-                        </asp:CustomValidator>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="تاريخ الدفع">
@@ -131,7 +123,7 @@
                         <asp:TextBox runat="server" ID="txtPaymentDate" ClientIDMode="AutoID" CssClass="EditTxt dateInput" PlaceHolder="تاريخ الدفع" Style="height: 22px;" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
                             ControlToValidate="txtPaymentDate" Display="Dynamic" SetFocusOnError="true"
-                            ToolTip="المبلغ المدفوع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
+                            ToolTip="تاريخ الدفع متطلب اساسى" ValidationGroup="<%# Container.DataItemIndex %>">
                                 <img src="Images/Error.png" width="15" height="15"/>
                         </asp:RequiredFieldValidator>
                     </ItemTemplate>

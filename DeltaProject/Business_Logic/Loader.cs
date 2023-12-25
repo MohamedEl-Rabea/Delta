@@ -11,7 +11,7 @@ namespace DeltaProject.Business_Logic
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Loader> GetLoaders()
+        public static List<Loader> GetLoaders()
         {
             List<Loader> loaders = new List<Loader>();
 

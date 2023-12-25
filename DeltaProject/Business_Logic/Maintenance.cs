@@ -1,15 +1,17 @@
-﻿using System;
+﻿using DeltaProject.Business_Logic;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Business_Logic
 {
     [Serializable]
     public class Maintenance
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Title { get; set; }
         public string ClientName { get; set; }
         public string PhoneNumber { get; set; }
@@ -26,6 +28,10 @@ namespace Business_Logic
         public DateTime ExpiryWarrantyDate { get; set; }
         public string ExpiryWarrantyDateText { get; set; }
         public decimal? PaidAmount { get; set; }
+        public int PaymentCount { get; set; }
+        public int UserId { get; set; }
+        public List<EditHistory> History { get; set; } = new List<EditHistory>();
+
 
         public bool AddMaintenance(out string m)
         {
@@ -50,6 +56,43 @@ namespace Business_Logic
                     cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
                 if (PaidAmount.HasValue)
                     cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                m = ex.Message;
+                b = false;
+            }
+            return b;
+        }
+
+        public bool EditMaintenance(out string m)
+        {
+            bool b = true;
+            m = "";
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(CS);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("EditMaintenance", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
+                cmd.Parameters.Add("@title", SqlDbType.NVarChar).Value = Title;
+                cmd.Parameters.Add("@workshopId", SqlDbType.Int).Value = WorkshopId;
+                cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
+                cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
+                cmd.Parameters.Add("@orderDate", SqlDbType.DateTime).Value = OrderDate;
+                cmd.Parameters.Add("@expectedDeliveryDate", SqlDbType.DateTime).Value = ExpectedDeliveryDate;
+                cmd.Parameters.Add("@description", SqlDbType.NVarChar).Value = Description;
+                cmd.Parameters.Add("@price", SqlDbType.Money).Value = Price;
+                cmd.Parameters.Add("@cost", SqlDbType.Money).Value = Cost;
+                if (PaidAmount.HasValue)
+                    cmd.Parameters.Add("@paidAmount", SqlDbType.Money).Value = PaidAmount;
+                cmd.Parameters.Add("@userId", SqlDbType.Int).Value = UserId;
+
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -119,10 +162,12 @@ namespace Business_Logic
         public List<Maintenance> GetAllMaintenance(string statusName)
         {
             List<Maintenance> maintenanceList = new List<Maintenance>();
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
             SqlCommand cmd = new SqlCommand("SearchForMaintenance", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            if (Id.HasValue)
+                cmd.Parameters.Add("@id", SqlDbType.Int).Value = Id;
             cmd.Parameters.Add("@title", SqlDbType.NVarChar).Value = Title;
             cmd.Parameters.Add("@clientName", SqlDbType.NVarChar).Value = ClientName;
             cmd.Parameters.Add("@phoneNumber", SqlDbType.NVarChar).Value = PhoneNumber;
@@ -135,17 +180,21 @@ namespace Business_Logic
                 Maintenance maintenance = new Maintenance();
                 maintenance.Id = Convert.ToInt32(rdr["Id"]);
                 maintenance.ClientName = rdr["ClientName"].ToString();
+                maintenance.PhoneNumber = rdr["PhoneNumber"].ToString();
                 maintenance.Title = rdr["Title"].ToString();
                 maintenance.OrderDate = Convert.ToDateTime(rdr["OrderDate"]);
+                maintenance.ExpectedDeliveryDate = Convert.ToDateTime(rdr["ExpectedDeliveryDate"]);
                 maintenance.ExpiryWarrantyDate = string.IsNullOrEmpty(rdr["ExpiryWarrantyDate"].ToString()) ? default : Convert.ToDateTime(rdr["ExpiryWarrantyDate"]);
                 maintenance.ExpiryWarrantyDateText = maintenance.ExpiryWarrantyDate == default ? "" : maintenance.ExpiryWarrantyDate.ToString("dd/MM/yyyy");
                 maintenance.Cost = string.IsNullOrEmpty(rdr["Cost"].ToString()) ? 0 : Convert.ToDecimal(rdr["Cost"]);
                 maintenance.Price = string.IsNullOrEmpty(rdr["Price"].ToString()) ? 0 : Convert.ToDecimal(rdr["Price"]);
                 maintenance.RemainingAmount = string.IsNullOrEmpty(rdr["RemainingAmount"].ToString()) ?
                     maintenance.Price.Value : Convert.ToDecimal(rdr["RemainingAmount"]);
+                maintenance.WorkshopId = Convert.ToInt32(rdr["WorkshopId"].ToString());
                 maintenance.WorkshopName = rdr["WorkshopName"].ToString();
                 maintenance.StatusName = rdr["StatusName"].ToString();
                 maintenance.Description = rdr["Description"].ToString();
+                maintenance.PaymentCount = Convert.ToInt32(rdr["PaymentCount"].ToString());
                 maintenanceList.Add(maintenance);
             }
             rdr.Close();
@@ -217,6 +266,28 @@ namespace Business_Logic
             rdr.Close();
             con.Close();
             return maintenanceList;
+        }
+        
+        public void GetEditHistory()
+        {
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            SqlConnection con = new SqlConnection(cs);
+            SqlCommand cmd = new SqlCommand("GetMaintenanceEditHistory", con) { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add("@maintenanceId", SqlDbType.Int).Value = Id;
+            con.Open();
+            SqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                EditHistory record = new EditHistory
+                {
+                    Date = Convert.ToDateTime(rdr["Date"]),
+                    Description = rdr["Description"].ToString(),
+                    UserName = rdr["UserName"].ToString()
+                };
+                History.Add(record);
+            }
+            rdr.Close();
+            con.Close();
         }
     }
 }

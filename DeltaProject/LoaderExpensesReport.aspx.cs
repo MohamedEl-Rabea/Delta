@@ -14,8 +14,7 @@ namespace DeltaProject
         {
             if (!IsPostBack)
             {
-                Loader loader = new Loader();
-                ddlLoaders.DataSource = loader.GetLoaders();
+                ddlLoaders.DataSource = Loader.GetLoaders();
                 ddlLoaders.DataBind();
                 ddlLoaders.Items.Insert(0, new ListItem("إختر ونش", ""));
                 ddlLoaders.SelectedIndex = 0;
@@ -48,7 +47,7 @@ namespace DeltaProject
                 var maintenanceList = LoaderProcess.GetLoaderProcessesReport(loaderId, startDate, endDate);
                 GridViewLoaderProcesses.DataSource = maintenanceList;
                 GridViewLoaderProcesses.Columns[2].FooterText = maintenanceList.Sum(p => p.Cost).ToString("0.##");
-                GridViewLoaderProcesses.Columns[3].FooterText = maintenanceList.Sum(p => p.PaidAmount).ToString("0.##");
+                GridViewLoaderProcesses.Columns[3].FooterText = maintenanceList.Sum(p => p.PaidAmount.Value).ToString("0.##");
                 GridViewLoaderProcesses.Columns[4].FooterText = maintenanceList.Sum(p => p.RemainingAmount).ToString("0.##");
                 GridViewLoaderProcesses.DataBind();
 
@@ -57,7 +56,7 @@ namespace DeltaProject
                 GridViewExpenses.Columns[1].FooterText = expensesList.Sum(p => p.Amount).ToString("0.##");
                 GridViewExpenses.DataBind();
 
-                var profit = maintenanceList.Sum(p => p.PaidAmount) - expensesList.Sum(p => p.Amount);
+                var profit = maintenanceList.Sum(p => p.PaidAmount.Value) - expensesList.Sum(p => p.Amount);
                 lblProfit.Text = profit.ToString("0.##");
 
                 if (profit < 0)

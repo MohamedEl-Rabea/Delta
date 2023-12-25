@@ -6,7 +6,6 @@
             width: auto !important;
         }
     </style>
-    <script type="text/javascript" src="Script/ValidationScript.js"></script>
     <script type="text/javascript">
         $(function () {
             $('#<%= txtClientName.ClientID%>').autocomplete({
@@ -188,13 +187,13 @@
                 </tr>
                 <tr>
                     <td class="RHSTD">
-                        <p class="RHSP">التكلفة</p>
+                        <p class="RHSP">التكلفة :</p>
                     </td>
                     <td style="text-align: right">
                         <asp:TextBox runat="server" ID="txtCost" CssClass="txts3" PlaceHolder="التكلفة"></asp:TextBox>
                     </td>
                     <td class="RHSTD">
-                        <p class="RHSP">السعر</p>
+                        <p class="RHSP">السعر :</p>
                     </td>
                     <td style="text-align: right">
                         <asp:TextBox runat="server" ID="txtPrice" CssClass="txts3" PlaceHolder="السعر"></asp:TextBox>
@@ -208,7 +207,7 @@
                 </tr>
                 <tr>
                     <td class="RHSTD">
-                        <p class="RHSP">المدفوع</p>
+                        <p class="RHSP">المدفوع :</p>
                     </td>
                     <td style="text-align: right">
                         <asp:TextBox runat="server" ID="txtPaidAmount" CssClass="txts3" PlaceHolder="المدفوع"></asp:TextBox>
