@@ -179,7 +179,7 @@ namespace DeltaProject
             PanelAddProducts.Visible = false;
             PanelProductsList.Visible = true;
             lblSupplierName.Text = ddlSuppliers.SelectedItem.Text;
-            var purchase_Date = DateTime.ParseExact(lblPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var purchase_Date = DateTime.ParseExact(txtPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             lblPurchaseDate.Text = purchase_Date.ToShortDateString();
             ProductsListBind();
         }
