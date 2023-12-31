@@ -1,6 +1,7 @@
 ﻿using Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -293,7 +294,8 @@ namespace DeltaProject
                     product.Special_Price = Convert.ToDouble(((Label)row.FindControl("lblSpecial_Price")).Text);
                     product.Amount = Convert.ToDecimal(((Label)row.FindControl("lblAmount")).Text);
                     product.Description = ((Label)row.FindControl("lblDecription")).Text;
-                    if (!product.Add_Product(out m, lblSupplier.Text, Convert.ToDateTime(lblPurchaseDate.Text)))
+                    DateTime Purchase_Date = DateTime.ParseExact(lblPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    if (!product.Add_Product(out m, lblSupplier.Text, Purchase_Date))
                     {
                         lblFinishMsg.Text += m + "هذا الخطأ عند المنتج " + product.P_name + "<br />";
                         lblFinishMsg.ForeColor = System.Drawing.Color.Red;
@@ -307,7 +309,8 @@ namespace DeltaProject
                         Expenses = Convert.ToDouble(txtPaid_Amount.Text);
                     else
                         Expenses = Convert.ToDouble(lblTotalCost.Text);
-                    DateTime Purchase_Date = Convert.ToDateTime(lblPurchaseDate.Text);
+                    
+                    DateTime Purchase_Date = DateTime.ParseExact(lblPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     Purchase_Date = new DateTime(Purchase_Date.Year, Purchase_Date.Month, Purchase_Date.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
                     string Notes;

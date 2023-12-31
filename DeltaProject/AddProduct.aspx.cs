@@ -121,8 +121,8 @@ namespace DeltaProject
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var date = Convert.ToDateTime(txtPurchaseDate.Text);
-            var datetime = new DateTime(date.Year, date.Month, date.Day,
+            var purchaseDate = DateTime.ParseExact(txtPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var datetime = new DateTime(purchaseDate.Year, purchaseDate.Month, purchaseDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
             SupplierInvoice invoice = new SupplierInvoice
