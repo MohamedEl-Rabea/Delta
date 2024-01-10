@@ -167,6 +167,8 @@
                                     <asp:TreeNode Text="تقرير الدخل" NavigateUrl="~/Income_Report.aspx"></asp:TreeNode>
                                 </asp:TreeNode>
                                 <asp:TreeNode Text="تقاريــــــــــــــــــــر">
+                                    <asp:TreeNode Text="تقرير الايرادات و المصروفات" ToolTip="عرض تقرير الايرادات و المصروفات خلال فترة معينه" 
+                                        NavigateUrl="~/IncomesAndExpensesReport.aspx"></asp:TreeNode>
                                     <asp:TreeNode Text="تقارير تخزينيه" Expanded="false">
                                         <asp:TreeNode Text="احتياجات" ToolTip="عرض احتياجات المخزن من منتجات" NavigateUrl="~/Needs_Report.aspx"></asp:TreeNode>
                                     </asp:TreeNode>

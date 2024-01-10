@@ -144,6 +144,7 @@
     <Content Include="Images\printer.png" />
     <Content Include="Images\home.png" />
     <Content Include="Images\Up.png" />
+    <Content Include="IncomesAndExpensesReport.aspx" />
     <Content Include="Income_Report.aspx" />
     <Content Include="InvoiceDetails.aspx" />
     <Content Include="LoaderExpensesReport.aspx" />
@@ -367,6 +368,7 @@
     <Compile Include="Business_Logic\Client_Phone.cs" />
     <Compile Include="Business_Logic\Expenses.cs" />
     <Compile Include="Business_Logic\EditHistory.cs" />
+    <Compile Include="Business_Logic\IncomeAndExpense.cs" />
     <Compile Include="Business_Logic\SaleBill.cs" />
     <Compile Include="Business_Logic\SupplierPayment.cs" />
     <Compile Include="Business_Logic\Loader.cs" />
@@ -488,6 +490,13 @@
     </Compile>
     <Compile Include="Expenses.aspx.designer.cs">
       <DependentUpon>Expenses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IncomesAndExpensesReport.aspx.cs">
+      <DependentUpon>IncomesAndExpensesReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IncomesAndExpensesReport.aspx.designer.cs">
+      <DependentUpon>IncomesAndExpensesReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Income_Report.aspx.cs">
       <DependentUpon>Income_Report.aspx</DependentUpon>
