@@ -231,7 +231,7 @@
                         <ItemTemplate>
                             <asp:TextBox runat="server" ID="txtQuantity" CssClass="NoDispaly"  Text='<%# Bind("Quantity") %>'></asp:TextBox>
                             <asp:TextBox ID="txtNewQuantity" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" 
-                                         Text='<%# Eval("Quantity", "{0:##}") %>'>></asp:TextBox>
+                                         Text='<%# Eval("Quantity", "{0:0.##}") %>'>></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
                                                         ControlToValidate="txtNewQuantity" Display="Dynamic" SetFocusOnError="true"
                                                         ToolTip="الكميه متطلب اساسى" ValidationGroup="finishGroup">
@@ -263,7 +263,7 @@
                         <ItemTemplate>
                             <asp:TextBox runat="server" ID="txtPrice" CssClass="NoDispaly"  Text='<%# Bind("SpecifiedPrice") %>'></asp:TextBox>
                             <asp:TextBox ID="txtNewPrice" CssClass="EditTxt" runat="server" AutoCompleteType="Disabled" 
-                                         Text='<%# Eval("SpecifiedPrice", "{0:##}") %>'></asp:TextBox>
+                                         Text='<%# Eval("SpecifiedPrice", "{0:0.##}") %>'></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
                                                         ControlToValidate="txtNewPrice" Display="Dynamic" SetFocusOnError="true"
                                                         ToolTip="السعر متطلب اساسى" ValidationGroup="finishGroup">

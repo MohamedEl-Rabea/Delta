@@ -2,6 +2,7 @@
 using DeltaProject.Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -120,8 +121,8 @@ namespace DeltaProject
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var date = Convert.ToDateTime(txtPurchaseDate.Text);
-            var datetime = new DateTime(date.Year, date.Month, date.Day,
+            var purchaseDate = DateTime.ParseExact(txtPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var datetime = new DateTime(purchaseDate.Year, purchaseDate.Month, purchaseDate.Day,
                 DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
             SupplierInvoice invoice = new SupplierInvoice
@@ -178,7 +179,8 @@ namespace DeltaProject
             PanelAddProducts.Visible = false;
             PanelProductsList.Visible = true;
             lblSupplierName.Text = ddlSuppliers.SelectedItem.Text;
-            lblPurchaseDate.Text = Convert.ToDateTime(txtPurchaseDate.Text).ToString("dd/MM/yyyy");
+            var purchase_Date = DateTime.ParseExact(txtPurchaseDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            lblPurchaseDate.Text = purchase_Date.ToShortDateString();
             ProductsListBind();
         }
 
@@ -210,7 +212,6 @@ namespace DeltaProject
         {
             ddlClassifications.DataSource = Classification.GetClassifications();
             ddlClassifications.DataBind();
-            ddlClassifications.Items.Insert(0, new ListItem("إختر تصنيف", ""));
             ddlClassifications.SelectedIndex = 0;
         }
 
