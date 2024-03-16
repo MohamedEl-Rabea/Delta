@@ -1,6 +1,7 @@
 ﻿using Business_Logic;
 using DeltaProject.Business_Logic;
 using System;
+using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -71,9 +72,8 @@ namespace DeltaProject
 
         protected void btnPay_Click(object sender, EventArgs e)
         {
-            var date = Convert.ToDateTime(txtPaymentDate.Text);
-            var datetime = new DateTime(date.Year, date.Month, date.Day,
-                DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            var date = DateTime.ParseExact(txtPaymentDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var datetime = new DateTime(date.Year, date.Month, date.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             SupplierPayment supplierPayment = new SupplierPayment
             {
                 SupplierId = Convert.ToInt32(ddlSuppliers.SelectedValue),

@@ -1,6 +1,7 @@
 ﻿using Business_Logic;
 using DeltaProject.Business_Logic;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -78,7 +79,7 @@ namespace DeltaProject
                 else
                 {
                     maintenance.Id = Convert.ToInt32(txtMaintenanceId.Text);
-                    PanelAllMaintenance.Visible = true; 
+                    PanelAllMaintenance.Visible = true;
                 }
             }
 
@@ -102,7 +103,7 @@ namespace DeltaProject
                 lblRemainingAmount.Text = gridRow.Cells[8].Text;
                 lblDescription.Text = gridRow.Cells[9].Text;
 
-                Maintenance maintenance = new Maintenance { Id = Convert.ToInt32(id)};
+                Maintenance maintenance = new Maintenance { Id = Convert.ToInt32(id) };
                 maintenance.GetEditHistory();
                 GridViewHistory.DataSource = maintenance.History;
                 GridViewHistory.DataBind();
@@ -111,7 +112,7 @@ namespace DeltaProject
                 PanelMaintenanceDetails.Visible = true;
                 PanelEditMaintenance.Visible = false;
             }
-            else if(e.CommandName == "EditMaintenance")
+            else if (e.CommandName == "EditMaintenance")
             {
                 var gridRow = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
                 var paymentCount = Convert.ToInt32(gridRow.Cells[11].Text);
@@ -125,7 +126,7 @@ namespace DeltaProject
                 txtPaidAmount.Text = (Convert.ToDecimal(gridRow.Cells[7].Text) - Convert.ToDecimal(gridRow.Cells[8].Text)).ToString();
                 txtDescription.Text = gridRow.Cells[9].Text;
                 ExpectedDeliveryDate.Text = gridRow.Cells[10].Text;
-                if(paymentCount > 1)
+                if (paymentCount > 1)
                 {
                     txtPaidAmount.Enabled = false;
                 }
@@ -212,12 +213,12 @@ namespace DeltaProject
                 Title = txtTitle.Text,
                 ClientName = txtEditClientName.Text,
                 PhoneNumber = txtEditPhoneNumber.Text,
-                OrderDate = Convert.ToDateTime(OrderDate.Text),
+                OrderDate = DateTime.ParseExact(OrderDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 Cost = Convert.ToDecimal(txtCost.Text),
                 Price = Convert.ToDecimal(txtPrice.Text),
                 PaidAmount = txtPaidAmount.Enabled == false ? (decimal?)null : Convert.ToDecimal(txtPaidAmount.Text),
                 Description = txtDescription.Text,
-                ExpectedDeliveryDate = Convert.ToDateTime(ExpectedDeliveryDate.Text),
+                ExpectedDeliveryDate = DateTime.ParseExact(ExpectedDeliveryDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 WorkshopId = Convert.ToInt32(ddlWorkshops.SelectedValue),
                 UserId = Convert.ToInt32(Session["userId"])
             };
