@@ -2,6 +2,7 @@
 using DeltaProject.Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -77,7 +78,7 @@ namespace DeltaProject
 
             if (InvoiceId != null)
             {
-                var returnDate = Convert.ToDateTime(((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtReturnDate")).Text);
+                var returnDate = DateTime.ParseExact(((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtReturnDate")).Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 var returnedQuantity = Convert.ToDecimal(((TextBox)GridViewProducts.Rows[rowIndex].FindControl("txtReturnedQuantity")).Text);
                 SupplierInvoice supplierInvoice = new SupplierInvoice
                 {
