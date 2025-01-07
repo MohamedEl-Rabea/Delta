@@ -208,6 +208,50 @@
                         <FooterStyle CssClass="FooterIncomeReport" />
                     </asp:GridView>
                 </section>
+
+                <header class="PreSectionTab">
+                    <div>
+                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="TabLnks" Enabled="false">الصيانة</asp:LinkButton>
+                    </div>
+                </header>
+                <section class="PreReport_SectionTab">
+                    <asp:GridView ID="GridViewMaintenance" runat="server" AutoGenerateColumns="False" EmptyDataText="لا يوجد صيانات"
+                        CssClass="GridViewList" OnRowDataBound="GridViewMaintenance_RowDataBound">
+                        <Columns>
+                            <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:d}" FooterText="اجمـــــــالى" />
+                            <asp:BoundField DataField="Description" HeaderText="الوصف" />
+                            <asp:BoundField DataField="Cost" HeaderText="التكلفة" />
+                            <asp:BoundField DataField="Price" HeaderText="السعر" />
+                        </Columns>
+                        <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                        <HeaderStyle CssClass="HeaderIncomeReport" />
+                        <RowStyle CssClass="Row_Style" />
+                        <AlternatingRowStyle CssClass="AlternatRowStyle" />
+                        <FooterStyle CssClass="FooterIncomeReport" />
+                    </asp:GridView>
+                </section>
+
+                <header class="PreSectionTab">
+                    <div>
+                        <asp:LinkButton ID="LinkButton3" runat="server" CssClass="TabLnks" Enabled="false">الونش</asp:LinkButton>
+                    </div>
+                </header>
+                <section class="PreReport_SectionTab">
+                    <asp:GridView ID="GridViewLoader" runat="server" AutoGenerateColumns="False" EmptyDataText="لا يوجد عمليات ونش"
+                        CssClass="GridViewList" OnRowDataBound="GridViewLoader_RowDataBound">
+                        <Columns>
+                            <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:d}" FooterText="اجمـــــــالى" />
+                            <asp:BoundField DataField="Description" HeaderText="الوصف" />
+                            <asp:BoundField DataField="Cost" HeaderText="التكلفة" />
+                        </Columns>
+                        <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
+                        <HeaderStyle CssClass="HeaderIncomeReport" />
+                        <RowStyle CssClass="Row_Style" />
+                        <AlternatingRowStyle CssClass="AlternatRowStyle" />
+                        <FooterStyle CssClass="FooterIncomeReport" />
+                    </asp:GridView>
+                </section>
+
                 <header class="PreSectionTab">
                     <div>
                         <asp:LinkButton ID="LinkButton4" runat="server" CssClass="TabLnks" Enabled="false">الخلاصــــــه</asp:LinkButton>

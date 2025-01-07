@@ -30,31 +30,76 @@ namespace DeltaProject
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             // Bind incomes
-            DataTable table = new DataTable();
-            table.Columns.Add("Bill_Date");
-            table.Columns.Add("P_Name");
-            table.Columns.Add("Amount");
-            table.Columns.Add("Purchase_Price");
-            table.Columns.Add("Specified_Price");
-            table.Columns.Add("Sell_Price");
+            DataTable salesTable = new DataTable();
+            salesTable.Columns.Add("Bill_Date");
+            salesTable.Columns.Add("P_Name");
+            salesTable.Columns.Add("Amount");
+            salesTable.Columns.Add("Purchase_Price");
+            salesTable.Columns.Add("Specified_Price");
+            salesTable.Columns.Add("Sell_Price");
 
             while (rdr.Read())
             {
-                DataRow row = table.NewRow();
-                row["Bill_Date"] = Convert.ToDateTime(rdr["Bill_Date"]).ToShortDateString();
-                row["P_Name"] = rdr["P_Name"];
-                row["Amount"] = Convert.ToInt32(rdr["Amount"]);
-                row["Purchase_Price"] = Convert.ToDouble(rdr["Purchase_Price"]);
-                row["Specified_Price"] = Convert.ToDouble(rdr["Specified_Price"]);
-                row["Sell_Price"] = Convert.ToDouble(rdr["Sell_Price"]);
+                DataRow row = salesTable.NewRow();
+                row["Bill_Date"] = Convert.ToDateTime(rdr["Date"]).ToShortDateString();
+                row["P_Name"] = rdr["Name"];
+                row["Amount"] = Convert.ToInt32(rdr["Quantity"]);
+                row["Purchase_Price"] = Convert.ToDouble(rdr["PurchasePrice"]);
+                row["Specified_Price"] = Convert.ToDouble(rdr["SpecifiedPrice"]);
+                row["Sell_Price"] = Convert.ToDouble(rdr["SellPrice"]);
 
-                table.Rows.Add(row);
+                salesTable.Rows.Add(row);
             }
+
+            GridViewSales.DataSource = salesTable;
+            GridViewSales.DataBind();
+
+            DataTable maintenanceTable = new DataTable();
+            maintenanceTable.Columns.Add("Date");
+            maintenanceTable.Columns.Add("Description");
+            maintenanceTable.Columns.Add("Cost");
+            maintenanceTable.Columns.Add("Price");
+
+            rdr.NextResult();
+
+            while (rdr.Read())
+            {
+                DataRow row = maintenanceTable.NewRow();
+                row["Date"] = Convert.ToDateTime(rdr["Date"]).ToShortDateString();
+                row["Description"] = rdr["Description"];
+                row["Cost"] = Convert.ToDouble(rdr["Cost"]);
+                row["Price"] = Convert.ToDouble(rdr["Price"]);
+
+                maintenanceTable.Rows.Add(row);
+            }
+
+            GridViewMaintenance.DataSource = maintenanceTable;
+            GridViewMaintenance.DataBind();
+
+
+            DataTable loaderTable = new DataTable();
+            loaderTable.Columns.Add("Date");
+            loaderTable.Columns.Add("Description");
+            loaderTable.Columns.Add("Cost");
+
+            rdr.NextResult();
+
+            while (rdr.Read())
+            {
+                DataRow row = loaderTable.NewRow();
+                row["Date"] = Convert.ToDateTime(rdr["Date"]).ToShortDateString();
+                row["Description"] = rdr["Description"];
+                row["Cost"] = Convert.ToDouble(rdr["Cost"]);
+
+                loaderTable.Rows.Add(row);
+            }
+
+            GridViewLoader.DataSource = loaderTable;
+            GridViewLoader.DataBind();
+
             rdr.Close();
             con.Close();
 
-            GridViewSales.DataSource = table;
-            GridViewSales.DataBind();
 
             lblTotalSales.Text = totalSales.ToString();
             lblearns.Text = (totalSales - totalCost).ToString();
@@ -63,6 +108,24 @@ namespace DeltaProject
         }
 
         double totalSales, totalCost, totalSpecified = 0;
+
+        protected void GridViewLoader_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                totalSales += Convert.ToDouble(e.Row.Cells[2].Text);
+            }
+        }
+
+        protected void GridViewMaintenance_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                totalSales += Convert.ToDouble(e.Row.Cells[3].Text);
+                totalCost += Convert.ToDouble(e.Row.Cells[2].Text);
+            }
+        }
+
         protected void GridViewSales_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -72,5 +135,6 @@ namespace DeltaProject
                 totalCost +=  Convert.ToDouble(e.Row.Cells[3].Text) *Convert.ToInt32(e.Row.Cells[2].Text);
             }
         }
+
     }
 }
