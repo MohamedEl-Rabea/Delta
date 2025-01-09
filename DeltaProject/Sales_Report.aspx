@@ -192,7 +192,7 @@
                 </header>
                 <section class="PreReport_SectionTab">
                     <asp:GridView ID="GridViewSales" runat="server" AutoGenerateColumns="False" EmptyDataText="لا يوجد مبيعات"
-                        CssClass="GridViewList" OnRowDataBound="GridViewSales_RowDataBound">
+                        CssClass="GridViewList" OnRowDataBound="GridViewSales_RowDataBound" ShowFooter="true">
                         <Columns>
                             <asp:BoundField DataField="Bill_Date" HeaderText="التاريخ" DataFormatString="{0:d}" FooterText="اجمـــــــالى" />
                             <asp:BoundField DataField="P_Name" HeaderText="اسم المنتج" />
@@ -200,6 +200,8 @@
                             <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" />
                             <asp:BoundField DataField="Specified_Price" HeaderText="السعر المحدد" />
                             <asp:BoundField DataField="Sell_Price" HeaderText="سعر البيع" />
+                            <asp:BoundField DataField="Discount" HeaderText="الخصم" />
+                            <asp:BoundField DataField="Total" HeaderText="الاجمالى" />
                         </Columns>
                         <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
                         <HeaderStyle CssClass="HeaderIncomeReport" />
@@ -216,12 +218,12 @@
                 </header>
                 <section class="PreReport_SectionTab">
                     <asp:GridView ID="GridViewMaintenance" runat="server" AutoGenerateColumns="False" EmptyDataText="لا يوجد صيانات"
-                        CssClass="GridViewList" OnRowDataBound="GridViewMaintenance_RowDataBound">
+                        CssClass="GridViewList">
                         <Columns>
-                            <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:d}" FooterText="اجمـــــــالى" />
-                            <asp:BoundField DataField="Description" HeaderText="الوصف" />
+                            <asp:BoundField DataField="WorkshopName" HeaderText="الورشة" />
                             <asp:BoundField DataField="Cost" HeaderText="التكلفة" />
                             <asp:BoundField DataField="Price" HeaderText="السعر" />
+                            <asp:BoundField DataField="Expenses" HeaderText="المصروفات" />
                         </Columns>
                         <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
                         <HeaderStyle CssClass="HeaderIncomeReport" />
@@ -238,11 +240,11 @@
                 </header>
                 <section class="PreReport_SectionTab">
                     <asp:GridView ID="GridViewLoader" runat="server" AutoGenerateColumns="False" EmptyDataText="لا يوجد عمليات ونش"
-                        CssClass="GridViewList" OnRowDataBound="GridViewLoader_RowDataBound">
+                        CssClass="GridViewList">
                         <Columns>
-                            <asp:BoundField DataField="Date" HeaderText="التاريخ" DataFormatString="{0:d}" FooterText="اجمـــــــالى" />
-                            <asp:BoundField DataField="Description" HeaderText="الوصف" />
+                            <asp:BoundField DataField="LoaderName" HeaderText="الونش" />
                             <asp:BoundField DataField="Cost" HeaderText="التكلفة" />
+                            <asp:BoundField DataField="Expenses" HeaderText="المصروفات" />
                         </Columns>
                         <EmptyDataRowStyle CssClass="EmptyDataRowStyleList" />
                         <HeaderStyle CssClass="HeaderIncomeReport" />
@@ -250,38 +252,6 @@
                         <AlternatingRowStyle CssClass="AlternatRowStyle" />
                         <FooterStyle CssClass="FooterIncomeReport" />
                     </asp:GridView>
-                </section>
-
-                <header class="PreSectionTab">
-                    <div>
-                        <asp:LinkButton ID="LinkButton4" runat="server" CssClass="TabLnks" Enabled="false">الخلاصــــــه</asp:LinkButton>
-                    </div>
-                </header>
-                <section class="PreReport_SectionTab">
-                    <section class="ContactsSection" style="padding: 10px; background-color: #e1e1da">
-                        <table class="AddProductsTable">
-                            <tr>
-                                <td style="width: 100px; text-align: right">
-                                    <asp:Label ID="Label3" runat="server" Text="اجمالى المبيعات : " CssClass="lblInfo"></asp:Label>
-                                </td>
-                                <td style="text-align: right">
-                                    <asp:Label ID="lblTotalSales" runat="server" CssClass="lblInfo2"></asp:Label>
-                                </td>
-                                <td style="width: 100px; text-align: right">
-                                    <asp:Label ID="Label1" runat="server" Text="الارباح : " CssClass="lblInfo"></asp:Label>
-                                </td>
-                                <td style="text-align: right">
-                                    <asp:Label ID="lblearns" runat="server" CssClass="lblInfo2"></asp:Label>
-                                </td>
-                                <td style="width: 250px; text-align: right">
-                                    <asp:Label ID="Label4" runat="server" Text="فرق الاسعار (السعر المحدد - سعر البيع) : " CssClass="lblInfo"></asp:Label>
-                                </td>
-                                <td style="text-align: right">
-                                    <asp:Label ID="lblDiff" runat="server" CssClass="lblInfo2"></asp:Label>
-                                </td>
-                            </tr>
-                        </table>
-                    </section>
                 </section>
                 <br />
             </section>
