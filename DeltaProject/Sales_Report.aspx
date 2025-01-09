@@ -198,8 +198,7 @@
                             <asp:BoundField DataField="P_Name" HeaderText="اسم المنتج" />
                             <asp:BoundField DataField="Amount" HeaderText="الكميه المباعه" />
                             <asp:BoundField DataField="Purchase_Price" HeaderText="سعر الشراء" />
-                            <asp:BoundField DataField="Specified_Price" HeaderText="السعر المحدد" />
-                            <asp:BoundField DataField="Sell_Price" HeaderText="سعر البيع" />
+                            <asp:BoundField DataField="Specified_Price" HeaderText="سعر البيع" />
                             <asp:BoundField DataField="Discount" HeaderText="الخصم" />
                             <asp:BoundField DataField="Total" HeaderText="الاجمالى" />
                         </Columns>

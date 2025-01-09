@@ -36,7 +36,6 @@ namespace DeltaProject
             salesTable.Columns.Add("Amount");
             salesTable.Columns.Add("Purchase_Price");
             salesTable.Columns.Add("Specified_Price");
-            salesTable.Columns.Add("Sell_Price");
             salesTable.Columns.Add("Discount");
             salesTable.Columns.Add("Total");
 
@@ -48,7 +47,6 @@ namespace DeltaProject
                 row["Amount"] = Convert.ToInt32(rdr["Quantity"]);
                 row["Purchase_Price"] = Convert.ToDouble(rdr["PurchasePrice"]);
                 row["Specified_Price"] = Convert.ToDouble(rdr["SpecifiedPrice"]);
-                row["Sell_Price"] = Convert.ToDouble(rdr["SellPrice"]);
                 row["Discount"] = Convert.ToDouble(rdr["Discount"]);
                 row["Total"] = (Convert.ToDouble(rdr["SpecifiedPrice"]) * Convert.ToInt32(rdr["Quantity"])) - Convert.ToDouble(rdr["Discount"]);
 
@@ -113,18 +111,18 @@ namespace DeltaProject
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                _total += Convert.ToDouble(e.Row.Cells[7].Text);
+                _total += Convert.ToDouble(e.Row.Cells[6].Text);
                 _totalExpenses += (Convert.ToDouble(e.Row.Cells[2].Text) * Convert.ToDouble(e.Row.Cells[3].Text));
             }
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
                 e.Row.Cells.Clear();
                 TableCell cell = new TableCell();
-                cell.ColumnSpan = 2;
+                cell.ColumnSpan = 1;
                 cell.Text = "الاجمـــــالى:";
                 e.Row.Cells.Add(cell);
                 TableCell cell2 = new TableCell();
-                cell2.ColumnSpan = 2;
+                cell2.ColumnSpan = 1;
                 cell2.Text = _total.ToString("0.##");
                 e.Row.Cells.Add(cell2);
                 TableCell cell3 = new TableCell();
@@ -132,7 +130,7 @@ namespace DeltaProject
                 cell3.Text = "اجمالى الارباح:";
                 e.Row.Cells.Add(cell3);
                 TableCell cell4 = new TableCell();
-                cell4.ColumnSpan = 2;
+                cell4.ColumnSpan = 3;
                 cell4.Text = (_total - _totalExpenses).ToString("0.##");
                 e.Row.Cells.Add(cell4);
             }
