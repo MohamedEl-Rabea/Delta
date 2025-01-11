@@ -30,46 +30,109 @@ namespace DeltaProject
             con.Open();
             SqlDataReader rdr = cmd.ExecuteReader();
             // Bind incomes
-            DataTable table = new DataTable();
-            table.Columns.Add("Bill_Date");
-            table.Columns.Add("P_Name");
-            table.Columns.Add("Amount");
-            table.Columns.Add("Purchase_Price");
-            table.Columns.Add("Specified_Price");
-            table.Columns.Add("Sell_Price");
+            DataTable salesTable = new DataTable();
+            salesTable.Columns.Add("Bill_Date");
+            salesTable.Columns.Add("P_Name");
+            salesTable.Columns.Add("Amount");
+            salesTable.Columns.Add("Purchase_Price");
+            salesTable.Columns.Add("Specified_Price");
+            salesTable.Columns.Add("Discount");
+            salesTable.Columns.Add("Total");
 
             while (rdr.Read())
             {
-                DataRow row = table.NewRow();
-                row["Bill_Date"] = Convert.ToDateTime(rdr["Bill_Date"]).ToShortDateString();
-                row["P_Name"] = rdr["P_Name"];
-                row["Amount"] = Convert.ToInt32(rdr["Amount"]);
-                row["Purchase_Price"] = Convert.ToDouble(rdr["Purchase_Price"]);
-                row["Specified_Price"] = Convert.ToDouble(rdr["Specified_Price"]);
-                row["Sell_Price"] = Convert.ToDouble(rdr["Sell_Price"]);
+                DataRow row = salesTable.NewRow();
+                row["Bill_Date"] = Convert.ToDateTime(rdr["Date"]).ToShortDateString();
+                row["P_Name"] = rdr["Name"];
+                row["Amount"] = Convert.ToInt32(rdr["Quantity"]);
+                row["Purchase_Price"] = Convert.ToDouble(rdr["PurchasePrice"]);
+                row["Specified_Price"] = Convert.ToDouble(rdr["SpecifiedPrice"]);
+                row["Discount"] = Convert.ToDouble(rdr["Discount"]);
+                row["Total"] = (Convert.ToDouble(rdr["SpecifiedPrice"]) * Convert.ToInt32(rdr["Quantity"])) - Convert.ToDouble(rdr["Discount"]);
 
-                table.Rows.Add(row);
+                salesTable.Rows.Add(row);
             }
+
+            GridViewSales.DataSource = salesTable;
+            GridViewSales.DataBind();
+
+            DataTable maintenanceTable = new DataTable();
+            maintenanceTable.Columns.Add("WorkshopName");
+            maintenanceTable.Columns.Add("Cost");
+            maintenanceTable.Columns.Add("Price");
+            maintenanceTable.Columns.Add("Expenses");
+
+            rdr.NextResult();
+
+            while (rdr.Read())
+            {
+                DataRow row = maintenanceTable.NewRow();
+                row["WorkshopName"] = rdr["WorkshopName"];
+                row["Cost"] = Convert.ToDouble(rdr["Cost"]);
+                row["Price"] = Convert.ToDouble(rdr["Price"]);
+                row["Expenses"] = Convert.ToDouble(rdr["Expenses"]);
+
+                maintenanceTable.Rows.Add(row);
+            }
+
+            GridViewMaintenance.DataSource = maintenanceTable;
+            GridViewMaintenance.DataBind();
+
+
+            DataTable loaderTable = new DataTable();
+            loaderTable.Columns.Add("LoaderName");
+            loaderTable.Columns.Add("Cost");
+            loaderTable.Columns.Add("Expenses");
+
+            rdr.NextResult();
+
+            while (rdr.Read())
+            {
+                DataRow row = loaderTable.NewRow();
+                row["LoaderName"] = rdr["LoaderName"];
+                row["Cost"] = Convert.ToDouble(rdr["Cost"]);
+                row["Expenses"] = Convert.ToDouble(rdr["Expenses"]);
+
+                loaderTable.Rows.Add(row);
+            }
+
+            GridViewLoader.DataSource = loaderTable;
+            GridViewLoader.DataBind();
+
             rdr.Close();
             con.Close();
 
-            GridViewSales.DataSource = table;
-            GridViewSales.DataBind();
-
-            lblTotalSales.Text = totalSales.ToString();
-            lblearns.Text = (totalSales - totalCost).ToString();
-            lblDiff.Text = (totalSales - totalSpecified).ToString();
             PanelReport.Visible = true;
         }
 
-        double totalSales, totalCost, totalSpecified = 0;
+        double _total = 0;
+        double _totalExpenses = 0;
         protected void GridViewSales_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                totalSales += Convert.ToDouble(e.Row.Cells[5].Text) * Convert.ToInt32(e.Row.Cells[2].Text);
-                totalSpecified += Convert.ToDouble(e.Row.Cells[4].Text) * Convert.ToInt32(e.Row.Cells[2].Text);
-                totalCost +=  Convert.ToDouble(e.Row.Cells[3].Text) *Convert.ToInt32(e.Row.Cells[2].Text);
+                _total += Convert.ToDouble(e.Row.Cells[6].Text);
+                _totalExpenses += (Convert.ToDouble(e.Row.Cells[2].Text) * Convert.ToDouble(e.Row.Cells[3].Text));
+            }
+            else if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells.Clear();
+                TableCell cell = new TableCell();
+                cell.ColumnSpan = 1;
+                cell.Text = "الاجمـــــالى:";
+                e.Row.Cells.Add(cell);
+                TableCell cell2 = new TableCell();
+                cell2.ColumnSpan = 1;
+                cell2.Text = _total.ToString("0.##");
+                e.Row.Cells.Add(cell2);
+                TableCell cell3 = new TableCell();
+                cell3.ColumnSpan = 2;
+                cell3.Text = "اجمالى الارباح:";
+                e.Row.Cells.Add(cell3);
+                TableCell cell4 = new TableCell();
+                cell4.ColumnSpan = 3;
+                cell4.Text = (_total - _totalExpenses).ToString("0.##");
+                e.Row.Cells.Add(cell4);
             }
         }
     }
